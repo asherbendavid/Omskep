@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Omskep.App/Omskep.App.vbproj" />
+    <Project Path="src/Omskep.Core/Omskep.Core.vbproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Omskep.Core.Tests/Omskep.Core.Tests.vbproj" />
+  </Folder>
+</Solution>
