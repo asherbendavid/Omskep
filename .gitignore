@@ -481,5 +481,10 @@ $RECYCLE.BIN/
 # Vim temporary swap files
 *.swp
 
-# testdata for spike tests not included in commits
-spike/Spike.Azure/testdata/
+# Real study PDFs, extracted text, generated audio and local secrets
+# must never be committed
+**/testdata/
+*.extracted.txt
+*.mp3
+secrets.json
+*.secrets.json
