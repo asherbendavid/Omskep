@@ -179,7 +179,7 @@ Namespace Settings
         <TestMethod>
         Public Sub Load_FileLockedByAnotherHandle_IsUnreadable_AndLeftAlone()
             Using t As New Support.TempDir()
-                Dim store = NewStore(t.FolderPath)
+                Dim store = New SettingsStore(t.FolderPath, Nothing, Nothing, New Integer() {0})
                 Dim s As New AppSettings()
                 s.Azure.KeyBlob = "BLOB"
                 store.Save(s)
@@ -273,6 +273,124 @@ Namespace Settings
                 Assert.IsTrue(fileText.Contains("keyBlob", StringComparison.Ordinal))
                 Assert.IsFalse(fileText.Contains("""key""", StringComparison.OrdinalIgnoreCase))
                 Assert.IsFalse(fileText.Contains("subscription", StringComparison.OrdinalIgnoreCase))
+            End Using
+        End Sub
+
+        ' ---- transient read failures and the locked-update path ----
+
+        Private Shared Function ReaderFailingTimes(failures As Integer, calls As Integer(), exceptionFactory As Func(Of Exception)) As Func(Of String, Byte())
+            Return Function(p As String) As Byte()
+                       calls(0) += 1
+                       If calls(0) <= failures Then Throw exceptionFactory()
+                       Return File.ReadAllBytes(p)
+                   End Function
+        End Function
+
+        <TestMethod>
+        Public Sub Load_TransientReadFailures_AreRetried_ThenLoad()
+            Using t As New Support.TempDir()
+                NewStore(t.FolderPath).Save(New AppSettings() With {.Azure = New AzureSettings() With {.Region = "westeurope"}})
+                Dim calls(0) As Integer
+                Dim reader = ReaderFailingTimes(2, calls, Function() New IOException("The process cannot access the file."))
+                Dim store As New SettingsStore(t.FolderPath, Nothing, reader, New Integer() {0, 0, 0})
+
+                Dim r = store.Load()
+
+                Assert.AreEqual(SettingsLoadStatus.Loaded, r.Status)
+                Assert.AreEqual("westeurope", r.Value.Azure.Region)
+                Assert.AreEqual(3, calls(0))
+            End Using
+        End Sub
+
+        <TestMethod>
+        Public Sub Load_PersistentReadFailure_IsUnreadable_AfterConfiguredRetries()
+            Using t As New Support.TempDir()
+                NewStore(t.FolderPath).Save(New AppSettings())
+                Dim calls(0) As Integer
+                Dim reader = ReaderFailingTimes(1000, calls, Function() New UnauthorizedAccessException("denied"))
+                Dim store As New SettingsStore(t.FolderPath, Nothing, reader, New Integer() {0, 0})
+
+                Assert.AreEqual(SettingsLoadStatus.Unreadable, store.Load().Status)
+                Assert.AreEqual(3, calls(0))   ' first try plus two retries
+                Assert.IsEmpty(Directory.GetFiles(t.FolderPath, "*.damaged-*"))
+            End Using
+        End Sub
+
+        <TestMethod>
+        Public Sub Load_FileNotFound_IsNotRetried()
+            Using t As New Support.TempDir()
+                Dim calls(0) As Integer
+                Dim reader = ReaderFailingTimes(1000, calls, Function() New FileNotFoundException("gone"))
+                Dim store As New SettingsStore(t.FolderPath, Nothing, reader, New Integer() {0, 0, 0})
+
+                Assert.AreEqual(SettingsLoadStatus.NotFound, store.Load().Status)
+                Assert.AreEqual(1, calls(0))
+            End Using
+        End Sub
+
+        <TestMethod>
+        Public Sub Update_ChangesOneThing_AndKeepsTheRest()
+            Using t As New Support.TempDir()
+                Dim store = NewStore(t.FolderPath)
+                store.Update(Sub(s)
+                                 s.Azure.Region = "westeurope"
+                                 s.Azure.KeyBlob = "BLOB"
+                                 s.SpeakingRatePercent("he-IL") = -10
+                             End Sub)
+                store.Update(Sub(s) s.DefaultVoices("af-ZA") = "af-ZA-WillemNeural")
+
+                Dim r = store.Load().Value
+                Assert.AreEqual("westeurope", r.Azure.Region)
+                Assert.AreEqual("BLOB", r.Azure.KeyBlob)
+                Assert.AreEqual(-10, r.SpeakingRatePercent("he-IL"))
+                Assert.AreEqual("af-ZA-WillemNeural", r.DefaultVoices("af-ZA"))
+            End Using
+        End Sub
+
+        <TestMethod>
+        Public Sub Update_ConcurrentWriters_NeverLoseEachOthersChanges()
+            Using t As New Support.TempDir()
+                Dim store = NewStore(t.FolderPath)
+                Parallel.For(0, 40, Sub(i As Integer)
+                                        store.Update(Sub(s) s.DefaultVoices("loc" & i.ToString()) = "v")
+                                    End Sub)
+                Assert.HasCount(40, store.Load().Value.DefaultVoices)
+            End Using
+        End Sub
+
+        <TestMethod>
+        Public Sub Update_WhenFileUnreadable_Throws_AndOverwritesNothing()
+            Using t As New Support.TempDir()
+                Dim good = NewStore(t.FolderPath)
+                good.Update(Sub(s) s.Azure.KeyBlob = "PRECIOUS")
+                Dim before = File.ReadAllText(good.SettingsPath)
+
+                Dim calls(0) As Integer
+                Dim reader = ReaderFailingTimes(1000, calls, Function() New IOException("locked"))
+                Dim locked As New SettingsStore(t.FolderPath, Nothing, reader, New Integer() {0})
+
+                Assert.ThrowsExactly(Of IOException)(Sub() locked.Update(Sub(s) s.Azure.KeyBlob = "OVERWRITE"))
+                Assert.AreEqual(before, File.ReadAllText(good.SettingsPath))
+            End Using
+        End Sub
+
+        <TestMethod>
+        Public Sub Update_OnDamagedFile_SetsItAside_AndAppliesToFreshDefaults()
+            Using t As New Support.TempDir()
+                Dim store = NewStore(t.FolderPath)
+                WriteRaw(store, "garbage {{")
+                store.Update(Sub(s) s.Azure.KeyBlob = "NEW")
+
+                Assert.AreEqual("NEW", store.Load().Value.Azure.KeyBlob)
+                Assert.HasCount(1, Directory.GetFiles(t.FolderPath, "settings.json.damaged-*"))
+            End Using
+        End Sub
+
+        <TestMethod>
+        Public Sub Update_NullChange_Throws()
+            Using t As New Support.TempDir()
+                Dim store = NewStore(t.FolderPath)
+                Assert.ThrowsExactly(Of ArgumentNullException)(Sub() store.Update(Nothing))
             End Using
         End Sub
 

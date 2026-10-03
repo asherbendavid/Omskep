@@ -1,4 +1,4 @@
-﻿Namespace Access
+Namespace Access
 
     ''' <summary>
     ''' Pure functions: no I/O, no clock, no UI. Every branch of the lockout state machine
@@ -16,6 +16,8 @@
                     Return Locked(AccessReason.SettingsFileDamaged, AccessMessages.SettingsFileDamaged)
                 Case KeyState.BlobUnreadable
                     Return Locked(AccessReason.KeyUnreadable, AccessMessages.KeyUnreadable)
+                Case KeyState.SettingsUnreadable
+                    Return Locked(AccessReason.SettingsUnreadable, AccessMessages.SettingsUnreadable)
                 Case KeyState.Present
                     If cache = CacheStatus.Present Then
                         Return EvaluateWithCache(connection)

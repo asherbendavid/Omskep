@@ -10,6 +10,8 @@ Namespace Access
         BlobUnreadable
         ''' <summary>A key was loaded successfully.</summary>
         Present
+        ''' <summary>settings.json could not be read (locked or in use) even after retries. Nothing was changed.</summary>
+        SettingsUnreadable
     End Enum
 
     ''' <summary>Whether a usable voice list is cached for the CURRENT region.</summary>
@@ -48,6 +50,7 @@ Namespace Access
         NoKey
         SettingsFileDamaged
         KeyUnreadable
+        SettingsUnreadable
         NeedsConnectionTest
         KeyRejected
         Offline
@@ -64,6 +67,8 @@ Namespace Access
             "The settings file could not be read, so it is being treated as empty. Enter your Azure key and region in Settings."
         Public Const KeyUnreadable As String =
             "The saved Azure key could not be read. Enter it again in Settings."
+        Public Const SettingsUnreadable As String =
+            "The settings file is in use by another program right now. Close anything that may be using it, then try again."
         Public Const NeedsConnectionTest As String =
             "Use Test connection in Settings to download the voice list."
         Public Const Offline As String =

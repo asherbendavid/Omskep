@@ -1,4 +1,4 @@
-﻿Imports Microsoft.VisualStudio.TestTools.UnitTesting
+Imports Microsoft.VisualStudio.TestTools.UnitTesting
 Imports Omskep.Core.Access
 
 Namespace Access
@@ -37,6 +37,14 @@ Namespace Access
         <TestMethod>
         Public Sub UnreadableBlob_IsLocked_WithPlainMessage()
             AssertLocked(AccessEvaluator.Evaluate(KeyState.BlobUnreadable, CacheStatus.Present, Snap(AzureOutcome.Ok)), AccessReason.KeyUnreadable)
+        End Sub
+
+        <TestMethod>
+        Public Sub UnreadableSettings_IsLocked_WithTryAgainMessage_NotAKeyLossMessage()
+            Dim s = AccessEvaluator.Evaluate(KeyState.SettingsUnreadable, CacheStatus.Present, ConnectionSnapshot.Empty)
+            AssertLocked(s, AccessReason.SettingsUnreadable)
+            Assert.IsTrue(s.Message.Contains("try again", StringComparison.OrdinalIgnoreCase))
+            Assert.IsFalse(s.Message.Contains("enter", StringComparison.OrdinalIgnoreCase))
         End Sub
 
         ' ---- Row 3/6: key + cache => unlocked ----

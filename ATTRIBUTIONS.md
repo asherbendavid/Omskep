@@ -10,16 +10,24 @@ phase 0 (October 2026). Re-check them when versions are pinned.
 
 | Component | Purpose | Introduced in | License | Source |
 | --- | --- | --- | --- | --- |
-| PdfPig | PDF text extraction | Phase 1 | Apache-2.0 (derived from Apache PDFBox) | <https://github.com/UglyToad/PdfPig>, NuGet package `PdfPig` |
-| Scintilla5.NET 7.0.0 | WinForms editor control | Phase 1 | MIT | <https://www.nuget.org/packages/Scintilla5.NET> |
-| Scintilla and Lexilla (native engine bundled inside Scintilla5.NET) | Text editing engine and XML lexer | Phase 1 | Scintilla license (short permissive notice), Copyright 1998-2021 Neil Hodgson | <https://www.scintilla.org/License.txt> |
-| TagLibSharp2 0.6.0 | ID3v2 tags on exported MP3 files | Phase 2 | MIT | <https://github.com/decriptor/TagLibSharp2>, NuGet package `TagLibSharp2` |
+| PdfPig | PDF text extraction | Phase 2 | Apache-2.0 (derived from Apache PDFBox) | <https://github.com/UglyToad/PdfPig>, NuGet package `PdfPig` |
+| Scintilla5.NET 7.0.0 | WinForms editor control | Phase 2 | MIT | <https://www.nuget.org/packages/Scintilla5.NET> |
+| Scintilla and Lexilla (native engine bundled inside Scintilla5.NET) | Text editing engine and XML lexer | Phase 2 | Scintilla license (short permissive notice), Copyright 1998-2021 Neil Hodgson | <https://www.scintilla.org/License.txt> |
+| TagLibSharp2 0.6.0 | ID3v2 tags on exported MP3 files | Phase 3 | MIT | <https://github.com/decriptor/TagLibSharp2>, NuGet package `TagLibSharp2` |
 
 Development and test only (not distributed with the application):
 
 | Component | Purpose | License |
 | --- | --- | --- |
-| MSTest | Unit tests | MIT (confirm when versions are pinned) |
+| MSTest (microsoft/testfx) | Unit tests | MIT (re-check against the pinned version) |
+
+## Platform components (part of .NET, not separate dependencies)
+
+- **Windows DPAPI** (`System.Security.Cryptography.ProtectedData`) protects the
+  saved Azure key. It ships inside .NET 10 for Windows, so no package is
+  referenced (NuGet reports NU1510 if one is added). Governed by the .NET
+  runtime's MIT license. If Omskep is ever published self-contained, include
+  the .NET runtime's license notices with the release.
 
 ## Services
 
