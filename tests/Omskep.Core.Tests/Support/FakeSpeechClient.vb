@@ -9,17 +9,22 @@ Namespace Support
     Public NotInheritable Class FakeSpeechClient
         Implements ISpeechClient
 
-        Private ReadOnly _responder As Func(Of CancellationToken, Task(Of VoiceListResult))
+        Private ReadOnly _responder As Func(Of String, String, CancellationToken, Task(Of VoiceListResult))
 
         Public ReadOnly Property Calls As New List(Of String())()
 
         Public Sub New(responder As Func(Of CancellationToken, Task(Of VoiceListResult)))
+            _responder = Function(region, key, ct) responder(ct)
+        End Sub
+
+        ''' <summary>Responder that can look at the region and key it was called with.</summary>
+        Public Sub New(responder As Func(Of String, String, CancellationToken, Task(Of VoiceListResult)))
             _responder = responder
         End Sub
 
         Public Function GetVoicesAsync(region As String, key As String, cancellationToken As CancellationToken) As Task(Of VoiceListResult) Implements ISpeechClient.GetVoicesAsync
             Calls.Add(New String() {region, key})
-            Return _responder(cancellationToken)
+            Return _responder(region, key, cancellationToken)
         End Function
 
         Public Shared Function Returning(result As VoiceListResult) As FakeSpeechClient

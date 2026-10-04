@@ -72,7 +72,7 @@ Namespace Access
         Public Const NeedsConnectionTest As String =
             "Use Test connection in Settings to download the voice list."
         Public Const Offline As String =
-            "Could not reach Azure. Check your internet connection, then try again in Settings."
+            "Could not reach Azure. Check your internet connection, your firewall, and that the region name is spelled correctly, then try again."
         Public Const AzureTemporarilyUnavailable As String =
             "Azure is temporarily busy or unavailable. Your key has been kept. Wait a moment and try again."
         Public Const AzureUnexpectedResponse As String =

@@ -26,6 +26,19 @@ Namespace Speech
             Assert.AreEqual(40, AzureRegion.Normalize(New String("a"c, 40)).Length)
         End Sub
 
+        <TestMethod>
+        Public Sub CommonRegions_AreAllValid_Unique_AndIncludeTheDefault()
+            Assert.IsGreaterThan(10, AzureRegion.CommonRegions.Count)
+            Dim seen As New HashSet(Of String)()
+            For Each r In AzureRegion.CommonRegions
+                Assert.AreEqual(r, AzureRegion.Normalize(r), r)
+                Assert.IsTrue(seen.Add(r), "duplicate: " & r)
+            Next
+            Assert.Contains(Omskep.Core.Settings.AzureSettings.DefaultRegion, seen)
+            Assert.Contains("southafricanorth", seen)
+
+        End Sub
+
     End Class
 
 End Namespace

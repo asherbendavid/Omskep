@@ -83,14 +83,9 @@ Namespace Secrets
 
         ' Pasted keys often carry a trailing space or newline. Messages here must never include the key.
         Private Shared Function ValidateKey(key As String) As String
-            Dim cleaned = If(key, String.Empty).Trim()
-            If cleaned.Length = 0 Then Throw New ArgumentException("A key is required.", NameOf(key))
-            For Each c In cleaned
-                If Char.IsWhiteSpace(c) OrElse Char.IsControl(c) Then
-                    Throw New ArgumentException("A key cannot contain spaces or line breaks.", NameOf(key))
-                End If
-            Next
-            Return cleaned
+            Dim problem = KeyRules.Problem(key)
+            If problem IsNot Nothing Then Throw New ArgumentException(problem, NameOf(key))
+            Return key.Trim()
         End Function
 
     End Class

@@ -8,6 +8,13 @@ Namespace Speech
 
         Public Const MaxLength As Integer = 40
 
+        ''' <summary>Common Azure Speech regions for the Settings drop-down. The box stays editable for any other valid region.</summary>
+        Public ReadOnly CommonRegions As IReadOnlyList(Of String) = New String() {
+            "australiaeast", "brazilsouth", "canadacentral", "centralindia", "centralus", "eastasia", "eastus", "eastus2",
+            "francecentral", "germanywestcentral", "italynorth", "japaneast", "koreacentral", "northeurope", "norwayeast",
+            "polandcentral", "southafricanorth", "southcentralus", "southeastasia", "swedencentral", "switzerlandnorth",
+            "uaenorth", "uksouth", "westeurope", "westus", "westus2", "westus3"}
+
         ''' <summary>Trimmed, lowercased region id, or Nothing if it is not a plain region id like "southafricanorth".</summary>
         Public Function Normalize(region As String) As String
             If region Is Nothing Then Return Nothing
