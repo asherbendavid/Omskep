@@ -4,7 +4,8 @@ Third-party software and services used by Omskep, with license and source.
 This file is updated by every phase as dependencies are added or removed.
 
 Licenses below were checked against the package or project license text during
-phase 0 (October 2026). Re-check them when versions are pinned.
+phase 0 (October 2026), and the test tooling again in phase 1. Re-check them when
+versions are pinned.
 
 ## Libraries used or planned
 
@@ -19,7 +20,11 @@ Development and test only (not distributed with the application):
 
 | Component | Purpose | License |
 | --- | --- | --- |
-| MSTest (microsoft/testfx) | Unit tests | MIT (re-check against the pinned version) |
+| MSTest 4.0.2 (microsoft/testfx; meta package that pulls in MSTest.TestFramework, MSTest.TestAdapter, Microsoft.NET.Test.Sdk and the code-coverage extensions) | Unit tests | MIT |
+
+The MSTest license was read on NuGet's page for the latest version (4.4.1); the
+pinned 4.0.2 is the same project (microsoft/testfx). None of these test packages
+is distributed with the application.
 
 ## Platform components (part of .NET, not separate dependencies)
 

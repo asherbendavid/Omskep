@@ -7,9 +7,11 @@ proof-listened audio version with a study group.
 
 ## Status
 
-Phase 0 (technical decisions, spikes and project scaffold) is complete.
-Omskep is **not yet functional**: the application is an empty shell while the
-editor, import, export and voice features are built in later phases.
+Phase 0 (technical decisions, spikes and project scaffold) and phase 1
+(Settings and Azure connection) are complete. Omskep is **not yet
+functional as a converter**: you can enter your Azure key, test the
+connection and download the list of available voices, but the editor,
+import, export and voice features are built in later phases.
 
 ## What it will do
 
@@ -32,6 +34,38 @@ editor, import, export and voice features are built in later phases.
 - Your own Azure AI Speech resource (key and region). Omskep never ships or
   assumes a key; it is entered in Settings and stored encrypted for your
   Windows user account.
+
+## Settings and your Azure key
+
+Open **Tools > Settings**. Until a working key is saved, everything except
+Settings is disabled.
+
+1. Choose your Azure region. South Africa North (`southafricanorth`) is the
+   default; any other region id, such as `westeurope`, can be typed.
+2. Paste your key into the masked box and press **Test connection**.
+3. Omskep saves the key and region only if the test succeeds. Otherwise
+   nothing changes, so a working key is never replaced by one that does not
+   work.
+
+After a successful test Omskep downloads the list of voices for your region
+and keeps it on disk, so later launches do not need the network. **Refresh
+voices** downloads it again, for example when Microsoft adds a voice. The key
+is never shown again after entry; use **Replace...** or **Remove** to change
+it.
+
+If Azure later rejects the key or region, you can keep editing but export is
+blocked until you fix it in Settings. The saved key is never deleted
+automatically. A region name that looks valid but does not exist fails like a
+lost connection, so check its spelling if you see the "could not reach Azure"
+message.
+
+### Where your key is kept
+
+Settings are stored in `%LOCALAPPDATA%\Omskep` (`settings.json` and
+`voices-cache.json`). The key is encrypted with Windows' per-user protection
+(DPAPI), so another Windows user, or a copy of the file on another computer,
+cannot read it. It does **not** protect against other software that is already
+running as you. Do not share the settings file or put it in source control.
 
 ## Azure account, costs and responsible use
 
@@ -73,18 +107,22 @@ not include or redistribute the Azure Speech SDK.
 - .NET 10 SDK
 - Visual Studio 2026 (or later) with the ".NET desktop development" workload
 - Open `Omskep.slnx`, or build from the command line: `dotnet build`
-- Run the tests with `dotnet test`
+- Run the tests with `dotnet test` (it runs both test projects; the App tests
+  need Windows)
 - Use a source path without apostrophes or other unusual characters.
 
 ## Project structure
 
-- `src/Omskep.Core`: SSML sanitization, chunking, billable-character
-  counting, well-formedness checking and other logic with no UI or platform
-  dependencies
-- `src/Omskep.App`: WinForms application (`net10.0-windows`)
+- `src/Omskep.Core`: logic with no UI or platform dependencies. Today that is
+  settings and key storage, the Azure Speech REST client, the voice list and
+  its cache, and the lockout rules. SSML sanitization, chunking,
+  billable-character counting and well-formedness checking follow in later
+  phases.
+- `src/Omskep.App`: WinForms application (`net10.0-windows`): the main
+  window, Settings, and the Windows DPAPI key protector
 - `tests/Omskep.Core.Tests`: MSTest unit tests for `Omskep.Core`
-- `spike/`: reserved for throwaway exploration code; never part of the
-  shipping app
+- `tests/Omskep.App.Tests`: MSTest tests that need Windows
+  (`net10.0-windows`), such as the DPAPI key protector
 
 ## Third-party software
 
