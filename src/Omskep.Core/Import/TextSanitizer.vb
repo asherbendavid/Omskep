@@ -44,6 +44,26 @@ Namespace Import
             Me.TrimmedLines = trimmedLines
         End Sub
 
+        ''' <summary>Adds up the counts of several results (for example one per page) and
+        ''' attaches them to a new body.</summary>
+        Public Shared Function Combine(body As String, parts As IEnumerable(Of SanitizeResult)) As SanitizeResult
+            Dim privateUse As New SortedDictionary(Of Integer, Integer)()
+            Dim invalid As Integer = 0
+            Dim fixedQuotes As Integer = 0
+            Dim trimmed As Integer = 0
+            For Each part In parts
+                For Each kv In part.RemovedPrivateUse
+                    Dim existing As Integer = 0
+                    privateUse.TryGetValue(kv.Key, existing)
+                    privateUse(kv.Key) = existing + kv.Value
+                Next
+                invalid += part.RemovedInvalidCharacters
+                fixedQuotes += part.FixedArticleQuotes
+                trimmed += part.TrimmedLines
+            Next
+            Return New SanitizeResult(body, privateUse, invalid, fixedQuotes, trimmed)
+        End Function
+
         ''' <summary>Total number of private-use characters removed.</summary>
         Public ReadOnly Property RemovedPrivateUseTotal As Integer
             Get
