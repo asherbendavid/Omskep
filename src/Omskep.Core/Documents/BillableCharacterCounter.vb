@@ -83,7 +83,7 @@ Namespace Documents
         ''' <summary>If a complete speak or voice tag (opening, closing or self-closing, with attributes) starts
         ''' at index i, returns the index just after its closing ">". Returns i for anything else, including a
         ''' half-typed tag with no closing ">" (which is then counted as ordinary text).</summary>
-        Private Shared Function EndOfFreeTag(ssml As String, i As Integer) As Integer
+        Friend Shared Function EndOfFreeTag(ssml As String, i As Integer) As Integer
             Dim p As Integer = i + 1
             If p < ssml.Length AndAlso ssml(p) = "/"c Then p += 1
 

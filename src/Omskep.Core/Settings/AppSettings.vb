@@ -36,6 +36,10 @@ Namespace Settings
         <JsonPropertyName("defaultVoices")>
         Public Property DefaultVoices As Dictionary(Of String, String) = New Dictionary(Of String, String)()
 
+        ''' <summary>Whether the editor wraps long lines (View, Word wrap). On by default.</summary>
+        <JsonPropertyName("wordWrap")>
+        Public Property WordWrap As Boolean = True
+
         ''' <summary>Locale to speaking-rate preset, in whole percent (e.g. "he-IL": -10).</summary>
         <JsonPropertyName("speakingRatePercent")>
         Public Property SpeakingRatePercent As Dictionary(Of String, Integer) = New Dictionary(Of String, Integer)()

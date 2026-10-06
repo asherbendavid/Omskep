@@ -73,6 +73,29 @@ Namespace Session
             End Get
         End Property
 
+        ''' <summary>Locale to voice short name from the saved settings, for the voice written into new documents.
+        ''' Empty when the settings cannot be read (the caller then falls back to a built-in voice).</summary>
+        Public Function DefaultVoices() As IReadOnlyDictionary(Of String, String)
+            Dim loaded As SettingsLoadResult = _settings.Load()
+            If loaded.Value Is Nothing OrElse loaded.Value.DefaultVoices Is Nothing Then Return New Dictionary(Of String, String)()
+            Return New Dictionary(Of String, String)(loaded.Value.DefaultVoices)
+        End Function
+
+        ''' <summary>The saved word-wrap preference; on when nothing is saved or the settings cannot be read.</summary>
+        Public Function WordWrapPreference() As Boolean
+            Dim loaded As SettingsLoadResult = _settings.Load()
+            Return loaded.Value Is Nothing OrElse loaded.Value.WordWrap
+        End Function
+
+        ''' <summary>Saves the word-wrap preference. A preference is not worth an error: if the file is locked it is skipped.</summary>
+        Public Sub SetWordWrapPreference(value As Boolean)
+            Try
+                _settings.Update(Sub(s) s.WordWrap = value)
+            Catch ex As IOException
+                ' Settings file in use by another program; try again at the next change.
+            End Try
+        End Sub
+
         Public ReadOnly Property IsBusy As Boolean
             Get
                 Return _voices.IsBusy

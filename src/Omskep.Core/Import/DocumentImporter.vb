@@ -123,6 +123,23 @@ Namespace Import
             Return count.ToString(Globalization.CultureInfo.InvariantCulture) & " " & noun & If(count = 1, "", "s")
         End Function
 
+        ''' <summary>" Cleaned up: removed 2 decorative symbols, corrected 3 quote marks." or an empty string when
+        ''' nothing was changed. Shared with pasting so both report in the same words.</summary>
+        Friend Shared Function CleanupSentence(sanitation As SanitizeResult) As String
+            Dim cleaned As New List(Of String)()
+            If sanitation.RemovedPrivateUseTotal > 0 Then
+                cleaned.Add("removed " & Plural(sanitation.RemovedPrivateUseTotal, "decorative symbol"))
+            End If
+            If sanitation.RemovedInvalidCharacters > 0 Then
+                cleaned.Add("removed " & Plural(sanitation.RemovedInvalidCharacters, "unusable character"))
+            End If
+            If sanitation.FixedArticleQuotes > 0 Then
+                cleaned.Add("corrected " & Plural(sanitation.FixedArticleQuotes, "quote mark"))
+            End If
+            If cleaned.Count = 0 Then Return String.Empty
+            Return " Cleaned up: " & String.Join(", ", cleaned) & "."
+        End Function
+
         Private Shared Function Summarise(lead As String,
                                           emptyPages As List(Of Integer),
                                           sanitation As SanitizeResult,
@@ -143,19 +160,7 @@ Namespace Import
                 sb.Append(". Check them in the original PDF.")
             End If
 
-            Dim cleaned As New List(Of String)()
-            If sanitation.RemovedPrivateUseTotal > 0 Then
-                cleaned.Add("removed " & Plural(sanitation.RemovedPrivateUseTotal, "decorative symbol"))
-            End If
-            If sanitation.RemovedInvalidCharacters > 0 Then
-                cleaned.Add("removed " & Plural(sanitation.RemovedInvalidCharacters, "unusable character"))
-            End If
-            If sanitation.FixedArticleQuotes > 0 Then
-                cleaned.Add("corrected " & Plural(sanitation.FixedArticleQuotes, "quote mark"))
-            End If
-            If cleaned.Count > 0 Then
-                sb.Append(" Cleaned up: ").Append(String.Join(", ", cleaned)).Append(".")
-            End If
+            sb.Append(CleanupSentence(sanitation))
 
             Dim wide As Integer = 0
             Dim hyphens As Integer = 0
