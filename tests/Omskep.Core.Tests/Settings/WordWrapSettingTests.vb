@@ -40,6 +40,22 @@ Namespace Settings
             Assert.AreEqual("af-ZA-AdriNeural", loaded.DefaultVoices("af-ZA"))
         End Sub
 
+        <TestMethod>
+        Public Sub Review_marks_and_DirectWrite_are_on_by_default_and_remember_being_turned_off()
+            Dim folder As String = NewFolder()
+            Dim fresh As AppSettings = New SettingsStore(folder).Load().Value
+            Assert.IsTrue(fresh.ReviewMarks)
+            Assert.IsTrue(fresh.DirectWrite)
+
+            Dim store As New SettingsStore(folder)
+            store.Update(Sub(s) s.ReviewMarks = False)
+            store.Update(Sub(s) s.DirectWrite = False)
+            Dim reloaded As AppSettings = New SettingsStore(folder).Load().Value
+            Assert.IsFalse(reloaded.ReviewMarks)
+            Assert.IsFalse(reloaded.DirectWrite)
+            Assert.IsTrue(reloaded.WordWrap)
+        End Sub
+
     End Class
 
 End Namespace

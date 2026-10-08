@@ -40,6 +40,14 @@ Namespace Settings
         <JsonPropertyName("wordWrap")>
         Public Property WordWrap As Boolean = True
 
+        ''' <summary>Whether wide gaps and line-end hyphens are highlighted for review (View). On by default.</summary>
+        <JsonPropertyName("reviewMarks")>
+        Public Property ReviewMarks As Boolean = True
+
+        ''' <summary>Whether the editor uses DirectWrite text rendering (View). On by default; turn off if text looks wrong.</summary>
+        <JsonPropertyName("directWrite")>
+        Public Property DirectWrite As Boolean = True
+
         ''' <summary>Locale to speaking-rate preset, in whole percent (e.g. "he-IL": -10).</summary>
         <JsonPropertyName("speakingRatePercent")>
         Public Property SpeakingRatePercent As Dictionary(Of String, Integer) = New Dictionary(Of String, Integer)()

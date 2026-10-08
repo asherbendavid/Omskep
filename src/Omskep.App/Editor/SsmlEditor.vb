@@ -15,7 +15,7 @@ Namespace Editor
     ''' The text editor, wrapped so the rest of the app never touches Scintilla directly and the control
     ''' can be replaced later. Holds no document logic: it shows text, reports edits, and draws marks that
     ''' other code asks for. All positions in its API are 1-based lines and columns counted in .NET
-    ''' characters; Scintilla's own byte positions stay inside this class.
+    ''' characters; the control's own position units stay inside this class.
     '''
     ''' Pasting is deliberately not done here: Ctrl+V, Ctrl+Shift+V and Shift+Insert are switched off in the
     ''' control so the form's menu commands (which sanitize) are the only way text is pasted.
@@ -46,6 +46,7 @@ Namespace Editor
 
         Private ReadOnly _sci As New Scintilla()
         Private _loading As Boolean
+        Private _usesBytePositions As Boolean
 
         ''' <summary>The text was changed by the user or by an editing command (not by LoadText).</summary>
         Public Event ContentChanged()
@@ -61,6 +62,7 @@ Namespace Editor
             ResumeLayout()
 
             ConfigureEditor()
+            CalibratePositions()
             ConfigureLexer()
             ConfigureMargins()
             ConfigureIndicators()
@@ -71,6 +73,25 @@ Namespace Editor
         End Sub
 
         ' ---- setup ----
+
+        ''' <summary>
+        ''' Scintilla itself counts UTF-8 bytes, but ScintillaNET converts to characters for most of its methods, and which
+        ''' one a given version uses is easy to get wrong. So it is measured, once, with a character that takes two bytes:
+        ''' the control's own length tells which unit its positions use.
+        ''' </summary>
+        Private Sub CalibratePositions()
+            _sci.Text = ChrW(&HEB)
+            _usesBytePositions = _sci.TextLength > 1
+            _sci.Text = String.Empty
+            _sci.EmptyUndoBuffer()
+            _sci.SetSavePoint()
+        End Sub
+
+        ''' <summary>How many position units the text spans in this control: bytes or characters, as measured.</summary>
+        Private Function Units(value As String) As Integer
+            Return If(_usesBytePositions, Encoding.UTF8.GetByteCount(value), value.Length)
+        End Function
+
 
         Private Sub ConfigureEditor()
             _sci.Technology = Technology.DirectWrite
@@ -240,6 +261,41 @@ Namespace Editor
             End Try
         End Sub
 
+        ''' <summary>The selected text, or an empty string.</summary>
+        Public ReadOnly Property SelectedText As String
+            Get
+                Return _sci.SelectedText
+            End Get
+        End Property
+
+        ''' <summary>Replaces the selection with the given text, as one undo step.</summary>
+        Public Sub ReplaceSelectionText(replacement As String)
+            InsertAtCaret(replacement)
+        End Sub
+
+        ''' <summary>Applies edits as one undo step. Give them last first (as HebrewOrder does) so offsets stay valid.
+        ''' Offsets are character offsets in <see cref="DocumentText"/>; the marks and caret elsewhere are undisturbed.
+        ''' The result is checked against expectedText; if it differs, everything is undone and False is returned, so a
+        ''' wrongly placed edit can never stay in the document.</summary>
+        Public Function ApplyEdits(edits As IEnumerable(Of TextEdit), expectedText As String) As Boolean
+            If Not IsEditable OrElse edits Is Nothing Then Return False
+            Dim snapshot As String = _sci.Text
+            _sci.BeginUndoAction()
+            Try
+                For Each edit As TextEdit In edits
+                    Dim startPos As Integer = Units(snapshot.Substring(0, edit.Start))
+                    Dim endPos As Integer = startPos + Units(snapshot.Substring(edit.Start, edit.Length))
+                    _sci.SetTargetRange(startPos, endPos)
+                    _sci.ReplaceTarget(edit.NewText)
+                Next
+            Finally
+                _sci.EndUndoAction()
+            End Try
+            If String.Equals(_sci.Text, expectedText, StringComparison.Ordinal) Then Return True
+            _sci.Undo()
+            Return False
+        End Function
+
         ''' <summary>Replaces the whole document as one undo step, so one Undo brings the old text back.</summary>
         Public Sub ReplaceAllText(newText As String)
             If Not IsEditable Then Return
@@ -340,8 +396,8 @@ Namespace Editor
             _sci.IndicatorFillRange(startPos, byteLength)
         End Sub
 
-        ''' <summary>Converts a 1-based line and column and a length in characters to Scintilla's byte position
-        ''' and byte length (the text is stored as UTF-8). Out-of-range input is clamped.</summary>
+        ''' <summary>Converts a 1-based line and column and a length in characters to the control's own position and
+        ''' length (see <see cref="Units"/>). Out-of-range input is clamped.</summary>
         Private Function TryRange(line As Integer, column As Integer, length As Integer,
                                   ByRef startPos As Integer, ByRef byteLength As Integer) As Boolean
             If line < 1 OrElse _sci.Lines.Count = 0 Then Return False
@@ -350,8 +406,8 @@ Namespace Editor
             Dim lineText As String = scintillaLine.Text
             Dim startIndex As Integer = Math.Max(0, Math.Min(column - 1, lineText.Length))
             Dim count As Integer = Math.Max(0, Math.Min(length, lineText.Length - startIndex))
-            startPos = scintillaLine.Position + Encoding.UTF8.GetByteCount(lineText.Substring(0, startIndex))
-            byteLength = Encoding.UTF8.GetByteCount(lineText.Substring(startIndex, count))
+            startPos = scintillaLine.Position + Units(lineText.Substring(0, startIndex))
+            byteLength = Units(lineText.Substring(startIndex, count))
             Return True
         End Function
 

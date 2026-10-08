@@ -82,9 +82,11 @@ Namespace Import
                                     document, pages.Count, emptyPages, sanitation, flags)
         End Function
 
-        ''' <summary>Pasted text from Word or anywhere else. Same sanitizing as a PDF.</summary>
+        ''' <summary>Pasted text from Word or anywhere else (or a plain text file). Same sanitizing as a PDF.
+        ''' sourceDescription completes the message "Imported ...", for example "the text file notes.txt".</summary>
         ''' <exception cref="ArgumentException">locale or voice is blank (a caller bug).</exception>
-        Public Function ImportText(pastedText As String, locale As String, voiceShortName As String) As ImportResult
+        Public Function ImportText(pastedText As String, locale As String, voiceShortName As String,
+                                   Optional sourceDescription As String = "the pasted text") As ImportResult
             DocumentComposer.RequireScaffold(locale, voiceShortName)
 
             Dim sanitation As SanitizeResult = TextSanitizer.Sanitize(pastedText)
@@ -96,7 +98,7 @@ Namespace Import
             Dim document As String = DocumentComposer.Compose(body, locale, voiceShortName)
             Dim flags As IReadOnlyList(Of ImportFlag) = ImportFlagFinder.Find(document)
             Return New ImportResult(ImportOutcome.Imported,
-                                    Summarise("Imported the pasted text.", New List(Of Integer)(), sanitation, flags),
+                                    Summarise("Imported " & sourceDescription & ".", New List(Of Integer)(), sanitation, flags),
                                     document, 0, New List(Of Integer)(), sanitation, flags)
         End Function
 

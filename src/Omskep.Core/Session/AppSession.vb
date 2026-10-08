@@ -87,6 +87,34 @@ Namespace Session
             Return loaded.Value Is Nothing OrElse loaded.Value.WordWrap
         End Function
 
+        ''' <summary>The saved "highlight review marks" preference; on when nothing is saved.</summary>
+        Public Function ReviewMarksPreference() As Boolean
+            Dim loaded As SettingsLoadResult = _settings.Load()
+            Return loaded.Value Is Nothing OrElse loaded.Value.ReviewMarks
+        End Function
+
+        Public Sub SetReviewMarksPreference(value As Boolean)
+            Try
+                _settings.Update(Sub(s) s.ReviewMarks = value)
+            Catch ex As IOException
+                ' Preference only: skipped if the settings file is in use.
+            End Try
+        End Sub
+
+        ''' <summary>The saved DirectWrite rendering preference; on when nothing is saved.</summary>
+        Public Function DirectWritePreference() As Boolean
+            Dim loaded As SettingsLoadResult = _settings.Load()
+            Return loaded.Value Is Nothing OrElse loaded.Value.DirectWrite
+        End Function
+
+        Public Sub SetDirectWritePreference(value As Boolean)
+            Try
+                _settings.Update(Sub(s) s.DirectWrite = value)
+            Catch ex As IOException
+                ' Preference only: skipped if the settings file is in use.
+            End Try
+        End Sub
+
         ''' <summary>Saves the word-wrap preference. A preference is not worth an error: if the file is locked it is skipped.</summary>
         Public Sub SetWordWrapPreference(value As Boolean)
             Try

@@ -43,6 +43,9 @@ Public Class MainForm
         BuildEditorContextMenu()
         mnuWordWrap.Checked = _session.WordWrapPreference()
         ssmlEditor.WordWrap = mnuWordWrap.Checked
+        mnuReviewMarks.Checked = _session.ReviewMarksPreference()
+        mnuDirectWrite.Checked = _session.DirectWritePreference()
+        ssmlEditor.UseDirectWrite = mnuDirectWrite.Checked
         AddHandler _session.StateChanged, AddressOf OnSessionStateChanged
         ApplyState()
     End Sub
@@ -81,6 +84,7 @@ Public Class MainForm
         mnuCut.Enabled = canStart
         mnuPaste.Enabled = canStart
         mnuPastePlain.Enabled = canStart
+        mnuReverseHebrew.Enabled = canStart
         mnuGoToError.Enabled = hasError
         mnuGoToCause.Enabled = hasError AndAlso _model.LastCheck.HasCause
 
@@ -164,8 +168,15 @@ Public Class MainForm
     ' ---- startup / shutdown ----
 
     Private Async Sub MainForm_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        ' A file given by Windows (double-click or "Open with"). Unsaved work from an earlier session is then not
+        ' offered this time; it is kept and offered at the next normal start.
+        Dim startupPath As String = CommandLineArguments.FindDocumentPath(Environment.GetCommandLineArgs())
         StartNewDocument()
-        OfferRecovery()
+        If startupPath Is Nothing Then
+            OfferRecovery()
+        Else
+            ShowNote("Unsaved work from an earlier session, if any, is kept and will be offered next time.")
+        End If
         tmrAutosave.Start()
         Try
             Await _session.StartupAsync(_closing.Token)
@@ -175,6 +186,14 @@ Public Class MainForm
         If IsDisposed Then Return
         _startupDone = True
         ApplyState()
+
+        If startupPath IsNot Nothing Then
+            If _session.Access.CanEdit Then
+                Await OpenPathAsync(startupPath)
+            Else
+                ShowError("Enter your Azure key in Settings first, then open the file again.")
+            End If
+        End If
     End Sub
 
     Private Sub MainForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
@@ -337,7 +356,8 @@ Public Class MainForm
                     OpenLoadedSsml(path, fileText)
                 Else
                     Dim choice As ScaffoldChoice = Scaffold()
-                    ApplyImport(_importer.ImportText(fileText, choice.Locale, choice.VoiceShortName))
+                    ApplyImport(_importer.ImportText(fileText, choice.Locale, choice.VoiceShortName,
+                                                     "the text file " & System.IO.Path.GetFileName(path)))
                 End If
         End Select
     End Function
@@ -383,7 +403,6 @@ Public Class MainForm
             Return
         End If
         ssmlEditor.LoadText(result.Document)
-        ssmlEditor.ShowFlags(result.Flags)
         _model.Imported()
         AfterContentReplaced()
         MessageBox.Show(Me, result.Message, "Omskep", MessageBoxButtons.OK,
@@ -394,6 +413,7 @@ Public Class MainForm
     Private Sub AfterContentReplaced()
         _recovery.Discard()
         _lastSnapshotRevision = -1
+        RefreshReviewMarks()
         RunCheckNow()
         ssmlEditor.Focus()
     End Sub
@@ -522,10 +542,10 @@ Public Class MainForm
         Select Case plan.Kind
             Case PasteKind.ReplaceDocument
                 ssmlEditor.ReplaceAllText(plan.Text)
-                ssmlEditor.ShowFlags(ImportFlagFinder.Find(ssmlEditor.DocumentText))
+                RefreshReviewMarks()
             Case PasteKind.InsertText
                 ssmlEditor.InsertAtCaret(plan.Text)
-                If Not plainText Then ssmlEditor.ShowFlags(ImportFlagFinder.Find(ssmlEditor.DocumentText))
+                RefreshReviewMarks()
         End Select
         ShowNote(plan.Message)
     End Sub
@@ -551,7 +571,70 @@ Public Class MainForm
         _editOnlyItems.Add(menu.Items.Add("Paste as plain &text", Nothing, Sub(sender, e) DoPaste(True)))
         menu.Items.Add(New ToolStripSeparator())
         menu.Items.Add("Select &all", Nothing, Sub(sender, e) ssmlEditor.SelectEverything())
+        menu.Items.Add(New ToolStripSeparator())
+        _editOnlyItems.Add(menu.Items.Add("Reverse &Hebrew text", Nothing, Sub(sender, e) ReverseHebrew()))
         ssmlEditor.UseContextMenu(menu)
+    End Sub
+
+    Private Sub mnuReviewMarks_Click(sender As Object, e As EventArgs) Handles mnuReviewMarks.Click
+        _session.SetReviewMarksPreference(mnuReviewMarks.Checked)
+        RefreshReviewMarks()
+    End Sub
+
+    Private Sub mnuDirectWrite_Click(sender As Object, e As EventArgs) Handles mnuDirectWrite.Click
+        ssmlEditor.UseDirectWrite = mnuDirectWrite.Checked
+        _session.SetDirectWritePreference(mnuDirectWrite.Checked)
+    End Sub
+
+    ''' <summary>Shows (or clears) the yellow marks for wide gaps and line-end hyphens, worked out from the text as it is now.</summary>
+    Private Sub RefreshReviewMarks()
+        If mnuReviewMarks.Checked Then
+            ssmlEditor.ShowFlags(ImportFlagFinder.Find(ssmlEditor.DocumentText))
+        Else
+            ssmlEditor.ShowFlags(Nothing)
+        End If
+    End Sub
+
+    ''' <summary>Puts Hebrew that came out of a PDF back in reading order: the selection if there is one, otherwise the whole
+    ''' document (leaving runs that already look correct alone). One undo step either way.</summary>
+    Private Sub mnuReverseHebrew_Click(sender As Object, e As EventArgs) Handles mnuReverseHebrew.Click
+        ReverseHebrew()
+    End Sub
+
+    Private Sub ReverseHebrew()
+        If _busy OrElse Not ssmlEditor.IsEditable Then Return
+
+        Dim selected As String = ssmlEditor.SelectedText
+        If selected.Length > 0 Then
+            Dim part As HebrewReverseResult = HebrewOrder.ReverseRuns(selected, False)
+            If part.RunsReversed = 0 Then
+                ShowNote("There is no Hebrew in the selection.")
+                Return
+            End If
+            ssmlEditor.ReplaceSelectionText(part.Text)
+            ShowNote("Reversed " & part.RunsReversed.ToString(Globalization.CultureInfo.InvariantCulture) & " Hebrew run(s) in the selection.")
+            RefreshReviewMarks()
+            Return
+        End If
+
+        Dim whole As HebrewReverseResult = HebrewOrder.ReverseRuns(ssmlEditor.DocumentText, True)
+        If whole.RunsReversed = 0 Then
+            ShowNote(If(whole.RunsSkipped > 0,
+                        "The Hebrew already looks right. Select text to reverse it anyway.",
+                        "There is no Hebrew text in the document."))
+            Return
+        End If
+        Dim question As String = "Reverse " & whole.RunsReversed.ToString(Globalization.CultureInfo.InvariantCulture) &
+                                 " Hebrew run(s) in the whole document?" & vbCrLf &
+                                 If(whole.RunsSkipped > 0, whole.RunsSkipped.ToString(Globalization.CultureInfo.InvariantCulture) & " that already look correct will be left alone." & vbCrLf, "") &
+                                 vbCrLf & "Use this when Hebrew from a PDF reads left to right. You can undo it with Ctrl+Z."
+        If MessageBox.Show(Me, question, "Omskep", MessageBoxButtons.YesNo, MessageBoxIcon.Question) <> DialogResult.Yes Then Return
+        If Not ssmlEditor.ApplyEdits(whole.Edits, whole.Text) Then
+            ShowError("The Hebrew text could not be reversed safely, so nothing was changed. Select the Hebrew text and try again.")
+            Return
+        End If
+        ShowNote("Reversed " & whole.RunsReversed.ToString(Globalization.CultureInfo.InvariantCulture) & " Hebrew run(s).")
+        RefreshReviewMarks()
     End Sub
 
     ' ---- Tools menu ----
