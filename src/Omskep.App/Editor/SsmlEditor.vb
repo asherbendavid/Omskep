@@ -87,6 +87,13 @@ Namespace Editor
             _sci.SetSavePoint()
         End Sub
 
+        ''' <summary>The reverse of <see cref="Units"/>: a position in the control's units back to a character offset.</summary>
+        Private Function CharIndexFromUnits(units As Integer) As Integer
+            If Not _usesBytePositions Then Return units
+            Dim bytes As Byte() = Encoding.UTF8.GetBytes(_sci.Text)
+            Return Encoding.UTF8.GetCharCount(bytes, 0, Math.Max(0, Math.Min(units, bytes.Length)))
+        End Function
+
         ''' <summary>How many position units the text spans in this control: bytes or characters, as measured.</summary>
         Private Function Units(value As String) As Integer
             Return If(_usesBytePositions, Encoding.UTF8.GetByteCount(value), value.Length)
@@ -273,20 +280,35 @@ Namespace Editor
             InsertAtCaret(replacement)
         End Sub
 
-        ''' <summary>Applies edits as one undo step. Give them last first (as HebrewOrder does) so offsets stay valid.
+        ''' <summary>Applies edits as one undo step. Give them last first and not overlapping (as HebrewOrder and TextSearch do).
         ''' Offsets are character offsets in <see cref="DocumentText"/>; the marks and caret elsewhere are undisturbed.
         ''' The result is checked against expectedText; if it differs, everything is undone and False is returned, so a
         ''' wrongly placed edit can never stay in the document.</summary>
         Public Function ApplyEdits(edits As IEnumerable(Of TextEdit), expectedText As String) As Boolean
             If Not IsEditable OrElse edits Is Nothing Then Return False
+            Dim ordered As List(Of TextEdit) = edits.ToList()
             Dim snapshot As String = _sci.Text
+
+            ' All positions are worked out from the original text in one forward pass.
+            Dim starts(ordered.Count - 1) As Integer
+            Dim ends(ordered.Count - 1) As Integer
+            Dim runningUnits As Integer = 0
+            Dim copiedTo As Integer = 0
+            For k As Integer = ordered.Count - 1 To 0 Step -1
+                Dim edit As TextEdit = ordered(k)
+                If edit.Start < copiedTo OrElse edit.Length < 0 OrElse edit.Start + edit.Length > snapshot.Length Then Return False
+                runningUnits += Units(snapshot.Substring(copiedTo, edit.Start - copiedTo))
+                starts(k) = runningUnits
+                runningUnits += Units(snapshot.Substring(edit.Start, edit.Length))
+                ends(k) = runningUnits
+                copiedTo = edit.Start + edit.Length
+            Next
+
             _sci.BeginUndoAction()
             Try
-                For Each edit As TextEdit In edits
-                    Dim startPos As Integer = Units(snapshot.Substring(0, edit.Start))
-                    Dim endPos As Integer = startPos + Units(snapshot.Substring(edit.Start, edit.Length))
-                    _sci.SetTargetRange(startPos, endPos)
-                    _sci.ReplaceTarget(edit.NewText)
+                For k As Integer = 0 To ordered.Count - 1
+                    _sci.SetTargetRange(starts(k), ends(k))
+                    _sci.ReplaceTarget(ordered(k).NewText)
                 Next
             Finally
                 _sci.EndUndoAction()
@@ -295,6 +317,31 @@ Namespace Editor
             _sci.Undo()
             Return False
         End Function
+
+        ''' <summary>Start of the selection (or the caret) as a character offset in <see cref="DocumentText"/>.</summary>
+        Public ReadOnly Property SelectionStartIndex As Integer
+            Get
+                Return CharIndexFromUnits(_sci.SelectionStart)
+            End Get
+        End Property
+
+        ''' <summary>End of the selection (or the caret) as a character offset in <see cref="DocumentText"/>.</summary>
+        Public ReadOnly Property SelectionEndIndex As Integer
+            Get
+                Return CharIndexFromUnits(_sci.SelectionEnd)
+            End Get
+        End Property
+
+        ''' <summary>Selects a range given as character offsets and scrolls it into view (focus stays where it is).</summary>
+        Public Sub SelectCharacterRange(startIndex As Integer, length As Integer)
+            Dim snapshot As String = _sci.Text
+            Dim first As Integer = Math.Max(0, Math.Min(startIndex, snapshot.Length))
+            Dim count As Integer = Math.Max(0, Math.Min(length, snapshot.Length - first))
+            Dim startUnits As Integer = Units(snapshot.Substring(0, first))
+            Dim lengthUnits As Integer = Units(snapshot.Substring(first, count))
+            _sci.SetSelection(startUnits + lengthUnits, startUnits)
+            _sci.ScrollCaret()
+        End Sub
 
         ''' <summary>Replaces the whole document as one undo step, so one Undo brings the old text back.</summary>
         Public Sub ReplaceAllText(newText As String)

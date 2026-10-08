@@ -29,6 +29,7 @@ Public Class MainForm
     Private _busy As Boolean
     Private _keepRecovery As Boolean
     Private _startupDone As Boolean
+    Private _findDialog As FindReplaceForm
     Private _checkFull As String = String.Empty
     Private _noteFull As String = String.Empty
 
@@ -85,6 +86,10 @@ Public Class MainForm
         mnuPaste.Enabled = canStart
         mnuPastePlain.Enabled = canStart
         mnuReverseHebrew.Enabled = canStart
+        mnuFind.Enabled = Not _busy
+        mnuReplace.Enabled = Not _busy
+        mnuFindNext.Enabled = Not _busy
+        mnuFindPrevious.Enabled = Not _busy
         mnuGoToError.Enabled = hasError
         mnuGoToCause.Enabled = hasError AndAlso _model.LastCheck.HasCause
 
@@ -220,6 +225,7 @@ Public Class MainForm
         If Not _keepRecovery Then _recovery.Discard()
         If _session IsNot Nothing Then RemoveHandler _session.StateChanged, AddressOf OnSessionStateChanged
         _closing.Dispose()
+        If _findDialog IsNot Nothing Then _findDialog.Dispose()
     End Sub
 
     ' ---- banner buttons ----
@@ -635,6 +641,34 @@ Public Class MainForm
         End If
         ShowNote("Reversed " & whole.RunsReversed.ToString(Globalization.CultureInfo.InvariantCulture) & " Hebrew run(s).")
         RefreshReviewMarks()
+    End Sub
+
+    ' ---- Find and Replace ----
+
+    Private Sub EnsureFindDialog()
+        If _findDialog Is Nothing OrElse _findDialog.IsDisposed Then
+            _findDialog = New FindReplaceForm(Me, ssmlEditor, AddressOf RefreshReviewMarks)
+        End If
+    End Sub
+
+    Private Sub mnuFind_Click(sender As Object, e As EventArgs) Handles mnuFind.Click
+        EnsureFindDialog()
+        _findDialog.ShowFor(False)
+    End Sub
+
+    Private Sub mnuReplace_Click(sender As Object, e As EventArgs) Handles mnuReplace.Click
+        EnsureFindDialog()
+        _findDialog.ShowFor(True)
+    End Sub
+
+    Private Sub mnuFindNext_Click(sender As Object, e As EventArgs) Handles mnuFindNext.Click
+        EnsureFindDialog()
+        _findDialog.FindNext(True)
+    End Sub
+
+    Private Sub mnuFindPrevious_Click(sender As Object, e As EventArgs) Handles mnuFindPrevious.Click
+        EnsureFindDialog()
+        _findDialog.FindNext(False)
     End Sub
 
     ' ---- Tools menu ----
