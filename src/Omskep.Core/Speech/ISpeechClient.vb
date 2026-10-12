@@ -14,6 +14,7 @@ Namespace Speech
         ''' invalid region or blank key (programming errors), and OperationCanceledException if the caller cancels.
         ''' </summary>
         Function GetVoicesAsync(region As String, key As String, cancellationToken As CancellationToken) As Task(Of VoiceListResult)
+        Function SynthesizeAsync(ssml As String, region As String, key As String, cancellationToken As CancellationToken) As Task(Of SynthesisResult)
     End Interface
 
     ''' <summary>

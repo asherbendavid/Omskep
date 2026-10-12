@@ -15,6 +15,15 @@ converter**: exporting audio, choosing a voice per language, the pronunciation
 tools and the SSML reference panel are built in later phases. The File, Export
 item is still a placeholder.
 
+Phase 3 (export) is split in two. **Phase 3a, the synthesis engine, is
+complete**: composing a document into the SSML actually sent to Azure,
+splitting it into chunks under Azure's duration limit, calling the Speech REST
+endpoint, and running the chunks through to one joined MP3 with retry and a
+crash-safe write, all live in `Omskep.Core` with unit tests and have been
+verified against the real Azure service. None of it is reachable from the
+application yet -- there is no Export dialog, no ID3 tags and no progress UI.
+That wiring, plus file naming and ID3 tagging, is phase 3b.
+
 ## What it will do
 
 1. Open a study PDF (or paste text from Word) and turn it into an editable
@@ -248,8 +257,13 @@ not include or redistribute the Azure Speech SDK.
     paste decision, and the review-flag finder.
   - `Documents`: well-formedness checking, the billable-character counter, the
     document state model, file open and save, the recovery store, find and
-    replace, and Hebrew order repair.
-  - Chunking and export logic follow in phase 3.
+    replace, Hebrew order repair, composing a document into send-ready SSML
+    (`SsmlComposer`), and splitting it into chunks under the duration cap
+    (`Chunker`).
+  - `Export`: the export engine (`ExportEngine`) -- sequential per-chunk
+    synthesis with retry, a plausibility check on each response, byte-join,
+    and a crash-safe write via `AtomicFile`. Same-session resume only (see the
+    phase 3a handoff). File naming and ID3 tagging are phase 3b.
 - `src/Omskep.App`: WinForms application (`net10.0-windows`): the main window,
   Settings, the Find and Replace window, `Editor\SsmlEditor` (the wrapper around
   the Scintilla5.NET control), and the Windows DPAPI key protector

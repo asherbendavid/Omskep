@@ -1,0 +1,1229 @@
+﻿src\Omskep.App\FindReplaceForm.vb:10: Public NotInheritable Class FindReplaceForm
+src\Omskep.App\FindReplaceForm.vb:30: Public Sub New(owner As Form, editor As Editor.SsmlEditor, afterEdit As Action)
+src\Omskep.App\FindReplaceForm.vb:105: Private Shared Function MakeLabel(caption As String) As Label
+src\Omskep.App\FindReplaceForm.vb:112: Public Sub ShowFor(focusReplace As Boolean)
+src\Omskep.App\FindReplaceForm.vb:130: Protected Overrides Sub OnFormClosing(e As FormClosingEventArgs)
+src\Omskep.App\FindReplaceForm.vb:139: Private Sub OnDialogKeyDown(sender As Object, e As KeyEventArgs)
+src\Omskep.App\FindReplaceForm.vb:146: Private Sub UpdateEnabled()
+src\Omskep.App\FindReplaceForm.vb:153: Private Sub PrefillFromSelection()
+src\Omskep.App\FindReplaceForm.vb:161: Private Function CurrentOptions() As SearchOptions
+src\Omskep.App\FindReplaceForm.vb:165: Private Sub Say(message As String, isProblem As Boolean)
+src\Omskep.App\FindReplaceForm.vb:171: Public Sub FindNext(forward As Boolean)
+src\Omskep.App\FindReplaceForm.vb:189: Private Sub ReplaceCurrent()
+src\Omskep.App\FindReplaceForm.vb:214: Private Sub ReplaceEverything()
+src\Omskep.App\MainForm.vb:13: Public Class MainForm
+src\Omskep.App\MainForm.vb:37: Public Sub New()
+src\Omskep.App\MainForm.vb:41: Public Sub New(session As AppSession)
+src\Omskep.App\MainForm.vb:56: Private Sub OnSessionStateChanged(sender As Object, e As EventArgs)
+src\Omskep.App\MainForm.vb:65: Private Sub ApplyState()
+src\Omskep.App\MainForm.vb:110: Private Sub ShowNote(message As String)
+src\Omskep.App\MainForm.vb:117: Private Sub tmrNote_Tick(sender As Object, e As EventArgs) Handles tmrNote.Tick
+src\Omskep.App\MainForm.vb:123: Private Sub statusMain_SizeChanged(sender As Object, e As EventArgs) Handles statusMain.SizeChanged
+src\Omskep.App\MainForm.vb:131: Private Sub FitStatusBar()
+src\Omskep.App\MainForm.vb:143: Private Function StatusTextWidth(value As String) As Integer
+src\Omskep.App\MainForm.vb:148: Private Function Shorten(value As String, maxWidth As Integer) As String
+src\Omskep.App\MainForm.vb:164: Private Sub ShowError(message As String)
+src\Omskep.App\MainForm.vb:169: Private Function Scaffold() As ScaffoldChoice
+src\Omskep.App\MainForm.vb:204: Private Sub MainForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+src\Omskep.App\MainForm.vb:224: Private Sub MainForm_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
+src\Omskep.App\MainForm.vb:242: Private Sub btnOpenSettings_Click(sender As Object, e As EventArgs) Handles btnOpenSettings.Click
+src\Omskep.App\MainForm.vb:248: Private Sub ssmlEditor_ContentChanged() Handles ssmlEditor.ContentChanged
+src\Omskep.App\MainForm.vb:255: Private Sub ssmlEditor_DirtyChanged(isDirty As Boolean) Handles ssmlEditor.DirtyChanged
+src\Omskep.App\MainForm.vb:262: Private Sub tmrCheck_Tick(sender As Object, e As EventArgs) Handles tmrCheck.Tick
+src\Omskep.App\MainForm.vb:267: Private Sub RunCheckNow()
+src\Omskep.App\MainForm.vb:279: Private Sub tmrAutosave_Tick(sender As Object, e As EventArgs) Handles tmrAutosave.Tick
+src\Omskep.App\MainForm.vb:288: Private Sub OfferRecovery()
+src\Omskep.App\MainForm.vb:310: Private Sub RestoreFrom(item As RecoveryItem)
+src\Omskep.App\MainForm.vb:330: Private Sub mnuNew_Click(sender As Object, e As EventArgs) Handles mnuNew.Click
+src\Omskep.App\MainForm.vb:335: Private Sub StartNewDocument()
+src\Omskep.App\MainForm.vb:371: Private Function TryLoad(path As String) As String
+src\Omskep.App\MainForm.vb:380: Private Sub OpenLoadedSsml(path As String, fileText As String)
+src\Omskep.App\MainForm.vb:399: Private Sub SetBusy(value As Boolean)
+src\Omskep.App\MainForm.vb:406: Private Sub ApplyImport(result As ImportResult)
+src\Omskep.App\MainForm.vb:419: Private Sub AfterContentReplaced()
+src\Omskep.App\MainForm.vb:427: Private Sub mnuSave_Click(sender As Object, e As EventArgs) Handles mnuSave.Click
+src\Omskep.App\MainForm.vb:431: Private Sub mnuSaveAs_Click(sender As Object, e As EventArgs) Handles mnuSaveAs.Click
+src\Omskep.App\MainForm.vb:435: Private Function SaveDocument() As Boolean
+src\Omskep.App\MainForm.vb:440: Private Function SaveDocumentAs() As Boolean
+src\Omskep.App\MainForm.vb:457: Private Function WriteTo(path As String) As Boolean
+src\Omskep.App\MainForm.vb:474: Private Function ConfirmDiscardChanges() As Boolean
+src\Omskep.App\MainForm.vb:488: Private Sub mnuExit_Click(sender As Object, e As EventArgs) Handles mnuExit.Click
+src\Omskep.App\MainForm.vb:493: Private Sub mnuExport_Click(sender As Object, e As EventArgs) Handles mnuExport.Click
+src\Omskep.App\MainForm.vb:499: Private Sub mnuUndo_Click(sender As Object, e As EventArgs) Handles mnuUndo.Click
+src\Omskep.App\MainForm.vb:503: Private Sub mnuRedo_Click(sender As Object, e As EventArgs) Handles mnuRedo.Click
+src\Omskep.App\MainForm.vb:507: Private Sub mnuCut_Click(sender As Object, e As EventArgs) Handles mnuCut.Click
+src\Omskep.App\MainForm.vb:511: Private Sub mnuCopy_Click(sender As Object, e As EventArgs) Handles mnuCopy.Click
+src\Omskep.App\MainForm.vb:515: Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
+src\Omskep.App\MainForm.vb:519: Private Sub mnuPastePlain_Click(sender As Object, e As EventArgs) Handles mnuPastePlain.Click
+src\Omskep.App\MainForm.vb:523: Private Sub mnuSelectAll_Click(sender As Object, e As EventArgs) Handles mnuSelectAll.Click
+src\Omskep.App\MainForm.vb:527: Private Sub mnuGoToError_Click(sender As Object, e As EventArgs) Handles mnuGoToError.Click
+src\Omskep.App\MainForm.vb:532: Private Sub mnuGoToCause_Click(sender As Object, e As EventArgs) Handles mnuGoToCause.Click
+src\Omskep.App\MainForm.vb:537: Private Sub mnuWordWrap_Click(sender As Object, e As EventArgs) Handles mnuWordWrap.Click
+src\Omskep.App\MainForm.vb:544: Private Sub DoPaste(plainText As Boolean)
+src\Omskep.App\MainForm.vb:559: Private Shared Function ReadClipboardText() As String
+src\Omskep.App\MainForm.vb:569: Private Sub BuildEditorContextMenu()
+src\Omskep.App\MainForm.vb:585: Private Sub mnuReviewMarks_Click(sender As Object, e As EventArgs) Handles mnuReviewMarks.Click
+src\Omskep.App\MainForm.vb:590: Private Sub mnuDirectWrite_Click(sender As Object, e As EventArgs) Handles mnuDirectWrite.Click
+src\Omskep.App\MainForm.vb:596: Private Sub RefreshReviewMarks()
+src\Omskep.App\MainForm.vb:606: Private Sub mnuReverseHebrew_Click(sender As Object, e As EventArgs) Handles mnuReverseHebrew.Click
+src\Omskep.App\MainForm.vb:610: Private Sub ReverseHebrew()
+src\Omskep.App\MainForm.vb:648: Private Sub EnsureFindDialog()
+src\Omskep.App\MainForm.vb:654: Private Sub mnuFind_Click(sender As Object, e As EventArgs) Handles mnuFind.Click
+src\Omskep.App\MainForm.vb:659: Private Sub mnuReplace_Click(sender As Object, e As EventArgs) Handles mnuReplace.Click
+src\Omskep.App\MainForm.vb:664: Private Sub mnuFindNext_Click(sender As Object, e As EventArgs) Handles mnuFindNext.Click
+src\Omskep.App\MainForm.vb:669: Private Sub mnuFindPrevious_Click(sender As Object, e As EventArgs) Handles mnuFindPrevious.Click
+src\Omskep.App\MainForm.vb:676: Private Sub mnuSettings_Click(sender As Object, e As EventArgs) Handles mnuSettings.Click
+src\Omskep.App\MainForm.vb:680: Private Sub ShowSettings()
+src\Omskep.App\Program.vb:6: Friend Module Program
+src\Omskep.App\Program.vb:9: Friend Sub Main(args As String())
+src\Omskep.App\Program.vb:29: Private Sub OnThreadException(sender As Object, e As Threading.ThreadExceptionEventArgs)
+src\Omskep.App\Program.vb:36: Private Sub OnDomainException(sender As Object, e As UnhandledExceptionEventArgs)
+src\Omskep.App\SettingsForm.vb:9: Public Class SettingsForm
+src\Omskep.App\SettingsForm.vb:16: Public Sub New()
+src\Omskep.App\SettingsForm.vb:20: Public Sub New(session As AppSession)
+src\Omskep.App\SettingsForm.vb:33: Private Sub OnSessionStateChanged(sender As Object, e As EventArgs)
+src\Omskep.App\SettingsForm.vb:42: Private Sub ApplyState()
+src\Omskep.App\SettingsForm.vb:65: Private Sub ShowResult(result As ActionResult)
+src\Omskep.App\SettingsForm.vb:72: Private Sub cboRegion_TextChanged(sender As Object, e As EventArgs) Handles cboRegion.TextChanged
+src\Omskep.App\SettingsForm.vb:76: Private Sub txtKey_TextChanged(sender As Object, e As EventArgs) Handles txtKey.TextChanged
+src\Omskep.App\SettingsForm.vb:98: Private Sub btnReplace_Click(sender As Object, e As EventArgs) Handles btnReplace.Click
+src\Omskep.App\SettingsForm.vb:104: Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+src\Omskep.App\SettingsForm.vb:143: Private Sub SettingsForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+src\Omskep.App\SettingsForm.vb:147: Private Sub SettingsForm_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
+src\Omskep.App\Editor\SsmlEditor.vb:23: Public NotInheritable Class SsmlEditor
+src\Omskep.App\Editor\SsmlEditor.vb:58: Public Sub New()
+src\Omskep.App\Editor\SsmlEditor.vb:82: Private Sub CalibratePositions()
+src\Omskep.App\Editor\SsmlEditor.vb:91: Private Function CharIndexFromUnits(units As Integer) As Integer
+src\Omskep.App\Editor\SsmlEditor.vb:98: Private Function Units(value As String) As Integer
+src\Omskep.App\Editor\SsmlEditor.vb:103: Private Sub ConfigureEditor()
+src\Omskep.App\Editor\SsmlEditor.vb:123: Private Sub ConfigureLexer()
+src\Omskep.App\Editor\SsmlEditor.vb:141: Private Sub ConfigureMargins()
+src\Omskep.App\Editor\SsmlEditor.vb:150: Private Sub ConfigureIndicators()
+src\Omskep.App\Editor\SsmlEditor.vb:164: Public ReadOnly Property DocumentText As String
+src\Omskep.App\Editor\SsmlEditor.vb:172: Public Sub LoadText(newText As String)
+src\Omskep.App\Editor\SsmlEditor.vb:189: Public Sub MarkSaved()
+src\Omskep.App\Editor\SsmlEditor.vb:195: Public Property IsEditable As Boolean
+src\Omskep.App\Editor\SsmlEditor.vb:205: Public Property WordWrap As Boolean
+src\Omskep.App\Editor\SsmlEditor.vb:216: Public Property UseDirectWrite As Boolean
+src\Omskep.App\Editor\SsmlEditor.vb:227: Public Sub UseContextMenu(menu As ContextMenuStrip)
+src\Omskep.App\Editor\SsmlEditor.vb:232: Public ReadOnly Property LineCount As Integer
+src\Omskep.App\Editor\SsmlEditor.vb:240: Public Sub UndoEdit()
+src\Omskep.App\Editor\SsmlEditor.vb:244: Public Sub RedoEdit()
+src\Omskep.App\Editor\SsmlEditor.vb:248: Public Sub CutSelection()
+src\Omskep.App\Editor\SsmlEditor.vb:252: Public Sub CopySelection()
+src\Omskep.App\Editor\SsmlEditor.vb:256: Public Sub SelectEverything()
+src\Omskep.App\Editor\SsmlEditor.vb:261: Public Sub InsertAtCaret(insertText As String)
+src\Omskep.App\Editor\SsmlEditor.vb:272: Public ReadOnly Property SelectedText As String
+src\Omskep.App\Editor\SsmlEditor.vb:279: Public Sub ReplaceSelectionText(replacement As String)
+src\Omskep.App\Editor\SsmlEditor.vb:287: Public Function ApplyEdits(edits As IEnumerable(Of TextEdit), expectedText As String) As Boolean
+src\Omskep.App\Editor\SsmlEditor.vb:322: Public ReadOnly Property SelectionStartIndex As Integer
+src\Omskep.App\Editor\SsmlEditor.vb:329: Public ReadOnly Property SelectionEndIndex As Integer
+src\Omskep.App\Editor\SsmlEditor.vb:336: Public Sub SelectCharacterRange(startIndex As Integer, length As Integer)
+src\Omskep.App\Editor\SsmlEditor.vb:347: Public Sub ReplaceAllText(newText As String)
+src\Omskep.App\Editor\SsmlEditor.vb:361: Public Sub ClearMarks()
+src\Omskep.App\Editor\SsmlEditor.vb:369: Public Sub ShowCheck(result As CheckResult)
+src\Omskep.App\Editor\SsmlEditor.vb:399: Public Sub ShowFlags(flags As IEnumerable(Of ImportFlag))
+src\Omskep.App\Editor\SsmlEditor.vb:409: Public Sub GoToLineColumn(line As Integer, column As Integer)
+src\Omskep.App\Editor\SsmlEditor.vb:420: Private Sub OnSciTextChanged(sender As Object, e As EventArgs)
+src\Omskep.App\Editor\SsmlEditor.vb:425: Private Sub UpdateLineNumberWidth()
+src\Omskep.App\Editor\SsmlEditor.vb:430: Private Function LineTextWithoutEol(line As Integer) As String
+src\Omskep.App\Editor\SsmlEditor.vb:434: Private Shared Function IsTokenBoundary(c As Char) As Boolean
+src\Omskep.App\Editor\SsmlEditor.vb:438: Private Sub MarkRange(indicator As Integer, line As Integer, column As Integer, length As Integer)
+src\Omskep.App\Editor\SsmlEditor.vb:448: Private Function TryRange(line As Integer, column As Integer, length As Integer,
+src\Omskep.App\Secrets\DpapiSecretProtector.vb:12: Public NotInheritable Class DpapiSecretProtector
+src\Omskep.App\Secrets\DpapiSecretProtector.vb:18: Public Function Protect(plain As Byte()) As Byte() Implements ISecretProtector.Protect
+src\Omskep.App\Secrets\DpapiSecretProtector.vb:24: Public Function Unprotect(protectedBlob As Byte()) As Byte() Implements ISecretProtector.Unprotect
+src\Omskep.Core\Class1.vb:1: Public Class Class1
+src\Omskep.Core\Access\AccessEvaluator.vb:7: Public Module AccessEvaluator
+src\Omskep.Core\Access\AccessEvaluator.vb:9: Public Function Evaluate(key As KeyState, cache As CacheStatus, connection As ConnectionSnapshot) As AccessState
+src\Omskep.Core\Access\AccessEvaluator.vb:33: Private Function EvaluateWithCache(connection As ConnectionSnapshot) As AccessState
+src\Omskep.Core\Access\AccessEvaluator.vb:41: Private Function EvaluateWithoutCache(connection As ConnectionSnapshot) As AccessState
+src\Omskep.Core\Access\AccessEvaluator.vb:60: Private Function Locked(reason As AccessReason, message As String) As AccessState
+src\Omskep.Core\Access\AccessEvaluator.vb:67: Public Function CacheStatusFor(cachedRegion As String, cachedVoiceCount As Integer, currentRegion As String) As CacheStatus
+src\Omskep.Core\Access\AccessEvaluator.vb:81: Public Function OutcomeFromHttpStatus(statusCode As Integer) As AzureOutcome
+src\Omskep.Core\Access\AccessEvaluator.vb:103: Public NotInheritable Class ConnectionMonitor
+src\Omskep.Core\Access\AccessEvaluator.vb:108: Public ReadOnly Property Snapshot As ConnectionSnapshot
+src\Omskep.Core\Access\AccessEvaluator.vb:116: Public Sub Report(outcome As AzureOutcome)
+src\Omskep.Core\Access\AccessEvaluator.vb:130: Public Sub Reset()
+src\Omskep.Core\Access\AccessTypes.vb:4: Public Enum KeyState
+src\Omskep.Core\Access\AccessTypes.vb:18: Public Enum CacheStatus
+src\Omskep.Core\Access\AccessTypes.vb:25: Public Enum AzureOutcome
+src\Omskep.Core\Access\AccessTypes.vb:39: Public Enum AccessMode
+src\Omskep.Core\Access\AccessTypes.vb:48: Public Enum AccessReason
+src\Omskep.Core\Access\AccessTypes.vb:63: Public Module AccessMessages
+src\Omskep.Core\Access\AccessTypes.vb:87: Public NotInheritable Class AccessState
+src\Omskep.Core\Access\AccessTypes.vb:88: Public ReadOnly Property Mode As AccessMode
+src\Omskep.Core\Access\AccessTypes.vb:89: Public ReadOnly Property Reason As AccessReason
+src\Omskep.Core\Access\AccessTypes.vb:91: Public ReadOnly Property Message As String
+src\Omskep.Core\Access\AccessTypes.vb:93: Public ReadOnly Property CanEdit As Boolean
+src\Omskep.Core\Access\AccessTypes.vb:99: Public ReadOnly Property CanExport As Boolean
+src\Omskep.Core\Access\AccessTypes.vb:106: Public ReadOnly Property CanOpenSettings As Boolean
+src\Omskep.Core\Access\AccessTypes.vb:112: Public Sub New(mode As AccessMode, reason As AccessReason, message As String)
+src\Omskep.Core\Access\AccessTypes.vb:124: Public NotInheritable Class ConnectionSnapshot
+src\Omskep.Core\Access\AccessTypes.vb:125: Public ReadOnly Property LastOutcome As AzureOutcome
+src\Omskep.Core\Access\AccessTypes.vb:126: Public ReadOnly Property KeyRejected As Boolean
+src\Omskep.Core\Access\AccessTypes.vb:130: Public Sub New(lastOutcome As AzureOutcome, keyRejected As Boolean)
+src\Omskep.Core\Documents\BillableCharacterCounter.vb:17: Public NotInheritable Class BillableCharacterCounter
+src\Omskep.Core\Documents\BillableCharacterCounter.vb:19: Private Sub New()
+src\Omskep.Core\Documents\BillableCharacterCounter.vb:22: Public Shared Function CountUpperBound(ssml As String) As Integer
+src\Omskep.Core\Documents\BillableCharacterCounter.vb:60: Private Shared Function CountPlain(ssml As String, start As Integer, [stop] As Integer) As Integer
+src\Omskep.Core\Documents\BillableCharacterCounter.vb:71: Private Shared Function EndOfBlock(ssml As String, i As Integer) As Integer
+src\Omskep.Core\Documents\BillableCharacterCounter.vb:78: Private Shared Function AfterMarker(ssml As String, from As Integer, marker As String) As Integer
+src\Omskep.Core\Documents\BillableCharacterCounter.vb:86: Friend Shared Function EndOfFreeTag(ssml As String, i As Integer) As Integer
+src\Omskep.Core\Documents\BillableCharacterCounter.vb:116: Private Shared Function NameLengthAt(ssml As String, p As Integer) As Integer
+src\Omskep.Core\Documents\BillableCharacterCounter.vb:122: Private Shared Function StartsWithAt(ssml As String, index As Integer, value As String) As Boolean
+src\Omskep.Core\Documents\Chunker.vb:13: Public NotInheritable Class DocumentChunk
+src\Omskep.Core\Documents\Chunker.vb:14: Public ReadOnly Property Ssml As String
+src\Omskep.Core\Documents\Chunker.vb:15: Public ReadOnly Property EstimatedSeconds As Double
+src\Omskep.Core\Documents\Chunker.vb:17: Public Sub New(ssml As String, estimatedSeconds As Double)
+src\Omskep.Core\Documents\Chunker.vb:24: Public NotInheritable Class ChunkingResult
+src\Omskep.Core\Documents\Chunker.vb:25: Public ReadOnly Property IsSuccess As Boolean
+src\Omskep.Core\Documents\Chunker.vb:26: Public ReadOnly Property Chunks As IReadOnlyList(Of DocumentChunk)
+src\Omskep.Core\Documents\Chunker.vb:28: Public ReadOnly Property FailureReason As String
+src\Omskep.Core\Documents\Chunker.vb:30: Private Sub New(isSuccess As Boolean, chunks As IReadOnlyList(Of DocumentChunk), failureReason As String)
+src\Omskep.Core\Documents\Chunker.vb:36: Friend Shared Function Success(chunks As IReadOnlyList(Of DocumentChunk)) As ChunkingResult
+src\Omskep.Core\Documents\Chunker.vb:40: Friend Shared Function Failure(reason As String) As ChunkingResult
+src\Omskep.Core\Documents\Chunker.vb:64: Public NotInheritable Class Chunker
+src\Omskep.Core\Documents\Chunker.vb:71: Public Shared Function TotalBillableCharacters(chunks As IReadOnlyList(Of DocumentChunk)) As Integer
+src\Omskep.Core\Documents\Chunker.vb:87: Private Sub New()
+src\Omskep.Core\Documents\Chunker.vb:90: Public Shared Function Chunk(composedSsml As String, Optional capSeconds As Double = DefaultCapSeconds) As ChunkingResult
+src\Omskep.Core\Documents\Chunker.vb:140: Private Shared Function BuildWholeVoiceChunk(root As XElement, voiceGroup As List(Of XElement), totalSeconds As Double) As DocumentChunk
+src\Omskep.Core\Documents\Chunker.vb:149: Private Shared Function MultiplierFor(voice As XElement, ns As XNamespace) As Double
+src\Omskep.Core\Documents\Chunker.vb:170: Private Shared Function SplitOversizedVoice(root As XElement, voice As XElement, ns As XNamespace, multiplier As Double, capSeconds As Double) As ChunkingResult
+src\Omskep.Core\Documents\Chunker.vb:209: Private Shared Function BuildAtomicUnits(container As XElement, multiplier As Double) As List(Of AtomicUnit)
+src\Omskep.Core\Documents\Chunker.vb:240: Private Shared Function StripNamespace(node As XNode) As XNode
+src\Omskep.Core\Documents\Chunker.vb:258: Private Shared Function SplitIntoSentenceFragments(text As String) As List(Of String)
+src\Omskep.Core\Documents\Chunker.vb:273: Private NotInheritable Class AtomicUnit
+src\Omskep.Core\Documents\Chunker.vb:274: Public ReadOnly Property EstimatedSeconds As Double
+src\Omskep.Core\Documents\Chunker.vb:278: Private Sub New(text As String, node As XNode, estimatedSeconds As Double)
+src\Omskep.Core\Documents\Chunker.vb:284: Public Shared Function ForText(fragment As String, multiplier As Double) As AtomicUnit
+src\Omskep.Core\Documents\Chunker.vb:288: Public Shared Function ForOpaque(node As XNode, billableChars As Integer, multiplier As Double) As AtomicUnit
+src\Omskep.Core\Documents\Chunker.vb:293: Public Function Materialize() As XNode
+src\Omskep.Core\Documents\Chunker.vb:305: Public Function Preview() As String
+src\Omskep.Core\Documents\Chunker.vb:313: Private NotInheritable Class PackResult
+src\Omskep.Core\Documents\Chunker.vb:314: Public ReadOnly Property Succeeded As Boolean
+src\Omskep.Core\Documents\Chunker.vb:315: Public ReadOnly Property Groups As List(Of List(Of AtomicUnit))
+src\Omskep.Core\Documents\Chunker.vb:316: Public ReadOnly Property FailingUnit As AtomicUnit
+src\Omskep.Core\Documents\Chunker.vb:318: Private Sub New(succeeded As Boolean, groups As List(Of List(Of AtomicUnit)), failingUnit As AtomicUnit)
+src\Omskep.Core\Documents\Chunker.vb:324: Public Shared Function Ok(groups As List(Of List(Of AtomicUnit))) As PackResult
+src\Omskep.Core\Documents\Chunker.vb:328: Public Shared Function Fail(failingUnit As AtomicUnit) As PackResult
+src\Omskep.Core\Documents\Chunker.vb:335: Private Shared Function GreedyPack(units As List(Of AtomicUnit), capSeconds As Double) As PackResult
+src\Omskep.Core\Documents\CommandLineArguments.vb:11: Public NotInheritable Class CommandLineArguments
+src\Omskep.Core\Documents\CommandLineArguments.vb:13: Private Sub New()
+src\Omskep.Core\Documents\CommandLineArguments.vb:19: Public Shared Function FindDocumentPath(arguments As IEnumerable(Of String),
+src\Omskep.Core\Documents\DocumentFile.vb:12: Public Class DocumentFileException
+src\Omskep.Core\Documents\DocumentFile.vb:15: Public Sub New(message As String)
+src\Omskep.Core\Documents\DocumentFile.vb:19: Public Sub New(message As String, innerException As Exception)
+src\Omskep.Core\Documents\DocumentFile.vb:30: Public NotInheritable Class DocumentFile
+src\Omskep.Core\Documents\DocumentFile.vb:35: Private Sub New()
+src\Omskep.Core\Documents\DocumentFile.vb:38: Public Shared Function Load(path As String, Optional maxBytes As Integer = MaxBytes) As String
+src\Omskep.Core\Documents\DocumentFile.vb:64: Public Shared Sub Save(path As String, text As String)
+src\Omskep.Core\Documents\DocumentFile.vb:86: Private Shared Function Decode(bytes As Byte()) As String
+src\Omskep.Core\Documents\DocumentFile.vb:106: Private Shared Function Refuse(message As String) As String
+src\Omskep.Core\Documents\DocumentFile.vb:110: Private Shared Function IsFileProblem(ex As Exception) As Boolean
+src\Omskep.Core\Documents\DocumentModel.vb:10: Public Enum SaveState
+src\Omskep.Core\Documents\DocumentModel.vb:20: Public Enum CheckState
+src\Omskep.Core\Documents\DocumentModel.vb:37: Public NotInheritable Class DocumentModel
+src\Omskep.Core\Documents\DocumentModel.vb:39: Public ReadOnly Property FilePath As String
+src\Omskep.Core\Documents\DocumentModel.vb:40: Public ReadOnly Property SaveState As SaveState
+src\Omskep.Core\Documents\DocumentModel.vb:41: Public ReadOnly Property CheckState As CheckState
+src\Omskep.Core\Documents\DocumentModel.vb:42: Public ReadOnly Property LastCheck As CheckResult
+src\Omskep.Core\Documents\DocumentModel.vb:43: Public ReadOnly Property Revision As Integer
+src\Omskep.Core\Documents\DocumentModel.vb:45: Public Sub New()
+src\Omskep.Core\Documents\DocumentModel.vb:49: Public ReadOnly Property DisplayName As String
+src\Omskep.Core\Documents\DocumentModel.vb:55: Public ReadOnly Property IsWellFormed As Boolean
+src\Omskep.Core\Documents\DocumentModel.vb:61: Public ReadOnly Property HasUnsavedChanges As Boolean
+src\Omskep.Core\Documents\DocumentModel.vb:68: Public Sub NewDocument()
+src\Omskep.Core\Documents\DocumentModel.vb:73: Public Sub OpenedFile(path As String)
+src\Omskep.Core\Documents\DocumentModel.vb:79: Public Sub Imported()
+src\Omskep.Core\Documents\DocumentModel.vb:84: Public Sub Edited()
+src\Omskep.Core\Documents\DocumentModel.vb:91: Public Sub Saved(path As String)
+src\Omskep.Core\Documents\DocumentModel.vb:98: Public Sub ReachedSavePoint()
+src\Omskep.Core\Documents\DocumentModel.vb:104: Public Function CheckCompleted(forRevision As Integer, result As CheckResult) As Boolean
+src\Omskep.Core\Documents\DocumentModel.vb:112: Private Sub StartContent(path As String, save As SaveState)
+src\Omskep.Core\Documents\DocumentModel.vb:120: Private Shared Sub RequirePath(path As String)
+src\Omskep.Core\Documents\DocumentScaffold.vb:8: Public NotInheritable Class DocumentScaffold
+src\Omskep.Core\Documents\DocumentScaffold.vb:13: Private Sub New()
+src\Omskep.Core\Documents\DocumentScaffold.vb:20: Public Shared Function IsBlank(documentText As String) As Boolean
+src\Omskep.Core\Documents\DocumentScaffold.vb:41: Public NotInheritable Class ScaffoldChoice
+src\Omskep.Core\Documents\DocumentScaffold.vb:43: Public ReadOnly Property Locale As String
+src\Omskep.Core\Documents\DocumentScaffold.vb:44: Public ReadOnly Property VoiceShortName As String
+src\Omskep.Core\Documents\DocumentScaffold.vb:46: Public Sub New(locale As String, voiceShortName As String)
+src\Omskep.Core\Documents\DocumentScaffold.vb:54: Public NotInheritable Class ScaffoldDefaults
+src\Omskep.Core\Documents\DocumentScaffold.vb:59: Private Sub New()
+src\Omskep.Core\Documents\DocumentScaffold.vb:67: Public Shared Function Choose(defaultVoices As IReadOnlyDictionary(Of String, String)) As ScaffoldChoice
+src\Omskep.Core\Documents\FileKinds.vb:8: Public Enum FileKind
+src\Omskep.Core\Documents\FileKinds.vb:18: Public NotInheritable Class FileKinds
+src\Omskep.Core\Documents\FileKinds.vb:20: Private Sub New()
+src\Omskep.Core\Documents\FileKinds.vb:23: Public Shared Function Classify(path As String) As FileKind
+src\Omskep.Core\Documents\FileKinds.vb:37: Public Shared Function LooksLikeSsml(fileText As String) As Boolean
+src\Omskep.Core\Documents\HebrewOrder.vb:12: Public NotInheritable Class TextEdit
+src\Omskep.Core\Documents\HebrewOrder.vb:14: Public ReadOnly Property Start As Integer
+src\Omskep.Core\Documents\HebrewOrder.vb:15: Public ReadOnly Property Length As Integer
+src\Omskep.Core\Documents\HebrewOrder.vb:16: Public ReadOnly Property NewText As String
+src\Omskep.Core\Documents\HebrewOrder.vb:18: Public Sub New(start As Integer, length As Integer, newText As String)
+src\Omskep.Core\Documents\HebrewOrder.vb:26: Public NotInheritable Class HebrewReverseResult
+src\Omskep.Core\Documents\HebrewOrder.vb:29: Public ReadOnly Property Text As String
+src\Omskep.Core\Documents\HebrewOrder.vb:32: Public ReadOnly Property Edits As IReadOnlyList(Of TextEdit)
+src\Omskep.Core\Documents\HebrewOrder.vb:34: Public ReadOnly Property RunsReversed As Integer
+src\Omskep.Core\Documents\HebrewOrder.vb:37: Public ReadOnly Property RunsSkipped As Integer
+src\Omskep.Core\Documents\HebrewOrder.vb:39: Public Sub New(text As String, edits As IReadOnlyList(Of TextEdit), runsReversed As Integer, runsSkipped As Integer)
+src\Omskep.Core\Documents\HebrewOrder.vb:58: Public NotInheritable Class HebrewOrder
+src\Omskep.Core\Documents\HebrewOrder.vb:67: Private Sub New()
+src\Omskep.Core\Documents\HebrewOrder.vb:73: Public Shared Function ReverseRuns(text As String, skipRunsThatLookCorrect As Boolean) As HebrewReverseResult
+src\Omskep.Core\Documents\HebrewOrder.vb:101: Friend Shared Function LooksCorrect(run As String) As Boolean
+src\Omskep.Core\Documents\HebrewOrder.vb:120: Private Shared Function IsFinalForm(letter As Char) As Boolean
+src\Omskep.Core\Documents\RecoveryStore.vb:14: Public NotInheritable Class RecoveryItem
+src\Omskep.Core\Documents\RecoveryStore.vb:16: Public ReadOnly Property FilePath As String
+src\Omskep.Core\Documents\RecoveryStore.vb:17: Public ReadOnly Property Text As String
+src\Omskep.Core\Documents\RecoveryStore.vb:20: Public ReadOnly Property OriginalPath As String
+src\Omskep.Core\Documents\RecoveryStore.vb:22: Public ReadOnly Property DisplayName As String
+src\Omskep.Core\Documents\RecoveryStore.vb:23: Public ReadOnly Property SavedUtc As Date
+src\Omskep.Core\Documents\RecoveryStore.vb:25: Friend Sub New(filePath As String, text As String, originalPath As String, displayName As String, savedUtc As Date)
+src\Omskep.Core\Documents\RecoveryStore.vb:45: Public NotInheritable Class RecoveryStore
+src\Omskep.Core\Documents\RecoveryStore.vb:51: Public NotInheritable Class RecoveryRecord
+src\Omskep.Core\Documents\RecoveryStore.vb:52: Public Property Version As Integer
+src\Omskep.Core\Documents\RecoveryStore.vb:53: Public Property OwnerPid As Integer
+src\Omskep.Core\Documents\RecoveryStore.vb:54: Public Property OwnerStartUtc As Date
+src\Omskep.Core\Documents\RecoveryStore.vb:55: Public Property SavedUtc As Date
+src\Omskep.Core\Documents\RecoveryStore.vb:56: Public Property OriginalPath As String
+src\Omskep.Core\Documents\RecoveryStore.vb:57: Public Property DisplayName As String
+src\Omskep.Core\Documents\RecoveryStore.vb:58: Public Property Text As String
+src\Omskep.Core\Documents\RecoveryStore.vb:74: Public Sub New(folder As String, Optional ownerIsAlive As Func(Of Integer, Date, Boolean) = Nothing)
+src\Omskep.Core\Documents\RecoveryStore.vb:86: Public Shared Function DefaultFolder() As String
+src\Omskep.Core\Documents\RecoveryStore.vb:91: Public Function Snapshot(text As String, originalPath As String, displayName As String) As Boolean
+src\Omskep.Core\Documents\RecoveryStore.vb:112: Public Sub Discard()
+src\Omskep.Core\Documents\RecoveryStore.vb:117: Public Function FindOrphans() As IReadOnlyList(Of RecoveryItem)
+src\Omskep.Core\Documents\RecoveryStore.vb:136: Public Sub Remove(item As RecoveryItem)
+src\Omskep.Core\Documents\RecoveryStore.vb:144: Private Shared Function TryRead(filePath As String) As RecoveryRecord
+src\Omskep.Core\Documents\RecoveryStore.vb:155: Private Shared Function ProcessIsAlive(pid As Integer, startUtc As Date) As Boolean
+src\Omskep.Core\Documents\RecoveryStore.vb:166: Private Shared Sub TryDelete(path As String)
+src\Omskep.Core\Documents\SsmlComposer.vb:15: Public NotInheritable Class CompositionResult
+src\Omskep.Core\Documents\SsmlComposer.vb:17: Public ReadOnly Property IsSuccess As Boolean
+src\Omskep.Core\Documents\SsmlComposer.vb:18: Public ReadOnly Property Ssml As String
+src\Omskep.Core\Documents\SsmlComposer.vb:20: Public ReadOnly Property FailureReason As String
+src\Omskep.Core\Documents\SsmlComposer.vb:22: Private Sub New(isSuccess As Boolean, ssml As String, failureReason As String)
+src\Omskep.Core\Documents\SsmlComposer.vb:28: Friend Shared Function Success(ssml As String) As CompositionResult
+src\Omskep.Core\Documents\SsmlComposer.vb:32: Friend Shared Function Failure(reason As String) As CompositionResult
+src\Omskep.Core\Documents\SsmlComposer.vb:58: Public NotInheritable Class SsmlComposer
+src\Omskep.Core\Documents\SsmlComposer.vb:60: Private Sub New()
+src\Omskep.Core\Documents\SsmlComposer.vb:63: Public Shared Function Compose(documentText As String, speakingRatePercent As IReadOnlyDictionary(Of String, Integer)) As CompositionResult
+src\Omskep.Core\Documents\SsmlComposer.vb:101: Private Shared Function FindNestedVoice(doc As XDocument, ns As XNamespace) As String
+src\Omskep.Core\Documents\SsmlComposer.vb:114: Private Shared Sub CollapseWhitespace(doc As XDocument)
+src\Omskep.Core\Documents\SsmlComposer.vb:121: Private Shared Sub ApplyProsodyRates(doc As XDocument, ns As XNamespace, speakingRatePercent As IReadOnlyDictionary(Of String, Integer))
+src\Omskep.Core\Documents\SsmlComposer.vb:144: Private Shared Function LocaleOf(voiceName As String) As String
+src\Omskep.Core\Documents\SsmlComposer.vb:151: Private Shared Function FormatRate(percent As Integer) As String
+src\Omskep.Core\Documents\TextSearch.vb:10: Public NotInheritable Class SearchOptions
+src\Omskep.Core\Documents\TextSearch.vb:12: Public ReadOnly Property MatchCase As Boolean
+src\Omskep.Core\Documents\TextSearch.vb:13: Public ReadOnly Property WholeWord As Boolean
+src\Omskep.Core\Documents\TextSearch.vb:16: Public ReadOnly Property UseRegex As Boolean
+src\Omskep.Core\Documents\TextSearch.vb:18: Public Sub New(Optional matchCase As Boolean = False, Optional wholeWord As Boolean = False, Optional useRegex As Boolean = False)
+src\Omskep.Core\Documents\TextSearch.vb:26: Public NotInheritable Class SearchMatch
+src\Omskep.Core\Documents\TextSearch.vb:28: Public ReadOnly Property Start As Integer
+src\Omskep.Core\Documents\TextSearch.vb:29: Public ReadOnly Property Length As Integer
+src\Omskep.Core\Documents\TextSearch.vb:31: Public Sub New(start As Integer, length As Integer)
+src\Omskep.Core\Documents\TextSearch.vb:38: Public NotInheritable Class FindOutcome
+src\Omskep.Core\Documents\TextSearch.vb:41: Public ReadOnly Property Match As SearchMatch
+src\Omskep.Core\Documents\TextSearch.vb:44: Public ReadOnly Property Wrapped As Boolean
+src\Omskep.Core\Documents\TextSearch.vb:47: Public ReadOnly Property ErrorMessage As String
+src\Omskep.Core\Documents\TextSearch.vb:49: Public Sub New(match As SearchMatch, wrapped As Boolean, errorMessage As String)
+src\Omskep.Core\Documents\TextSearch.vb:57: Public NotInheritable Class ReplaceAllOutcome
+src\Omskep.Core\Documents\TextSearch.vb:60: Public ReadOnly Property NewText As String
+src\Omskep.Core\Documents\TextSearch.vb:63: Public ReadOnly Property Edits As IReadOnlyList(Of TextEdit)
+src\Omskep.Core\Documents\TextSearch.vb:65: Public ReadOnly Property Count As Integer
+src\Omskep.Core\Documents\TextSearch.vb:66: Public ReadOnly Property ErrorMessage As String
+src\Omskep.Core\Documents\TextSearch.vb:68: Public Sub New(newText As String, edits As IReadOnlyList(Of TextEdit), count As Integer, errorMessage As String)
+src\Omskep.Core\Documents\TextSearch.vb:83: Public NotInheritable Class TextSearch
+src\Omskep.Core\Documents\TextSearch.vb:87: Private Sub New()
+src\Omskep.Core\Documents\TextSearch.vb:90: Public Shared Function Find(text As String, pattern As String, options As SearchOptions, startIndex As Integer,
+src\Omskep.Core\Documents\TextSearch.vb:127: Public Shared Function ReplaceAt(text As String, pattern As String, replacement As String, options As SearchOptions,
+src\Omskep.Core\Documents\TextSearch.vb:143: Public Shared Function ReplaceAll(text As String, pattern As String, replacement As String, options As SearchOptions,
+src\Omskep.Core\Documents\TextSearch.vb:175: Private Shared Function Build(pattern As String, options As SearchOptions, timeoutMilliseconds As Integer,
+src\Omskep.Core\Documents\TextSearch.vb:195: Private Shared Function FirstNonEmpty(rx As Regex, haystack As String, start As Integer) As Match
+src\Omskep.Core\Documents\TextSearch.vb:203: Private Shared Function Expand(found As Match, replacement As String, options As SearchOptions) As String
+src\Omskep.Core\Documents\TextSearch.vb:211: Private Shared Function UnescapeReplacement(value As String) As String
+src\Omskep.Core\Documents\WellFormednessChecker.vb:15: Public NotInheritable Class CheckResult
+src\Omskep.Core\Documents\WellFormednessChecker.vb:19: Public ReadOnly Property IsWellFormed As Boolean
+src\Omskep.Core\Documents\WellFormednessChecker.vb:22: Public ReadOnly Property Line As Integer
+src\Omskep.Core\Documents\WellFormednessChecker.vb:23: Public ReadOnly Property Column As Integer
+src\Omskep.Core\Documents\WellFormednessChecker.vb:25: Public ReadOnly Property Message As String
+src\Omskep.Core\Documents\WellFormednessChecker.vb:29: Public ReadOnly Property CauseLine As Integer
+src\Omskep.Core\Documents\WellFormednessChecker.vb:30: Public ReadOnly Property CauseColumn As Integer
+src\Omskep.Core\Documents\WellFormednessChecker.vb:31: Public ReadOnly Property CauseElement As String
+src\Omskep.Core\Documents\WellFormednessChecker.vb:33: Private Sub New(isWellFormed As Boolean, line As Integer, column As Integer, message As String,
+src\Omskep.Core\Documents\WellFormednessChecker.vb:44: Friend Shared Function Malformed(line As Integer, column As Integer, message As String,
+src\Omskep.Core\Documents\WellFormednessChecker.vb:49: Public ReadOnly Property HasCause As Boolean
+src\Omskep.Core\Documents\WellFormednessChecker.vb:56: Public ReadOnly Property StatusText As String
+src\Omskep.Core\Documents\WellFormednessChecker.vb:75: Public NotInheritable Class WellFormednessChecker
+src\Omskep.Core\Documents\WellFormednessChecker.vb:77: Private NotInheritable Class OpenElement
+src\Omskep.Core\Documents\WellFormednessChecker.vb:82: Public Sub New(name As String, line As Integer, column As Integer)
+src\Omskep.Core\Documents\WellFormednessChecker.vb:89: Private Sub New()
+src\Omskep.Core\Documents\WellFormednessChecker.vb:92: Public Shared Function Check(documentText As String) As CheckResult
+src\Omskep.Core\Documents\WellFormednessChecker.vb:127: Private Shared Function Explain(documentText As String, ex As XmlException, openElements As Stack(Of OpenElement)) As CheckResult
+src\Omskep.Core\Documents\WellFormednessChecker.vb:148: Private Shared Function OffsetOf(text As String, line As Integer, column As Integer) As Integer
+src\Omskep.Core\Export\ExportEngine.vb:16: Public Enum ChunkExportStatus
+src\Omskep.Core\Export\ExportEngine.vb:23: Public Enum ChunkLiveState
+src\Omskep.Core\Export\ExportEngine.vb:29: Public NotInheritable Class ChunkExportOutcome
+src\Omskep.Core\Export\ExportEngine.vb:30: Public ReadOnly Property Status As ChunkExportStatus
+src\Omskep.Core\Export\ExportEngine.vb:31: Public ReadOnly Property Audio As Byte()
+src\Omskep.Core\Export\ExportEngine.vb:32: Public ReadOnly Property RetriesUsed As Integer
+src\Omskep.Core\Export\ExportEngine.vb:34: Public ReadOnly Property PossiblyBilledTwice As Boolean
+src\Omskep.Core\Export\ExportEngine.vb:36: Public ReadOnly Property FailureReason As String
+src\Omskep.Core\Export\ExportEngine.vb:38: Private Sub New(status As ChunkExportStatus, audio As Byte(), retriesUsed As Integer, possiblyBilledTwice As Boolean, failureReason As String)
+src\Omskep.Core\Export\ExportEngine.vb:46: Friend Shared Function Pending() As ChunkExportOutcome
+src\Omskep.Core\Export\ExportEngine.vb:50: Friend Shared Function Done(audio As Byte(), retriesUsed As Integer, possiblyBilledTwice As Boolean) As ChunkExportOutcome
+src\Omskep.Core\Export\ExportEngine.vb:54: Friend Shared Function Failed(retriesUsed As Integer, possiblyBilledTwice As Boolean, reason As String) As ChunkExportOutcome
+src\Omskep.Core\Export\ExportEngine.vb:59: Public Enum ExportStatus
+src\Omskep.Core\Export\ExportEngine.vb:68: Public NotInheritable Class ExportResult
+src\Omskep.Core\Export\ExportEngine.vb:69: Public ReadOnly Property Status As ExportStatus
+src\Omskep.Core\Export\ExportEngine.vb:70: Public ReadOnly Property Chunks As IReadOnlyList(Of ChunkExportOutcome)
+src\Omskep.Core\Export\ExportEngine.vb:72: Public ReadOnly Property OutputPath As String
+src\Omskep.Core\Export\ExportEngine.vb:73: Public ReadOnly Property Message As String
+src\Omskep.Core\Export\ExportEngine.vb:75: Private Sub New(status As ExportStatus, chunks As IReadOnlyList(Of ChunkExportOutcome), outputPath As String, message As String)
+src\Omskep.Core\Export\ExportEngine.vb:82: Friend Shared Function Complete(chunks As IReadOnlyList(Of ChunkExportOutcome), outputPath As String, message As String) As ExportResult
+src\Omskep.Core\Export\ExportEngine.vb:86: Friend Shared Function Cancelled(chunks As IReadOnlyList(Of ChunkExportOutcome), message As String) As ExportResult
+src\Omskep.Core\Export\ExportEngine.vb:90: Friend Shared Function FailedResumable(chunks As IReadOnlyList(Of ChunkExportOutcome), message As String) As ExportResult
+src\Omskep.Core\Export\ExportEngine.vb:95: Public NotInheritable Class ExportProgress
+src\Omskep.Core\Export\ExportEngine.vb:96: Public ReadOnly Property ChunkIndex As Integer
+src\Omskep.Core\Export\ExportEngine.vb:97: Public ReadOnly Property TotalChunks As Integer
+src\Omskep.Core\Export\ExportEngine.vb:98: Public ReadOnly Property State As ChunkLiveState
+src\Omskep.Core\Export\ExportEngine.vb:100: Public ReadOnly Property RetryAttempt As Integer
+src\Omskep.Core\Export\ExportEngine.vb:102: Public Sub New(chunkIndex As Integer, totalChunks As Integer, state As ChunkLiveState, retryAttempt As Integer)
+src\Omskep.Core\Export\ExportEngine.vb:125: Public NotInheritable Class ExportEngine
+src\Omskep.Core\Export\ExportEngine.vb:139: Public Sub New(client As ISpeechClient, secrets As ISecretStore, session As AppSession, monitor As ConnectionMonitor)
+src\Omskep.Core\Export\ExportEngine.vb:248: Private Shared Function ImplausibilityReason(audio As Byte()) As String
+src\Omskep.Core\Export\ExportEngine.vb:254: Private Shared Function DescribeFailure(result As SynthesisResult) As String
+src\Omskep.Core\Export\ExportEngine.vb:267: Private Shared Sub PadWithPending(outcomes As List(Of ChunkExportOutcome), totalCount As Integer)
+src\Omskep.Core\Export\ExportEngine.vb:274: Private Shared Function JoinAudio(outcomes As IReadOnlyList(Of ChunkExportOutcome)) As Byte()
+src\Omskep.Core\Import\DocumentComposer.vb:13: Public NotInheritable Class DocumentComposer
+src\Omskep.Core\Import\DocumentComposer.vb:17: Private Sub New()
+src\Omskep.Core\Import\DocumentComposer.vb:23: Public Shared Function Compose(body As String, locale As String, voiceShortName As String) As String
+src\Omskep.Core\Import\DocumentComposer.vb:36: Friend Shared Sub RequireScaffold(locale As String, voiceShortName As String)
+src\Omskep.Core\Import\DocumentComposer.vb:45: Private Shared Function EscapeAttribute(value As String) As String
+src\Omskep.Core\Import\DocumentImporter.vb:15: Public NotInheritable Class DocumentImporter
+src\Omskep.Core\Import\DocumentImporter.vb:25: Public Sub New(reader As IPdfPageReader)
+src\Omskep.Core\Import\DocumentImporter.vb:31: Public Function ImportPdf(pdfPath As String, locale As String, voiceShortName As String) As ImportResult
+src\Omskep.Core\Import\DocumentImporter.vb:88: Public Function ImportText(pastedText As String, locale As String, voiceShortName As String,
+src\Omskep.Core\Import\DocumentImporter.vb:111: Private Shared Function Failure(outcome As ImportOutcome, message As String) As ImportResult
+src\Omskep.Core\Import\DocumentImporter.vb:116: Private Shared Function CountNonWhitespace(value As String) As Integer
+src\Omskep.Core\Import\DocumentImporter.vb:124: Private Shared Function Plural(count As Integer, noun As String) As String
+src\Omskep.Core\Import\DocumentImporter.vb:130: Friend Shared Function CleanupSentence(sanitation As SanitizeResult) As String
+src\Omskep.Core\Import\DocumentImporter.vb:145: Private Shared Function Summarise(lead As String,
+src\Omskep.Core\Import\ImportFlagFinder.vb:14: Public NotInheritable Class ImportFlagFinder
+src\Omskep.Core\Import\ImportFlagFinder.vb:18: Private Sub New()
+src\Omskep.Core\Import\ImportFlagFinder.vb:22: Public Shared Function Find(documentText As String) As IReadOnlyList(Of ImportFlag)
+src\Omskep.Core\Import\ImportTypes.vb:8: Public Enum ImportOutcome
+src\Omskep.Core\Import\ImportTypes.vb:21: Public Class PdfPasswordRequiredException
+src\Omskep.Core\Import\ImportTypes.vb:24: Public Sub New()
+src\Omskep.Core\Import\ImportTypes.vb:34: Public Interface IPdfPageReader
+src\Omskep.Core\Import\ImportTypes.vb:38: Public Enum ImportFlagKind
+src\Omskep.Core\Import\ImportTypes.vb:47: Public NotInheritable Class ImportFlag
+src\Omskep.Core\Import\ImportTypes.vb:49: Public ReadOnly Property Kind As ImportFlagKind
+src\Omskep.Core\Import\ImportTypes.vb:50: Public ReadOnly Property Line As Integer
+src\Omskep.Core\Import\ImportTypes.vb:51: Public ReadOnly Property Column As Integer
+src\Omskep.Core\Import\ImportTypes.vb:52: Public ReadOnly Property Length As Integer
+src\Omskep.Core\Import\ImportTypes.vb:54: Public Sub New(kind As ImportFlagKind, line As Integer, column As Integer, length As Integer)
+src\Omskep.Core\Import\ImportTypes.vb:63: Public NotInheritable Class ImportResult
+src\Omskep.Core\Import\ImportTypes.vb:65: Public ReadOnly Property Outcome As ImportOutcome
+src\Omskep.Core\Import\ImportTypes.vb:68: Public ReadOnly Property Message As String
+src\Omskep.Core\Import\ImportTypes.vb:71: Public ReadOnly Property Document As String
+src\Omskep.Core\Import\ImportTypes.vb:74: Public ReadOnly Property PageCount As Integer
+src\Omskep.Core\Import\ImportTypes.vb:77: Public ReadOnly Property EmptyPages As IReadOnlyList(Of Integer)
+src\Omskep.Core\Import\ImportTypes.vb:80: Public ReadOnly Property Sanitation As SanitizeResult
+src\Omskep.Core\Import\ImportTypes.vb:83: Public ReadOnly Property Flags As IReadOnlyList(Of ImportFlag)
+src\Omskep.Core\Import\ImportTypes.vb:85: Public Sub New(outcome As ImportOutcome,
+src\Omskep.Core\Import\ImportTypes.vb:101: Public ReadOnly Property Succeeded As Boolean
+src\Omskep.Core\Import\PasteHandler.vb:9: Public Enum PasteKind
+src\Omskep.Core\Import\PasteHandler.vb:19: Public NotInheritable Class PastePlan
+src\Omskep.Core\Import\PasteHandler.vb:21: Public ReadOnly Property Kind As PasteKind
+src\Omskep.Core\Import\PasteHandler.vb:22: Public ReadOnly Property Text As String
+src\Omskep.Core\Import\PasteHandler.vb:23: Public ReadOnly Property Message As String
+src\Omskep.Core\Import\PasteHandler.vb:25: Public Sub New(kind As PasteKind, text As String, message As String)
+src\Omskep.Core\Import\PasteHandler.vb:37: Public NotInheritable Class PasteHandler
+src\Omskep.Core\Import\PasteHandler.vb:40: Private NotInheritable Class NoPdfReader
+src\Omskep.Core\Import\PasteHandler.vb:43: Public Function ReadPages(pdfPath As String) As IReadOnlyList(Of String) Implements IPdfPageReader.ReadPages
+src\Omskep.Core\Import\PasteHandler.vb:48: Private Sub New()
+src\Omskep.Core\Import\PasteHandler.vb:56: Public Shared Function Plan(currentDocument As String, clipboardText As String, locale As String,
+src\Omskep.Core\Import\PdfPigPageReader.vb:15: Public NotInheritable Class PdfPigPageReader
+src\Omskep.Core\Import\PdfPigPageReader.vb:18: Public Function ReadPages(pdfPath As String) As IReadOnlyList(Of String) Implements IPdfPageReader.ReadPages
+src\Omskep.Core\Import\PdfPigPageReader.vb:33: Private Shared Function IsPasswordRequired(ex As Exception) As Boolean
+src\Omskep.Core\Import\TextSanitizer.vb:14: Public NotInheritable Class SanitizeResult
+src\Omskep.Core\Import\TextSanitizer.vb:18: Public ReadOnly Property Body As String
+src\Omskep.Core\Import\TextSanitizer.vb:22: Public ReadOnly Property RemovedPrivateUse As IReadOnlyDictionary(Of Integer, Integer)
+src\Omskep.Core\Import\TextSanitizer.vb:26: Public ReadOnly Property RemovedInvalidCharacters As Integer
+src\Omskep.Core\Import\TextSanitizer.vb:30: Public ReadOnly Property FixedArticleQuotes As Integer
+src\Omskep.Core\Import\TextSanitizer.vb:33: Public ReadOnly Property TrimmedLines As Integer
+src\Omskep.Core\Import\TextSanitizer.vb:35: Public Sub New(body As String,
+src\Omskep.Core\Import\TextSanitizer.vb:49: Public Shared Function Combine(body As String, parts As IEnumerable(Of SanitizeResult)) As SanitizeResult
+src\Omskep.Core\Import\TextSanitizer.vb:68: Public ReadOnly Property RemovedPrivateUseTotal As Integer
+src\Omskep.Core\Import\TextSanitizer.vb:86: Public NotInheritable Class TextSanitizer
+src\Omskep.Core\Import\TextSanitizer.vb:101: Private Sub New()
+src\Omskep.Core\Import\TextSanitizer.vb:116: Public Shared Function Sanitize(raw As String) As SanitizeResult
+src\Omskep.Core\Import\TextSanitizer.vb:193: Private Shared Function IsPrivateUse(codePoint As Integer) As Boolean
+src\Omskep.Core\Import\TextSanitizer.vb:199: Private Shared Sub Tally(counts As SortedDictionary(Of Integer, Integer), codePoint As Integer)
+src\Omskep.Core\Secrets\FileSecretStore.vb:12: Public NotInheritable Class FileSecretStore
+src\Omskep.Core\Secrets\FileSecretStore.vb:21: Public Sub New(settings As SettingsStore, protector As ISecretProtector)
+src\Omskep.Core\Secrets\FileSecretStore.vb:28: Public Function Load() As SecretLoadResult Implements ISecretStore.Load
+src\Omskep.Core\Secrets\FileSecretStore.vb:44: Private Function DecodeKey(blobText As String) As SecretLoadResult
+src\Omskep.Core\Secrets\FileSecretStore.vb:69: Public Sub Save(key As String) Implements ISecretStore.Save
+src\Omskep.Core\Secrets\FileSecretStore.vb:80: Public Sub Clear() Implements ISecretStore.Clear
+src\Omskep.Core\Secrets\FileSecretStore.vb:85: Private Shared Function ValidateKey(key As String) As String
+src\Omskep.Core\Secrets\ISecretStore.vb:10: Public Interface ISecretProtector
+src\Omskep.Core\Secrets\ISecretStore.vb:16: Public Interface ISecretStore
+src\Omskep.Core\Secrets\ISecretStore.vb:28: Public NotInheritable Class SecretLoadResult
+src\Omskep.Core\Secrets\ISecretStore.vb:29: Public ReadOnly Property Status As KeyState
+src\Omskep.Core\Secrets\ISecretStore.vb:30: Public ReadOnly Property Key As String
+src\Omskep.Core\Secrets\ISecretStore.vb:32: Public Sub New(status As KeyState, key As String)
+src\Omskep.Core\Secrets\KeyRules.vb:4: Public Module KeyRules
+src\Omskep.Core\Secrets\KeyRules.vb:7: Public Function Problem(key As String) As String
+src\Omskep.Core\Session\ActionResult.vb:4: Public NotInheritable Class ActionResult
+src\Omskep.Core\Session\ActionResult.vb:5: Public ReadOnly Property Success As Boolean
+src\Omskep.Core\Session\ActionResult.vb:6: Public ReadOnly Property Message As String
+src\Omskep.Core\Session\ActionResult.vb:8: Private Sub New(success As Boolean, message As String)
+src\Omskep.Core\Session\ActionResult.vb:13: Public Shared Function Ok(message As String) As ActionResult
+src\Omskep.Core\Session\ActionResult.vb:17: Public Shared Function Fail(message As String) As ActionResult
+src\Omskep.Core\Session\AppSession.vb:25: Public NotInheritable Class AppSession
+src\Omskep.Core\Session\AppSession.vb:37: Public Sub New(settings As SettingsStore, secrets As ISecretStore, voices As VoiceService, monitor As ConnectionMonitor)
+src\Omskep.Core\Session\AppSession.vb:49: Public Shared Function Create(folder As String, protector As ISecretProtector, http As HttpClient) As AppSession
+src\Omskep.Core\Session\AppSession.vb:58: Public ReadOnly Property Access As AccessState
+src\Omskep.Core\Session\AppSession.vb:64: Public ReadOnly Property KeyIsSaved As Boolean
+src\Omskep.Core\Session\AppSession.vb:70: Public ReadOnly Property Region As String
+src\Omskep.Core\Session\AppSession.vb:78: Public Function DefaultVoices() As IReadOnlyDictionary(Of String, String)
+src\Omskep.Core\Session\AppSession.vb:85: Public Function WordWrapPreference() As Boolean
+src\Omskep.Core\Session\AppSession.vb:91: Public Function ReviewMarksPreference() As Boolean
+src\Omskep.Core\Session\AppSession.vb:96: Public Sub SetReviewMarksPreference(value As Boolean)
+src\Omskep.Core\Session\AppSession.vb:105: Public Function DirectWritePreference() As Boolean
+src\Omskep.Core\Session\AppSession.vb:110: Public Sub SetDirectWritePreference(value As Boolean)
+src\Omskep.Core\Session\AppSession.vb:119: Public Sub SetWordWrapPreference(value As Boolean)
+src\Omskep.Core\Session\AppSession.vb:127: Public ReadOnly Property IsBusy As Boolean
+src\Omskep.Core\Session\AppSession.vb:133: Public ReadOnly Property VoiceCount As Integer
+src\Omskep.Core\Session\AppSession.vb:139: Public ReadOnly Property Catalog As VoiceCatalog
+src\Omskep.Core\Session\AppSession.vb:146: Public ReadOnly Property CanRetry As Boolean
+src\Omskep.Core\Session\AppSession.vb:185: Public Function RetryAsync(cancellationToken As CancellationToken) As Task
+src\Omskep.Core\Session\AppSession.vb:189: Private Sub LoadFromDisk()
+src\Omskep.Core\Session\AppSession.vb:272: Public Function ClearKey() As ActionResult
+src\Omskep.Core\Session\AppSession.vb:310: Private Shared Function IsStorageProblem(ex As Exception) As Boolean
+src\Omskep.Core\Session\AppSession.vb:314: Private Sub RaiseStateChanged()
+src\Omskep.Core\Session\ConnectionMessages.vb:7: Public Module ConnectionMessages
+src\Omskep.Core\Session\ConnectionMessages.vb:21: Public Function Plural(count As Integer, singular As String, pluralForm As String) As String
+src\Omskep.Core\Session\ConnectionMessages.vb:26: Public Function Connected(prefix As String, voices As Integer, locales As Integer, cacheSaved As Boolean) As String
+src\Omskep.Core\Session\ConnectionMessages.vb:35: Public Function ForFailure(result As VoiceListResult, suffix As String) As String
+src\Omskep.Core\Session\DocumentFormState.vb:15: Public NotInheritable Class DocumentFormState
+src\Omskep.Core\Session\DocumentFormState.vb:18: Public ReadOnly Property EditorEnabled As Boolean
+src\Omskep.Core\Session\DocumentFormState.vb:21: Public ReadOnly Property NewOpenPasteEnabled As Boolean
+src\Omskep.Core\Session\DocumentFormState.vb:25: Public ReadOnly Property SaveEnabled As Boolean
+src\Omskep.Core\Session\DocumentFormState.vb:27: Public ReadOnly Property SaveAsEnabled As Boolean
+src\Omskep.Core\Session\DocumentFormState.vb:30: Public ReadOnly Property ExportEnabled As Boolean
+src\Omskep.Core\Session\DocumentFormState.vb:33: Public ReadOnly Property ExportBlockedReason As String
+src\Omskep.Core\Session\DocumentFormState.vb:35: Public ReadOnly Property WindowTitle As String
+src\Omskep.Core\Session\DocumentFormState.vb:38: Public ReadOnly Property CheckText As String
+src\Omskep.Core\Session\DocumentFormState.vb:41: Public ReadOnly Property CountText As String
+src\Omskep.Core\Session\DocumentFormState.vb:43: Private Sub New(editorEnabled As Boolean, newOpenPasteEnabled As Boolean, saveEnabled As Boolean,
+src\Omskep.Core\Session\DocumentFormState.vb:59: Public Shared Function From(access As AccessState, document As DocumentModel, billableUpperBound As Integer,
+src\Omskep.Core\Session\FormStates.vb:6: Public NotInheritable Class SettingsFormState
+src\Omskep.Core\Session\FormStates.vb:7: Public ReadOnly Property ShowKeyBox As Boolean
+src\Omskep.Core\Session\FormStates.vb:8: Public ReadOnly Property ShowSavedPanel As Boolean
+src\Omskep.Core\Session\FormStates.vb:9: Public ReadOnly Property InputsEnabled As Boolean
+src\Omskep.Core\Session\FormStates.vb:10: Public ReadOnly Property TestEnabled As Boolean
+src\Omskep.Core\Session\FormStates.vb:12: Public ReadOnly Property TestIsCancel As Boolean
+src\Omskep.Core\Session\FormStates.vb:13: Public ReadOnly Property RefreshEnabled As Boolean
+src\Omskep.Core\Session\FormStates.vb:14: Public ReadOnly Property ReplaceEnabled As Boolean
+src\Omskep.Core\Session\FormStates.vb:15: Public ReadOnly Property ClearEnabled As Boolean
+src\Omskep.Core\Session\FormStates.vb:16: Public ReadOnly Property ShowProgress As Boolean
+src\Omskep.Core\Session\FormStates.vb:18: Private Sub New(showKeyBox As Boolean, showSavedPanel As Boolean, inputsEnabled As Boolean, testEnabled As Boolean,
+src\Omskep.Core\Session\FormStates.vb:33: Public Shared Function From(keySaved As Boolean, replacing As Boolean, ownRequestRunning As Boolean,
+src\Omskep.Core\Session\FormStates.vb:53: Public NotInheritable Class MainFormState
+src\Omskep.Core\Session\FormStates.vb:54: Public ReadOnly Property EditEnabled As Boolean
+src\Omskep.Core\Session\FormStates.vb:55: Public ReadOnly Property ExportEnabled As Boolean
+src\Omskep.Core\Session\FormStates.vb:56: Public ReadOnly Property ShowBanner As Boolean
+src\Omskep.Core\Session\FormStates.vb:57: Public ReadOnly Property BannerText As String
+src\Omskep.Core\Session\FormStates.vb:58: Public ReadOnly Property ShowRetry As Boolean
+src\Omskep.Core\Session\FormStates.vb:59: Public ReadOnly Property RetryEnabled As Boolean
+src\Omskep.Core\Session\FormStates.vb:60: Public ReadOnly Property StatusText As String
+src\Omskep.Core\Session\FormStates.vb:62: Private Sub New(editEnabled As Boolean, exportEnabled As Boolean, showBanner As Boolean, bannerText As String,
+src\Omskep.Core\Session\FormStates.vb:73: Public Shared Function From(access As AccessState, isBusy As Boolean, canRetry As Boolean, voiceCount As Integer) As MainFormState
+src\Omskep.Core\Settings\AppSettings.vb:7: Public NotInheritable Class AzureSettings
+src\Omskep.Core\Settings\AppSettings.vb:11: Public Property Region As String = DefaultRegion
+src\Omskep.Core\Settings\AppSettings.vb:15: Public Property KeyBlob As String
+src\Omskep.Core\Settings\AppSettings.vb:19: Public Property ExtensionData As Dictionary(Of String, JsonElement)
+src\Omskep.Core\Settings\AppSettings.vb:26: Public NotInheritable Class AppSettings
+src\Omskep.Core\Settings\AppSettings.vb:30: Public Property SchemaVersion As Integer = CurrentSchemaVersion
+src\Omskep.Core\Settings\AppSettings.vb:33: Public Property Azure As AzureSettings = New AzureSettings()
+src\Omskep.Core\Settings\AppSettings.vb:37: Public Property DefaultVoices As Dictionary(Of String, String) = New Dictionary(Of String, String)()
+src\Omskep.Core\Settings\AppSettings.vb:41: Public Property WordWrap As Boolean = True
+src\Omskep.Core\Settings\AppSettings.vb:45: Public Property ReviewMarks As Boolean = True
+src\Omskep.Core\Settings\AppSettings.vb:49: Public Property DirectWrite As Boolean = True
+src\Omskep.Core\Settings\AppSettings.vb:53: Public Property SpeakingRatePercent As Dictionary(Of String, Integer) = New Dictionary(Of String, Integer)()
+src\Omskep.Core\Settings\AppSettings.vb:56: Public Property ExtensionData As Dictionary(Of String, JsonElement)
+src\Omskep.Core\Settings\AppSettings.vb:59: Friend Sub Normalize()
+src\Omskep.Core\Settings\SettingsStore.vb:8: Public Enum SettingsLoadStatus
+src\Omskep.Core\Settings\SettingsStore.vb:19: Public NotInheritable Class SettingsLoadResult
+src\Omskep.Core\Settings\SettingsStore.vb:20: Public ReadOnly Property Status As SettingsLoadStatus
+src\Omskep.Core\Settings\SettingsStore.vb:22: Public ReadOnly Property Value As AppSettings
+src\Omskep.Core\Settings\SettingsStore.vb:24: Public ReadOnly Property Detail As String
+src\Omskep.Core\Settings\SettingsStore.vb:26: Public Sub New(status As SettingsLoadStatus, value As AppSettings, detail As String)
+src\Omskep.Core\Settings\SettingsStore.vb:37: Public NotInheritable Class SettingsStore
+src\Omskep.Core\Settings\SettingsStore.vb:54: Public ReadOnly Property SettingsPath As String
+src\Omskep.Core\Settings\SettingsStore.vb:56: Public Sub New(folder As String, Optional utcNow As Func(Of DateTime) = Nothing)
+src\Omskep.Core\Settings\SettingsStore.vb:64: Public Sub New(folder As String, utcNow As Func(Of DateTime), readAllBytes As Func(Of String, Byte()), readRetryDelaysMs As IReadOnlyList(Of Integer))
+src\Omskep.Core\Settings\SettingsStore.vb:87: Public Function Load() As SettingsLoadResult
+src\Omskep.Core\Settings\SettingsStore.vb:95: Public Sub Save(settings As AppSettings)
+src\Omskep.Core\Settings\SettingsStore.vb:107: Public Sub Update(change As Action(Of AppSettings))
+src\Omskep.Core\Settings\SettingsStore.vb:119: Private Sub SaveCore(settings As AppSettings)
+src\Omskep.Core\Settings\SettingsStore.vb:124: Private Function LoadCore() As SettingsLoadResult
+src\Omskep.Core\Settings\SettingsStore.vb:165: Private Sub SetAsideDamagedFile()
+src\Omskep.Core\Speech\AzureHttpClientFactory.vb:10: Public Module AzureHttpClientFactory
+src\Omskep.Core\Speech\AzureHttpClientFactory.vb:12: Public Function CreateHandler() As SocketsHttpHandler
+src\Omskep.Core\Speech\AzureHttpClientFactory.vb:19: Public Function CreateClient() As HttpClient
+src\Omskep.Core\Speech\AzureRegion.vb:7: Public Module AzureRegion
+src\Omskep.Core\Speech\AzureRegion.vb:19: Public Function Normalize(region As String) As String
+src\Omskep.Core\Speech\AzureRegion.vb:31: Public Function IsValid(region As String) As Boolean
+src\Omskep.Core\Speech\AzureSpeechClient.vb:12: Public NotInheritable Class AzureSpeechClient
+src\Omskep.Core\Speech\AzureSpeechClient.vb:28: Public Sub New(http As HttpClient, Optional listTimeout As TimeSpan? = Nothing, Optional synthesisTimeout As TimeSpan? = Nothing)
+src\Omskep.Core\Speech\AzureSpeechClient.vb:104: Private NotInheritable Class RawResponse
+src\Omskep.Core\Speech\AzureSpeechClient.vb:105: Public ReadOnly Property Outcome As AzureOutcome
+src\Omskep.Core\Speech\AzureSpeechClient.vb:106: Public ReadOnly Property StatusCode As Integer
+src\Omskep.Core\Speech\AzureSpeechClient.vb:107: Public ReadOnly Property Detail As String
+src\Omskep.Core\Speech\AzureSpeechClient.vb:108: Public ReadOnly Property Body As Byte()
+src\Omskep.Core\Speech\AzureSpeechClient.vb:109: Public ReadOnly Property RetryAfter As TimeSpan?
+src\Omskep.Core\Speech\AzureSpeechClient.vb:111: Public Sub New(outcome As AzureOutcome, statusCode As Integer, detail As String, body As Byte(), Optional retryAfter As TimeSpan? = Nothing)
+src\Omskep.Core\Speech\AzureSpeechClient.vb:159: Private Shared Function TryGetRetryAfter(response As HttpResponseMessage) As TimeSpan?
+src\Omskep.Core\Speech\ISpeechClient.vb:11: Public Interface ISpeechClient
+src\Omskep.Core\Speech\ISpeechClient.vb:24: Public NotInheritable Class VoiceListResult
+src\Omskep.Core\Speech\ISpeechClient.vb:25: Public ReadOnly Property Outcome As AzureOutcome
+src\Omskep.Core\Speech\ISpeechClient.vb:26: Public ReadOnly Property StatusCode As Integer
+src\Omskep.Core\Speech\ISpeechClient.vb:27: Public ReadOnly Property Detail As String
+src\Omskep.Core\Speech\ISpeechClient.vb:29: Public ReadOnly Property Voices As IReadOnlyList(Of VoiceInfo)
+src\Omskep.Core\Speech\ISpeechClient.vb:31: Public ReadOnly Property IsSuccess As Boolean
+src\Omskep.Core\Speech\ISpeechClient.vb:37: Public Sub New(outcome As AzureOutcome, statusCode As Integer, detail As String, voices As IReadOnlyList(Of VoiceInfo))
+src\Omskep.Core\Speech\SynthesisResult.vb:10: Public NotInheritable Class SynthesisResult
+src\Omskep.Core\Speech\SynthesisResult.vb:11: Public ReadOnly Property Outcome As AzureOutcome
+src\Omskep.Core\Speech\SynthesisResult.vb:12: Public ReadOnly Property StatusCode As Integer
+src\Omskep.Core\Speech\SynthesisResult.vb:13: Public ReadOnly Property Detail As String
+src\Omskep.Core\Speech\SynthesisResult.vb:14: Public ReadOnly Property Audio As Byte()
+src\Omskep.Core\Speech\SynthesisResult.vb:15: Public ReadOnly Property RetryAfter As TimeSpan?
+src\Omskep.Core\Speech\SynthesisResult.vb:17: Public Sub New(outcome As AzureOutcome, statusCode As Integer, detail As String, audio As Byte(), retryAfter As TimeSpan?)
+src\Omskep.Core\Speech\VoiceListParser.vb:8: Public NotInheritable Class AzureVoiceDto
+src\Omskep.Core\Speech\VoiceListParser.vb:9: Public Property ShortName As String
+src\Omskep.Core\Speech\VoiceListParser.vb:10: Public Property Locale As String
+src\Omskep.Core\Speech\VoiceListParser.vb:11: Public Property DisplayName As String
+src\Omskep.Core\Speech\VoiceListParser.vb:12: Public Property Gender As String
+src\Omskep.Core\Speech\VoiceListParser.vb:13: Public Property VoiceType As String
+src\Omskep.Core\Speech\VoiceListParser.vb:16: Public Module VoiceListParser
+src\Omskep.Core\Speech\VoiceListParser.vb:24: Public Function Parse(json As Byte()) As IReadOnlyList(Of VoiceInfo)
+src\Omskep.Core\Storage\AtomicFile.vb:10: Public Module AtomicFile
+src\Omskep.Core\Storage\AtomicFile.vb:20: Public Sub WriteAllBytes(path As String, content As Byte())
+src\Omskep.Core\Storage\AtomicFile.vb:28: Public Sub WriteAllBytes(path As String, content As Byte(), swap As Action(Of String, String), retryDelaysMs As IReadOnlyList(Of Integer))
+src\Omskep.Core\Storage\AtomicFile.vb:61: Private Sub SwapIntoPlace(tempPath As String, path As String)
+src\Omskep.Core\Storage\AtomicFile.vb:70: Private Function IsTransient(ex As Exception) As Boolean
+src\Omskep.Core\Storage\AtomicFile.vb:75: Private Sub TryDelete(path As String)
+src\Omskep.Core\Voices\VoiceCache.vb:10: Public NotInheritable Class VoiceInfo
+src\Omskep.Core\Voices\VoiceCache.vb:12: Public Property ShortName As String
+src\Omskep.Core\Voices\VoiceCache.vb:14: Public Property Locale As String
+src\Omskep.Core\Voices\VoiceCache.vb:16: Public Property DisplayName As String
+src\Omskep.Core\Voices\VoiceCache.vb:18: Public Property Gender As String
+src\Omskep.Core\Voices\VoiceCache.vb:20: Public Property VoiceType As String
+src\Omskep.Core\Voices\VoiceCache.vb:24: Public NotInheritable Class VoiceCache
+src\Omskep.Core\Voices\VoiceCache.vb:28: Public Property SchemaVersion As Integer = CurrentSchemaVersion
+src\Omskep.Core\Voices\VoiceCache.vb:32: Public Property Region As String
+src\Omskep.Core\Voices\VoiceCache.vb:35: Public Property FetchedUtc As DateTime
+src\Omskep.Core\Voices\VoiceCache.vb:38: Public Property Voices As List(Of VoiceInfo) = New List(Of VoiceInfo)()
+src\Omskep.Core\Voices\VoiceCache.vb:41: Public Function StatusFor(currentRegion As String) As CacheStatus
+src\Omskep.Core\Voices\VoiceCache.vb:45: Friend Sub Normalize()
+src\Omskep.Core\Voices\VoiceCache.vb:51: Public Enum VoiceCacheLoadStatus
+src\Omskep.Core\Voices\VoiceCache.vb:58: Public NotInheritable Class VoiceCacheLoadResult
+src\Omskep.Core\Voices\VoiceCache.vb:59: Public ReadOnly Property Status As VoiceCacheLoadStatus
+src\Omskep.Core\Voices\VoiceCache.vb:61: Public ReadOnly Property Cache As VoiceCache
+src\Omskep.Core\Voices\VoiceCache.vb:63: Public Sub New(status As VoiceCacheLoadStatus, cache As VoiceCache)
+src\Omskep.Core\Voices\VoiceCache.vb:69: Public NotInheritable Class VoiceCacheStore
+src\Omskep.Core\Voices\VoiceCache.vb:77: Public ReadOnly Property CachePath As String
+src\Omskep.Core\Voices\VoiceCache.vb:79: Public Sub New(folder As String)
+src\Omskep.Core\Voices\VoiceCache.vb:84: Public Function Load() As VoiceCacheLoadResult
+src\Omskep.Core\Voices\VoiceCache.vb:110: Public Sub Save(cache As VoiceCache)
+src\Omskep.Core\Voices\VoiceCache.vb:119: Public Sub Clear()
+src\Omskep.Core\Voices\VoiceCatalog.vb:8: Public NotInheritable Class VoiceCatalog
+src\Omskep.Core\Voices\VoiceCatalog.vb:17: Public Sub New(voices As IEnumerable(Of VoiceInfo))
+src\Omskep.Core\Voices\VoiceCatalog.vb:42: Public ReadOnly Property Count As Integer
+src\Omskep.Core\Voices\VoiceCatalog.vb:49: Public ReadOnly Property Locales As IReadOnlyList(Of String)
+src\Omskep.Core\Voices\VoiceCatalog.vb:56: Public Function VoicesFor(locale As String) As IReadOnlyList(Of VoiceInfo)
+src\Omskep.Core\Voices\VoiceCatalog.vb:64: Public Function TryFind(shortName As String) As VoiceInfo
+src\Omskep.Core\Voices\VoiceCatalog.vb:71: Public Function Contains(shortName As String) As Boolean
+src\Omskep.Core\Voices\VoiceService.vb:9: Public NotInheritable Class VoiceRefreshResult
+src\Omskep.Core\Voices\VoiceService.vb:10: Public ReadOnly Property Result As VoiceListResult
+src\Omskep.Core\Voices\VoiceService.vb:11: Public ReadOnly Property CacheSaved As Boolean
+src\Omskep.Core\Voices\VoiceService.vb:13: Public Sub New(result As VoiceListResult, cacheSaved As Boolean)
+src\Omskep.Core\Voices\VoiceService.vb:30: Public NotInheritable Class VoiceService
+src\Omskep.Core\Voices\VoiceService.vb:42: Public Sub New(client As ISpeechClient, cache As VoiceCacheStore, monitor As ConnectionMonitor, Optional utcNow As Func(Of DateTime) = Nothing)
+src\Omskep.Core\Voices\VoiceService.vb:57: Public ReadOnly Property Catalog As VoiceCatalog
+src\Omskep.Core\Voices\VoiceService.vb:65: Public ReadOnly Property IsBusy As Boolean
+src\Omskep.Core\Voices\VoiceService.vb:72: Public Function LoadCache(currentRegion As String) As CacheStatus
+src\Omskep.Core\Voices\VoiceService.vb:90: Public Function CacheStatusFor(currentRegion As String) As CacheStatus
+src\Omskep.Core\Voices\VoiceService.vb:101: Public Function TestAsync(region As String, key As String, cancellationToken As CancellationToken) As Task(Of VoiceListResult)
+src\Omskep.Core\Voices\VoiceService.vb:125: Public Function Adopt(result As VoiceListResult, region As String) As Boolean
+src\Omskep.Core\Voices\VoiceService.vb:153: Public Sub CredentialsChanged()
+tests\Omskep.App.Tests\DpapiSecretProtectorTests.vb:14: Public Class DpapiSecretProtectorTests
+tests\Omskep.App.Tests\DpapiSecretProtectorTests.vb:18: Private Shared Sub RequireWindows()
+tests\Omskep.App.Tests\DpapiSecretProtectorTests.vb:23: Public Sub RoundTrip_ReturnsTheOriginalBytes()
+tests\Omskep.App.Tests\DpapiSecretProtectorTests.vb:31: Public Sub ProtectedBlob_DoesNotContainThePlaintext()
+tests\Omskep.App.Tests\DpapiSecretProtectorTests.vb:39: Public Sub CorruptedBlob_ThrowsCryptographicException()
+tests\Omskep.App.Tests\DpapiSecretProtectorTests.vb:50: Public Sub TruncatedBlob_ThrowsCryptographicException()
+tests\Omskep.App.Tests\DpapiSecretProtectorTests.vb:59: Public Sub GarbageBlob_ThrowsCryptographicException()
+tests\Omskep.App.Tests\DpapiSecretProtectorTests.vb:66: Public Sub BlobMadeWithOtherEntropy_CannotBeReadByOurProtector()
+tests\Omskep.App.Tests\DpapiSecretProtectorTests.vb:74: Public Sub NullInput_Throws()
+tests\Omskep.Core.Tests\AtomicFileTests.vb:10: Public Class AtomicFileTests
+tests\Omskep.Core.Tests\AtomicFileTests.vb:13: Public Sub Write_NewFile_CreatesMissingFolderAndContent()
+tests\Omskep.Core.Tests\AtomicFileTests.vb:23: Public Sub Write_ExistingFile_ReplacesContent_AndLeavesNoTemp()
+tests\Omskep.Core.Tests\AtomicFileTests.vb:34: Public Sub Write_StaleTempFileFromEarlierCrash_IsOverwritten()
+tests\Omskep.Core.Tests\AtomicFileTests.vb:46: Public Sub Write_WhenTempCannotBeCreated_ThrowsAndOriginalIsIntact()
+tests\Omskep.Core.Tests\AtomicFileTests.vb:65: Public Sub Write_FailureForNewFile_LeavesNothingBehind()
+tests\Omskep.Core.Tests\AtomicFileTests.vb:83: Public Sub Write_TransientSwapFailures_AreRetried_ThenSucceed()
+tests\Omskep.Core.Tests\AtomicFileTests.vb:105: Public Sub Write_SwapKeepsFailing_GivesUpAfterConfiguredRetries_OriginalIntact()
+tests\Omskep.Core.Tests\AtomicFileTests.vb:126: Public Sub Write_NonTransientSwapFailure_IsNotRetried()
+tests\Omskep.Core.Tests\AtomicFileTests.vb:146: Public Sub Write_NullRetryList_Throws()
+tests\Omskep.Core.Tests\AtomicFileTests.vb:152: Public Sub Write_LargePayload_RoundTripsExactly()
+tests\Omskep.Core.Tests\AtomicFileTests.vb:164: Public Sub Write_EmptyContent_WritesEmptyFile()
+tests\Omskep.Core.Tests\AtomicFileTests.vb:173: Public Sub Write_BadArguments_Throw()
+tests\Omskep.Core.Tests\SettingsStoreTests.vb:10: Public Class SettingsStoreTests
+tests\Omskep.Core.Tests\SettingsStoreTests.vb:14: Private Shared Function NewStore(folder As String) As SettingsStore
+tests\Omskep.Core.Tests\SettingsStoreTests.vb:18: Private Shared Sub MakeStore(folder As String)
+tests\Omskep.Core.Tests\SettingsStoreTests.vb:22: Private Shared Sub WriteRaw(store As SettingsStore, content As String)
+tests\Omskep.Core.Tests\SettingsStoreTests.vb:29: Public Sub Load_NoFile_IsNotFound_WithSouthAfricaNorthDefaults()
+tests\Omskep.Core.Tests\SettingsStoreTests.vb:39: Public Sub Load_MissingFolder_IsNotFound()
+tests\Omskep.Core.Tests\SettingsStoreTests.vb:49: Public Sub SaveThenLoad_RoundTripsEveryField()
+tests\Omskep.Core.Tests\SettingsStoreTests.vb:70: Public Sub Save_TwiceInARow_SecondWins_NoTempLeft()
+tests\Omskep.Core.Tests\SettingsStoreTests.vb:84: Public Sub Save_NullSettings_Throws()
+tests\Omskep.Core.Tests\SettingsStoreTests.vb:92: Public Sub Save_ConcurrentCalls_NeverCorruptTheFile()
+tests\Omskep.Core.Tests\SettingsStoreTests.vb:107: Public Sub Save_WhenWriteFails_ThrowsAndKeepsOldSettings()
+tests\Omskep.Core.Tests\SettingsStoreTests.vb:132: Public Sub Load_LeftoverTempFile_IsIgnored_MainFileWins()
+tests\Omskep.Core.Tests\SettingsStoreTests.vb:149: Public Sub Load_GarbageFile_IsDamaged_SetAsideNotDeleted()
+tests\Omskep.Core.Tests\SettingsStoreTests.vb:169: Public Sub Load_EmptyFile_And_JsonNull_And_WrongShape_AreDamaged()
+tests\Omskep.Core.Tests\SettingsStoreTests.vb:180: Public Sub Load_FileLockedByAnotherHandle_IsUnreadable_AndLeftAlone()
+tests\Omskep.Core.Tests\SettingsStoreTests.vb:200: Public Sub Load_Utf8Bom_IsAccepted()
+tests\Omskep.Core.Tests\SettingsStoreTests.vb:216: Public Sub Load_TrailingCommasAndComments_AreAccepted()
+tests\Omskep.Core.Tests\SettingsStoreTests.vb:225: Public Sub Load_NullSections_AreRepairedToDefaults()
+tests\Omskep.Core.Tests\SettingsStoreTests.vb:239: Public Sub Load_BlankRegion_FallsBackToDefault()
+tests\Omskep.Core.Tests\SettingsStoreTests.vb:250: Public Sub UnknownFields_SurviveLoadAndResave()
+tests\Omskep.Core.Tests\SettingsStoreTests.vb:266: Public Sub SavedFile_ContainsOnlyTheBlob_NotAnyPlaintextKeyField()
+tests\Omskep.Core.Tests\SettingsStoreTests.vb:281: Private Shared Function ReaderFailingTimes(failures As Integer, calls As Integer(), exceptionFactory As Func(Of Exception)) As Func(Of String, Byte())
+tests\Omskep.Core.Tests\SettingsStoreTests.vb:290: Public Sub Load_TransientReadFailures_AreRetried_ThenLoad()
+tests\Omskep.Core.Tests\SettingsStoreTests.vb:306: Public Sub Load_PersistentReadFailure_IsUnreadable_AfterConfiguredRetries()
+tests\Omskep.Core.Tests\SettingsStoreTests.vb:320: Public Sub Load_FileNotFound_IsNotRetried()
+tests\Omskep.Core.Tests\SettingsStoreTests.vb:332: Public Sub Update_ChangesOneThing_AndKeepsTheRest()
+tests\Omskep.Core.Tests\SettingsStoreTests.vb:351: Public Sub Update_ConcurrentWriters_NeverLoseEachOthersChanges()
+tests\Omskep.Core.Tests\SettingsStoreTests.vb:362: Public Sub Update_WhenFileUnreadable_Throws_AndOverwritesNothing()
+tests\Omskep.Core.Tests\SettingsStoreTests.vb:378: Public Sub Update_OnDamagedFile_SetsItAside_AndAppliesToFreshDefaults()
+tests\Omskep.Core.Tests\SettingsStoreTests.vb:390: Public Sub Update_NullChange_Throws()
+tests\Omskep.Core.Tests\SettingsStoreTests.vb:398: Public Sub Constructor_BlankFolder_Throws()
+tests\Omskep.Core.Tests\VoiceCacheStoreTests.vb:9: Public Class VoiceCacheStoreTests
+tests\Omskep.Core.Tests\VoiceCacheStoreTests.vb:11: Private Shared Function Sample(region As String, count As Integer) As VoiceCache
+tests\Omskep.Core.Tests\VoiceCacheStoreTests.vb:27: Public Sub Load_NoFile_IsNotFound_AndEmpty()
+tests\Omskep.Core.Tests\VoiceCacheStoreTests.vb:37: Public Sub SaveThenLoad_RoundTrips_LargeList()
+tests\Omskep.Core.Tests\VoiceCacheStoreTests.vb:53: Public Sub StatusFor_FollowsRegion_AndEmptiness()
+tests\Omskep.Core.Tests\VoiceCacheStoreTests.vb:62: Public Sub Load_GarbageOrWrongShape_IsUnusable_AndFileLeftInPlace()
+tests\Omskep.Core.Tests\VoiceCacheStoreTests.vb:76: Public Sub Load_NullVoicesAndNullEntries_AreRepaired()
+tests\Omskep.Core.Tests\VoiceCacheStoreTests.vb:90: Public Sub Clear_RemovesCache_AndIsSafeWhenNoneExists()
+tests\Omskep.Core.Tests\VoiceCacheStoreTests.vb:102: Public Sub CacheFile_IsSeparateFrom_SettingsFile()
+tests\Omskep.Core.Tests\VoiceCacheStoreTests.vb:110: Public Sub Save_NullCache_Throws()
+tests\Omskep.Core.Tests\Access\AccessEvaluatorTests.vb:7: Public Class AccessEvaluatorTests
+tests\Omskep.Core.Tests\Access\AccessEvaluatorTests.vb:11: Private Shared Function Snap(last As AzureOutcome, Optional rejected As Boolean = False) As ConnectionSnapshot
+tests\Omskep.Core.Tests\Access\AccessEvaluatorTests.vb:15: Private Shared Sub AssertLocked(s As AccessState, reason As AccessReason)
+tests\Omskep.Core.Tests\Access\AccessEvaluatorTests.vb:27: Public Sub NoKey_IsLocked_EvenWithCache()
+tests\Omskep.Core.Tests\Access\AccessEvaluatorTests.vb:33: Public Sub DamagedSettingsFile_IsLocked_WithPlainMessage()
+tests\Omskep.Core.Tests\Access\AccessEvaluatorTests.vb:38: Public Sub UnreadableBlob_IsLocked_WithPlainMessage()
+tests\Omskep.Core.Tests\Access\AccessEvaluatorTests.vb:43: Public Sub UnreadableSettings_IsLocked_WithTryAgainMessage_NotAKeyLossMessage()
+tests\Omskep.Core.Tests\Access\AccessEvaluatorTests.vb:53: Public Sub KeyAndCache_NoCallYet_IsFull()
+tests\Omskep.Core.Tests\Access\AccessEvaluatorTests.vb:62: Public Sub KeyAndCache_OfflineTransientFailed_StayFull()
+tests\Omskep.Core.Tests\Access\AccessEvaluatorTests.vb:72: Public Sub KeyAndCache_Rejected_EditOnly_ExportBlocked()
+tests\Omskep.Core.Tests\Access\AccessEvaluatorTests.vb:82: Public Sub StandingRejection_SurvivesALaterOfflineResult()
+tests\Omskep.Core.Tests\Access\AccessEvaluatorTests.vb:91: Public Sub KeyNoCache_EachOutcome_LocksWithItsOwnReason()
+tests\Omskep.Core.Tests\Access\AccessEvaluatorTests.vb:101: Public Sub KeyNoCache_Rejected_UsesExactCombinedMessage()
+tests\Omskep.Core.Tests\Access\AccessEvaluatorTests.vb:107: Public Sub KeyNoCache_OfflineMessage_DiffersFromRejectedMessage()
+tests\Omskep.Core.Tests\Access\AccessEvaluatorTests.vb:115: Public Sub Transient_NeverClaimsKeyIsBadOrQuotaSpent()
+tests\Omskep.Core.Tests\Access\AccessEvaluatorTests.vb:125: Public Sub AllCombinations_HoldInvariants()
+tests\Omskep.Core.Tests\Access\AccessEvaluatorTests.vb:148: Public Sub NullSnapshot_Throws()
+tests\Omskep.Core.Tests\Access\AccessEvaluatorTests.vb:156: Public Sub CacheStatusFor_MatchingRegion_IsPresent_CaseInsensitive()
+tests\Omskep.Core.Tests\Access\AccessEvaluatorTests.vb:161: Public Sub CacheStatusFor_DifferentRegion_IsMissing()
+tests\Omskep.Core.Tests\Access\AccessEvaluatorTests.vb:166: Public Sub CacheStatusFor_EmptyOrBlank_IsMissing()
+tests\Omskep.Core.Tests\Access\AccessEvaluatorTests.vb:176: Public Sub Http200_IsOk_And401_IsRejected()
+tests\Omskep.Core.Tests\Access\AccessEvaluatorTests.vb:182: Public Sub Http429_408_And5xx_AreTransient_NotRejected()
+tests\Omskep.Core.Tests\Access\AccessEvaluatorTests.vb:189: Public Sub OtherStatuses_AreFailed()
+tests\Omskep.Core.Tests\Access\AccessEvaluatorTests.vb:198: Public Class ConnectionMonitorTests
+tests\Omskep.Core.Tests\Access\AccessEvaluatorTests.vb:201: Public Sub NewMonitor_IsEmpty()
+tests\Omskep.Core.Tests\Access\AccessEvaluatorTests.vb:208: Public Sub Rejected_IsSticky_AcrossOfflineTransientFailed()
+tests\Omskep.Core.Tests\Access\AccessEvaluatorTests.vb:219: Public Sub Ok_ClearsRejection()
+tests\Omskep.Core.Tests\Access\AccessEvaluatorTests.vb:228: Public Sub Reset_ClearsEverything()
+tests\Omskep.Core.Tests\Access\AccessEvaluatorTests.vb:237: Public Sub ReportingNone_IsIgnored()
+tests\Omskep.Core.Tests\Access\AccessEvaluatorTests.vb:246: Public Sub Transient_WithoutPriorRejection_NeverSetsRejected()
+tests\Omskep.Core.Tests\Documents\ChunkerTests.vb:11: Public Class ChunkerTests
+tests\Omskep.Core.Tests\Documents\ChunkerTests.vb:13: Private Shared Function VoiceDoc(ParamArray voices As String()) As String
+tests\Omskep.Core.Tests\Documents\ChunkerTests.vb:21: Public Sub A_document_with_no_voice_elements_fails_cleanly()
+tests\Omskep.Core.Tests\Documents\ChunkerTests.vb:28: Public Sub Malformed_input_does_not_throw()
+tests\Omskep.Core.Tests\Documents\ChunkerTests.vb:37: Public Sub Two_short_voices_combine_into_one_chunk_when_they_fit_together()
+tests\Omskep.Core.Tests\Documents\ChunkerTests.vb:50: Public Sub Voices_split_into_separate_chunks_when_they_do_not_fit_together()
+tests\Omskep.Core.Tests\Documents\ChunkerTests.vb:64: Public Sub Three_voices_pack_two_per_chunk_when_the_third_would_not_fit()
+tests\Omskep.Core.Tests\Documents\ChunkerTests.vb:81: Public Sub TotalBillableCharacters_sums_every_chunks_billable_count()
+tests\Omskep.Core.Tests\Documents\ChunkerTests.vb:98: Public Sub TotalBillableCharacters_is_zero_for_no_chunks_or_nothing()
+tests\Omskep.Core.Tests\Documents\ChunkerTests.vb:106: Public Sub Baseline_duration_estimate_is_characters_over_ten()
+tests\Omskep.Core.Tests\Documents\ChunkerTests.vb:115: Public Sub A_numeric_prosody_rate_scales_the_estimate()
+tests\Omskep.Core.Tests\Documents\ChunkerTests.vb:129: Public Sub A_keyword_rate_is_preserved_verbatim_and_estimated_conservatively()
+tests\Omskep.Core.Tests\Documents\ChunkerTests.vb:148: Public Sub An_oversized_single_voice_splits_at_sentence_ends()
+tests\Omskep.Core.Tests\Documents\ChunkerTests.vb:166: Public Sub A_keyword_rate_survives_a_reconstructed_split_verbatim()
+tests\Omskep.Core.Tests\Documents\ChunkerTests.vb:183: Public Sub An_oversized_voice_with_no_sentence_end_is_reported_not_forced()
+tests\Omskep.Core.Tests\Documents\ChunkerTests.vb:192: Public Sub An_inline_sub_element_is_never_split_across_chunks()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:11: Friend Module DocumentTestHelpers
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:16: Public Function Doc(ParamArray bodyLines As String()) As String
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:24: Public Function TestPath(fileName As String) As String
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:28: Public Function Wrap(inner As String) As String
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:34: Public Class WellFormednessCheckerTests
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:37: Public Sub A_well_formed_document_passes()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:45: Public Sub Null_empty_and_whitespace_are_malformed_not_exceptions()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:54: Public Sub A_mismatched_end_tag_points_at_the_element_that_is_still_open()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:66: Public Sub An_unclosed_prosody_is_blamed_even_when_the_error_is_many_lines_later()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:82: Public Sub A_missing_voice_end_tag_blames_voice()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:90: Public Sub A_document_cut_off_while_elements_are_open_blames_the_innermost()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:97: Public Sub A_stray_ampersand_is_reported_without_blaming_an_element()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:105: Public Sub A_stray_less_than_is_reported_without_blaming_an_element()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:112: Public Sub Half_typed_markup_is_malformed_never_an_exception()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:136: Public Sub Structure_errors_are_reported()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:144: Public Sub A_doctype_is_refused_and_nothing_is_expanded()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:151: Public Sub Control_characters_make_the_document_malformed()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:156: Public Sub An_error_line_follows_the_text_when_earlier_lines_are_added()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:164: Public Sub Very_deep_nesting_does_not_throw()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:174: Public Sub Random_garbage_never_throws_and_always_gives_a_usable_position()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:193: Public Sub The_largest_study_size_checks_quickly()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:210: Public Class BillableCharacterCounterTests
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:215: Private Shared Function Count(text As String) As Integer
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:222: Public Sub Hello_text_only_counts_every_character_and_no_scaffold_tags()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:227: Public Sub W1_a_single_space_counts_as_one()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:232: Public Sub W2_six_spaces_count_as_six()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:237: Public Sub W3_a_CRLF_counts_as_one_and_a_lone_LF_or_CR_also_one()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:244: Public Sub W4_CRLF_and_four_spaces_count_as_five()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:249: Public Sub W5_edge_whitespace_is_counted_which_is_the_upper_bound_Azure_may_bill_less()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:254: Public Sub Other_markup_counts_character_for_character()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:262: Public Sub P3_two_CRLF_and_indent_separators_without_a_wrapper()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:271: Public Sub The_full_scaffold_with_attributes_and_line_breaks_is_free()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:277: Public Sub Self_closing_and_spaced_closing_scaffold_tags_are_free()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:284: Public Sub A_greater_than_inside_an_attribute_value_does_not_end_the_free_tag()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:290: Public Sub Look_alike_names_are_counted_as_text()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:298: Public Sub Half_typed_scaffold_tags_are_counted_in_full()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:307: Public Sub Tags_inside_comments_cdata_and_instructions_are_not_free()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:315: Public Sub CRLF_inside_a_comment_still_counts_as_one()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:320: Public Sub Entities_are_counted_as_written()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:325: Public Sub Characters_outside_the_basic_plane_count_as_two_which_is_the_safe_side()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:330: Public Sub Null_and_empty_count_zero()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:336: Public Sub Random_garbage_never_throws_and_never_exceeds_the_length()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:352: Public Sub The_largest_study_size_counts_instantly()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:368: Public Class DocumentModelTests
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:371: Public Sub A_new_model_is_a_pristine_untitled_document()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:382: Public Sub Editing_makes_it_dirty_and_unchecked_and_bumps_the_revision()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:393: Public Sub Opening_a_file_is_clean_with_the_file_name_as_display_name()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:402: Public Sub An_import_is_dirty_and_untitled()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:412: Public Sub Saving_makes_it_clean_and_keeps_the_check_result_and_revision()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:425: Public Sub A_check_result_for_old_text_is_ignored()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:436: Public Sub A_check_result_after_new_or_open_for_the_previous_document_is_ignored()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:449: Public Sub A_malformed_result_is_stored_and_does_not_make_the_document_unsaveable()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:463: Public Sub The_last_result_is_kept_while_the_next_check_is_pending()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:473: Public Sub Undoing_back_to_the_saved_content_makes_a_file_document_clean_again()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:482: Public Sub Reaching_a_save_point_without_a_file_changes_nothing()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:490: Public Sub Blank_paths_and_null_results_are_rejected()
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:13: Public MustInherit Class ScratchFolderTests
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:17: Protected Function NewFolder() As String
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:25: Public Sub RemoveScratchFolders()
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:38: Public Class DocumentFileTests
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:45: Public Sub Text_survives_a_save_and_load_unchanged()
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:52: Public Sub Save_writes_utf8_without_a_BOM_and_LF_line_endings()
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:61: Public Sub Save_creates_missing_folders_and_replaces_an_existing_file()
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:70: Public Sub A_failed_save_reports_a_clear_error_and_leaves_the_old_file_alone()
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:82: Public Sub Text_with_an_unpaired_surrogate_is_refused_not_silently_altered()
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:90: Public Sub Load_strips_a_UTF8_BOM_and_normalises_line_endings()
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:99: Public Sub Load_reads_UTF16_files_with_a_BOM()
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:110: Public Sub Load_never_edits_markup_it_only_normalises_line_endings()
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:118: Public Sub A_file_that_is_not_utf8_gets_a_clear_message()
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:126: Public Sub Binary_files_are_refused()
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:138: Public Sub A_missing_or_oversized_file_gets_a_clear_message()
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:150: Public Sub A_locked_file_gets_a_clear_message_not_a_raw_exception()
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:160: Public Sub Blank_paths_and_null_text_are_caller_bugs()
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:167: Public Sub An_eighty_thousand_character_document_round_trips()
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:177: Public Class RecoveryStoreTests
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:186: Public Sub A_snapshot_from_a_dead_instance_is_offered_back_intact()
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:200: Public Sub An_untitled_document_has_no_original_path()
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:209: Public Sub Each_snapshot_replaces_the_previous_one_from_the_same_instance()
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:219: Public Sub An_instance_never_offers_its_own_snapshot()
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:227: Public Sub A_running_instances_snapshot_is_not_offered_to_another_instance()
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:234: Public Sub Two_instances_keep_separate_snapshots()
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:246: Public Sub Discard_removes_the_snapshot_and_is_safe_to_repeat()
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:257: Public Sub Remove_deletes_a_restored_orphan()
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:268: Public Sub Garbage_files_are_ignored_and_left_alone()
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:288: Public Sub A_missing_folder_offers_nothing()
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:294: Public Sub A_snapshot_that_cannot_be_written_returns_false_and_never_throws()
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:303: Public Sub Text_with_an_unpaired_surrogate_is_still_snapshotted_with_a_replacement_character()
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:313: Public Sub A_large_document_snapshots_and_restores_exactly()
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:321: Public Sub The_real_liveness_check_sees_this_running_process_as_alive()
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:330: Public Sub Blank_folder_and_null_item_are_caller_bugs()
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:336: Private Shared Sub MakeStore(folder As String)
+tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:341: Public Sub The_default_folder_is_under_local_application_data()
+tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:14: Public Class HebrewOrderTests
+tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:27: Private Shared Function Reversed(value As String) As String
+tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:34: Public Sub The_El_example_from_the_real_PDF_is_put_back_in_reading_order()
+tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:42: Public Sub A_phrase_gets_its_letters_and_its_word_order_restored()
+tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:50: Public Sub In_a_whole_document_a_run_that_already_looks_correct_is_left_alone()
+tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:59: Public Sub A_selection_is_reversed_even_if_it_looks_correct_because_the_user_decided()
+tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:64: Public Sub Text_around_the_Hebrew_is_untouched()
+tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:74: Public Sub Spaces_outside_a_run_are_not_part_of_it()
+tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:80: Public Sub Several_runs_give_edits_that_apply_from_the_last_to_the_first()
+tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:95: Public Sub Reversing_twice_gives_the_original_back()
+tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:102: Public Sub A_presentation_form_keeps_its_letter_in_place_and_is_normalised()
+tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:109: Public Sub No_Hebrew_null_and_empty_change_nothing()
+tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:117: Public Sub Random_garbage_never_throws_and_only_hebrew_runs_change()
+tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:138: Public Class CommandLineArgumentsTests
+tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:142: Private Shared Function RejectsPath(path As String) As Boolean
+tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:147: Public Sub The_first_existing_file_after_the_program_name_is_returned()
+tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:153: Public Sub The_program_name_itself_is_never_taken_as_the_document()
+tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:158: Public Sub Switches_and_missing_files_are_ignored()
+tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:164: Public Sub No_arguments_null_and_unusable_paths_give_nothing()
+tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:173: Public Class ImportTextDescriptionTests
+tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:175: Private NotInheritable Class NoReader
+tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:178: Public Function ReadPages(pdfPath As String) As IReadOnlyList(Of String) Implements IPdfPageReader.ReadPages
+tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:184: Public Sub A_text_file_import_says_which_file_it_came_from()
+tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:190: Public Sub Pasted_text_still_says_pasted()
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:15: Public Class DocumentScaffoldTests
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:20: Public Sub A_new_scaffold_is_blank()
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:28: Public Sub Any_body_text_or_other_markup_makes_it_content()
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:36: Public Sub A_half_typed_tag_counts_as_content_so_it_is_never_overwritten()
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:43: Public Sub A_greater_than_inside_an_attribute_does_not_confuse_the_check()
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:50: Public Class ScaffoldDefaultsTests
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:52: Private Shared Function Voices(ParamArray pairs As String()) As IReadOnlyDictionary(Of String, String)
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:61: Public Sub Nothing_or_empty_gives_the_built_in_afrikaans_voice()
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:69: Public Sub The_afrikaans_entry_wins_when_usable()
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:76: Public Sub Without_afrikaans_the_first_locale_in_order_is_used()
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:83: Public Sub Blank_entries_are_skipped()
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:93: Public Class FileKindsTests
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:96: Public Sub Extensions_decide_the_kind_case_insensitively()
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:106: Public Sub Blank_paths_are_text_not_an_exception()
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:112: Public Sub SSML_is_recognised_by_its_first_element_even_with_a_BOM_or_leading_blank_lines()
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:119: Public Sub Ordinary_text_and_other_markup_are_not_SSML()
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:131: Public Class PasteHandlerTests
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:140: Private Shared Function Plan(current As String, clip As String, plain As Boolean) As PastePlan
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:144: Private Shared Sub AssertWellFormed(xml As String)
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:159: Public Sub An_empty_or_blank_clipboard_pastes_nothing_in_both_modes()
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:167: Public Sub Text_that_is_only_removable_characters_pastes_nothing()
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:176: Public Sub Paste_into_a_blank_document_builds_a_complete_document()
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:190: Public Sub Paste_into_a_completely_empty_editor_also_builds_a_document()
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:198: Public Sub Paste_into_a_document_with_content_inserts_cleaned_text_only()
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:208: Public Sub A_paste_with_nothing_to_clean_says_so_briefly()
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:214: Public Sub A_half_typed_document_is_never_replaced()
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:222: Public Sub Plain_paste_inserts_exactly_what_was_copied()
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:231: Public Sub Plain_paste_into_a_blank_document_still_only_inserts()
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:236: Public Sub Plain_paste_normalises_line_endings_and_drops_NUL()
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:243: Public Sub A_blank_voice_or_locale_is_a_caller_bug_when_a_document_must_be_built()
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:249: Public Sub Random_clipboard_garbage_always_gives_content_that_fits_inside_a_well_formed_document()
+tests\Omskep.Core.Tests\Documents\SsmlComposerTests.vb:11: Public Class SsmlComposerTests
+tests\Omskep.Core.Tests\Documents\SsmlComposerTests.vb:16: Public Sub A_voice_nested_inside_another_voice_is_rejected()
+tests\Omskep.Core.Tests\Documents\SsmlComposerTests.vb:30: Public Sub Sibling_voice_elements_are_not_nesting()
+tests\Omskep.Core.Tests\Documents\SsmlComposerTests.vb:44: Public Sub A_malformed_document_is_not_composed()
+tests\Omskep.Core.Tests\Documents\SsmlComposerTests.vb:52: Public Sub Null_and_empty_text_are_refused_not_exceptions()
+tests\Omskep.Core.Tests\Documents\SsmlComposerTests.vb:62: Public Sub A_run_of_whitespace_in_text_collapses_to_one_space()
+tests\Omskep.Core.Tests\Documents\SsmlComposerTests.vb:70: Public Sub A_composed_document_never_contains_a_raw_newline()
+tests\Omskep.Core.Tests\Documents\SsmlComposerTests.vb:78: Public Sub Whitespace_collapse_never_touches_an_attribute_value()
+tests\Omskep.Core.Tests\Documents\SsmlComposerTests.vb:88: Public Sub Hebrew_and_accented_text_survive_composition_unchanged()
+tests\Omskep.Core.Tests\Documents\SsmlComposerTests.vb:101: Public Sub A_locale_with_a_rate_preset_is_wrapped_in_prosody()
+tests\Omskep.Core.Tests\Documents\SsmlComposerTests.vb:113: Public Sub A_zero_percent_preset_still_wraps_with_an_explicit_sign()
+tests\Omskep.Core.Tests\Documents\SsmlComposerTests.vb:124: Public Sub A_locale_with_no_preset_is_left_unwrapped()
+tests\Omskep.Core.Tests\Documents\SsmlComposerTests.vb:135: Public Sub Nothing_or_an_empty_rate_dictionary_leaves_every_voice_unwrapped()
+tests\Omskep.Core.Tests\Documents\SsmlComposerTests.vb:147: Public Sub Each_voice_in_a_multi_voice_document_gets_its_own_locales_rate_independently()
+tests\Omskep.Core.Tests\Documents\SsmlComposerTests.vb:161: Public Sub An_unparseable_voice_name_is_simply_left_unwrapped()
+tests\Omskep.Core.Tests\Documents\TextSearchTests.vb:12: Public Class TextSearchTests
+tests\Omskep.Core.Tests\Documents\TextSearchTests.vb:18: Private Shared Function Apply(text As String, edits As IEnumerable(Of TextEdit)) As String
+tests\Omskep.Core.Tests\Documents\TextSearchTests.vb:29: Public Sub Literal_search_ignores_case_by_default_and_matches_accented_letters()
+tests\Omskep.Core.Tests\Documents\TextSearchTests.vb:37: Public Sub Match_case_is_respected()
+tests\Omskep.Core.Tests\Documents\TextSearchTests.vb:44: Public Sub Special_characters_are_literal_unless_regex_is_on()
+tests\Omskep.Core.Tests\Documents\TextSearchTests.vb:51: Public Sub Whole_word_does_not_match_inside_a_longer_word()
+tests\Omskep.Core.Tests\Documents\TextSearchTests.vb:59: Public Sub Searching_forward_starts_at_the_given_index_and_can_wrap()
+tests\Omskep.Core.Tests\Documents\TextSearchTests.vb:69: Public Sub Searching_backward_finds_the_match_before_the_index_and_can_wrap()
+tests\Omskep.Core.Tests\Documents\TextSearchTests.vb:79: Public Sub Multi_line_regex_can_find_a_header_and_page_number_block()
+tests\Omskep.Core.Tests\Documents\TextSearchTests.vb:86: Public Sub Nothing_found_is_not_an_error()
+tests\Omskep.Core.Tests\Documents\TextSearchTests.vb:93: Public Sub An_empty_pattern_and_a_bad_pattern_give_messages_not_exceptions()
+tests\Omskep.Core.Tests\Documents\TextSearchTests.vb:102: Public Sub A_runaway_pattern_is_stopped_with_a_message()
+tests\Omskep.Core.Tests\Documents\TextSearchTests.vb:110: Public Sub Matches_of_zero_length_are_ignored()
+tests\Omskep.Core.Tests\Documents\TextSearchTests.vb:120: Public Sub Replace_all_gives_edits_that_reproduce_the_new_text_last_first()
+tests\Omskep.Core.Tests\Documents\TextSearchTests.vb:130: Public Sub Replacing_with_nothing_deletes_the_matches()
+tests\Omskep.Core.Tests\Documents\TextSearchTests.vb:136: Public Sub One_regex_removes_every_header_and_page_number_block()
+tests\Omskep.Core.Tests\Documents\TextSearchTests.vb:146: Public Sub Regex_replacement_can_use_groups_and_line_break_escapes()
+tests\Omskep.Core.Tests\Documents\TextSearchTests.vb:154: Public Sub Literal_replacement_is_never_interpreted()
+tests\Omskep.Core.Tests\Documents\TextSearchTests.vb:159: Public Sub Whole_word_replace_all_leaves_longer_words_alone()
+tests\Omskep.Core.Tests\Documents\TextSearchTests.vb:166: Public Sub Replace_at_replaces_only_a_selection_that_is_exactly_a_match()
+tests\Omskep.Core.Tests\Documents\TextSearchTests.vb:177: Public Sub Hebrew_and_other_Unicode_text_is_searched_and_replaced_correctly()
+tests\Omskep.Core.Tests\Documents\TextSearchTests.vb:186: Public Sub Null_text_is_treated_as_empty()
+tests\Omskep.Core.Tests\Documents\TextSearchTests.vb:192: Public Sub Random_patterns_and_texts_never_throw_and_edits_always_match_the_new_text()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:14: Friend NotInheritable Class FakePdfReader
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:20: Public Sub New(pages As IReadOnlyList(Of String))
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:24: Public Sub New(failure As Exception)
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:28: Public Function ReadPages(pdfPath As String) As IReadOnlyList(Of String) Implements IPdfPageReader.ReadPages
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:35: Friend Module ImportTestHelpers
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:40: Public Sub AssertWellFormedDocument(document As String)
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:52: Public Function CountOf(value As String, find As String) As Integer
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:62: Public Function Importer(reader As IPdfPageReader) As DocumentImporter
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:68: Public Class DocumentComposerTests
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:71: Public Sub Compose_wraps_body_in_speak_and_voice()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:81: Public Sub Compose_output_is_well_formed_even_with_hostile_attribute_values()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:87: Public Sub Compose_with_empty_body_is_still_well_formed()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:92: Public Sub Compose_rejects_a_blank_locale_or_voice()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:102: Public Class ImportFlagFinderTests
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:105: Public Sub Wide_space_run_is_flagged_with_line_column_and_length()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:115: Public Sub One_or_two_spaces_are_not_flagged()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:120: Public Sub Line_end_hyphen_after_a_letter_is_flagged()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:129: Public Sub Hyphens_that_are_not_split_words_are_not_flagged()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:135: Public Sub Flag_lines_match_document_lines_including_the_scaffold()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:145: Public Sub Null_empty_and_huge_runs_do_not_throw()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:154: Public Sub Windows_line_endings_do_not_hide_a_line_end_hyphen()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:162: Public Class DocumentImporterTests
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:166: Private Shared Function Pages(ParamArray texts As String()) As IReadOnlyList(Of String)
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:170: Private Shared Function StudyPage(n As Integer) As String
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:178: Public Sub A_normal_pdf_becomes_a_well_formed_document()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:189: Public Sub Headers_and_page_numbers_are_never_silently_removed()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:196: Public Sub Pages_are_separated_by_one_blank_line_and_use_LF_only()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:203: Public Sub Wide_gaps_and_line_end_hyphens_are_flagged_per_page()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:216: Public Sub Sanitizer_counts_are_summed_over_all_pages_and_reported()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:229: Public Sub Pages_without_text_are_skipped_and_listed_by_number()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:242: Public Sub A_page_holding_only_decorative_or_control_characters_counts_as_empty()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:249: Public Sub A_null_page_from_the_reader_is_treated_as_empty()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:256: Public Sub Many_empty_pages_are_summarised_not_listed_in_full()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:270: Public Sub A_scanned_pdf_with_no_text_gives_a_clear_message_not_an_empty_document()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:279: Public Sub A_scan_whose_only_text_is_page_numbers_counts_as_no_text()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:286: Public Sub A_pdf_with_no_pages_gives_no_text_found()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:292: Public Sub A_password_protected_pdf_gives_a_clear_message()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:300: Public Sub Any_other_reader_failure_becomes_an_unreadable_result_not_an_exception()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:316: Public Sub A_blank_voice_or_locale_is_a_caller_bug_and_throws_before_reading()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:325: Public Sub Pasted_word_text_keeps_curly_quotes_and_escapes_a_literal_ampersand()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:336: Public Sub Empty_or_whitespace_paste_gives_no_text_found()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:348: Public Sub Importing_twice_with_the_same_importer_gives_identical_results()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:357: Public Sub A_forty_five_page_study_imports_quickly_and_stays_well_formed()
+tests\Omskep.Core.Tests\Import\TextSanitizerTests.vb:13: Public Class TextSanitizerTests
+tests\Omskep.Core.Tests\Import\TextSanitizerTests.vb:17: Private Shared Function Clean(raw As String) As String
+tests\Omskep.Core.Tests\Import\TextSanitizerTests.vb:24: Public Sub Unicode_punctuation_passes_through_unchanged()
+tests\Omskep.Core.Tests\Import\TextSanitizerTests.vb:32: Public Sub Decorative_private_use_glyphs_are_removed_and_counted()
+tests\Omskep.Core.Tests\Import\TextSanitizerTests.vb:43: Public Sub Title_page_ornament_line_becomes_an_empty_line_not_a_deleted_line()
+tests\Omskep.Core.Tests\Import\TextSanitizerTests.vb:49: Public Sub Supplementary_plane_private_use_is_removed()
+tests\Omskep.Core.Tests\Import\TextSanitizerTests.vb:57: Public Sub Wrong_direction_quote_before_standalone_n_is_fixed()
+tests\Omskep.Core.Tests\Import\TextSanitizerTests.vb:64: Public Sub Article_quote_is_fixed_at_start_of_text_and_after_a_line_break()
+tests\Omskep.Core.Tests\Import\TextSanitizerTests.vb:71: Public Sub Right_quote_form_before_n_is_normalised_too()
+tests\Omskep.Core.Tests\Import\TextSanitizerTests.vb:77: Public Sub Quote_before_a_longer_word_or_after_a_letter_is_left_alone()
+tests\Omskep.Core.Tests\Import\TextSanitizerTests.vb:86: Public Sub Article_quote_already_in_the_target_form_is_not_counted_as_a_fix()
+tests\Omskep.Core.Tests\Import\TextSanitizerTests.vb:94: Public Sub Hebrew_presentation_form_is_normalised_to_base_letter_plus_point()
+tests\Omskep.Core.Tests\Import\TextSanitizerTests.vb:104: Public Sub Letters_with_separate_diaeresis_are_composed()
+tests\Omskep.Core.Tests\Import\TextSanitizerTests.vb:110: Public Sub Only_ampersand_less_than_and_greater_than_are_escaped()
+tests\Omskep.Core.Tests\Import\TextSanitizerTests.vb:117: Public Sub Text_that_already_looks_like_an_entity_is_treated_as_plain_text()
+tests\Omskep.Core.Tests\Import\TextSanitizerTests.vb:124: Public Sub All_line_break_forms_become_LF()
+tests\Omskep.Core.Tests\Import\TextSanitizerTests.vb:130: Public Sub Trailing_spaces_and_tabs_are_trimmed_but_interior_runs_are_kept()
+tests\Omskep.Core.Tests\Import\TextSanitizerTests.vb:139: Public Sub Words_are_never_removed()
+tests\Omskep.Core.Tests\Import\TextSanitizerTests.vb:147: Public Sub Null_empty_and_whitespace_only_input_do_not_throw()
+tests\Omskep.Core.Tests\Import\TextSanitizerTests.vb:154: Public Sub Control_characters_are_removed_and_counted_but_tab_survives_inside_a_line()
+tests\Omskep.Core.Tests\Import\TextSanitizerTests.vb:162: Public Sub Lone_surrogates_are_removed_and_a_valid_pair_survives()
+tests\Omskep.Core.Tests\Import\TextSanitizerTests.vb:171: Public Sub Noncharacters_FFFE_and_FFFF_are_removed()
+tests\Omskep.Core.Tests\Import\TextSanitizerTests.vb:178: Public Sub Markup_like_garbage_is_neutralised()
+tests\Omskep.Core.Tests\Import\TextSanitizerTests.vb:186: Public Sub Random_garbage_always_produces_well_formed_xml_content()
+tests\Omskep.Core.Tests\Import\TextSanitizerTests.vb:211: Public Sub Sanitizing_twice_gives_identical_results_and_keeps_no_state()
+tests\Omskep.Core.Tests\Import\TextSanitizerTests.vb:221: Public Sub A_million_characters_sanitize_in_reasonable_time()
+tests\Omskep.Core.Tests\Import\TextSanitizerTests.vb:237: Private Shared Sub AssertWellFormed(body As String, context As String)
+tests\Omskep.Core.Tests\Secrets\KeyRulesTests.vb:7: Public Class KeyRulesTests
+tests\Omskep.Core.Tests\Secrets\KeyRulesTests.vb:10: Public Sub Problem_IsNothing_ForNormalKeys_AndPastedWhitespaceAtTheEnds()
+tests\Omskep.Core.Tests\Secrets\KeyRulesTests.vb:16: Public Sub Problem_ExplainsBlankAndSpacedKeys_WithoutEchoingThem()
+tests\Omskep.Core.Tests\Session\AppSessionTests.vb:16: Public Class AppSessionTests
+tests\Omskep.Core.Tests\Session\AppSessionTests.vb:24: Private NotInheritable Class Rig
+tests\Omskep.Core.Tests\Session\AppSessionTests.vb:27: Public ReadOnly Property Dir As Support.TempDir
+tests\Omskep.Core.Tests\Session\AppSessionTests.vb:28: Public ReadOnly Property Protector As New Support.FakeSecretProtector()
+tests\Omskep.Core.Tests\Session\AppSessionTests.vb:29: Public Property SettingsLocked As Boolean
+tests\Omskep.Core.Tests\Session\AppSessionTests.vb:30: Public ReadOnly Property Store As SettingsStore
+tests\Omskep.Core.Tests\Session\AppSessionTests.vb:31: Public ReadOnly Property KeyStore As FileSecretStore
+tests\Omskep.Core.Tests\Session\AppSessionTests.vb:32: Public ReadOnly Property CacheFile As VoiceCacheStore
+tests\Omskep.Core.Tests\Session\AppSessionTests.vb:33: Public Property Monitor As ConnectionMonitor
+tests\Omskep.Core.Tests\Session\AppSessionTests.vb:34: Public Property Client As Support.FakeSpeechClient
+tests\Omskep.Core.Tests\Session\AppSessionTests.vb:35: Public Property VoiceSvc As VoiceService
+tests\Omskep.Core.Tests\Session\AppSessionTests.vb:36: Public Property App As AppSession
+tests\Omskep.Core.Tests\Session\AppSessionTests.vb:38: Public Sub New(client As Support.FakeSpeechClient)
+tests\Omskep.Core.Tests\Session\AppSessionTests.vb:52: Public Sub Restart(client As Support.FakeSpeechClient)
+tests\Omskep.Core.Tests\Session\AppSessionTests.vb:59: Public Sub Dispose() Implements IDisposable.Dispose
+tests\Omskep.Core.Tests\Session\AppSessionTests.vb:64: Private Shared Function Always(result As VoiceListResult) As Support.FakeSpeechClient
+tests\Omskep.Core.Tests\Session\AppSessionTests.vb:69: Private Shared Function KeyedClient(Optional voices As Integer = 5) As Support.FakeSpeechClient
+tests\Omskep.Core.Tests\Session\AppSessionTests.vb:86: Private Shared Sub AssertLocked(app As AppSession, reason As AccessReason)
+tests\Omskep.Core.Tests\Session\AppSessionTests.vb:710: Public Sub Constructor_NullArguments_Throw()
+tests\Omskep.Core.Tests\Session\AppSessionTests.vb:719: Private Shared Sub Build(s As SettingsStore, k As ISecretStore, v As VoiceService, m As ConnectionMonitor)
+tests\Omskep.Core.Tests\Session\DocumentFormStateTests.vb:14: Public Class DocumentFormStateTests
+tests\Omskep.Core.Tests\Session\DocumentFormStateTests.vb:20: Private Shared Function TestPath(fileName As String) As String
+tests\Omskep.Core.Tests\Session\DocumentFormStateTests.vb:24: Private Shared Function State(access As AccessState, doc As DocumentModel, Optional count As Integer = 0) As DocumentFormState
+tests\Omskep.Core.Tests\Session\DocumentFormStateTests.vb:28: Private Shared Function WellFormedDirty() As DocumentModel
+tests\Omskep.Core.Tests\Session\DocumentFormStateTests.vb:35: Private Shared Function MalformedDirty() As DocumentModel
+tests\Omskep.Core.Tests\Session\DocumentFormStateTests.vb:45: Public Sub A_new_untouched_document_has_nothing_to_save_or_export()
+tests\Omskep.Core.Tests\Session\DocumentFormStateTests.vb:60: Public Sub Export_needs_both_access_and_a_well_formed_document()
+tests\Omskep.Core.Tests\Session\DocumentFormStateTests.vb:68: Public Sub A_malformed_document_blocks_export_and_names_the_line()
+tests\Omskep.Core.Tests\Session\DocumentFormStateTests.vb:76: Public Sub A_document_still_being_checked_blocks_export_but_keeps_the_last_result_on_screen()
+tests\Omskep.Core.Tests\Session\DocumentFormStateTests.vb:86: Public Sub An_edited_document_with_no_result_yet_says_checking()
+tests\Omskep.Core.Tests\Session\DocumentFormStateTests.vb:93: Public Sub When_access_is_the_blocker_the_document_gives_no_extra_reason()
+tests\Omskep.Core.Tests\Session\DocumentFormStateTests.vb:101: Public Sub Saving_is_allowed_for_a_malformed_document()
+tests\Omskep.Core.Tests\Session\DocumentFormStateTests.vb:106: Public Sub Saving_stays_possible_when_the_app_becomes_locked()
+tests\Omskep.Core.Tests\Session\DocumentFormStateTests.vb:115: Public Sub An_import_that_has_not_been_saved_can_be_saved()
+tests\Omskep.Core.Tests\Session\DocumentFormStateTests.vb:125: Public Sub A_clean_file_has_nothing_to_save_but_can_be_saved_as()
+tests\Omskep.Core.Tests\Session\DocumentFormStateTests.vb:135: Public Sub The_title_shows_a_star_for_unsaved_changes_and_loses_it_on_save()
+tests\Omskep.Core.Tests\Session\DocumentFormStateTests.vb:147: Public Sub The_count_is_shown_as_an_upper_bound_with_thousands_separators()
+tests\Omskep.Core.Tests\Session\DocumentFormStateTests.vb:156: Public Sub Null_arguments_are_rejected()
+tests\Omskep.Core.Tests\Session\DocumentFormStateTests.vb:161: Private Shared Sub Build(access As AccessState, doc As DocumentModel)
+tests\Omskep.Core.Tests\Session\FormStatesTests.vb:8: Public Class SettingsFormStateTests
+tests\Omskep.Core.Tests\Session\FormStatesTests.vb:10: Private Shared Function S(Optional keySaved As Boolean = False, Optional replacing As Boolean = False,
+tests\Omskep.Core.Tests\Session\FormStatesTests.vb:17: Public Sub NoKeySaved_ShowsKeyBox_AndNeedsATypedKeyToTest()
+tests\Omskep.Core.Tests\Session\FormStatesTests.vb:30: Public Sub InvalidRegion_DisablesTest_EvenWithAKey()
+tests\Omskep.Core.Tests\Session\FormStatesTests.vb:36: Public Sub KeySaved_ShowsSavedPanel_WithReplaceClearRefreshAndTest()
+tests\Omskep.Core.Tests\Session\FormStatesTests.vb:47: Public Sub Replacing_ShowsKeyBoxAgain_AndHidesReplaceAndClear()
+tests\Omskep.Core.Tests\Session\FormStatesTests.vb:57: Public Sub OwnRequestRunning_TestBecomesCancel_AndEverythingElseIsLocked()
+tests\Omskep.Core.Tests\Session\FormStatesTests.vb:69: Public Sub OwnRequestRunning_StaysCancellable_EvenIfInputsBecomeInvalid()
+tests\Omskep.Core.Tests\Session\FormStatesTests.vb:74: Public Sub OtherRequestRunning_DisablesEverything_AndOffersNoCancel()
+tests\Omskep.Core.Tests\Session\FormStatesTests.vb:84: Public Sub NothingRunning_NoProgress_InputsEnabled()
+tests\Omskep.Core.Tests\Session\FormStatesTests.vb:92: Public Sub KeyBox_AndSavedPanel_AreNeverBothShown_Nor_BothHidden()
+tests\Omskep.Core.Tests\Session\FormStatesTests.vb:104: Public Class MainFormStateTests
+tests\Omskep.Core.Tests\Session\FormStatesTests.vb:106: Private Shared Function Access(mode As AccessMode, reason As AccessReason, message As String) As AccessState
+tests\Omskep.Core.Tests\Session\FormStatesTests.vb:111: Public Sub Full_EnablesEverything_NoBanner_ReadyStatus()
+tests\Omskep.Core.Tests\Session\FormStatesTests.vb:121: Public Sub EditOnly_BlocksExportOnly_ShowsBannerWithMessage()
+tests\Omskep.Core.Tests\Session\FormStatesTests.vb:131: Public Sub Locked_DisablesEditAndExport_ShowsBanner()
+tests\Omskep.Core.Tests\Session\FormStatesTests.vb:140: Public Sub Retry_ShownOnlyWhenAllowed_AndDisabledWhileBusy()
+tests\Omskep.Core.Tests\Session\FormStatesTests.vb:149: Public Sub Busy_ShowsContactingAzure()
+tests\Omskep.Core.Tests\Session\FormStatesTests.vb:155: Public Sub SingularVoice_IsNotPluralised()
+tests\Omskep.Core.Tests\Session\FormStatesTests.vb:161: Public Sub NullAccess_Throws()
+tests\Omskep.Core.Tests\Session\FormStatesTests.vb:165: Private Shared Sub Build(a As AccessState)
+tests\Omskep.Core.Tests\Settings\WordWrapSettingTests.vb:14: Public Class WordWrapSettingTests
+tests\Omskep.Core.Tests\Settings\WordWrapSettingTests.vb:18: Public Sub Word_wrap_is_on_when_nothing_is_saved()
+tests\Omskep.Core.Tests\Settings\WordWrapSettingTests.vb:24: Public Sub Word_wrap_off_survives_a_save_and_a_reload()
+tests\Omskep.Core.Tests\Settings\WordWrapSettingTests.vb:32: Public Sub An_older_settings_file_without_the_field_defaults_to_on_and_keeps_its_other_values()
+tests\Omskep.Core.Tests\Settings\WordWrapSettingTests.vb:44: Public Sub Review_marks_and_DirectWrite_are_on_by_default_and_remember_being_turned_off()
+tests\Omskep.Core.Tests\Speech\AzureRegionTests.vb:7: Public Class AzureRegionTests
+tests\Omskep.Core.Tests\Speech\AzureRegionTests.vb:10: Public Sub Normalize_AcceptsPlainRegionIds_TrimmedAndLowercased()
+tests\Omskep.Core.Tests\Speech\AzureRegionTests.vb:17: Public Sub Normalize_RejectsAnythingThatCouldRedirectTheKey()
+tests\Omskep.Core.Tests\Speech\AzureRegionTests.vb:25: Public Sub Normalize_AcceptsMaximumLength()
+tests\Omskep.Core.Tests\Speech\AzureRegionTests.vb:30: Public Sub CommonRegions_AreAllValid_Unique_AndIncludeTheDefault()
+tests\Omskep.Core.Tests\Speech\AzureSpeechClientTests.vb:12: Public Class AzureSpeechClientTests
+tests\Omskep.Core.Tests\Speech\AzureSpeechClientTests.vb:18: Private Shared Function NewClient(handler As Support.FakeHttpMessageHandler, Optional timeoutMs As Integer = 0) As AzureSpeechClient
+tests\Omskep.Core.Tests\Speech\AzureSpeechClientTests.vb:28: Private Shared Function BigVoiceListJson() As String
+tests\Omskep.Core.Tests\Speech\AzureSpeechClientTests.vb:302: Public Sub Constructor_NullHttpClient_Throws()
+tests\Omskep.Core.Tests\Speech\AzureSpeechClientTests.vb:306: Private Shared Sub Build(http As HttpClient)
+tests\Omskep.Core.Tests\Speech\AzureSpeechClientTests.vb:311: Public Sub Factory_DisablesRedirects_AndLeavesTimeoutToTheClient()
+tests\Omskep.Core.Tests\Speech\VoiceListParserTests.vb:9: Public Class VoiceListParserTests
+tests\Omskep.Core.Tests\Speech\VoiceListParserTests.vb:11: Private Shared Function Bytes(json As String) As Byte()
+tests\Omskep.Core.Tests\Speech\VoiceListParserTests.vb:16: Public Sub Parse_MapsTheFieldsWeKeep_AndIgnoresTheRest()
+tests\Omskep.Core.Tests\Speech\VoiceListParserTests.vb:28: Public Sub Parse_PropertyNamesAreCaseInsensitive()
+tests\Omskep.Core.Tests\Speech\VoiceListParserTests.vb:35: Public Sub Parse_SortsByLocaleThenName()
+tests\Omskep.Core.Tests\Speech\VoiceListParserTests.vb:44: Public Sub Parse_SkipsJunkEntries_AndCollapsesDuplicates()
+tests\Omskep.Core.Tests\Speech\VoiceListParserTests.vb:52: Public Sub Parse_MissingDisplayName_FallsBackToShortName()
+tests\Omskep.Core.Tests\Speech\VoiceListParserTests.vb:58: Public Sub Parse_EmptyArray_IsEmptyNotAnError()
+tests\Omskep.Core.Tests\Speech\VoiceListParserTests.vb:63: Public Sub Parse_NotAnArray_Throws()
+tests\Omskep.Core.Tests\Speech\VoiceListParserTests.vb:76: Public Sub Parse_NullBytes_Throws()
+tests\Omskep.Core.Tests\Support\FakeHttpMessageHandler.vb:9: Public NotInheritable Class RecordedRequest
+tests\Omskep.Core.Tests\Support\FakeHttpMessageHandler.vb:10: Public ReadOnly Property Method As String
+tests\Omskep.Core.Tests\Support\FakeHttpMessageHandler.vb:11: Public ReadOnly Property Url As String
+tests\Omskep.Core.Tests\Support\FakeHttpMessageHandler.vb:12: Public ReadOnly Property KeyHeader As String
+tests\Omskep.Core.Tests\Support\FakeHttpMessageHandler.vb:13: Public ReadOnly Property UserAgent As String
+tests\Omskep.Core.Tests\Support\FakeHttpMessageHandler.vb:15: Public Sub New(method As String, url As String, keyHeader As String, userAgent As String)
+tests\Omskep.Core.Tests\Support\FakeHttpMessageHandler.vb:24: Public NotInheritable Class FakeHttpMessageHandler
+tests\Omskep.Core.Tests\Support\FakeHttpMessageHandler.vb:29: Public ReadOnly Property Requests As New List(Of RecordedRequest)()
+tests\Omskep.Core.Tests\Support\FakeHttpMessageHandler.vb:31: Public Sub New(responder As Func(Of HttpRequestMessage, CancellationToken, Task(Of HttpResponseMessage)))
+tests\Omskep.Core.Tests\Support\FakeHttpMessageHandler.vb:35: Protected Overrides Function SendAsync(request As HttpRequestMessage, cancellationToken As CancellationToken) As Task(Of HttpResponseMessage)
+tests\Omskep.Core.Tests\Support\FakeHttpMessageHandler.vb:43: Public Shared Function Responding(status As Integer, body As String) As FakeHttpMessageHandler
+tests\Omskep.Core.Tests\Support\FakeHttpMessageHandler.vb:47: Public Shared Function RespondingBytes(status As Integer, body As Byte()) As FakeHttpMessageHandler
+tests\Omskep.Core.Tests\Support\FakeHttpMessageHandler.vb:55: Public Shared Function RespondingWith(content As HttpContent, status As Integer) As FakeHttpMessageHandler
+tests\Omskep.Core.Tests\Support\FakeHttpMessageHandler.vb:63: Public Shared Function Throwing(exceptionFactory As Func(Of Exception)) As FakeHttpMessageHandler
+tests\Omskep.Core.Tests\Support\FakeHttpMessageHandler.vb:71: Public Shared Function Hanging() As FakeHttpMessageHandler
+tests\Omskep.Core.Tests\Support\FakeHttpMessageHandler.vb:82: Public NotInheritable Class FailingContent
+tests\Omskep.Core.Tests\Support\FakeHttpMessageHandler.vb:85: Protected Overrides Function SerializeToStreamAsync(stream As Stream, context As TransportContext) As Task
+tests\Omskep.Core.Tests\Support\FakeHttpMessageHandler.vb:89: Protected Overrides Function TryComputeLength(ByRef length As Long) As Boolean
+tests\Omskep.Core.Tests\Support\FakeSecretProtector.vb:10: Public NotInheritable Class FakeSecretProtector
+tests\Omskep.Core.Tests\Support\FakeSecretProtector.vb:15: Public Property FailProtectWith As Exception
+tests\Omskep.Core.Tests\Support\FakeSecretProtector.vb:16: Public Property FailUnprotectWith As Exception
+tests\Omskep.Core.Tests\Support\FakeSecretProtector.vb:18: Public Property UnprotectResultOverride As Byte()
+tests\Omskep.Core.Tests\Support\FakeSecretProtector.vb:20: Public Property LastPlaintext As Byte()
+tests\Omskep.Core.Tests\Support\FakeSecretProtector.vb:22: Public Function Protect(plain As Byte()) As Byte() Implements ISecretProtector.Protect
+tests\Omskep.Core.Tests\Support\FakeSecretProtector.vb:34: Public Function Unprotect(protectedBlob As Byte()) As Byte() Implements ISecretProtector.Unprotect
+tests\Omskep.Core.Tests\Support\FakeSpeechClient.vb:9: Public NotInheritable Class FakeSpeechClient
+tests\Omskep.Core.Tests\Support\FakeSpeechClient.vb:15: Public ReadOnly Property Calls As New List(Of String())()
+tests\Omskep.Core.Tests\Support\FakeSpeechClient.vb:16: Public ReadOnly Property SynthesisCalls As New List(Of String())()
+tests\Omskep.Core.Tests\Support\FakeSpeechClient.vb:18: Public Sub New(responder As Func(Of CancellationToken, Task(Of VoiceListResult)), Optional synthesisResponder As Func(Of String, String, String, CancellationToken, Task(Of SynthesisResult)) = Nothing)
+tests\Omskep.Core.Tests\Support\FakeSpeechClient.vb:24: Public Sub New(responder As Func(Of String, String, CancellationToken, Task(Of VoiceListResult)), Optional synthesisResponder As Func(Of String, String, String, CancellationToken, Task(Of SynthesisResult)) = Nothing)
+tests\Omskep.Core.Tests\Support\FakeSpeechClient.vb:29: Public Function GetVoicesAsync(region As String, key As String, cancellationToken As CancellationToken) As Task(Of VoiceListResult) Implements ISpeechClient.GetVoicesAsync
+tests\Omskep.Core.Tests\Support\FakeSpeechClient.vb:34: Public Function SynthesizeAsync(ssml As String, region As String, key As String, cancellationToken As CancellationToken) As Task(Of SynthesisResult) Implements ISpeechClient.SynthesizeAsync
+tests\Omskep.Core.Tests\Support\FakeSpeechClient.vb:44: Private Shared Function DefaultSynthesisResponder(ssml As String, region As String, key As String, cancellationToken As CancellationToken) As Task(Of SynthesisResult)
+tests\Omskep.Core.Tests\Support\FakeSpeechClient.vb:48: Public Shared Function Returning(result As VoiceListResult) As FakeSpeechClient
+tests\Omskep.Core.Tests\Support\FakeSpeechClient.vb:53: Public Shared Function Hanging() As FakeSpeechClient
+tests\Omskep.Core.Tests\Support\FakeSpeechClient.vb:62: Public Shared Function ReturningSynthesis(result As SynthesisResult) As FakeSpeechClient
+tests\Omskep.Core.Tests\Support\FakeSpeechClient.vb:69: Public Shared Function HangingSynthesis() As FakeSpeechClient
+tests\Omskep.Core.Tests\Support\FakeSpeechClient.vb:78: Public Shared Function Voices(count As Integer, Optional locale As String = "xx-XX") As List(Of VoiceInfo)
+tests\Omskep.Core.Tests\Support\FakeSpeechClient.vb:91: Public Shared Function Ok(count As Integer, Optional locale As String = "xx-XX") As VoiceListResult
+tests\Omskep.Core.Tests\Support\FakeSpeechClient.vb:95: Public Shared Function Fail(outcome As AzureOutcome, statusCode As Integer) As VoiceListResult
+tests\Omskep.Core.Tests\Support\FakeSpeechClient.vb:99: Public Shared Function OkSynthesis(audio As Byte()) As SynthesisResult
+tests\Omskep.Core.Tests\Support\FakeSpeechClient.vb:103: Public Shared Function FailSynthesis(outcome As AzureOutcome, statusCode As Integer, Optional retryAfter As TimeSpan? = Nothing) As SynthesisResult
+tests\Omskep.Core.Tests\Support\FileSecretStoreTests.vb:12: Public Class FileSecretStoreTests
+tests\Omskep.Core.Tests\Support\FileSecretStoreTests.vb:16: Private Shared Function NewSettings(folder As String) As SettingsStore
+tests\Omskep.Core.Tests\Support\FileSecretStoreTests.vb:20: Private Shared Sub Build(settings As SettingsStore, protector As ISecretProtector)
+tests\Omskep.Core.Tests\Support\FileSecretStoreTests.vb:24: Private Shared Function LockedSettings(folder As String) As SettingsStore
+tests\Omskep.Core.Tests\Support\FileSecretStoreTests.vb:35: Public Sub NoSettingsFile_IsAbsent()
+tests\Omskep.Core.Tests\Support\FileSecretStoreTests.vb:44: Public Sub SaveThenLoad_RoundTripsTheKey()
+tests\Omskep.Core.Tests\Support\FileSecretStoreTests.vb:55: Public Sub RoundTrip_LongKey_And_FreshStoreInstance_ModelsAnAppRestart()
+tests\Omskep.Core.Tests\Support\FileSecretStoreTests.vb:68: Public Sub SavedFile_NeverContainsThePlaintextKey()
+tests\Omskep.Core.Tests\Support\FileSecretStoreTests.vb:81: Public Sub Save_TrimsPastedWhitespace()
+tests\Omskep.Core.Tests\Support\FileSecretStoreTests.vb:90: Public Sub Save_Replace_KeepsOnlyTheNewKey()
+tests\Omskep.Core.Tests\Support\FileSecretStoreTests.vb:100: Public Sub SaveClearSave_Sequence_Works()
+tests\Omskep.Core.Tests\Support\FileSecretStoreTests.vb:114: Public Sub Clear_RemovesKey_ButKeepsOtherSettings()
+tests\Omskep.Core.Tests\Support\FileSecretStoreTests.vb:137: Public Sub Clear_WhenNothingSaved_IsSafe()
+tests\Omskep.Core.Tests\Support\FileSecretStoreTests.vb:146: Public Sub Save_KeepsRegionAndOtherSettings()
+tests\Omskep.Core.Tests\Support\FileSecretStoreTests.vb:159: Public Sub Save_BlankOrSpacedKey_Throws_KeepsExistingKey_AndNeverEchoesTheKey()
+tests\Omskep.Core.Tests\Support\FileSecretStoreTests.vb:182: Public Sub Save_WipesThePlaintextBuffer()
+tests\Omskep.Core.Tests\Support\FileSecretStoreTests.vb:195: Public Sub Save_WhenProtectorFails_Throws_AndKeepsExistingKey()
+tests\Omskep.Core.Tests\Support\FileSecretStoreTests.vb:212: Public Sub Load_ProtectorThrowsCryptographicException_IsBlobUnreadable()
+tests\Omskep.Core.Tests\Support\FileSecretStoreTests.vb:231: Public Sub Load_HandCorruptedBlob_ValidBase64ButGarbage_IsBlobUnreadable()
+tests\Omskep.Core.Tests\Support\FileSecretStoreTests.vb:242: Public Sub Load_BlobThatIsNotBase64_IsBlobUnreadable()
+tests\Omskep.Core.Tests\Support\FileSecretStoreTests.vb:251: Public Sub Load_DecryptsToEmptyOrInvalidUtf8_IsBlobUnreadable()
+tests\Omskep.Core.Tests\Support\FileSecretStoreTests.vb:267: Public Sub Load_EmptyBlobField_IsAbsent()
+tests\Omskep.Core.Tests\Support\FileSecretStoreTests.vb:276: Public Sub CorruptedBlob_ThenSavingANewKey_Recovers()
+tests\Omskep.Core.Tests\Support\FileSecretStoreTests.vb:290: Public Sub Load_DamagedSettingsFile_IsReported_ThenSavingWorks()
+tests\Omskep.Core.Tests\Support\FileSecretStoreTests.vb:303: Public Sub Load_SettingsFileLocked_IsSettingsUnreadable_NotAbsent()
+tests\Omskep.Core.Tests\Support\FileSecretStoreTests.vb:312: Public Sub Save_And_Clear_WhenSettingsFileLocked_Throw_AndOverwriteNothing()
+tests\Omskep.Core.Tests\Support\FileSecretStoreTests.vb:331: Public Sub Constructor_NullArguments_Throw()
+tests\Omskep.Core.Tests\Support\FileSecretStoreTests.vb:340: Public Sub InMemoryFake_FollowsTheSameContract()
+tests\Omskep.Core.Tests\Support\InMemorySecretStore.vb:7: Public NotInheritable Class InMemorySecretStore
+tests\Omskep.Core.Tests\Support\InMemorySecretStore.vb:13: Public Property ForcedLoadResult As SecretLoadResult
+tests\Omskep.Core.Tests\Support\InMemorySecretStore.vb:15: Public Function Load() As SecretLoadResult Implements ISecretStore.Load
+tests\Omskep.Core.Tests\Support\InMemorySecretStore.vb:21: Public Sub Save(key As String) Implements ISecretStore.Save
+tests\Omskep.Core.Tests\Support\InMemorySecretStore.vb:26: Public Sub Clear() Implements ISecretStore.Clear
+tests\Omskep.Core.Tests\Support\TempDir.vb:9: Public NotInheritable Class TempDir
+tests\Omskep.Core.Tests\Support\TempDir.vb:12: Public ReadOnly Property FolderPath As String
+tests\Omskep.Core.Tests\Support\TempDir.vb:14: Public Sub New()
+tests\Omskep.Core.Tests\Support\TempDir.vb:19: Public Sub Dispose() Implements IDisposable.Dispose
+tests\Omskep.Core.Tests\Voices\VoiceCatalogTests.vb:7: Public Class VoiceCatalogTests
+tests\Omskep.Core.Tests\Voices\VoiceCatalogTests.vb:9: Private Shared Function V(shortName As String, locale As String) As VoiceInfo
+tests\Omskep.Core.Tests\Voices\VoiceCatalogTests.vb:14: Public Sub Empty_HasNothing_AndLookupsAreSafe()
+tests\Omskep.Core.Tests\Voices\VoiceCatalogTests.vb:25: Public Sub GroupsByLocale_SortedLocalesAndSortedVoices()
+tests\Omskep.Core.Tests\Voices\VoiceCatalogTests.vb:45: Public Sub Lookups_IgnoreCase_AndTrim()
+tests\Omskep.Core.Tests\Voices\VoiceCatalogTests.vb:54: Public Sub UnknownLocaleOrVoice_GivesEmptyOrNothing()
+tests\Omskep.Core.Tests\Voices\VoiceCatalogTests.vb:62: Public Sub JunkEntries_AreSkipped_AndDuplicatesKeepTheFirst()
+tests\Omskep.Core.Tests\Voices\VoiceCatalogTests.vb:70: Public Sub ChangingTheSourceList_AfterConstruction_DoesNotChangeTheCatalog()
+tests\Omskep.Core.Tests\Voices\VoiceCatalogTests.vb:80: Public Sub NullList_Throws()
+tests\Omskep.Core.Tests\Voices\VoiceCatalogTests.vb:84: Private Shared Sub Build(voices As IEnumerable(Of VoiceInfo))
+tests\Omskep.Core.Tests\Voices\VoiceCatalogTests.vb:89: Public Sub RealisticSize_556Voices_153Locales_GroupsQuickly()
+tests\Omskep.Core.Tests\Voices\VoiceServiceTests.vb:11: Public Class VoiceServiceTests
+tests\Omskep.Core.Tests\Voices\VoiceServiceTests.vb:17: Private NotInheritable Class Rig
+tests\Omskep.Core.Tests\Voices\VoiceServiceTests.vb:20: Public ReadOnly Property Folder As Support.TempDir
+tests\Omskep.Core.Tests\Voices\VoiceServiceTests.vb:21: Public ReadOnly Property Cache As VoiceCacheStore
+tests\Omskep.Core.Tests\Voices\VoiceServiceTests.vb:22: Public ReadOnly Property Monitor As ConnectionMonitor
+tests\Omskep.Core.Tests\Voices\VoiceServiceTests.vb:23: Public ReadOnly Property Client As Support.FakeSpeechClient
+tests\Omskep.Core.Tests\Voices\VoiceServiceTests.vb:24: Public ReadOnly Property Service As VoiceService
+tests\Omskep.Core.Tests\Voices\VoiceServiceTests.vb:26: Public Sub New(client As Support.FakeSpeechClient)
+tests\Omskep.Core.Tests\Voices\VoiceServiceTests.vb:34: Public Sub Dispose() Implements IDisposable.Dispose
+tests\Omskep.Core.Tests\Voices\VoiceServiceTests.vb:39: Private Shared Function Seed(rig As Rig, region As String, count As Integer) As VoiceCache
+tests\Omskep.Core.Tests\Voices\VoiceServiceTests.vb:45: Private Shared Function StateNow(rig As Rig, key As KeyState, region As String) As AccessState
+tests\Omskep.Core.Tests\Voices\VoiceServiceTests.vb:52: Public Sub LoadCache_NoFile_IsMissing_AndCatalogEmpty()
+tests\Omskep.Core.Tests\Voices\VoiceServiceTests.vb:61: Public Sub LoadCache_ValidCacheForThisRegion_IsPresent_AndNothingIsFetched()
+tests\Omskep.Core.Tests\Voices\VoiceServiceTests.vb:72: Public Sub LoadCache_ForAnotherRegion_IsMissing_AndFileIsLeftAlone()
+tests\Omskep.Core.Tests\Voices\VoiceServiceTests.vb:82: Public Sub LoadCache_GarbageFile_IsMissing()
+tests\Omskep.Core.Tests\Voices\VoiceServiceTests.vb:90: Public Sub LoadCache_EmptyVoiceList_IsMissing()
+tests\Omskep.Core.Tests\Voices\VoiceServiceTests.vb:132: Public Sub Adopt_SetsCatalog_SavesCacheWithRegionAndTime_AndReportsOk()
+tests\Omskep.Core.Tests\Voices\VoiceServiceTests.vb:147: Public Sub Adopt_ThenFreshService_ModelsAnAppRestart_WithoutRefetching()
+tests\Omskep.Core.Tests\Voices\VoiceServiceTests.vb:160: Public Sub Adopt_ForAnotherRegion_MakesTheOldRegionMissing()
+tests\Omskep.Core.Tests\Voices\VoiceServiceTests.vb:169: Public Sub Adopt_WhenCacheCannotBeWritten_ReturnsFalse_ButVoicesStillWorkThisSession()
+tests\Omskep.Core.Tests\Voices\VoiceServiceTests.vb:183: Public Sub Adopt_RejectsAnythingThatIsNotASuccessfulNonEmptyList()
+tests\Omskep.Core.Tests\Voices\VoiceServiceTests.vb:411: Public Sub Constructor_NullArguments_Throw()
+tests\Omskep.Core.Tests\Voices\VoiceServiceTests.vb:421: Private Shared Sub Build(client As ISpeechClient, cache As VoiceCacheStore, monitor As ConnectionMonitor)

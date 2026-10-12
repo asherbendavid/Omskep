@@ -9,6 +9,11 @@ and Scintilla5.NET into use; their licenses were not re-read in phase 2, so
 re-check them against the exact pinned versions before the first release (see the
 list at the end). Re-check them whenever a version changes.
 
+Phase 3a introduced no new third-party packages. The synthesis engine, document
+composition and chunking use only `System.Net.Http` and `System.Xml.Linq`, both
+part of .NET (see Platform components below); Azure AI Speech is called directly
+over its REST endpoint, same position as already recorded under Services.
+
 ## Libraries used or planned
 
 | Component | Purpose | Introduced in | In use since | License | Source |
@@ -39,10 +44,14 @@ committed and is not part of the product. It used PdfPig only.
   referenced (NuGet reports NU1510 if one is added). Governed by the .NET
   runtime's MIT license. If Omskep is ever published self-contained, include
   the .NET runtime's license notices with the release.
-- **System.Text.Json**, **System.Text.RegularExpressions**, **System.Xml** and
-  the Unicode normalization in `System.String` (NFC) ship inside .NET and are
-  used for the recovery files, find and replace, the well-formedness check and
-  text sanitizing. Same license position as above.
+- **System.Text.Json**, **System.Text.RegularExpressions**, **System.Xml**,
+  **System.Xml.Linq** and the Unicode normalization in `System.String` (NFC)
+  ship inside .NET and are used for the recovery files, find and replace, the
+  well-formedness check, text sanitizing, and (from phase 3a) composing and
+  chunking documents for synthesis. Same license position as above.
+- **System.Net.Http** (`HttpClient`), used from phase 3a for the Azure Speech
+  REST calls (voice list fetch since phase 1, synthesis since phase 3a). Ships
+  inside .NET. Same license position as above.
 
 ## Standards and reference material
 

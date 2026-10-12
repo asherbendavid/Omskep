@@ -488,3 +488,4 @@ $RECYCLE.BIN/
 *.mp3
 secrets.json
 *.secrets.json
+/spike
