@@ -178,6 +178,10 @@ Namespace Documents
             Public Function ReadPages(pdfPath As String) As IReadOnlyList(Of String) Implements IPdfPageReader.ReadPages
                 Throw New NotSupportedException()
             End Function
+
+            Public Function ReadMetadata(pdfPath As String) As PdfDocumentMetadata Implements IPdfPageReader.ReadMetadata
+                Throw New NotSupportedException()
+            End Function
         End Class
 
         <TestMethod>

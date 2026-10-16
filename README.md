@@ -15,14 +15,15 @@ converter**: exporting audio, choosing a voice per language, the pronunciation
 tools and the SSML reference panel are built in later phases. The File, Export
 item is still a placeholder.
 
-Phase 3 (export) is split in two. **Phase 3a, the synthesis engine, is
-complete**: composing a document into the SSML actually sent to Azure,
-splitting it into chunks under Azure's duration limit, calling the Speech REST
-endpoint, and running the chunks through to one joined MP3 with retry and a
-crash-safe write, all live in `Omskep.Core` with unit tests and have been
-verified against the real Azure service. None of it is reachable from the
-application yet -- there is no Export dialog, no ID3 tags and no progress UI.
-That wiring, plus file naming and ID3 tagging, is phase 3b.
+**Phase 3 (export) is complete.** The synthesis engine (phase 3a) composes a
+document into the SSML actually sent to Azure, splits it into chunks under
+Azure's duration limit, and runs them through to one joined MP3 with retry and
+a crash-safe write. Phase 3b (this phase) made it reachable: **File > Export**
+opens a confirmation dialog showing the billable count and the resolved ID3
+fields, then a standard Save As dialog (defaulting to `<document name>
+Alpha.mp3`, never overwriting a different export), then export progress with
+Cancel, and a result screen that offers **Try Again** on a failure -- which
+resumes rather than re-synthesizing audio that already succeeded.
 
 ## What it will do
 
@@ -32,11 +33,10 @@ That wiring, plus file naming and ID3 tagging, is phase 3b.
 2. Let you remove page headers, footers and extraction artefacts, tag
    language changes, and choose a voice per language. *(Cleaning is done; tagging
    and voice choice come in phase 4.)*
-3. Show the billable character count before anything is sent to Azure. *(The
-   running count is done; the final count before export comes in phase 3.)*
-4. Export the document as one MP3 with ID3 tags, named so that first-pass
-   (`alphaN`) and Release Candidate (`RCN`) files can never overwrite each
-   other. *(Phase 3.)*
+3. Show the billable character count before anything is sent to Azure, both
+   while editing (the status bar) and again, finally, in the export
+   confirmation dialog. *(Done.)*
+4. Export the document as one MP3 with ID3 tags, defaulting to an Alpha-numbered filename, via **File > Export**. *(Done.)*
 5. Let you listen, note corrections by line number, fix pronunciations
    (respelling, `<sub alias>`, or `<phoneme>`), and export again. *(Phases 4 and 5.)*
 
@@ -88,7 +88,9 @@ running as you. Do not share the settings file or put it in source control.
 ### Starting a document
 
 - **File > New** (Ctrl+N): a blank document with the `<speak>` and `<voice>`
-  scaffolding, using your default voice. The caret waits on line 3.
+  scaffolding, using your default voice, preceded by an empty metadata block
+  (Title, Artist, Album, Track, Year, Copyright -- see "Document metadata"
+  below). The caret waits on the first body line.
 - **File > Open** (Ctrl+O) opens:
   - `.ssml` and `.xml` files exactly as they are;
   - `.pdf` study files, whose text is extracted and imported as a new, unsaved
@@ -164,6 +166,52 @@ The status bar also shows `up to N characters`: an upper bound on the characters
 Azure will bill for the document as written (everything except the `<speak>` and
 `<voice>` tags, a line break counting as one). The final count, including anything
 added at export, is shown before export in a later phase.
+
+### Document metadata
+
+Every document starts with a small block before `<speak>`:
+
+    <?omskep-meta
+    Title:
+    Artist:
+    Album:
+    Track:
+    Year:
+    Copyright:
+    ?>
+
+Fill in whichever fields matter to you by hand -- a blank or missing field is
+simply left out of the exported MP3's tags. Importing a study PDF prefills
+what it can (the PDF's own Title/Author where set, otherwise the study
+leader's `D_name (language).pdf` numbering for Title and Track, and the PDF's
+creation year for Year); Album and Copyright are always left for you to fill
+in. This block is never sent to Azure and never counted toward the billable
+character total. The full format -- including fields Omskep doesn't use yet,
+such as Composer or Publisher -- is documented in
+`docs/omskep-meta-spec.md`, written so another tool could read or write the
+same block without depending on Omskep at all.
+
+### Exporting audio
+
+**File > Export** opens a confirmation screen showing the billable character
+count and the ID3 tag values that will be written: Title, Artist, Album,
+Track, Year and Copyright come straight from the metadata block above.
+**Comment** and **Genre** are computed automatically (which voices were used,
+the speaking rate, a synthetic-speech disclosure, and the source filename for
+Comment; `Audiobook` for Genre) *unless* you've hand-typed a `Comment:` or
+`Genre:` line yourself, in which case your typed value is used instead, with
+no in-between choice -- the document is always the one source of truth. The
+Comment field has its own **Copy** button, since it's the one field most
+likely worth copying into the document by hand if you ever want to lock in a
+particular computed value (for example, before adding another language's
+voice, if you don't want the comment updated to mention it).
+
+Confirming opens a standard Save As dialog, defaulting to `<document name>
+Alpha.mp3` (bumping to `Alpha (2).mp3`, etc. if that name is already taken) --
+type anything else if you'd rather, nothing about export cares what you name
+it. Progress, then a result screen follow; a failed export offers **Try
+Again**, which resumes rather than resending audio that already synthesized
+successfully.
 
 ### Saving, autosave and recovery
 
@@ -262,15 +310,21 @@ not include or redistribute the Azure Speech SDK.
     (`Chunker`).
   - `Export`: the export engine (`ExportEngine`) -- sequential per-chunk
     synthesis with retry, a plausibility check on each response, byte-join,
-    and a crash-safe write via `AtomicFile`. Same-session resume only (see the
-    phase 3a handoff). File naming and ID3 tagging are phase 3b.
+    and a crash-safe write via `AtomicFile`, with content-checked resume (an
+    edited chunk is re-synthesized rather than reusing stale audio); the ID3
+    stamper (`Id3Stamper`, via the TagLibSharp2 library), the voices-used
+    scanner (`VoiceUsageScanner`), ID3 field resolution
+    (`ExportId3FieldsBuilder`), the export filename rule (`ExportFileNamer`),
+    and the one call (`ExportPreparation`) that ties all of it together for
+    the export dialog.
 - `src/Omskep.App`: WinForms application (`net10.0-windows`): the main window,
   Settings, the Find and Replace window, `Editor\SsmlEditor` (the wrapper around
   the Scintilla5.NET control), and the Windows DPAPI key protector
 - `tests/Omskep.Core.Tests`: MSTest unit tests for `Omskep.Core`
 - `tests/Omskep.App.Tests`: MSTest tests that need Windows
   (`net10.0-windows`), such as the DPAPI key protector
-- `docs`: phase handoff documents and test checklists
+- `docs`: phase handoff documents, test checklists, and the
+  `omskep-meta` file format specification
 
 ## Third-party software
 

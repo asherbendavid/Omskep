@@ -3,6 +3,7 @@ Option Explicit On
 Option Infer On
 
 Imports System.IO
+Imports System.Numerics
 Imports System.Text
 Imports System.Xml
 Imports Microsoft.VisualStudio.TestTools.UnitTesting
@@ -16,20 +17,27 @@ Namespace Import
 
         Private ReadOnly _pages As IReadOnlyList(Of String)
         Private ReadOnly _failure As Exception
-
-        Public Sub New(pages As IReadOnlyList(Of String))
-            _pages = pages
-        End Sub
-
-        Public Sub New(failure As Exception)
-            _failure = failure
-        End Sub
+        Private ReadOnly _metadata As PdfDocumentMetadata
 
         Public Function ReadPages(pdfPath As String) As IReadOnlyList(Of String) Implements IPdfPageReader.ReadPages
             If _failure IsNot Nothing Then Throw _failure
             Return _pages
         End Function
 
+        Public Sub New(pages As IReadOnlyList(Of String), Optional metadata As PdfDocumentMetadata = Nothing)
+            _pages = pages
+            _metadata = If(metadata, PdfDocumentMetadata.Empty)
+        End Sub
+
+        Public Sub New(failure As Exception)
+            _failure = failure
+            _metadata = PdfDocumentMetadata.Empty
+        End Sub
+
+        Public Function ReadMetadata(pdfPath As String) As PdfDocumentMetadata Implements IPdfPageReader.ReadMetadata
+            If _failure IsNot Nothing Then Throw _failure
+            Return _metadata
+        End Function
     End Class
 
     Friend Module ImportTestHelpers
@@ -69,11 +77,19 @@ Namespace Import
 
         <TestMethod>
         Public Sub Compose_wraps_body_in_speak_and_voice()
-            Dim expected As String = "<speak version=""1.0"" xmlns=""http://www.w3.org/2001/10/synthesis"" xml:lang=""af-ZA"">" & LF &
-                                     "<voice name=""af-ZA-WillemNeural"">" & LF &
-                                     "Hallo" & LF &
-                                     "</voice>" & LF &
-                                     "</speak>" & LF
+            Dim expected As String = "<?omskep-meta" & LF &
+                             "Title:" & LF &
+                             "Artist:" & LF &
+                             "Album:" & LF &
+                             "Track:" & LF &
+                             "Year:" & LF &
+                             "Copyright:" & LF &
+                             "?>" & LF &
+                             "<speak version=""1.0"" xmlns=""http://www.w3.org/2001/10/synthesis"" xml:lang=""af-ZA"">" & LF &
+                             "<voice name=""af-ZA-WillemNeural"">" & LF &
+                             "Hallo" & LF &
+                             "</voice>" & LF &
+                             "</speak>" & LF
             Assert.AreEqual(expected, DocumentComposer.Compose("Hallo", Locale, Voice))
         End Sub
 
@@ -136,8 +152,8 @@ Namespace Import
             Dim document As String = DocumentComposer.Compose("a" & LF & "b   c", Locale, Voice)
             Dim flags As IReadOnlyList(Of ImportFlag) = ImportFlagFinder.Find(document)
             Assert.HasCount(1, flags)
-            ' line 1 speak, 2 voice, 3 "a", 4 "b   c"
-            Assert.AreEqual(4, flags(0).Line)
+            ' lines 1-8 omskep-meta, 9 speak, 10 voice, 11 "a", 12 "b   c"
+            Assert.AreEqual(12, flags(0).Line)
             Assert.AreEqual(2, flags(0).Column)
         End Sub
 
@@ -182,7 +198,8 @@ Namespace Import
             Assert.AreEqual(3, result.PageCount)
             Assert.IsEmpty(result.EmptyPages)
             AssertWellFormedDocument(result.Document)
-            Assert.StartsWith("<speak version=""1.0""", result.Document)
+            Assert.StartsWith("<?omskep-meta", result.Document)
+            Assert.Contains("<speak version=""1.0""", result.Document)
         End Sub
 
         <TestMethod>
@@ -370,6 +387,46 @@ Namespace Import
             Assert.AreEqual(45 * 30, result.Sanitation.FixedArticleQuotes)
             AssertWellFormedDocument(result.Document)
             Assert.IsLessThan(3000L, watch.ElapsedMilliseconds)
+        End Sub
+
+        <TestMethod>
+        Public Sub Pdf_title_and_author_metadata_seed_title_and_artist_alongside_filename_derived_track_and_year()
+            Dim meta As New PdfDocumentMetadata("A Real Title", "J. Smith", "D:20260115120000+02'00'", Nothing)
+            Dim result As ImportResult = Importer(New FakePdfReader(Pages(StudyPage(1)), meta)).ImportPdf("4_whatever (English).pdf", Locale, Voice)
+            Assert.Contains("Title: A Real Title", result.Document)
+            Assert.Contains("Artist: J. Smith", result.Document)
+            Assert.Contains("Year: 2026", result.Document)
+            Assert.Contains("Track: 4", result.Document)
+        End Sub
+
+        <TestMethod>
+        Public Sub Missing_pdf_title_falls_back_to_the_filenames_numbered_pattern()
+            Dim result As ImportResult = Importer(New FakePdfReader(Pages(StudyPage(1)), PdfDocumentMetadata.Empty)).ImportPdf("4_Die Heelal (English).pdf", Locale, Voice)
+            Assert.Contains("Title: Die Heelal (English)", result.Document)
+            Assert.Contains("Track: 4", result.Document)
+            Assert.Contains("Artist:" & LF, result.Document)
+        End Sub
+
+        <TestMethod>
+        Public Sub A_filename_that_does_not_match_the_numbered_pattern_falls_back_to_the_whole_name_with_no_track()
+            Dim result As ImportResult = Importer(New FakePdfReader(Pages(StudyPage(1)), PdfDocumentMetadata.Empty)).ImportPdf("some study.pdf", Locale, Voice)
+            Assert.Contains("Title: some study", result.Document)
+            Assert.Contains("Track:" & LF, result.Document)
+        End Sub
+
+        <TestMethod>
+        Public Sub Modification_date_is_used_when_creation_date_is_missing()
+            Dim meta As New PdfDocumentMetadata(Nothing, Nothing, Nothing, "D:20250630")
+            Dim result As ImportResult = Importer(New FakePdfReader(Pages(StudyPage(1)), meta)).ImportPdf("x.pdf", Locale, Voice)
+            Assert.Contains("Year: 2025", result.Document)
+        End Sub
+
+        <TestMethod>
+        Public Sub Album_and_copyright_are_always_left_unset_on_import_regardless_of_pdf_metadata()
+            Dim meta As New PdfDocumentMetadata("T", "A", "D:20260101", Nothing)
+            Dim result As ImportResult = Importer(New FakePdfReader(Pages(StudyPage(1)), meta)).ImportPdf("1_x (English).pdf", Locale, Voice)
+            Assert.Contains("Album:" & LF, result.Document)
+            Assert.Contains("Copyright:" & LF, result.Document)
         End Sub
 
     End Class

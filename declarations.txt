@@ -166,12 +166,13 @@ src\Omskep.Core\Access\AccessTypes.vb:130: Public Sub New(lastOutcome As AzureOu
 src\Omskep.Core\Documents\BillableCharacterCounter.vb:17: Public NotInheritable Class BillableCharacterCounter
 src\Omskep.Core\Documents\BillableCharacterCounter.vb:19: Private Sub New()
 src\Omskep.Core\Documents\BillableCharacterCounter.vb:22: Public Shared Function CountUpperBound(ssml As String) As Integer
-src\Omskep.Core\Documents\BillableCharacterCounter.vb:60: Private Shared Function CountPlain(ssml As String, start As Integer, [stop] As Integer) As Integer
-src\Omskep.Core\Documents\BillableCharacterCounter.vb:71: Private Shared Function EndOfBlock(ssml As String, i As Integer) As Integer
-src\Omskep.Core\Documents\BillableCharacterCounter.vb:78: Private Shared Function AfterMarker(ssml As String, from As Integer, marker As String) As Integer
-src\Omskep.Core\Documents\BillableCharacterCounter.vb:86: Friend Shared Function EndOfFreeTag(ssml As String, i As Integer) As Integer
-src\Omskep.Core\Documents\BillableCharacterCounter.vb:116: Private Shared Function NameLengthAt(ssml As String, p As Integer) As Integer
-src\Omskep.Core\Documents\BillableCharacterCounter.vb:122: Private Shared Function StartsWithAt(ssml As String, index As Integer, value As String) As Boolean
+src\Omskep.Core\Documents\BillableCharacterCounter.vb:71: Private Shared Function CountPlain(ssml As String, start As Integer, [stop] As Integer) As Integer
+src\Omskep.Core\Documents\BillableCharacterCounter.vb:82: Private Shared Function EndOfBlock(ssml As String, i As Integer) As Integer
+src\Omskep.Core\Documents\BillableCharacterCounter.vb:89: Private Shared Function AfterMarker(ssml As String, from As Integer, marker As String) As Integer
+src\Omskep.Core\Documents\BillableCharacterCounter.vb:97: Friend Shared Function EndOfFreeTag(ssml As String, i As Integer) As Integer
+src\Omskep.Core\Documents\BillableCharacterCounter.vb:130: Friend Shared Function EndOfMetaBlock(ssml As String, i As Integer) As Integer
+src\Omskep.Core\Documents\BillableCharacterCounter.vb:139: Private Shared Function NameLengthAt(ssml As String, p As Integer) As Integer
+src\Omskep.Core\Documents\BillableCharacterCounter.vb:145: Private Shared Function StartsWithAt(ssml As String, index As Integer, value As String) As Boolean
 src\Omskep.Core\Documents\Chunker.vb:13: Public NotInheritable Class DocumentChunk
 src\Omskep.Core\Documents\Chunker.vb:14: Public ReadOnly Property Ssml As String
 src\Omskep.Core\Documents\Chunker.vb:15: Public ReadOnly Property EstimatedSeconds As Double
@@ -243,15 +244,15 @@ src\Omskep.Core\Documents\DocumentModel.vb:104: Public Function CheckCompleted(f
 src\Omskep.Core\Documents\DocumentModel.vb:112: Private Sub StartContent(path As String, save As SaveState)
 src\Omskep.Core\Documents\DocumentModel.vb:120: Private Shared Sub RequirePath(path As String)
 src\Omskep.Core\Documents\DocumentScaffold.vb:8: Public NotInheritable Class DocumentScaffold
-src\Omskep.Core\Documents\DocumentScaffold.vb:13: Private Sub New()
-src\Omskep.Core\Documents\DocumentScaffold.vb:20: Public Shared Function IsBlank(documentText As String) As Boolean
-src\Omskep.Core\Documents\DocumentScaffold.vb:41: Public NotInheritable Class ScaffoldChoice
-src\Omskep.Core\Documents\DocumentScaffold.vb:43: Public ReadOnly Property Locale As String
-src\Omskep.Core\Documents\DocumentScaffold.vb:44: Public ReadOnly Property VoiceShortName As String
-src\Omskep.Core\Documents\DocumentScaffold.vb:46: Public Sub New(locale As String, voiceShortName As String)
-src\Omskep.Core\Documents\DocumentScaffold.vb:54: Public NotInheritable Class ScaffoldDefaults
-src\Omskep.Core\Documents\DocumentScaffold.vb:59: Private Sub New()
-src\Omskep.Core\Documents\DocumentScaffold.vb:67: Public Shared Function Choose(defaultVoices As IReadOnlyDictionary(Of String, String)) As ScaffoldChoice
+src\Omskep.Core\Documents\DocumentScaffold.vb:14: Private Sub New()
+src\Omskep.Core\Documents\DocumentScaffold.vb:21: Public Shared Function IsBlank(documentText As String) As Boolean
+src\Omskep.Core\Documents\DocumentScaffold.vb:47: Public NotInheritable Class ScaffoldChoice
+src\Omskep.Core\Documents\DocumentScaffold.vb:49: Public ReadOnly Property Locale As String
+src\Omskep.Core\Documents\DocumentScaffold.vb:50: Public ReadOnly Property VoiceShortName As String
+src\Omskep.Core\Documents\DocumentScaffold.vb:52: Public Sub New(locale As String, voiceShortName As String)
+src\Omskep.Core\Documents\DocumentScaffold.vb:60: Public NotInheritable Class ScaffoldDefaults
+src\Omskep.Core\Documents\DocumentScaffold.vb:65: Private Sub New()
+src\Omskep.Core\Documents\DocumentScaffold.vb:73: Public Shared Function Choose(defaultVoices As IReadOnlyDictionary(Of String, String)) As ScaffoldChoice
 src\Omskep.Core\Documents\FileKinds.vb:8: Public Enum FileKind
 src\Omskep.Core\Documents\FileKinds.vb:18: Public NotInheritable Class FileKinds
 src\Omskep.Core\Documents\FileKinds.vb:20: Private Sub New()
@@ -273,6 +274,11 @@ src\Omskep.Core\Documents\HebrewOrder.vb:67: Private Sub New()
 src\Omskep.Core\Documents\HebrewOrder.vb:73: Public Shared Function ReverseRuns(text As String, skipRunsThatLookCorrect As Boolean) As HebrewReverseResult
 src\Omskep.Core\Documents\HebrewOrder.vb:101: Friend Shared Function LooksCorrect(run As String) As Boolean
 src\Omskep.Core\Documents\HebrewOrder.vb:120: Private Shared Function IsFinalForm(letter As Char) As Boolean
+src\Omskep.Core\Documents\OmskepMetaFields.vb:17: Public NotInheritable Class OmskepMetaFields
+src\Omskep.Core\Documents\OmskepMetaFields.vb:21: Private Sub New(values As IReadOnlyDictionary(Of String, String))
+src\Omskep.Core\Documents\OmskepMetaFields.vb:25: Public Shared ReadOnly Property Empty As OmskepMetaFields = New OmskepMetaFields(New Dictionary(Of String, String)())
+src\Omskep.Core\Documents\OmskepMetaFields.vb:30: Public Function Value(fieldName As String) As String
+src\Omskep.Core\Documents\OmskepMetaFields.vb:50: Public Shared Function Parse(xmlText As String) As OmskepMetaFields
 src\Omskep.Core\Documents\RecoveryStore.vb:14: Public NotInheritable Class RecoveryItem
 src\Omskep.Core\Documents\RecoveryStore.vb:16: Public ReadOnly Property FilePath As String
 src\Omskep.Core\Documents\RecoveryStore.vb:17: Public ReadOnly Property Text As String
@@ -305,14 +311,14 @@ src\Omskep.Core\Documents\SsmlComposer.vb:20: Public ReadOnly Property FailureRe
 src\Omskep.Core\Documents\SsmlComposer.vb:22: Private Sub New(isSuccess As Boolean, ssml As String, failureReason As String)
 src\Omskep.Core\Documents\SsmlComposer.vb:28: Friend Shared Function Success(ssml As String) As CompositionResult
 src\Omskep.Core\Documents\SsmlComposer.vb:32: Friend Shared Function Failure(reason As String) As CompositionResult
-src\Omskep.Core\Documents\SsmlComposer.vb:58: Public NotInheritable Class SsmlComposer
-src\Omskep.Core\Documents\SsmlComposer.vb:60: Private Sub New()
-src\Omskep.Core\Documents\SsmlComposer.vb:63: Public Shared Function Compose(documentText As String, speakingRatePercent As IReadOnlyDictionary(Of String, Integer)) As CompositionResult
-src\Omskep.Core\Documents\SsmlComposer.vb:101: Private Shared Function FindNestedVoice(doc As XDocument, ns As XNamespace) As String
-src\Omskep.Core\Documents\SsmlComposer.vb:114: Private Shared Sub CollapseWhitespace(doc As XDocument)
-src\Omskep.Core\Documents\SsmlComposer.vb:121: Private Shared Sub ApplyProsodyRates(doc As XDocument, ns As XNamespace, speakingRatePercent As IReadOnlyDictionary(Of String, Integer))
-src\Omskep.Core\Documents\SsmlComposer.vb:144: Private Shared Function LocaleOf(voiceName As String) As String
-src\Omskep.Core\Documents\SsmlComposer.vb:151: Private Shared Function FormatRate(percent As Integer) As String
+src\Omskep.Core\Documents\SsmlComposer.vb:61: Public NotInheritable Class SsmlComposer
+src\Omskep.Core\Documents\SsmlComposer.vb:63: Private Sub New()
+src\Omskep.Core\Documents\SsmlComposer.vb:66: Public Shared Function Compose(documentText As String, speakingRatePercent As IReadOnlyDictionary(Of String, Integer)) As CompositionResult
+src\Omskep.Core\Documents\SsmlComposer.vb:117: Private Shared Function FindNestedVoice(doc As XDocument, ns As XNamespace) As String
+src\Omskep.Core\Documents\SsmlComposer.vb:130: Private Shared Sub CollapseWhitespace(doc As XDocument)
+src\Omskep.Core\Documents\SsmlComposer.vb:137: Private Shared Sub ApplyProsodyRates(doc As XDocument, ns As XNamespace, speakingRatePercent As IReadOnlyDictionary(Of String, Integer))
+src\Omskep.Core\Documents\SsmlComposer.vb:160: Private Shared Function LocaleOf(voiceName As String) As String
+src\Omskep.Core\Documents\SsmlComposer.vb:167: Private Shared Function FormatRate(percent As Integer) As String
 src\Omskep.Core\Documents\TextSearch.vb:10: Public NotInheritable Class SearchOptions
 src\Omskep.Core\Documents\TextSearch.vb:12: Public ReadOnly Property MatchCase As Boolean
 src\Omskep.Core\Documents\TextSearch.vb:13: Public ReadOnly Property WholeWord As Boolean
@@ -361,78 +367,115 @@ src\Omskep.Core\Documents\WellFormednessChecker.vb:89: Private Sub New()
 src\Omskep.Core\Documents\WellFormednessChecker.vb:92: Public Shared Function Check(documentText As String) As CheckResult
 src\Omskep.Core\Documents\WellFormednessChecker.vb:127: Private Shared Function Explain(documentText As String, ex As XmlException, openElements As Stack(Of OpenElement)) As CheckResult
 src\Omskep.Core\Documents\WellFormednessChecker.vb:148: Private Shared Function OffsetOf(text As String, line As Integer, column As Integer) As Integer
-src\Omskep.Core\Export\ExportEngine.vb:16: Public Enum ChunkExportStatus
-src\Omskep.Core\Export\ExportEngine.vb:23: Public Enum ChunkLiveState
-src\Omskep.Core\Export\ExportEngine.vb:29: Public NotInheritable Class ChunkExportOutcome
-src\Omskep.Core\Export\ExportEngine.vb:30: Public ReadOnly Property Status As ChunkExportStatus
-src\Omskep.Core\Export\ExportEngine.vb:31: Public ReadOnly Property Audio As Byte()
-src\Omskep.Core\Export\ExportEngine.vb:32: Public ReadOnly Property RetriesUsed As Integer
-src\Omskep.Core\Export\ExportEngine.vb:34: Public ReadOnly Property PossiblyBilledTwice As Boolean
-src\Omskep.Core\Export\ExportEngine.vb:36: Public ReadOnly Property FailureReason As String
-src\Omskep.Core\Export\ExportEngine.vb:38: Private Sub New(status As ChunkExportStatus, audio As Byte(), retriesUsed As Integer, possiblyBilledTwice As Boolean, failureReason As String)
-src\Omskep.Core\Export\ExportEngine.vb:46: Friend Shared Function Pending() As ChunkExportOutcome
-src\Omskep.Core\Export\ExportEngine.vb:50: Friend Shared Function Done(audio As Byte(), retriesUsed As Integer, possiblyBilledTwice As Boolean) As ChunkExportOutcome
-src\Omskep.Core\Export\ExportEngine.vb:54: Friend Shared Function Failed(retriesUsed As Integer, possiblyBilledTwice As Boolean, reason As String) As ChunkExportOutcome
-src\Omskep.Core\Export\ExportEngine.vb:59: Public Enum ExportStatus
-src\Omskep.Core\Export\ExportEngine.vb:68: Public NotInheritable Class ExportResult
-src\Omskep.Core\Export\ExportEngine.vb:69: Public ReadOnly Property Status As ExportStatus
-src\Omskep.Core\Export\ExportEngine.vb:70: Public ReadOnly Property Chunks As IReadOnlyList(Of ChunkExportOutcome)
-src\Omskep.Core\Export\ExportEngine.vb:72: Public ReadOnly Property OutputPath As String
-src\Omskep.Core\Export\ExportEngine.vb:73: Public ReadOnly Property Message As String
-src\Omskep.Core\Export\ExportEngine.vb:75: Private Sub New(status As ExportStatus, chunks As IReadOnlyList(Of ChunkExportOutcome), outputPath As String, message As String)
-src\Omskep.Core\Export\ExportEngine.vb:82: Friend Shared Function Complete(chunks As IReadOnlyList(Of ChunkExportOutcome), outputPath As String, message As String) As ExportResult
-src\Omskep.Core\Export\ExportEngine.vb:86: Friend Shared Function Cancelled(chunks As IReadOnlyList(Of ChunkExportOutcome), message As String) As ExportResult
-src\Omskep.Core\Export\ExportEngine.vb:90: Friend Shared Function FailedResumable(chunks As IReadOnlyList(Of ChunkExportOutcome), message As String) As ExportResult
-src\Omskep.Core\Export\ExportEngine.vb:95: Public NotInheritable Class ExportProgress
-src\Omskep.Core\Export\ExportEngine.vb:96: Public ReadOnly Property ChunkIndex As Integer
-src\Omskep.Core\Export\ExportEngine.vb:97: Public ReadOnly Property TotalChunks As Integer
-src\Omskep.Core\Export\ExportEngine.vb:98: Public ReadOnly Property State As ChunkLiveState
-src\Omskep.Core\Export\ExportEngine.vb:100: Public ReadOnly Property RetryAttempt As Integer
-src\Omskep.Core\Export\ExportEngine.vb:102: Public Sub New(chunkIndex As Integer, totalChunks As Integer, state As ChunkLiveState, retryAttempt As Integer)
-src\Omskep.Core\Export\ExportEngine.vb:125: Public NotInheritable Class ExportEngine
-src\Omskep.Core\Export\ExportEngine.vb:139: Public Sub New(client As ISpeechClient, secrets As ISecretStore, session As AppSession, monitor As ConnectionMonitor)
-src\Omskep.Core\Export\ExportEngine.vb:248: Private Shared Function ImplausibilityReason(audio As Byte()) As String
-src\Omskep.Core\Export\ExportEngine.vb:254: Private Shared Function DescribeFailure(result As SynthesisResult) As String
-src\Omskep.Core\Export\ExportEngine.vb:267: Private Shared Sub PadWithPending(outcomes As List(Of ChunkExportOutcome), totalCount As Integer)
-src\Omskep.Core\Export\ExportEngine.vb:274: Private Shared Function JoinAudio(outcomes As IReadOnlyList(Of ChunkExportOutcome)) As Byte()
+src\Omskep.Core\Export\ExportEngine.vb:18: Public Enum ChunkExportStatus
+src\Omskep.Core\Export\ExportEngine.vb:25: Public Enum ChunkLiveState
+src\Omskep.Core\Export\ExportEngine.vb:31: Public NotInheritable Class ChunkExportOutcome
+src\Omskep.Core\Export\ExportEngine.vb:32: Public ReadOnly Property Status As ChunkExportStatus
+src\Omskep.Core\Export\ExportEngine.vb:33: Public ReadOnly Property Audio As Byte()
+src\Omskep.Core\Export\ExportEngine.vb:34: Public ReadOnly Property RetriesUsed As Integer
+src\Omskep.Core\Export\ExportEngine.vb:36: Public ReadOnly Property PossiblyBilledTwice As Boolean
+src\Omskep.Core\Export\ExportEngine.vb:38: Public ReadOnly Property FailureReason As String
+src\Omskep.Core\Export\ExportEngine.vb:41: Public ReadOnly Property ContentHash As String
+src\Omskep.Core\Export\ExportEngine.vb:43: Private Sub New(status As ChunkExportStatus, audio As Byte(), retriesUsed As Integer, possiblyBilledTwice As Boolean, failureReason As String, contentHash As String)
+src\Omskep.Core\Export\ExportEngine.vb:52: Friend Shared Function Pending() As ChunkExportOutcome
+src\Omskep.Core\Export\ExportEngine.vb:56: Friend Shared Function Done(audio As Byte(), retriesUsed As Integer, possiblyBilledTwice As Boolean, contentHash As String) As ChunkExportOutcome
+src\Omskep.Core\Export\ExportEngine.vb:60: Friend Shared Function Failed(retriesUsed As Integer, possiblyBilledTwice As Boolean, reason As String) As ChunkExportOutcome
+src\Omskep.Core\Export\ExportEngine.vb:65: Public Enum ExportStatus
+src\Omskep.Core\Export\ExportEngine.vb:78: Public NotInheritable Class ExportResult
+src\Omskep.Core\Export\ExportEngine.vb:79: Public ReadOnly Property Status As ExportStatus
+src\Omskep.Core\Export\ExportEngine.vb:80: Public ReadOnly Property Chunks As IReadOnlyList(Of ChunkExportOutcome)
+src\Omskep.Core\Export\ExportEngine.vb:82: Public ReadOnly Property OutputPath As String
+src\Omskep.Core\Export\ExportEngine.vb:83: Public ReadOnly Property Message As String
+src\Omskep.Core\Export\ExportEngine.vb:85: Private Sub New(status As ExportStatus, chunks As IReadOnlyList(Of ChunkExportOutcome), outputPath As String, message As String)
+src\Omskep.Core\Export\ExportEngine.vb:92: Friend Shared Function Complete(chunks As IReadOnlyList(Of ChunkExportOutcome), outputPath As String, message As String) As ExportResult
+src\Omskep.Core\Export\ExportEngine.vb:96: Friend Shared Function Cancelled(chunks As IReadOnlyList(Of ChunkExportOutcome), message As String) As ExportResult
+src\Omskep.Core\Export\ExportEngine.vb:100: Friend Shared Function FailedResumable(chunks As IReadOnlyList(Of ChunkExportOutcome), message As String) As ExportResult
+src\Omskep.Core\Export\ExportEngine.vb:104: Friend Shared Function FailedWriteOnly(chunks As IReadOnlyList(Of ChunkExportOutcome), message As String) As ExportResult
+src\Omskep.Core\Export\ExportEngine.vb:109: Public NotInheritable Class ExportProgress
+src\Omskep.Core\Export\ExportEngine.vb:110: Public ReadOnly Property ChunkIndex As Integer
+src\Omskep.Core\Export\ExportEngine.vb:111: Public ReadOnly Property TotalChunks As Integer
+src\Omskep.Core\Export\ExportEngine.vb:112: Public ReadOnly Property State As ChunkLiveState
+src\Omskep.Core\Export\ExportEngine.vb:114: Public ReadOnly Property RetryAttempt As Integer
+src\Omskep.Core\Export\ExportEngine.vb:116: Public Sub New(chunkIndex As Integer, totalChunks As Integer, state As ChunkLiveState, retryAttempt As Integer)
+src\Omskep.Core\Export\ExportEngine.vb:139: Public NotInheritable Class ExportEngine
+src\Omskep.Core\Export\ExportEngine.vb:154: Public Sub New(client As ISpeechClient, secrets As ISecretStore, session As AppSession, monitor As ConnectionMonitor,
+src\Omskep.Core\Export\ExportEngine.vb:266: Private Function HashOf(ssml As String) As String
+src\Omskep.Core\Export\ExportEngine.vb:273: Private Shared Function ImplausibilityReason(audio As Byte()) As String
+src\Omskep.Core\Export\ExportEngine.vb:279: Private Shared Function DescribeFailure(result As SynthesisResult) As String
+src\Omskep.Core\Export\ExportEngine.vb:292: Private Shared Sub PadWithPending(outcomes As List(Of ChunkExportOutcome), totalCount As Integer)
+src\Omskep.Core\Export\ExportEngine.vb:299: Private Shared Function JoinAudio(outcomes As IReadOnlyList(Of ChunkExportOutcome)) As Byte()
+src\Omskep.Core\Export\ExportFileNamer.vb:15: Public NotInheritable Class ExportFileNamer
+src\Omskep.Core\Export\ExportFileNamer.vb:21: Public Shared Function DefaultFileName(documentStem As String, outputFolder As String) As String
+src\Omskep.Core\Export\ExportFileNamer.vb:34: Private Shared Function SanitizeForFileName(stem As String) As String
+src\Omskep.Core\Export\ExportId3FieldsBuilder.vb:11: Public NotInheritable Class ExportId3FieldsBuilder
+src\Omskep.Core\Export\ExportId3FieldsBuilder.vb:12: Public Shared Function Build(savedDocumentText As String, chunks As IReadOnlyList(Of DocumentChunk),
+src\Omskep.Core\Export\Id3Stamper.vb:10: Public NotInheritable Class Id3Fields
+src\Omskep.Core\Export\Id3Stamper.vb:11: Public ReadOnly Property Title As String
+src\Omskep.Core\Export\Id3Stamper.vb:12: Public ReadOnly Property Artist As String
+src\Omskep.Core\Export\Id3Stamper.vb:13: Public ReadOnly Property Album As String
+src\Omskep.Core\Export\Id3Stamper.vb:14: Public ReadOnly Property Track As UInteger?
+src\Omskep.Core\Export\Id3Stamper.vb:15: Public ReadOnly Property Year As String
+src\Omskep.Core\Export\Id3Stamper.vb:16: Public ReadOnly Property Copyright As String
+src\Omskep.Core\Export\Id3Stamper.vb:17: Public ReadOnly Property Comment As String
+src\Omskep.Core\Export\Id3Stamper.vb:18: Public ReadOnly Property Genre As String
+src\Omskep.Core\Export\Id3Stamper.vb:20: Public Sub New(title As String, artist As String, album As String, track As UInteger?,
+src\Omskep.Core\Export\Id3Stamper.vb:27: Public NotInheritable Class Id3StampResult
+src\Omskep.Core\Export\Id3Stamper.vb:28: Public ReadOnly Property Succeeded As Boolean
+src\Omskep.Core\Export\Id3Stamper.vb:29: Public ReadOnly Property Message As String
+src\Omskep.Core\Export\Id3Stamper.vb:31: Private Sub New(succeeded As Boolean, message As String)
+src\Omskep.Core\Export\Id3Stamper.vb:36: Public Shared Function Ok() As Id3StampResult
+src\Omskep.Core\Export\Id3Stamper.vb:40: Public Shared Function Failed(message As String) As Id3StampResult
+src\Omskep.Core\Export\Id3Stamper.vb:46: Public NotInheritable Class Id3Stamper
+src\Omskep.Core\Export\Id3Stamper.vb:47: Public Shared Function Stamp(mp3Path As String, fields As Id3Fields) As Id3StampResult
+src\Omskep.Core\Export\VoiceUsageScanner.vb:11: Public NotInheritable Class VoiceUsageScanner
+src\Omskep.Core\Export\VoiceUsageScanner.vb:12: Public Shared Function FindDistinctVoiceNames(chunks As IReadOnlyList(Of DocumentChunk)) As IReadOnlyList(Of String)
 src\Omskep.Core\Import\DocumentComposer.vb:13: Public NotInheritable Class DocumentComposer
 src\Omskep.Core\Import\DocumentComposer.vb:17: Private Sub New()
-src\Omskep.Core\Import\DocumentComposer.vb:23: Public Shared Function Compose(body As String, locale As String, voiceShortName As String) As String
-src\Omskep.Core\Import\DocumentComposer.vb:36: Friend Shared Sub RequireScaffold(locale As String, voiceShortName As String)
-src\Omskep.Core\Import\DocumentComposer.vb:45: Private Shared Function EscapeAttribute(value As String) As String
-src\Omskep.Core\Import\DocumentImporter.vb:15: Public NotInheritable Class DocumentImporter
-src\Omskep.Core\Import\DocumentImporter.vb:25: Public Sub New(reader As IPdfPageReader)
-src\Omskep.Core\Import\DocumentImporter.vb:31: Public Function ImportPdf(pdfPath As String, locale As String, voiceShortName As String) As ImportResult
-src\Omskep.Core\Import\DocumentImporter.vb:88: Public Function ImportText(pastedText As String, locale As String, voiceShortName As String,
-src\Omskep.Core\Import\DocumentImporter.vb:111: Private Shared Function Failure(outcome As ImportOutcome, message As String) As ImportResult
-src\Omskep.Core\Import\DocumentImporter.vb:116: Private Shared Function CountNonWhitespace(value As String) As Integer
-src\Omskep.Core\Import\DocumentImporter.vb:124: Private Shared Function Plural(count As Integer, noun As String) As String
-src\Omskep.Core\Import\DocumentImporter.vb:130: Friend Shared Function CleanupSentence(sanitation As SanitizeResult) As String
-src\Omskep.Core\Import\DocumentImporter.vb:145: Private Shared Function Summarise(lead As String,
+src\Omskep.Core\Import\DocumentComposer.vb:29: Public Shared Function Compose(body As String, locale As String, voiceShortName As String,
+src\Omskep.Core\Import\DocumentComposer.vb:59: Private Shared Sub AppendMetaLine(sb As StringBuilder, key As String, value As String, lf As String)
+src\Omskep.Core\Import\DocumentComposer.vb:68: Friend Shared Sub RequireScaffold(locale As String, voiceShortName As String)
+src\Omskep.Core\Import\DocumentComposer.vb:77: Private Shared Function EscapeAttribute(value As String) As String
+src\Omskep.Core\Import\DocumentImporter.vb:19: Public NotInheritable Class DocumentImporter
+src\Omskep.Core\Import\DocumentImporter.vb:29: Public Sub New(reader As IPdfPageReader)
+src\Omskep.Core\Import\DocumentImporter.vb:35: Public Function ImportPdf(pdfPath As String, locale As String, voiceShortName As String) As ImportResult
+src\Omskep.Core\Import\DocumentImporter.vb:103: Public Function ImportText(pastedText As String, locale As String, voiceShortName As String,
+src\Omskep.Core\Import\DocumentImporter.vb:126: Private Shared Function Failure(outcome As ImportOutcome, message As String) As ImportResult
+src\Omskep.Core\Import\DocumentImporter.vb:131: Private Shared Function CountNonWhitespace(value As String) As Integer
+src\Omskep.Core\Import\DocumentImporter.vb:139: Private Shared Function Plural(count As Integer, noun As String) As String
+src\Omskep.Core\Import\DocumentImporter.vb:145: Friend Shared Function CleanupSentence(sanitation As SanitizeResult) As String
+src\Omskep.Core\Import\DocumentImporter.vb:160: Private Shared Function Summarise(lead As String,
+src\Omskep.Core\Import\DocumentImporter.vb:207: Private Shared Function ExtractPdfYear(pdfDate As String) As String
 src\Omskep.Core\Import\ImportFlagFinder.vb:14: Public NotInheritable Class ImportFlagFinder
 src\Omskep.Core\Import\ImportFlagFinder.vb:18: Private Sub New()
 src\Omskep.Core\Import\ImportFlagFinder.vb:22: Public Shared Function Find(documentText As String) As IReadOnlyList(Of ImportFlag)
 src\Omskep.Core\Import\ImportTypes.vb:8: Public Enum ImportOutcome
 src\Omskep.Core\Import\ImportTypes.vb:21: Public Class PdfPasswordRequiredException
 src\Omskep.Core\Import\ImportTypes.vb:24: Public Sub New()
-src\Omskep.Core\Import\ImportTypes.vb:34: Public Interface IPdfPageReader
-src\Omskep.Core\Import\ImportTypes.vb:38: Public Enum ImportFlagKind
-src\Omskep.Core\Import\ImportTypes.vb:47: Public NotInheritable Class ImportFlag
-src\Omskep.Core\Import\ImportTypes.vb:49: Public ReadOnly Property Kind As ImportFlagKind
-src\Omskep.Core\Import\ImportTypes.vb:50: Public ReadOnly Property Line As Integer
-src\Omskep.Core\Import\ImportTypes.vb:51: Public ReadOnly Property Column As Integer
-src\Omskep.Core\Import\ImportTypes.vb:52: Public ReadOnly Property Length As Integer
-src\Omskep.Core\Import\ImportTypes.vb:54: Public Sub New(kind As ImportFlagKind, line As Integer, column As Integer, length As Integer)
-src\Omskep.Core\Import\ImportTypes.vb:63: Public NotInheritable Class ImportResult
-src\Omskep.Core\Import\ImportTypes.vb:65: Public ReadOnly Property Outcome As ImportOutcome
-src\Omskep.Core\Import\ImportTypes.vb:68: Public ReadOnly Property Message As String
-src\Omskep.Core\Import\ImportTypes.vb:71: Public ReadOnly Property Document As String
-src\Omskep.Core\Import\ImportTypes.vb:74: Public ReadOnly Property PageCount As Integer
-src\Omskep.Core\Import\ImportTypes.vb:77: Public ReadOnly Property EmptyPages As IReadOnlyList(Of Integer)
-src\Omskep.Core\Import\ImportTypes.vb:80: Public ReadOnly Property Sanitation As SanitizeResult
-src\Omskep.Core\Import\ImportTypes.vb:83: Public ReadOnly Property Flags As IReadOnlyList(Of ImportFlag)
-src\Omskep.Core\Import\ImportTypes.vb:85: Public Sub New(outcome As ImportOutcome,
-src\Omskep.Core\Import\ImportTypes.vb:101: Public ReadOnly Property Succeeded As Boolean
+src\Omskep.Core\Import\ImportTypes.vb:35: Public Interface IPdfPageReader
+src\Omskep.Core\Import\ImportTypes.vb:43: Public NotInheritable Class PdfDocumentMetadata
+src\Omskep.Core\Import\ImportTypes.vb:44: Public ReadOnly Property Title As String
+src\Omskep.Core\Import\ImportTypes.vb:45: Public ReadOnly Property Author As String
+src\Omskep.Core\Import\ImportTypes.vb:46: Public ReadOnly Property CreationDate As String
+src\Omskep.Core\Import\ImportTypes.vb:47: Public ReadOnly Property ModificationDate As String
+src\Omskep.Core\Import\ImportTypes.vb:49: Public Sub New(title As String, author As String, creationDate As String, modificationDate As String)
+src\Omskep.Core\Import\ImportTypes.vb:56: Public Shared ReadOnly Property Empty As PdfDocumentMetadata = New PdfDocumentMetadata(Nothing, Nothing, Nothing, Nothing)
+src\Omskep.Core\Import\ImportTypes.vb:59: Public Enum ImportFlagKind
+src\Omskep.Core\Import\ImportTypes.vb:68: Public NotInheritable Class ImportFlag
+src\Omskep.Core\Import\ImportTypes.vb:70: Public ReadOnly Property Kind As ImportFlagKind
+src\Omskep.Core\Import\ImportTypes.vb:71: Public ReadOnly Property Line As Integer
+src\Omskep.Core\Import\ImportTypes.vb:72: Public ReadOnly Property Column As Integer
+src\Omskep.Core\Import\ImportTypes.vb:73: Public ReadOnly Property Length As Integer
+src\Omskep.Core\Import\ImportTypes.vb:75: Public Sub New(kind As ImportFlagKind, line As Integer, column As Integer, length As Integer)
+src\Omskep.Core\Import\ImportTypes.vb:84: Public NotInheritable Class ImportResult
+src\Omskep.Core\Import\ImportTypes.vb:86: Public ReadOnly Property Outcome As ImportOutcome
+src\Omskep.Core\Import\ImportTypes.vb:89: Public ReadOnly Property Message As String
+src\Omskep.Core\Import\ImportTypes.vb:92: Public ReadOnly Property Document As String
+src\Omskep.Core\Import\ImportTypes.vb:95: Public ReadOnly Property PageCount As Integer
+src\Omskep.Core\Import\ImportTypes.vb:98: Public ReadOnly Property EmptyPages As IReadOnlyList(Of Integer)
+src\Omskep.Core\Import\ImportTypes.vb:101: Public ReadOnly Property Sanitation As SanitizeResult
+src\Omskep.Core\Import\ImportTypes.vb:104: Public ReadOnly Property Flags As IReadOnlyList(Of ImportFlag)
+src\Omskep.Core\Import\ImportTypes.vb:106: Public Sub New(outcome As ImportOutcome,
+src\Omskep.Core\Import\ImportTypes.vb:122: Public ReadOnly Property Succeeded As Boolean
 src\Omskep.Core\Import\PasteHandler.vb:9: Public Enum PasteKind
 src\Omskep.Core\Import\PasteHandler.vb:19: Public NotInheritable Class PastePlan
 src\Omskep.Core\Import\PasteHandler.vb:21: Public ReadOnly Property Kind As PasteKind
@@ -442,11 +485,14 @@ src\Omskep.Core\Import\PasteHandler.vb:25: Public Sub New(kind As PasteKind, tex
 src\Omskep.Core\Import\PasteHandler.vb:37: Public NotInheritable Class PasteHandler
 src\Omskep.Core\Import\PasteHandler.vb:40: Private NotInheritable Class NoPdfReader
 src\Omskep.Core\Import\PasteHandler.vb:43: Public Function ReadPages(pdfPath As String) As IReadOnlyList(Of String) Implements IPdfPageReader.ReadPages
-src\Omskep.Core\Import\PasteHandler.vb:48: Private Sub New()
-src\Omskep.Core\Import\PasteHandler.vb:56: Public Shared Function Plan(currentDocument As String, clipboardText As String, locale As String,
+src\Omskep.Core\Import\PasteHandler.vb:47: Public Function ReadMetadata(pdfPath As String) As PdfDocumentMetadata Implements IPdfPageReader.ReadMetadata
+src\Omskep.Core\Import\PasteHandler.vb:52: Private Sub New()
+src\Omskep.Core\Import\PasteHandler.vb:60: Public Shared Function Plan(currentDocument As String, clipboardText As String, locale As String,
 src\Omskep.Core\Import\PdfPigPageReader.vb:15: Public NotInheritable Class PdfPigPageReader
 src\Omskep.Core\Import\PdfPigPageReader.vb:18: Public Function ReadPages(pdfPath As String) As IReadOnlyList(Of String) Implements IPdfPageReader.ReadPages
 src\Omskep.Core\Import\PdfPigPageReader.vb:33: Private Shared Function IsPasswordRequired(ex As Exception) As Boolean
+src\Omskep.Core\Import\PdfPigPageReader.vb:37: Private Function NullIfBlank(s As String) As String
+src\Omskep.Core\Import\PdfPigPageReader.vb:41: Public Function ReadMetadata(pdfPath As String) As PdfDocumentMetadata Implements IPdfPageReader.ReadMetadata
 src\Omskep.Core\Import\TextSanitizer.vb:14: Public NotInheritable Class SanitizeResult
 src\Omskep.Core\Import\TextSanitizer.vb:18: Public ReadOnly Property Body As String
 src\Omskep.Core\Import\TextSanitizer.vb:22: Public ReadOnly Property RemovedPrivateUse As IReadOnlyDictionary(Of Integer, Integer)
@@ -813,19 +859,21 @@ tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:325: Public Sub Characters_o
 tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:330: Public Sub Null_and_empty_count_zero()
 tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:336: Public Sub Random_garbage_never_throws_and_never_exceeds_the_length()
 tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:352: Public Sub The_largest_study_size_counts_instantly()
-tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:368: Public Class DocumentModelTests
-tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:371: Public Sub A_new_model_is_a_pristine_untitled_document()
-tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:382: Public Sub Editing_makes_it_dirty_and_unchecked_and_bumps_the_revision()
-tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:393: Public Sub Opening_a_file_is_clean_with_the_file_name_as_display_name()
-tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:402: Public Sub An_import_is_dirty_and_untitled()
-tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:412: Public Sub Saving_makes_it_clean_and_keeps_the_check_result_and_revision()
-tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:425: Public Sub A_check_result_for_old_text_is_ignored()
-tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:436: Public Sub A_check_result_after_new_or_open_for_the_previous_document_is_ignored()
-tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:449: Public Sub A_malformed_result_is_stored_and_does_not_make_the_document_unsaveable()
-tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:463: Public Sub The_last_result_is_kept_while_the_next_check_is_pending()
-tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:473: Public Sub Undoing_back_to_the_saved_content_makes_a_file_document_clean_again()
-tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:482: Public Sub Reaching_a_save_point_without_a_file_changes_nothing()
-tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:490: Public Sub Blank_paths_and_null_results_are_rejected()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:366: Public Sub The_omskep_meta_block_is_free_unlike_every_other_processing_instruction()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:371: Public Sub A_similarly_named_but_different_processing_instruction_is_not_mistaken_for_it()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:379: Public Class DocumentModelTests
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:382: Public Sub A_new_model_is_a_pristine_untitled_document()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:393: Public Sub Editing_makes_it_dirty_and_unchecked_and_bumps_the_revision()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:404: Public Sub Opening_a_file_is_clean_with_the_file_name_as_display_name()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:413: Public Sub An_import_is_dirty_and_untitled()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:423: Public Sub Saving_makes_it_clean_and_keeps_the_check_result_and_revision()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:436: Public Sub A_check_result_for_old_text_is_ignored()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:447: Public Sub A_check_result_after_new_or_open_for_the_previous_document_is_ignored()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:460: Public Sub A_malformed_result_is_stored_and_does_not_make_the_document_unsaveable()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:474: Public Sub The_last_result_is_kept_while_the_next_check_is_pending()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:484: Public Sub Undoing_back_to_the_saved_content_makes_a_file_document_clean_again()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:493: Public Sub Reaching_a_save_point_without_a_file_changes_nothing()
+tests\Omskep.Core.Tests\Documents\DocumentsTests.vb:501: Public Sub Blank_paths_and_null_results_are_rejected()
 tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:13: Public MustInherit Class ScratchFolderTests
 tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:17: Protected Function NewFolder() As String
 tests\Omskep.Core.Tests\Documents\FileAndRecoveryTests.vb:25: Public Sub RemoveScratchFolders()
@@ -884,8 +932,23 @@ tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:164: Public Sub N
 tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:173: Public Class ImportTextDescriptionTests
 tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:175: Private NotInheritable Class NoReader
 tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:178: Public Function ReadPages(pdfPath As String) As IReadOnlyList(Of String) Implements IPdfPageReader.ReadPages
-tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:184: Public Sub A_text_file_import_says_which_file_it_came_from()
-tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:190: Public Sub Pasted_text_still_says_pasted()
+tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:182: Public Function ReadMetadata(pdfPath As String) As PdfDocumentMetadata Implements IPdfPageReader.ReadMetadata
+tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:188: Public Sub A_text_file_import_says_which_file_it_came_from()
+tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:194: Public Sub Pasted_text_still_says_pasted()
+tests\Omskep.Core.Tests\Documents\OmskepMetaFieldsTests.vb:11: Public Class OmskepMetaFieldsTests
+tests\Omskep.Core.Tests\Documents\OmskepMetaFieldsTests.vb:14: Public Sub A_document_with_no_block_treats_every_field_as_null()
+tests\Omskep.Core.Tests\Documents\OmskepMetaFieldsTests.vb:21: Public Sub Empty_or_whitespace_input_treats_every_field_as_null()
+tests\Omskep.Core.Tests\Documents\OmskepMetaFieldsTests.vb:27: Public Sub Basic_fields_are_parsed_and_available_case_insensitively()
+tests\Omskep.Core.Tests\Documents\OmskepMetaFieldsTests.vb:44: Public Sub A_value_containing_a_colon_keeps_everything_after_the_first_one()
+tests\Omskep.Core.Tests\Documents\OmskepMetaFieldsTests.vb:50: Public Sub A_blank_value_and_an_absent_field_are_both_null()
+tests\Omskep.Core.Tests\Documents\OmskepMetaFieldsTests.vb:59: Public Sub A_line_with_no_colon_is_silently_ignored()
+tests\Omskep.Core.Tests\Documents\OmskepMetaFieldsTests.vb:66: Public Sub An_unrecognised_field_name_is_still_parsed_not_rejected()
+tests\Omskep.Core.Tests\Documents\OmskepMetaFieldsTests.vb:74: Public Sub The_first_occurrence_of_a_duplicated_key_wins_even_if_blank()
+tests\Omskep.Core.Tests\Documents\OmskepMetaFieldsTests.vb:83: Public Sub The_first_occurrence_wins_when_both_are_non_blank()
+tests\Omskep.Core.Tests\Documents\OmskepMetaFieldsTests.vb:92: Public Sub Only_a_single_leading_space_in_the_value_is_trimmed_not_all_leading_whitespace()
+tests\Omskep.Core.Tests\Documents\OmskepMetaFieldsTests.vb:99: Public Sub Trailing_whitespace_on_a_value_is_trimmed()
+tests\Omskep.Core.Tests\Documents\OmskepMetaFieldsTests.vb:105: Public Sub Windows_line_endings_in_the_block_are_handled_the_same_as_unix_ones()
+tests\Omskep.Core.Tests\Documents\OmskepMetaFieldsTests.vb:111: Public Sub A_field_name_is_never_null_or_empty_safe_to_query()
 tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:15: Public Class DocumentScaffoldTests
 tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:20: Public Sub A_new_scaffold_is_blank()
 tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:28: Public Sub Any_body_text_or_other_markup_makes_it_content()
@@ -908,15 +971,15 @@ tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:144: Private Shared S
 tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:159: Public Sub An_empty_or_blank_clipboard_pastes_nothing_in_both_modes()
 tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:167: Public Sub Text_that_is_only_removable_characters_pastes_nothing()
 tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:176: Public Sub Paste_into_a_blank_document_builds_a_complete_document()
-tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:190: Public Sub Paste_into_a_completely_empty_editor_also_builds_a_document()
-tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:198: Public Sub Paste_into_a_document_with_content_inserts_cleaned_text_only()
-tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:208: Public Sub A_paste_with_nothing_to_clean_says_so_briefly()
-tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:214: Public Sub A_half_typed_document_is_never_replaced()
-tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:222: Public Sub Plain_paste_inserts_exactly_what_was_copied()
-tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:231: Public Sub Plain_paste_into_a_blank_document_still_only_inserts()
-tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:236: Public Sub Plain_paste_normalises_line_endings_and_drops_NUL()
-tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:243: Public Sub A_blank_voice_or_locale_is_a_caller_bug_when_a_document_must_be_built()
-tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:249: Public Sub Random_clipboard_garbage_always_gives_content_that_fits_inside_a_well_formed_document()
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:191: Public Sub Paste_into_a_completely_empty_editor_also_builds_a_document()
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:199: Public Sub Paste_into_a_document_with_content_inserts_cleaned_text_only()
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:209: Public Sub A_paste_with_nothing_to_clean_says_so_briefly()
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:215: Public Sub A_half_typed_document_is_never_replaced()
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:223: Public Sub Plain_paste_inserts_exactly_what_was_copied()
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:232: Public Sub Plain_paste_into_a_blank_document_still_only_inserts()
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:237: Public Sub Plain_paste_normalises_line_endings_and_drops_NUL()
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:244: Public Sub A_blank_voice_or_locale_is_a_caller_bug_when_a_document_must_be_built()
+tests\Omskep.Core.Tests\Documents\PasteAndScaffoldTests.vb:250: Public Sub Random_clipboard_garbage_always_gives_content_that_fits_inside_a_well_formed_document()
 tests\Omskep.Core.Tests\Documents\SsmlComposerTests.vb:11: Public Class SsmlComposerTests
 tests\Omskep.Core.Tests\Documents\SsmlComposerTests.vb:16: Public Sub A_voice_nested_inside_another_voice_is_rejected()
 tests\Omskep.Core.Tests\Documents\SsmlComposerTests.vb:30: Public Sub Sibling_voice_elements_are_not_nesting()
@@ -932,6 +995,9 @@ tests\Omskep.Core.Tests\Documents\SsmlComposerTests.vb:124: Public Sub A_locale_
 tests\Omskep.Core.Tests\Documents\SsmlComposerTests.vb:135: Public Sub Nothing_or_an_empty_rate_dictionary_leaves_every_voice_unwrapped()
 tests\Omskep.Core.Tests\Documents\SsmlComposerTests.vb:147: Public Sub Each_voice_in_a_multi_voice_document_gets_its_own_locales_rate_independently()
 tests\Omskep.Core.Tests\Documents\SsmlComposerTests.vb:161: Public Sub An_unparseable_voice_name_is_simply_left_unwrapped()
+tests\Omskep.Core.Tests\Documents\SsmlComposerTests.vb:172: Public Sub An_omskep_meta_block_in_the_prolog_never_reaches_the_composed_output()
+tests\Omskep.Core.Tests\Documents\SsmlComposerTests.vb:183: Public Sub A_comment_before_the_root_element_never_reaches_the_composed_output()
+tests\Omskep.Core.Tests\Documents\SsmlComposerTests.vb:193: Public Sub A_document_with_no_prolog_at_all_still_composes_normally()
 tests\Omskep.Core.Tests\Documents\TextSearchTests.vb:12: Public Class TextSearchTests
 tests\Omskep.Core.Tests\Documents\TextSearchTests.vb:18: Private Shared Function Apply(text As String, edits As IEnumerable(Of TextEdit)) As String
 tests\Omskep.Core.Tests\Documents\TextSearchTests.vb:29: Public Sub Literal_search_ignores_case_by_default_and_matches_accented_letters()
@@ -955,49 +1021,84 @@ tests\Omskep.Core.Tests\Documents\TextSearchTests.vb:166: Public Sub Replace_at_
 tests\Omskep.Core.Tests\Documents\TextSearchTests.vb:177: Public Sub Hebrew_and_other_Unicode_text_is_searched_and_replaced_correctly()
 tests\Omskep.Core.Tests\Documents\TextSearchTests.vb:186: Public Sub Null_text_is_treated_as_empty()
 tests\Omskep.Core.Tests\Documents\TextSearchTests.vb:192: Public Sub Random_patterns_and_texts_never_throw_and_edits_always_match_the_new_text()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:14: Friend NotInheritable Class FakePdfReader
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:20: Public Sub New(pages As IReadOnlyList(Of String))
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:24: Public Sub New(failure As Exception)
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:28: Public Function ReadPages(pdfPath As String) As IReadOnlyList(Of String) Implements IPdfPageReader.ReadPages
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:35: Friend Module ImportTestHelpers
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:40: Public Sub AssertWellFormedDocument(document As String)
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:52: Public Function CountOf(value As String, find As String) As Integer
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:62: Public Function Importer(reader As IPdfPageReader) As DocumentImporter
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:68: Public Class DocumentComposerTests
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:71: Public Sub Compose_wraps_body_in_speak_and_voice()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:81: Public Sub Compose_output_is_well_formed_even_with_hostile_attribute_values()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:87: Public Sub Compose_with_empty_body_is_still_well_formed()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:92: Public Sub Compose_rejects_a_blank_locale_or_voice()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:102: Public Class ImportFlagFinderTests
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:105: Public Sub Wide_space_run_is_flagged_with_line_column_and_length()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:115: Public Sub One_or_two_spaces_are_not_flagged()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:120: Public Sub Line_end_hyphen_after_a_letter_is_flagged()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:129: Public Sub Hyphens_that_are_not_split_words_are_not_flagged()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:135: Public Sub Flag_lines_match_document_lines_including_the_scaffold()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:145: Public Sub Null_empty_and_huge_runs_do_not_throw()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:154: Public Sub Windows_line_endings_do_not_hide_a_line_end_hyphen()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:162: Public Class DocumentImporterTests
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:166: Private Shared Function Pages(ParamArray texts As String()) As IReadOnlyList(Of String)
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:170: Private Shared Function StudyPage(n As Integer) As String
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:178: Public Sub A_normal_pdf_becomes_a_well_formed_document()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:189: Public Sub Headers_and_page_numbers_are_never_silently_removed()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:196: Public Sub Pages_are_separated_by_one_blank_line_and_use_LF_only()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:203: Public Sub Wide_gaps_and_line_end_hyphens_are_flagged_per_page()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:216: Public Sub Sanitizer_counts_are_summed_over_all_pages_and_reported()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:229: Public Sub Pages_without_text_are_skipped_and_listed_by_number()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:242: Public Sub A_page_holding_only_decorative_or_control_characters_counts_as_empty()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:249: Public Sub A_null_page_from_the_reader_is_treated_as_empty()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:256: Public Sub Many_empty_pages_are_summarised_not_listed_in_full()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:270: Public Sub A_scanned_pdf_with_no_text_gives_a_clear_message_not_an_empty_document()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:279: Public Sub A_scan_whose_only_text_is_page_numbers_counts_as_no_text()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:286: Public Sub A_pdf_with_no_pages_gives_no_text_found()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:292: Public Sub A_password_protected_pdf_gives_a_clear_message()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:300: Public Sub Any_other_reader_failure_becomes_an_unreadable_result_not_an_exception()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:316: Public Sub A_blank_voice_or_locale_is_a_caller_bug_and_throws_before_reading()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:325: Public Sub Pasted_word_text_keeps_curly_quotes_and_escapes_a_literal_ampersand()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:336: Public Sub Empty_or_whitespace_paste_gives_no_text_found()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:348: Public Sub Importing_twice_with_the_same_importer_gives_identical_results()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:357: Public Sub A_forty_five_page_study_imports_quickly_and_stays_well_formed()
+tests\Omskep.Core.Tests\Export\ExportEngineTests.vb:35: Public Class ExportEngineTests
+tests\Omskep.Core.Tests\Export\ExportEngineTests.vb:47: Private NotInheritable Class Rig
+tests\Omskep.Core.Tests\Export\ExportEngineTests.vb:53: Public ReadOnly Property Dir As Support.TempDir
+tests\Omskep.Core.Tests\Export\ExportEngineTests.vb:54: Public ReadOnly Property Monitor As New ConnectionMonitor()
+tests\Omskep.Core.Tests\Export\ExportEngineTests.vb:55: Public ReadOnly Property App As AppSession
+tests\Omskep.Core.Tests\Export\ExportEngineTests.vb:57: Public Sub New()
+tests\Omskep.Core.Tests\Export\ExportEngineTests.vb:74: Public Sub Dispose() Implements IDisposable.Dispose
+tests\Omskep.Core.Tests\Export\ExportEngineTests.vb:81: Private Shared Function Chunks(count As Integer) As List(Of DocumentChunk)
+tests\Omskep.Core.Tests\Export\ExportEngineTests.vb:89: Private Shared Function Audio(fill As Byte, Optional length As Integer = ExportEngine.MinPlausibleAudioBytes + 100) As Byte()
+tests\Omskep.Core.Tests\Export\ExportEngineTests.vb:97: Private Shared Function NewSecrets() As Support.InMemorySecretStore
+tests\Omskep.Core.Tests\Export\ExportEngineTests.vb:104: Private Shared Function Sequenced(ParamArray results As SynthesisResult()) As Support.FakeSpeechClient
+tests\Omskep.Core.Tests\Export\ExportEngineTests.vb:411: Public Sub Constructor_NullArguments_Throw()
+tests\Omskep.Core.Tests\Export\ExportFileNamerTests.vb:21: Public Class ExportFileNamerTests
+tests\Omskep.Core.Tests\Export\ExportFileNamerTests.vb:24: Public Sub An_empty_folder_gets_the_plain_alpha_name()
+tests\Omskep.Core.Tests\Export\ExportFileNamerTests.vb:31: Public Sub An_existing_alpha_file_bumps_to_the_next_number()
+tests\Omskep.Core.Tests\Export\ExportFileNamerTests.vb:39: Public Sub A_gap_in_the_numbering_is_filled_rather_than_skipped()
+tests\Omskep.Core.Tests\Export\ExportFileNamerTests.vb:49: Public Sub An_unsaved_document_gets_the_untitled_stem()
+tests\Omskep.Core.Tests\Export\ExportFileNamerTests.vb:57: Public Sub Illegal_filename_characters_in_the_document_name_are_replaced()
+tests\Omskep.Core.Tests\Export\ExportId3FieldsBuilderTests.vb:21: Public Class ExportId3FieldsBuilderTests
+tests\Omskep.Core.Tests\Export\ExportId3FieldsBuilderTests.vb:23: Private Shared Function Chunk() As List(Of DocumentChunk)
+tests\Omskep.Core.Tests\Export\ExportId3FieldsBuilderTests.vb:30: Public Sub Typed_comment_and_genre_always_win_over_the_computed_defaults()
+tests\Omskep.Core.Tests\Export\ExportId3FieldsBuilderTests.vb:38: Public Sub Absent_comment_and_genre_fall_back_to_computed_defaults()
+tests\Omskep.Core.Tests\Export\ExportId3FieldsBuilderTests.vb:46: Public Sub A_numeric_track_field_parses_to_the_tags_integer_type()
+tests\Omskep.Core.Tests\Export\ExportId3FieldsBuilderTests.vb:52: Public Sub A_non_numeric_track_field_is_left_unset_not_an_error()
+tests\Omskep.Core.Tests\Export\VoiceUsageScannerTests.vb:12: Public Class VoiceUsageScannerTests
+tests\Omskep.Core.Tests\Export\VoiceUsageScannerTests.vb:14: Private Shared Function Chunk(ssml As String) As DocumentChunk
+tests\Omskep.Core.Tests\Export\VoiceUsageScannerTests.vb:19: Public Sub Distinct_voices_are_returned_in_first_appearance_order_not_sorted()
+tests\Omskep.Core.Tests\Export\VoiceUsageScannerTests.vb:30: Public Sub A_voice_repeated_across_chunks_is_only_listed_once()
+tests\Omskep.Core.Tests\Export\VoiceUsageScannerTests.vb:39: Public Sub No_chunks_yields_no_voices()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:15: Friend NotInheritable Class FakePdfReader
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:22: Public Function ReadPages(pdfPath As String) As IReadOnlyList(Of String) Implements IPdfPageReader.ReadPages
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:27: Public Sub New(pages As IReadOnlyList(Of String), Optional metadata As PdfDocumentMetadata = Nothing)
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:32: Public Sub New(failure As Exception)
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:37: Public Function ReadMetadata(pdfPath As String) As PdfDocumentMetadata Implements IPdfPageReader.ReadMetadata
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:43: Friend Module ImportTestHelpers
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:48: Public Sub AssertWellFormedDocument(document As String)
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:60: Public Function CountOf(value As String, find As String) As Integer
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:70: Public Function Importer(reader As IPdfPageReader) As DocumentImporter
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:76: Public Class DocumentComposerTests
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:79: Public Sub Compose_wraps_body_in_speak_and_voice()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:97: Public Sub Compose_output_is_well_formed_even_with_hostile_attribute_values()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:103: Public Sub Compose_with_empty_body_is_still_well_formed()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:108: Public Sub Compose_rejects_a_blank_locale_or_voice()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:118: Public Class ImportFlagFinderTests
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:121: Public Sub Wide_space_run_is_flagged_with_line_column_and_length()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:131: Public Sub One_or_two_spaces_are_not_flagged()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:136: Public Sub Line_end_hyphen_after_a_letter_is_flagged()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:145: Public Sub Hyphens_that_are_not_split_words_are_not_flagged()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:151: Public Sub Flag_lines_match_document_lines_including_the_scaffold()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:161: Public Sub Null_empty_and_huge_runs_do_not_throw()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:170: Public Sub Windows_line_endings_do_not_hide_a_line_end_hyphen()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:178: Public Class DocumentImporterTests
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:182: Private Shared Function Pages(ParamArray texts As String()) As IReadOnlyList(Of String)
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:186: Private Shared Function StudyPage(n As Integer) As String
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:194: Public Sub A_normal_pdf_becomes_a_well_formed_document()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:206: Public Sub Headers_and_page_numbers_are_never_silently_removed()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:213: Public Sub Pages_are_separated_by_one_blank_line_and_use_LF_only()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:220: Public Sub Wide_gaps_and_line_end_hyphens_are_flagged_per_page()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:233: Public Sub Sanitizer_counts_are_summed_over_all_pages_and_reported()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:246: Public Sub Pages_without_text_are_skipped_and_listed_by_number()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:259: Public Sub A_page_holding_only_decorative_or_control_characters_counts_as_empty()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:266: Public Sub A_null_page_from_the_reader_is_treated_as_empty()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:273: Public Sub Many_empty_pages_are_summarised_not_listed_in_full()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:287: Public Sub A_scanned_pdf_with_no_text_gives_a_clear_message_not_an_empty_document()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:296: Public Sub A_scan_whose_only_text_is_page_numbers_counts_as_no_text()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:303: Public Sub A_pdf_with_no_pages_gives_no_text_found()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:309: Public Sub A_password_protected_pdf_gives_a_clear_message()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:317: Public Sub Any_other_reader_failure_becomes_an_unreadable_result_not_an_exception()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:333: Public Sub A_blank_voice_or_locale_is_a_caller_bug_and_throws_before_reading()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:342: Public Sub Pasted_word_text_keeps_curly_quotes_and_escapes_a_literal_ampersand()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:353: Public Sub Empty_or_whitespace_paste_gives_no_text_found()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:365: Public Sub Importing_twice_with_the_same_importer_gives_identical_results()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:374: Public Sub A_forty_five_page_study_imports_quickly_and_stays_well_formed()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:393: Public Sub Pdf_title_and_author_metadata_seed_title_and_artist_alongside_filename_derived_track_and_year()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:403: Public Sub Missing_pdf_title_falls_back_to_the_filenames_numbered_pattern()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:411: Public Sub A_filename_that_does_not_match_the_numbered_pattern_falls_back_to_the_whole_name_with_no_track()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:418: Public Sub Modification_date_is_used_when_creation_date_is_missing()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:425: Public Sub Album_and_copyright_are_always_left_unset_on_import_regardless_of_pdf_metadata()
 tests\Omskep.Core.Tests\Import\TextSanitizerTests.vb:13: Public Class TextSanitizerTests
 tests\Omskep.Core.Tests\Import\TextSanitizerTests.vb:17: Private Shared Function Clean(raw As String) As String
 tests\Omskep.Core.Tests\Import\TextSanitizerTests.vb:24: Public Sub Unicode_punctuation_passes_through_unchanged()

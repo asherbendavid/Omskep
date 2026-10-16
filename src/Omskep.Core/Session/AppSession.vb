@@ -3,6 +3,7 @@ Imports System.Net.Http
 Imports System.Security.Cryptography
 Imports System.Threading
 Imports Omskep.Core.Access
+Imports Omskep.Core.Export
 Imports Omskep.Core.Secrets
 Imports Omskep.Core.Settings
 Imports Omskep.Core.Speech
@@ -28,29 +29,33 @@ Namespace Session
         Private ReadOnly _secrets As ISecretStore
         Private ReadOnly _voices As VoiceService
         Private ReadOnly _monitor As ConnectionMonitor
+        Private ReadOnly _speechClient As ISpeechClient
 
         Private _keyState As KeyState = KeyState.Absent
         Private _region As String = AzureSettings.DefaultRegion
 
         Public Event StateChanged As EventHandler
 
-        Public Sub New(settings As SettingsStore, secrets As ISecretStore, voices As VoiceService, monitor As ConnectionMonitor)
+        Public Sub New(settings As SettingsStore, secrets As ISecretStore, voices As VoiceService, monitor As ConnectionMonitor, speechClient As ISpeechClient)
             If settings Is Nothing Then Throw New ArgumentNullException(NameOf(settings))
             If secrets Is Nothing Then Throw New ArgumentNullException(NameOf(secrets))
             If voices Is Nothing Then Throw New ArgumentNullException(NameOf(voices))
             If monitor Is Nothing Then Throw New ArgumentNullException(NameOf(monitor))
+            If speechClient Is Nothing Then Throw New ArgumentNullException(NameOf(speechClient))
             _settings = settings
             _secrets = secrets
             _voices = voices
             _monitor = monitor
+            _speechClient = speechClient
         End Sub
 
         ''' <summary>Wires up the real file-backed stores and Azure client for one settings folder.</summary>
         Public Shared Function Create(folder As String, protector As ISecretProtector, http As HttpClient) As AppSession
             Dim settings As New SettingsStore(folder)
             Dim monitor As New ConnectionMonitor()
-            Dim voices As New VoiceService(New AzureSpeechClient(http), New VoiceCacheStore(folder), monitor)
-            Return New AppSession(settings, New FileSecretStore(settings, protector), voices, monitor)
+            Dim client As New AzureSpeechClient(http)
+            Dim voices As New VoiceService(client, New VoiceCacheStore(folder), monitor)
+            Return New AppSession(settings, New FileSecretStore(settings, protector), voices, monitor, client)
         End Function
 
         ' ---- what the UI reads ----
@@ -314,6 +319,20 @@ Namespace Session
         Private Sub RaiseStateChanged()
             RaiseEvent StateChanged(Me, EventArgs.Empty)
         End Sub
+
+        ''' <summary>Builds an ExportEngine wired to this session's own speech client, secrets, and connection
+        ''' monitor -- so a failure during export affects this session's Access state exactly the same way
+        ''' a failed Settings action would, since it is the same underlying monitor either way.</summary>
+        Public Function CreateExportEngine(Optional retryDelay As TimeSpan? = Nothing) As ExportEngine
+            Return New ExportEngine(_speechClient, _secrets, Me, _monitor, retryDelay)
+        End Function
+
+        ''' <summary>Locale to speaking-rate percent from the saved settings. Empty when nothing is saved.</summary>
+        Public Function SpeakingRatePercent() As IReadOnlyDictionary(Of String, Integer)
+            Dim loaded As SettingsLoadResult = _settings.Load()
+            If loaded.Value Is Nothing OrElse loaded.Value.SpeakingRatePercent Is Nothing Then Return New Dictionary(Of String, Integer)()
+            Return New Dictionary(Of String, Integer)(loaded.Value.SpeakingRatePercent)
+        End Function
 
     End Class
 

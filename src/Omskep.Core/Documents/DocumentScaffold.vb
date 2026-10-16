@@ -7,8 +7,9 @@ Namespace Documents
     ''' <summary>Questions about a document's scaffolding (the speak and voice tags). Pure.</summary>
     Public NotInheritable Class DocumentScaffold
 
-        ''' <summary>In a new document the body starts on this line (line 1 speak, line 2 voice).</summary>
-        Public Const BodyStartLine As Integer = 3
+        ''' <summary>In a new document the body starts on this line: 8 lines for the omskep-meta block
+        ''' (docs/omskep-meta-spec.md), then line 9 speak, line 10 voice, line 11 body.</summary>
+        Public Const BodyStartLine As Integer = 11
 
         Private Sub New()
         End Sub
@@ -23,6 +24,11 @@ Namespace Documents
             While i < documentText.Length
                 Dim c As Char = documentText(i)
                 If c = "<"c Then
+                    Dim metaEnd As Integer = BillableCharacterCounter.EndOfMetaBlock(documentText, i)
+                    If metaEnd > i Then
+                        i = metaEnd
+                        Continue While
+                    End If
                     Dim tagEnd As Integer = BillableCharacterCounter.EndOfFreeTag(documentText, i)
                     If tagEnd > i Then
                         i = tagEnd

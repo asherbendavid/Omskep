@@ -27,13 +27,34 @@ Namespace Import
     End Class
 
     ''' <summary>
-    ''' Reads the text of a PDF, one string per page, in page order. A page with no text
-    ''' yields an empty string. Throws <see cref="PdfPasswordRequiredException"/> for a
-    ''' password-protected file; any other failure may throw anything.
+    ''' Reads the text of a PDF, one string per page, in page order, and its document-info metadata.
+    ''' A page with no text yields an empty string. ReadPages throws <see cref="PdfPasswordRequiredException"/>
+    ''' for a password-protected file; any other failure may throw anything. ReadMetadata is only ever
+    ''' called after ReadPages has already succeeded for the same path.
     ''' </summary>
     Public Interface IPdfPageReader
         Function ReadPages(pdfPath As String) As IReadOnlyList(Of String)
+        Function ReadMetadata(pdfPath As String) As PdfDocumentMetadata
     End Interface
+
+    ''' <summary>Raw PDF document-info fields, exactly as the PDF reports them -- Nothing for any
+    ''' field the PDF doesn't set. CreationDate/ModificationDate are the PDF spec's own raw date
+    ''' string (e.g. "D:20260115120000+02'00'"), not a parsed DateTime.</summary>
+    Public NotInheritable Class PdfDocumentMetadata
+        Public ReadOnly Property Title As String
+        Public ReadOnly Property Author As String
+        Public ReadOnly Property CreationDate As String
+        Public ReadOnly Property ModificationDate As String
+
+        Public Sub New(title As String, author As String, creationDate As String, modificationDate As String)
+            Me.Title = title
+            Me.Author = author
+            Me.CreationDate = creationDate
+            Me.ModificationDate = modificationDate
+        End Sub
+
+        Public Shared ReadOnly Property Empty As PdfDocumentMetadata = New PdfDocumentMetadata(Nothing, Nothing, Nothing, Nothing)
+    End Class
 
     Public Enum ImportFlagKind
         ''' <summary>Three or more spaces in a row: usually a header or footer gap.</summary>
@@ -79,7 +100,7 @@ Namespace Import
         ''' <summary>What the sanitizer changed, summed over all pages.</summary>
         Public ReadOnly Property Sanitation As SanitizeResult
 
-        ''' <summary>Places to review, in document coordinates (line 1 is the speak tag).</summary>
+        ''' <summary>Places to review, in document coordinates (line 1 is the start of the omskep-meta block).</summary>
         Public ReadOnly Property Flags As IReadOnlyList(Of ImportFlag)
 
         Public Sub New(outcome As ImportOutcome,

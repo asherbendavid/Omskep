@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <PackageReference Include="Scintilla5.NET" Version="7.0.0" />
+    <PackageReference Include="TagLibSharp2" Version="0.6.0" />
   </ItemGroup>
 
   <ItemGroup>

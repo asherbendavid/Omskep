@@ -28,6 +28,17 @@ Namespace Documents
                 Dim c As Char = ssml(i)
 
                 If c = "<"c Then
+                    ' The omskep-meta metadata block (docs/omskep-meta-spec.md) is free, like the scaffold tags:
+                    ' Omskep's own data, never sent to Azure, never billed. Checked first because the existing
+                    ' EndOfBlock check below deliberately bills every OTHER comment/CDATA/PI as plain text, on
+                    ' the safe side, so a tag hidden inside one is never mistaken for a free scaffold tag.
+                    Dim metaEnd As Integer = EndOfMetaBlock(ssml, i)
+                    If metaEnd > i Then
+                        i = metaEnd
+                        Continue While
+                    End If
+
+
                     ' Comments, CDATA and processing instructions are billed like text and are skipped
                     ' over as a block, so a tag written inside one is never mistaken for a free tag.
                     Dim blockEnd As Integer = EndOfBlock(ssml, i)
@@ -110,6 +121,18 @@ Namespace Documents
                 End If
             Next
             Return i
+        End Function
+
+        ''' <summary>If the omskep-meta processing instruction starts at index i, returns the index just
+        ''' after its closing "?>" (or the end of the text if never closed); otherwise returns i. Requires
+        ''' whitespace immediately after the target name, matching OmskepMetaFields.Parse's own requirement,
+        ''' so the two stay in agreement about what counts as this one specific processing instruction.</summary>
+        Friend Shared Function EndOfMetaBlock(ssml As String, i As Integer) As Integer
+            Const Target As String = "<?omskep-meta"
+            If Not StartsWithAt(ssml, i, Target) Then Return i
+            Dim after As Integer = i + Target.Length
+            If after < ssml.Length AndAlso Not Char.IsWhiteSpace(ssml(after)) Then Return i
+            Return AfterMarker(ssml, i + 2, "?>")
         End Function
 
         ''' <summary>Length of "speak" or "voice" at p (case-sensitive, as in XML), else 0.</summary>

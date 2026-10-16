@@ -43,6 +43,10 @@ Namespace Import
             Public Function ReadPages(pdfPath As String) As IReadOnlyList(Of String) Implements IPdfPageReader.ReadPages
                 Throw New NotSupportedException("Pasting does not read PDFs.")
             End Function
+
+            Public Function ReadMetadata(pdfPath As String) As PdfDocumentMetadata Implements IPdfPageReader.ReadMetadata
+                Throw New NotSupportedException("Pasting does not read PDFs.")
+            End Function
         End Class
 
         Private Sub New()

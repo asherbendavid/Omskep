@@ -177,7 +177,8 @@ Namespace Documents
             Dim clip As String = ChrW(&H201C) & "Moses & Aaron" & ChrW(&H201D) & vbCrLf & ChrW(&H2018) & "n Man."
             Dim plan1 As PastePlan = Plan(Blank, clip, False)
             Assert.AreEqual(PasteKind.ReplaceDocument, plan1.Kind)
-            Assert.StartsWith("<speak version=""1.0""", plan1.Text)
+            Assert.StartsWith("<?omskep-meta", plan1.Text)
+            Assert.Contains("<speak version=""1.0""", plan1.Text)
             Assert.Contains("Moses &amp; Aaron", plan1.Text)
             Assert.Contains(ChrW(&H201C) & "Moses", plan1.Text)
             Assert.Contains(TextSanitizer.ArticleQuote & "n Man.", plan1.Text)

@@ -53,7 +53,7 @@ Namespace Session
                 Me.Client = client
                 Monitor = New ConnectionMonitor()
                 VoiceSvc = New VoiceService(client, CacheFile, Monitor)
-                App = New AppSession(Store, KeyStore, VoiceSvc, Monitor)
+                App = New AppSession(Store, KeyStore, VoiceSvc, Monitor, client)
             End Sub
 
             Public Sub Dispose() Implements IDisposable.Dispose
@@ -709,15 +709,16 @@ Namespace Session
         <TestMethod>
         Public Sub Constructor_NullArguments_Throw()
             Using rig As New Rig(Always(Support.FakeSpeechClient.Ok(1)))
-                Assert.ThrowsExactly(Of ArgumentNullException)(Sub() Build(Nothing, rig.KeyStore, rig.VoiceSvc, rig.Monitor))
-                Assert.ThrowsExactly(Of ArgumentNullException)(Sub() Build(rig.Store, Nothing, rig.VoiceSvc, rig.Monitor))
-                Assert.ThrowsExactly(Of ArgumentNullException)(Sub() Build(rig.Store, rig.KeyStore, Nothing, rig.Monitor))
-                Assert.ThrowsExactly(Of ArgumentNullException)(Sub() Build(rig.Store, rig.KeyStore, rig.VoiceSvc, Nothing))
+                Assert.ThrowsExactly(Of ArgumentNullException)(Sub() Build(Nothing, rig.KeyStore, rig.VoiceSvc, rig.Monitor, rig.Client))
+                Assert.ThrowsExactly(Of ArgumentNullException)(Sub() Build(rig.Store, Nothing, rig.VoiceSvc, rig.Monitor, rig.Client))
+                Assert.ThrowsExactly(Of ArgumentNullException)(Sub() Build(rig.Store, rig.KeyStore, Nothing, rig.Monitor, rig.Client))
+                Assert.ThrowsExactly(Of ArgumentNullException)(Sub() Build(rig.Store, rig.KeyStore, rig.VoiceSvc, Nothing, rig.Client))
+                Assert.ThrowsExactly(Of ArgumentNullException)(Sub() Build(rig.Store, rig.KeyStore, rig.VoiceSvc, rig.Monitor, Nothing))
             End Using
         End Sub
 
-        Private Shared Sub Build(s As SettingsStore, k As ISecretStore, v As VoiceService, m As ConnectionMonitor)
-            Dim unused = New AppSession(s, k, v, m)
+        Private Shared Sub Build(s As SettingsStore, k As ISecretStore, v As VoiceService, m As ConnectionMonitor, c As ISpeechClient)
+            Dim unused = New AppSession(s, k, v, m, c)
         End Sub
 
     End Class

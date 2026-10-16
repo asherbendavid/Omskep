@@ -2,7 +2,11 @@ Option Strict On
 Option Explicit On
 Option Infer On
 
+Imports System.IO
+Imports System.Linq
 Imports System.Text
+Imports System.Text.RegularExpressions
+Imports TagLibSharp2.Mpeg
 
 Namespace Import
 
@@ -73,7 +77,18 @@ Namespace Import
             Dim lf As String = ChrW(10)
             Dim joined As String = String.Join(lf & lf, keptBodies)
             Dim sanitation As SanitizeResult = SanitizeResult.Combine(joined, parts)
-            Dim document As String = DocumentComposer.Compose(joined, locale, voiceShortName)
+            ' Replaces: Dim document As String = DocumentComposer.Compose(joined, locale, voiceShortName)
+            Dim meta As PdfDocumentMetadata = _reader.ReadMetadata(pdfPath)
+            Dim fileStem As String = Path.GetFileNameWithoutExtension(pdfPath)
+            Dim match As Match = NumberedFilenamePattern.Match(fileStem)
+
+            Dim title As String = If(Not String.IsNullOrWhiteSpace(meta.Title), meta.Title,
+                       If(match.Success, match.Groups(2).Value, fileStem))
+            Dim track As String = If(match.Success, match.Groups(1).Value, Nothing)
+            Dim artist As String = If(String.IsNullOrWhiteSpace(meta.Author), Nothing, meta.Author)
+            Dim year As String = ExtractPdfYear(If(meta.CreationDate, meta.ModificationDate))
+
+            Dim document As String = DocumentComposer.Compose(joined, locale, voiceShortName, title:=title, artist:=artist, track:=track, year:=year)
             Dim flags As IReadOnlyList(Of ImportFlag) = ImportFlagFinder.Find(document)
             Dim outcome As ImportOutcome = If(emptyPages.Count > 0, ImportOutcome.ImportedWithEmptyPages, ImportOutcome.Imported)
 
@@ -179,6 +194,23 @@ Namespace Import
             Return sb.ToString()
         End Function
 
+        ' ---- omskep-meta seeding from PDF metadata and filename (docs/omskep-meta-spec.md) ----
+
+        ''' <summary>Matches "D_name (language)", the study leader's numbered naming convention: group 1
+        ''' is the leading number (Track), group 2 is everything after the first underscore (Title
+        ''' fallback). Does not match a filename that doesn't start with digits-then-underscore.</summary>
+        Private Shared ReadOnly NumberedFilenamePattern As New Regex("^(\d+)_(.+)$")
+
+        ''' <summary>Pulls the 4-digit year out of a PDF date string (the spec's own raw format, e.g.
+        ''' "D:20260115120000+02'00'"), tolerating a missing "D:" prefix since real-world writers vary.
+        ''' Returns Nothing if the input is null or doesn't start with 4 digits where expected.</summary>
+        Private Shared Function ExtractPdfYear(pdfDate As String) As String
+            If String.IsNullOrWhiteSpace(pdfDate) Then Return Nothing
+            Dim digitsStart As Integer = If(pdfDate.StartsWith("D:", StringComparison.Ordinal), 2, 0)
+            If pdfDate.Length < digitsStart + 4 Then Return Nothing
+            Dim year As String = pdfDate.Substring(digitsStart, 4)
+            Return If(year.All(AddressOf Char.IsDigit), year, Nothing)
+        End Function
     End Class
 
 End Namespace

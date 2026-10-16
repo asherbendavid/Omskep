@@ -362,6 +362,17 @@ Namespace Documents
             Assert.IsLessThan(200L, watch.ElapsedMilliseconds)
         End Sub
 
+        <TestMethod>
+        Public Sub The_omskep_meta_block_is_free_unlike_every_other_processing_instruction()
+            Assert.AreEqual(0, Count("<?omskep-meta" & LF & "Title: x" & LF & "?>"))
+        End Sub
+
+        <TestMethod>
+        Public Sub A_similarly_named_but_different_processing_instruction_is_not_mistaken_for_it()
+            Dim text As String = "<?omskep-metaXYZ foo ?>"
+            Assert.AreEqual(text.Length, Count(text))
+        End Sub
+
     End Class
 
     <TestClass>

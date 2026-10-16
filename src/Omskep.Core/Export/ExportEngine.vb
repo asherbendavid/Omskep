@@ -4,6 +4,8 @@ Option Infer On
 
 Imports System.IO
 Imports System.Threading
+Imports System.Security.Cryptography
+Imports System.Text
 Imports Omskep.Core.Access
 Imports Omskep.Core.Documents
 Imports Omskep.Core.Secrets
@@ -34,25 +36,29 @@ Namespace Export
         Public ReadOnly Property PossiblyBilledTwice As Boolean
         ''' <summary>Plain-language reason. Nothing unless Status is Failed.</summary>
         Public ReadOnly Property FailureReason As String
+        ''' <summary>SHA-256 of the chunk's SSML at the moment it was synthesized, hex-encoded. Nothing unless
+        ''' Status is Done. Lets a later resume attempt tell whether this chunk's text has changed since.</summary>
+        Public ReadOnly Property ContentHash As String
 
-        Private Sub New(status As ChunkExportStatus, audio As Byte(), retriesUsed As Integer, possiblyBilledTwice As Boolean, failureReason As String)
+        Private Sub New(status As ChunkExportStatus, audio As Byte(), retriesUsed As Integer, possiblyBilledTwice As Boolean, failureReason As String, contentHash As String)
             Me.Status = status
             Me.Audio = audio
             Me.RetriesUsed = retriesUsed
             Me.PossiblyBilledTwice = possiblyBilledTwice
             Me.FailureReason = failureReason
+            Me.ContentHash = contentHash
         End Sub
 
         Friend Shared Function Pending() As ChunkExportOutcome
-            Return New ChunkExportOutcome(ChunkExportStatus.Pending, Nothing, 0, False, Nothing)
+            Return New ChunkExportOutcome(ChunkExportStatus.Pending, Nothing, 0, False, Nothing, Nothing)
         End Function
 
-        Friend Shared Function Done(audio As Byte(), retriesUsed As Integer, possiblyBilledTwice As Boolean) As ChunkExportOutcome
-            Return New ChunkExportOutcome(ChunkExportStatus.Done, audio, retriesUsed, possiblyBilledTwice, Nothing)
+        Friend Shared Function Done(audio As Byte(), retriesUsed As Integer, possiblyBilledTwice As Boolean, contentHash As String) As ChunkExportOutcome
+            Return New ChunkExportOutcome(ChunkExportStatus.Done, audio, retriesUsed, possiblyBilledTwice, Nothing, contentHash)
         End Function
 
         Friend Shared Function Failed(retriesUsed As Integer, possiblyBilledTwice As Boolean, reason As String) As ChunkExportOutcome
-            Return New ChunkExportOutcome(ChunkExportStatus.Failed, Nothing, retriesUsed, possiblyBilledTwice, reason)
+            Return New ChunkExportOutcome(ChunkExportStatus.Failed, Nothing, retriesUsed, possiblyBilledTwice, reason, Nothing)
         End Function
     End Class
 
@@ -62,6 +68,10 @@ Namespace Export
         ''' <summary>Stopped at some chunk, or never started (export was not allowed). Call ExportAsync again --
         ''' pass this same result back as priorAttempt to pick up after the last chunk that finished.</summary>
         FailedResumable
+        ''' <summary>Every chunk was synthesized; only the final file write failed (disk full, permissions, a
+        ''' locked file). The audio is fine -- only saving failed. Call ExportAsync again with this result as
+        ''' priorAttempt (same chunk list) to retry just the write; no chunk is re-synthesized.</summary>
+        FailedWriteOnly
     End Enum
 
     ''' <summary>One export attempt's outcome. Chunks has exactly one entry per input chunk, in order, even on failure or cancellation.</summary>
@@ -89,6 +99,10 @@ Namespace Export
 
         Friend Shared Function FailedResumable(chunks As IReadOnlyList(Of ChunkExportOutcome), message As String) As ExportResult
             Return New ExportResult(ExportStatus.FailedResumable, chunks, Nothing, message)
+        End Function
+
+        Friend Shared Function FailedWriteOnly(chunks As IReadOnlyList(Of ChunkExportOutcome), message As String) As ExportResult
+            Return New ExportResult(ExportStatus.FailedWriteOnly, chunks, Nothing, message)
         End Function
     End Class
 
@@ -135,8 +149,10 @@ Namespace Export
         Private ReadOnly _secrets As ISecretStore
         Private ReadOnly _session As AppSession
         Private ReadOnly _monitor As ConnectionMonitor
+        Private ReadOnly _retryDelay As TimeSpan
 
-        Public Sub New(client As ISpeechClient, secrets As ISecretStore, session As AppSession, monitor As ConnectionMonitor)
+        Public Sub New(client As ISpeechClient, secrets As ISecretStore, session As AppSession, monitor As ConnectionMonitor,
+                       Optional retryDelay As TimeSpan? = Nothing)
             If client Is Nothing Then Throw New ArgumentNullException(NameOf(client))
             If secrets Is Nothing Then Throw New ArgumentNullException(NameOf(secrets))
             If session Is Nothing Then Throw New ArgumentNullException(NameOf(session))
@@ -145,6 +161,7 @@ Namespace Export
             _secrets = secrets
             _session = session
             _monitor = monitor
+            _retryDelay = If(retryDelay, DefaultRetryDelay)
         End Sub
 
         Public Async Function ExportAsync(chunks As IReadOnlyList(Of DocumentChunk), outputPath As String, cancellationToken As CancellationToken,
@@ -162,8 +179,10 @@ Namespace Export
             Dim outcomes As New List(Of ChunkExportOutcome)
             Dim startIndex As Integer = 0
             If priorAttempt IsNot Nothing AndAlso priorAttempt.Chunks IsNot Nothing AndAlso priorAttempt.Chunks.Count = chunks.Count Then
-                For Each priorOutcome As ChunkExportOutcome In priorAttempt.Chunks
+                For i As Integer = 0 To priorAttempt.Chunks.Count - 1
+                    Dim priorOutcome As ChunkExportOutcome = priorAttempt.Chunks(i)
                     If priorOutcome.Status <> ChunkExportStatus.Done Then Exit For
+                    If priorOutcome.ContentHash <> HashOf(chunks(i).Ssml) Then Exit For
                     outcomes.Add(priorOutcome)
                 Next
                 startIndex = outcomes.Count
@@ -193,7 +212,7 @@ Namespace Export
             Catch ex As Exception When TypeOf ex Is IOException OrElse TypeOf ex Is UnauthorizedAccessException
                 ' Every chunk succeeded; only the final write failed. Calling again with this result as
                 ' priorAttempt will skip straight to retrying the write, no chunk is re-synthesized.
-                Return ExportResult.FailedResumable(outcomes, "Every chunk was synthesized, but the file could not be written: " & ex.Message)
+                Return ExportResult.FailedWriteOnly(outcomes, "Every chunk was synthesized, but the file could not be written: " & ex.Message)
             End Try
 
             Return ExportResult.Complete(outcomes, outputPath, "Export complete: " & chunks.Count.ToString() & " chunk(s), " & joined.Length.ToString("N0") & " bytes.")
@@ -227,7 +246,7 @@ Namespace Export
                 If result.Outcome = AzureOutcome.Ok Then
                     Dim implausibleReason As String = ImplausibilityReason(result.Audio)
                     If implausibleReason Is Nothing Then
-                        Return ChunkExportOutcome.Done(result.Audio, retries, sendsAttempted > 1)
+                        Return ChunkExportOutcome.Done(result.Audio, retries, sendsAttempted > 1, HashOf(chunk.Ssml))
                     End If
                     If retries >= MaxRetriesPerChunk Then
                         Return ChunkExportOutcome.Failed(retries, sendsAttempted > 1, implausibleReason)
@@ -239,9 +258,15 @@ Namespace Export
                 End If
 
                 retries += 1
-                Dim delay As TimeSpan = If(result.RetryAfter.HasValue AndAlso result.RetryAfter.Value > DefaultRetryDelay, result.RetryAfter.Value, DefaultRetryDelay)
+                Dim delay As TimeSpan = If(result.RetryAfter.HasValue AndAlso result.RetryAfter.Value > _retryDelay, result.RetryAfter.Value, _retryDelay)
                 Await Task.Delay(delay, cancellationToken).ConfigureAwait(False)
             Loop
+        End Function
+
+        Private Function HashOf(ssml As String) As String
+            Using sha As SHA256 = SHA256.Create()
+                Return Convert.ToHexString(sha.ComputeHash(Encoding.UTF8.GetBytes(ssml)))
+            End Using
         End Function
 
         ''' <summary>Nothing when the audio is plausible; otherwise a user-facing reason. See the class remarks for why this does not use the duration estimate.</summary>

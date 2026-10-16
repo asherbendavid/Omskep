@@ -43,15 +43,18 @@ Namespace Documents
     ''' Steps, in order:
     ''' 1. The document must already be well-formed (the editor's own check); composing a malformed
     '''    document is refused rather than guessed at.
-    ''' 2. Structural rule: no &lt;voice&gt; may be nested inside another &lt;voice&gt;. Not an XML
+    ''' 2. Anything outside the single root element -- the omskep-meta metadata block, any other
+    '''    comment or processing instruction -- is stripped. Only the root element and its contents
+    '''    are ever sent to Azure.
+    ''' 3. Structural rule: no &lt;voice&gt; may be nested inside another &lt;voice&gt;. Not an XML
     '''    well-formedness question -- a project rule, enforced here.
-    ''' 3. Whitespace in text content is collapsed to a single space (spike evidence: a bare line break
+    ''' 4. Whitespace in text content is collapsed to a single space (spike evidence: a bare line break
     '''    with no sentence-ending punctuation near it is sometimes heard as a pause/restart; a single
     '''    space between words never is). Tags and attribute values are untouched.
-    ''' 4. Each &lt;voice&gt; whose locale (the first two hyphen-separated parts of its name, e.g.
+    ''' 5. Each &lt;voice&gt; whose locale (the first two hyphen-separated parts of its name, e.g.
     '''    "he-IL" from "he-IL-HilaNeural") has an entry in speakingRatePercent gets its content wrapped
     '''    in a &lt;prosody rate="±N%"&gt; element. A voice with no matching entry is left alone.
-    ''' 5. The result is re-checked for well-formedness as a defensive final step; composing a malformed
+    ''' 6. The result is re-checked for well-formedness as a defensive final step; composing a malformed
     '''    document from a well-formed one would be a bug here, not a user error.
     ''' Omskep never adds spoken text of its own at any step.
     ''' </summary>
@@ -77,6 +80,19 @@ Namespace Documents
             If doc.Root Is Nothing Then
                 Return CompositionResult.Failure("The document has no content.")
             End If
+
+            ' Anything outside the root element -- the omskep-meta block (docs/omskep-meta-spec.md), any
+            ' other comment or processing instruction, a stray XML declaration -- never reaches Azure.
+            ' doc.ToString() below would otherwise serialize these verbatim; they are deliberately stripped
+            ' here, after parsing, rather than by scanning the raw text, so whatever shape the prolog/epilog
+            ' actually took (however many comments or PIs, in whatever order) is already correctly resolved
+            ' by the parse above.
+            For Each topLevelNode As XNode In doc.Nodes().ToList()
+                If Not ReferenceEquals(topLevelNode, doc.Root) Then
+                    topLevelNode.Remove()
+                End If
+            Next
+
             Dim ns As XNamespace = doc.Root.Name.Namespace
 
             Dim nestedVoiceReason As String = FindNestedVoice(doc, ns)

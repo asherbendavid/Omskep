@@ -1,7 +1,9 @@
+Imports System.IO
 Imports System.Runtime.InteropServices
 Imports System.Threading
 Imports System.Threading.Tasks
 Imports Omskep.Core.Documents
+Imports Omskep.Core.Export
 Imports Omskep.Core.Import
 Imports Omskep.Core.Session
 
@@ -489,9 +491,22 @@ Public Class MainForm
         Close()
     End Sub
 
-    ' PLACEHOLDER (phase 3): export is not implemented yet. The button is already gated on a well-formed document.
     Private Sub mnuExport_Click(sender As Object, e As EventArgs) Handles mnuExport.Click
-        MessageBox.Show(Me, "Exporting audio arrives in phase 3.", "Omskep", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Dim documentText As String = ssmlEditor.DocumentText
+        Dim outputFolder As String = If(_model.FilePath IsNot Nothing,
+                                     Path.GetDirectoryName(_model.FilePath),
+                                     Environment.GetFolderPath(Environment.SpecialFolder.MyMusic))
+        Dim sourceFileName As String = If(_model.FilePath IsNot Nothing, Path.GetFileName(_model.FilePath), "Untitled.ssml")
+
+        Dim prep As ExportPreparationResult = ExportPreparation.Prepare(_session, _model, documentText, outputFolder, sourceFileName)
+        If Not prep.Succeeded Then
+            ShowError(prep.FailureMessage)
+            Return
+        End If
+
+        Using dialog As New ExportForm(_session, prep, outputFolder)
+            dialog.ShowDialog(Me)
+        End Using
     End Sub
 
     ' ---- Edit menu ----

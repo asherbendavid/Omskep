@@ -168,6 +168,36 @@ Namespace Documents
             Assert.DoesNotContain("<prosody", result.Ssml)
         End Sub
 
+        <TestMethod>
+        Public Sub An_omskep_meta_block_in_the_prolog_never_reaches_the_composed_output()
+            Dim xml = "<?omskep-meta" & vbLf & "Artist: J. Smith" & vbLf & "?>" & vbLf &
+              "<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis'>" &
+              "<voice name='af-ZA-WillemNeural'>Hi.</voice></speak>"
+            Dim result = SsmlComposer.Compose(xml, Nothing)
+            Assert.IsTrue(result.IsSuccess)
+            Assert.IsFalse(result.Ssml.Contains("omskep-meta", StringComparison.Ordinal))
+            Assert.IsFalse(result.Ssml.Contains("J. Smith", StringComparison.Ordinal))
+        End Sub
+
+        <TestMethod>
+        Public Sub A_comment_before_the_root_element_never_reaches_the_composed_output()
+            Dim xml = "<!-- a hand-written note -->" & vbLf &
+              "<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis'>" &
+              "<voice name='af-ZA-WillemNeural'>Hi.</voice></speak>"
+            Dim result = SsmlComposer.Compose(xml, Nothing)
+            Assert.IsTrue(result.IsSuccess)
+            Assert.IsFalse(result.Ssml.Contains("hand-written note", StringComparison.Ordinal))
+        End Sub
+
+        <TestMethod>
+        Public Sub A_document_with_no_prolog_at_all_still_composes_normally()
+            Dim xml = "<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis'>" &
+              "<voice name='af-ZA-WillemNeural'>Hi.</voice></speak>"
+            Dim result = SsmlComposer.Compose(xml, Nothing)
+            Assert.IsTrue(result.IsSuccess)
+            Assert.IsTrue(result.Ssml.Contains("Hi.", StringComparison.Ordinal))
+        End Sub
+
     End Class
 
 End Namespace

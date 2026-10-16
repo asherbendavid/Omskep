@@ -34,6 +34,16 @@ Namespace Import
             Return ex.GetType().Name = "PdfDocumentEncryptedException"
         End Function
 
+        Private Function NullIfBlank(s As String) As String
+            Return If(String.IsNullOrWhiteSpace(s), Nothing, s)
+        End Function
+
+        Public Function ReadMetadata(pdfPath As String) As PdfDocumentMetadata Implements IPdfPageReader.ReadMetadata
+            Using document As PdfDocument = PdfDocument.Open(pdfPath)
+                Dim info = document.Information
+                Return New PdfDocumentMetadata(NullIfBlank(info.Title), NullIfBlank(info.Author), NullIfBlank(info.CreationDate), NullIfBlank(info.ModifiedDate))
+            End Using
+        End Function
     End Class
 
 End Namespace
