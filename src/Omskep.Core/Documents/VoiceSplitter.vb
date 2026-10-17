@@ -151,7 +151,15 @@ Namespace Documents
                 Return RenameVoice(documentText, voice, trimmedName)
             End If
 
+            ' SsmlEditor.ApplyEdits requires its edits "last first" (highest offset first, descending) --
+            ' it walks the list back-to-front in one pass. Build this list in that order deliberately,
+            ' not just happen to match it, so the contract stays visible at the call site.
             Dim edits As New List(Of TextEdit)()
+
+            If hasTrailingFragment Then
+                edits.Add(New TextEdit(effectiveEnd, 0, "</voice><voice name=""" & voice.Name & """>"))
+            End If
+            ' Else: nothing to add at the end -- the original closing tag now simply closes the new voice.
 
             If hasLeadingFragment Then
                 edits.Add(New TextEdit(effectiveStart, 0, "</voice><voice name=""" & trimmedName & """>"))
@@ -160,11 +168,6 @@ Namespace Documents
                 ' the new one -- relabel the voice's own opening tag instead of inserting a new element.
                 edits.Add(New TextEdit(voice.NameValueStart, voice.NameValueLength, trimmedName))
             End If
-
-            If hasTrailingFragment Then
-                edits.Add(New TextEdit(effectiveEnd, 0, "</voice><voice name=""" & voice.Name & """>"))
-            End If
-            ' Else: nothing to add at the end -- the original closing tag now simply closes the new voice.
 
             Dim newText As String = ApplyLocally(documentText, edits)
             Return VoiceSplitResult.Success(newText, edits)

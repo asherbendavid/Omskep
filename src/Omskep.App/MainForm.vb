@@ -88,6 +88,7 @@ Public Class MainForm
         mnuPaste.Enabled = canStart
         mnuPastePlain.Enabled = canStart
         mnuReverseHebrew.Enabled = canStart
+        mnuVoiceChange.Enabled = canStart
         mnuFind.Enabled = Not _busy
         mnuReplace.Enabled = Not _busy
         mnuFindNext.Enabled = Not _busy
@@ -594,6 +595,7 @@ Public Class MainForm
         menu.Items.Add("Select &all", Nothing, Sub(sender, e) ssmlEditor.SelectEverything())
         menu.Items.Add(New ToolStripSeparator())
         _editOnlyItems.Add(menu.Items.Add("Reverse &Hebrew text", Nothing, Sub(sender, e) ReverseHebrew()))
+        _editOnlyItems.Add(menu.Items.Add("Use another &voice...", Nothing, Sub(sender, e) ChangeVoice()))
         ssmlEditor.UseContextMenu(menu)
     End Sub
 
@@ -655,6 +657,39 @@ Public Class MainForm
             Return
         End If
         ShowNote("Reversed " & whole.RunsReversed.ToString(Globalization.CultureInfo.InvariantCulture) & " Hebrew run(s).")
+        RefreshReviewMarks()
+    End Sub
+
+    ''' <summary>Splits the enclosing &lt;voice&gt; around the selection into a new voice, or (with no
+    ''' selection, or a selection covering the whole of its voice's content) renames the enclosing
+    ''' &lt;voice&gt;. One undo step either way. The voice name is typed in for now -- a catalog-driven
+    ''' picker replaces this input box later in this phase.</summary>
+    Private Sub mnuVoiceChange_Click(sender As Object, e As EventArgs) Handles mnuVoiceChange.Click
+        ChangeVoice()
+    End Sub
+
+    Private Sub ChangeVoice()
+        If _busy OrElse Not ssmlEditor.IsEditable Then Return
+
+        Dim newVoiceName As String = Microsoft.VisualBasic.Interaction.InputBox(
+            "Voice short name (e.g. en-US-JennyNeural):", "Use another voice", "")
+        If newVoiceName.Trim().Length = 0 Then Return ' cancelled
+
+        Dim start As Integer = ssmlEditor.SelectionStartIndex
+        Dim length As Integer = ssmlEditor.SelectionEndIndex - start
+
+        Dim result As VoiceSplitResult = VoiceSplitter.Split(ssmlEditor.DocumentText, start, length, newVoiceName)
+        If Not result.IsSuccess Then
+            ShowError(result.FailureReason)
+            Return
+        End If
+
+        If Not ssmlEditor.ApplyEdits(result.Edits, result.NewText) Then
+            ShowError("The voice could not be changed safely, so nothing was changed. Try again.")
+            Return
+        End If
+
+        ShowNote("Voice changed to " & newVoiceName.Trim() & ".")
         RefreshReviewMarks()
     End Sub
 

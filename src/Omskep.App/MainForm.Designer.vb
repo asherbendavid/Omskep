@@ -48,6 +48,7 @@ Partial Class MainForm
         mnuGoToCause = New ToolStripMenuItem()
         sepEdit4 = New ToolStripSeparator()
         mnuReverseHebrew = New ToolStripMenuItem()
+        mnuVoiceChange = New ToolStripMenuItem()
         sepEdit5 = New ToolStripSeparator()
         mnuFind = New ToolStripMenuItem()
         mnuReplace = New ToolStripMenuItem()
@@ -138,7 +139,7 @@ Partial Class MainForm
         ' 
         ' mnuEdit
         ' 
-        mnuEdit.DropDownItems.AddRange(New ToolStripItem() {mnuUndo, mnuRedo, sepEdit1, mnuCut, mnuCopy, mnuPaste, mnuPastePlain, sepEdit2, mnuSelectAll, sepEdit5, mnuFind, mnuReplace, mnuFindNext, mnuFindPrevious, sepEdit3, mnuGoToError, mnuGoToCause, sepEdit4, mnuReverseHebrew})
+        mnuEdit.DropDownItems.AddRange(New ToolStripItem() {mnuUndo, mnuRedo, sepEdit1, mnuCut, mnuCopy, mnuPaste, mnuPastePlain, sepEdit2, mnuSelectAll, sepEdit5, mnuFind, mnuReplace, mnuFindNext, mnuFindPrevious, sepEdit3, mnuGoToError, mnuGoToCause, sepEdit4, mnuReverseHebrew, mnuVoiceChange})
         mnuEdit.Name = "mnuEdit"
         mnuEdit.Text = "&Edit"
         ' 
@@ -245,6 +246,12 @@ Partial Class MainForm
         mnuReverseHebrew.Name = "mnuReverseHebrew"
         mnuReverseHebrew.Text = "Reverse &Hebrew text"
         mnuReverseHebrew.ToolTipText = "Puts Hebrew that came out of a PDF back in reading order (the selection, or the whole document)."
+        '
+        'mnuVoiceChange
+        '
+        mnuVoiceChange.Name = "mnuVoiceChange"
+        mnuVoiceChange.Text = "Use another &voice..."
+        mnuVoiceChange.ToolTipText = "Splits the selection into a new voice, or renames the voice under the caret."
         ' 
         ' mnuView
         ' 
@@ -443,6 +450,7 @@ Partial Class MainForm
     Friend WithEvents mnuGoToCause As ToolStripMenuItem
     Friend WithEvents sepEdit4 As ToolStripSeparator
     Friend WithEvents mnuReverseHebrew As ToolStripMenuItem
+    Friend WithEvents mnuVoiceChange As ToolStripMenuItem
     Friend WithEvents sepEdit5 As ToolStripSeparator
     Friend WithEvents mnuFind As ToolStripMenuItem
     Friend WithEvents mnuReplace As ToolStripMenuItem

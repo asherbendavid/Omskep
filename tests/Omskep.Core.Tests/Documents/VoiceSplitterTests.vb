@@ -51,6 +51,23 @@ Namespace Documents
             Assert.Contains("there", result.NewText)
         End Sub
 
+        ' ---- SsmlEditor.ApplyEdits contract: edits must be ordered last first (highest offset first) ----
+
+        <TestMethod>
+        Public Sub BothFragmentsSplit_EditsAreOrderedLastFirst_MatchingApplyEditsContract()
+            ' SsmlEditor.ApplyEdits walks its edit list back-to-front in one pass, so it requires the
+            ' list itself to be given highest-offset-first. A two-edit split (real text on both sides of
+            ' the selection) is the only shape with more than one edit, so it's the only case that can
+            ' catch an ordering regression -- the unit tests otherwise never exercise the real editor.
+            Dim text As String = Doc("Hello there friend")
+            Dim start As Integer = IndexOfOnce(text, "there")
+            Dim result As VoiceSplitResult = VoiceSplitter.Split(text, start, "there".Length, "en-US-JennyNeural")
+
+            Assert.IsTrue(result.IsSuccess, result.FailureReason)
+            Assert.HasCount(2, result.Edits)
+            Assert.IsGreaterThan(result.Edits(1).Start, result.Edits(0).Start)
+        End Sub
+
         ' ---- Case 2: whole-block rename ----
 
         <TestMethod>
