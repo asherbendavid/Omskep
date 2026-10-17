@@ -9,7 +9,8 @@ and Scintilla5.NET into use; their licenses were not re-read in phase 2, so
 re-check them against the exact pinned versions before the first release (see the
 list at the end). Re-check them whenever a version changes.
 
-Phase 3a introduced no new third-party packages. The synthesis engine, document
+Phase 3b put TagLibSharp2 into use for ID3v2 tagging; no other new third-party
+packages were introduced. Phase 3a introduced no new third-party packages. The synthesis engine, document
 composition and chunking use only `System.Net.Http` and `System.Xml.Linq`, both
 part of .NET (see Platform components below); Azure AI Speech is called directly
 over its REST endpoint, same position as already recorded under Services.
@@ -21,7 +22,7 @@ over its REST endpoint, same position as already recorded under Services.
 | PdfPig (version pinned in `Omskep.Core.vbproj`) | PDF text extraction (`ContentOrderTextExtractor`) | Phase 2 | Phase 2 | Apache-2.0 (derived from Apache PDFBox) | <https://github.com/UglyToad/PdfPig>, NuGet package `PdfPig` |
 | Scintilla5.NET 7.0.0 | WinForms editor control (`Omskep.App`, `Editor\SsmlEditor`) | Phase 2 | Phase 2 | MIT | <https://www.nuget.org/packages/Scintilla5.NET> |
 | Scintilla and Lexilla (native engine bundled inside Scintilla5.NET) | Text editing engine and XML lexer | Phase 2 | Phase 2 | Scintilla license (short permissive notice), Copyright 1998-2021 Neil Hodgson | <https://www.scintilla.org/License.txt> |
-| TagLibSharp2 0.6.0 | ID3v2 tags on exported MP3 files | Phase 3 | Not yet | MIT | <https://github.com/decriptor/TagLibSharp2>, NuGet package `TagLibSharp2` |
+| TagLibSharp2 0.6.0 | ID3v2 tags on exported MP3 files | Phase 3 | Phase 3b | MIT | <https://github.com/decriptor/TagLibSharp2>, NuGet package `TagLibSharp2` |
 
 Development and test only (not distributed with the application):
 
