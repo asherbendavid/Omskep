@@ -365,6 +365,7 @@ Namespace Editor
             For Each indicator As Integer In {ErrorIndicator, CauseIndicator, FlagIndicator, NestedVoiceIndicator}
                 _sci.IndicatorCurrent = indicator
                 _sci.IndicatorClearRange(0, _sci.TextLength)
+                _sci.AutoCShow(0, Nothing)
             Next
         End Sub
 

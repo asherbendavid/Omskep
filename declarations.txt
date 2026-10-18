@@ -27,68 +27,70 @@ src\Omskep.App\FindReplaceForm.vb:171: Public Sub FindNext(forward As Boolean)
 src\Omskep.App\FindReplaceForm.vb:189: Private Sub ReplaceCurrent()
 src\Omskep.App\FindReplaceForm.vb:214: Private Sub ReplaceEverything()
 src\Omskep.App\MainForm.vb:15: Public Class MainForm
-src\Omskep.App\MainForm.vb:39: Public Sub New()
-src\Omskep.App\MainForm.vb:43: Public Sub New(session As AppSession)
-src\Omskep.App\MainForm.vb:58: Private Sub OnSessionStateChanged(sender As Object, e As EventArgs)
-src\Omskep.App\MainForm.vb:67: Private Sub ApplyState()
-src\Omskep.App\MainForm.vb:112: Private Sub ShowNote(message As String)
-src\Omskep.App\MainForm.vb:119: Private Sub tmrNote_Tick(sender As Object, e As EventArgs) Handles tmrNote.Tick
-src\Omskep.App\MainForm.vb:125: Private Sub statusMain_SizeChanged(sender As Object, e As EventArgs) Handles statusMain.SizeChanged
-src\Omskep.App\MainForm.vb:133: Private Sub FitStatusBar()
-src\Omskep.App\MainForm.vb:145: Private Function StatusTextWidth(value As String) As Integer
-src\Omskep.App\MainForm.vb:150: Private Function Shorten(value As String, maxWidth As Integer) As String
-src\Omskep.App\MainForm.vb:166: Private Sub ShowError(message As String)
-src\Omskep.App\MainForm.vb:171: Private Function Scaffold() As ScaffoldChoice
-src\Omskep.App\MainForm.vb:206: Private Sub MainForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-src\Omskep.App\MainForm.vb:226: Private Sub MainForm_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
-src\Omskep.App\MainForm.vb:244: Private Sub btnOpenSettings_Click(sender As Object, e As EventArgs) Handles btnOpenSettings.Click
-src\Omskep.App\MainForm.vb:250: Private Sub ssmlEditor_ContentChanged() Handles ssmlEditor.ContentChanged
-src\Omskep.App\MainForm.vb:257: Private Sub ssmlEditor_DirtyChanged(isDirty As Boolean) Handles ssmlEditor.DirtyChanged
-src\Omskep.App\MainForm.vb:264: Private Sub tmrCheck_Tick(sender As Object, e As EventArgs) Handles tmrCheck.Tick
-src\Omskep.App\MainForm.vb:269: Private Sub RunCheckNow()
-src\Omskep.App\MainForm.vb:281: Private Sub tmrAutosave_Tick(sender As Object, e As EventArgs) Handles tmrAutosave.Tick
-src\Omskep.App\MainForm.vb:290: Private Sub OfferRecovery()
-src\Omskep.App\MainForm.vb:312: Private Sub RestoreFrom(item As RecoveryItem)
-src\Omskep.App\MainForm.vb:332: Private Sub mnuNew_Click(sender As Object, e As EventArgs) Handles mnuNew.Click
-src\Omskep.App\MainForm.vb:337: Private Sub StartNewDocument()
-src\Omskep.App\MainForm.vb:373: Private Function TryLoad(path As String) As String
-src\Omskep.App\MainForm.vb:382: Private Sub OpenLoadedSsml(path As String, fileText As String)
-src\Omskep.App\MainForm.vb:401: Private Sub SetBusy(value As Boolean)
-src\Omskep.App\MainForm.vb:408: Private Sub ApplyImport(result As ImportResult)
-src\Omskep.App\MainForm.vb:421: Private Sub AfterContentReplaced()
-src\Omskep.App\MainForm.vb:429: Private Sub mnuSave_Click(sender As Object, e As EventArgs) Handles mnuSave.Click
-src\Omskep.App\MainForm.vb:433: Private Sub mnuSaveAs_Click(sender As Object, e As EventArgs) Handles mnuSaveAs.Click
-src\Omskep.App\MainForm.vb:437: Private Function SaveDocument() As Boolean
-src\Omskep.App\MainForm.vb:442: Private Function SaveDocumentAs() As Boolean
-src\Omskep.App\MainForm.vb:459: Private Function WriteTo(path As String) As Boolean
-src\Omskep.App\MainForm.vb:476: Private Function ConfirmDiscardChanges() As Boolean
-src\Omskep.App\MainForm.vb:490: Private Sub mnuExit_Click(sender As Object, e As EventArgs) Handles mnuExit.Click
-src\Omskep.App\MainForm.vb:494: Private Sub mnuExport_Click(sender As Object, e As EventArgs) Handles mnuExport.Click
-src\Omskep.App\MainForm.vb:514: Private Sub mnuUndo_Click(sender As Object, e As EventArgs) Handles mnuUndo.Click
-src\Omskep.App\MainForm.vb:518: Private Sub mnuRedo_Click(sender As Object, e As EventArgs) Handles mnuRedo.Click
-src\Omskep.App\MainForm.vb:522: Private Sub mnuCut_Click(sender As Object, e As EventArgs) Handles mnuCut.Click
-src\Omskep.App\MainForm.vb:526: Private Sub mnuCopy_Click(sender As Object, e As EventArgs) Handles mnuCopy.Click
-src\Omskep.App\MainForm.vb:530: Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
-src\Omskep.App\MainForm.vb:534: Private Sub mnuPastePlain_Click(sender As Object, e As EventArgs) Handles mnuPastePlain.Click
-src\Omskep.App\MainForm.vb:538: Private Sub mnuSelectAll_Click(sender As Object, e As EventArgs) Handles mnuSelectAll.Click
-src\Omskep.App\MainForm.vb:542: Private Sub mnuGoToError_Click(sender As Object, e As EventArgs) Handles mnuGoToError.Click
-src\Omskep.App\MainForm.vb:547: Private Sub mnuGoToCause_Click(sender As Object, e As EventArgs) Handles mnuGoToCause.Click
-src\Omskep.App\MainForm.vb:552: Private Sub mnuWordWrap_Click(sender As Object, e As EventArgs) Handles mnuWordWrap.Click
-src\Omskep.App\MainForm.vb:559: Private Sub DoPaste(plainText As Boolean)
-src\Omskep.App\MainForm.vb:574: Private Shared Function ReadClipboardText() As String
-src\Omskep.App\MainForm.vb:584: Private Sub BuildEditorContextMenu()
-src\Omskep.App\MainForm.vb:600: Private Sub mnuReviewMarks_Click(sender As Object, e As EventArgs) Handles mnuReviewMarks.Click
-src\Omskep.App\MainForm.vb:605: Private Sub mnuDirectWrite_Click(sender As Object, e As EventArgs) Handles mnuDirectWrite.Click
-src\Omskep.App\MainForm.vb:611: Private Sub RefreshReviewMarks()
-src\Omskep.App\MainForm.vb:621: Private Sub mnuReverseHebrew_Click(sender As Object, e As EventArgs) Handles mnuReverseHebrew.Click
-src\Omskep.App\MainForm.vb:625: Private Sub ReverseHebrew()
-src\Omskep.App\MainForm.vb:663: Private Sub EnsureFindDialog()
-src\Omskep.App\MainForm.vb:669: Private Sub mnuFind_Click(sender As Object, e As EventArgs) Handles mnuFind.Click
-src\Omskep.App\MainForm.vb:674: Private Sub mnuReplace_Click(sender As Object, e As EventArgs) Handles mnuReplace.Click
-src\Omskep.App\MainForm.vb:679: Private Sub mnuFindNext_Click(sender As Object, e As EventArgs) Handles mnuFindNext.Click
-src\Omskep.App\MainForm.vb:684: Private Sub mnuFindPrevious_Click(sender As Object, e As EventArgs) Handles mnuFindPrevious.Click
-src\Omskep.App\MainForm.vb:691: Private Sub mnuSettings_Click(sender As Object, e As EventArgs) Handles mnuSettings.Click
-src\Omskep.App\MainForm.vb:695: Private Sub ShowSettings()
+src\Omskep.App\MainForm.vb:40: Public Sub New()
+src\Omskep.App\MainForm.vb:44: Public Sub New(session As AppSession)
+src\Omskep.App\MainForm.vb:59: Private Sub OnSessionStateChanged(sender As Object, e As EventArgs)
+src\Omskep.App\MainForm.vb:68: Private Sub ApplyState()
+src\Omskep.App\MainForm.vb:117: Private Sub ShowNote(message As String)
+src\Omskep.App\MainForm.vb:124: Private Sub tmrNote_Tick(sender As Object, e As EventArgs) Handles tmrNote.Tick
+src\Omskep.App\MainForm.vb:130: Private Sub statusMain_SizeChanged(sender As Object, e As EventArgs) Handles statusMain.SizeChanged
+src\Omskep.App\MainForm.vb:138: Private Sub FitStatusBar()
+src\Omskep.App\MainForm.vb:150: Private Function StatusTextWidth(value As String) As Integer
+src\Omskep.App\MainForm.vb:155: Private Function Shorten(value As String, maxWidth As Integer) As String
+src\Omskep.App\MainForm.vb:171: Private Sub ShowError(message As String)
+src\Omskep.App\MainForm.vb:176: Private Function Scaffold() As ScaffoldChoice
+src\Omskep.App\MainForm.vb:211: Private Sub MainForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+src\Omskep.App\MainForm.vb:231: Private Sub MainForm_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
+src\Omskep.App\MainForm.vb:249: Private Sub btnOpenSettings_Click(sender As Object, e As EventArgs) Handles btnOpenSettings.Click
+src\Omskep.App\MainForm.vb:255: Private Sub ssmlEditor_ContentChanged() Handles ssmlEditor.ContentChanged
+src\Omskep.App\MainForm.vb:262: Private Sub ssmlEditor_DirtyChanged(isDirty As Boolean) Handles ssmlEditor.DirtyChanged
+src\Omskep.App\MainForm.vb:269: Private Sub tmrCheck_Tick(sender As Object, e As EventArgs) Handles tmrCheck.Tick
+src\Omskep.App\MainForm.vb:274: Private Sub RunCheckNow()
+src\Omskep.App\MainForm.vb:288: Private Sub tmrAutosave_Tick(sender As Object, e As EventArgs) Handles tmrAutosave.Tick
+src\Omskep.App\MainForm.vb:297: Private Sub OfferRecovery()
+src\Omskep.App\MainForm.vb:319: Private Sub RestoreFrom(item As RecoveryItem)
+src\Omskep.App\MainForm.vb:339: Private Sub mnuNew_Click(sender As Object, e As EventArgs) Handles mnuNew.Click
+src\Omskep.App\MainForm.vb:344: Private Sub StartNewDocument()
+src\Omskep.App\MainForm.vb:380: Private Function TryLoad(path As String) As String
+src\Omskep.App\MainForm.vb:389: Private Sub OpenLoadedSsml(path As String, fileText As String)
+src\Omskep.App\MainForm.vb:408: Private Sub SetBusy(value As Boolean)
+src\Omskep.App\MainForm.vb:415: Private Sub ApplyImport(result As ImportResult)
+src\Omskep.App\MainForm.vb:428: Private Sub AfterContentReplaced()
+src\Omskep.App\MainForm.vb:436: Private Sub mnuSave_Click(sender As Object, e As EventArgs) Handles mnuSave.Click
+src\Omskep.App\MainForm.vb:440: Private Sub mnuSaveAs_Click(sender As Object, e As EventArgs) Handles mnuSaveAs.Click
+src\Omskep.App\MainForm.vb:444: Private Function SaveDocument() As Boolean
+src\Omskep.App\MainForm.vb:449: Private Function SaveDocumentAs() As Boolean
+src\Omskep.App\MainForm.vb:466: Private Function WriteTo(path As String) As Boolean
+src\Omskep.App\MainForm.vb:483: Private Function ConfirmDiscardChanges() As Boolean
+src\Omskep.App\MainForm.vb:497: Private Sub mnuExit_Click(sender As Object, e As EventArgs) Handles mnuExit.Click
+src\Omskep.App\MainForm.vb:501: Private Sub mnuExport_Click(sender As Object, e As EventArgs) Handles mnuExport.Click
+src\Omskep.App\MainForm.vb:521: Private Sub mnuUndo_Click(sender As Object, e As EventArgs) Handles mnuUndo.Click
+src\Omskep.App\MainForm.vb:525: Private Sub mnuRedo_Click(sender As Object, e As EventArgs) Handles mnuRedo.Click
+src\Omskep.App\MainForm.vb:529: Private Sub mnuCut_Click(sender As Object, e As EventArgs) Handles mnuCut.Click
+src\Omskep.App\MainForm.vb:533: Private Sub mnuCopy_Click(sender As Object, e As EventArgs) Handles mnuCopy.Click
+src\Omskep.App\MainForm.vb:537: Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
+src\Omskep.App\MainForm.vb:541: Private Sub mnuPastePlain_Click(sender As Object, e As EventArgs) Handles mnuPastePlain.Click
+src\Omskep.App\MainForm.vb:545: Private Sub mnuSelectAll_Click(sender As Object, e As EventArgs) Handles mnuSelectAll.Click
+src\Omskep.App\MainForm.vb:549: Private Sub mnuGoToError_Click(sender As Object, e As EventArgs) Handles mnuGoToError.Click
+src\Omskep.App\MainForm.vb:554: Private Sub mnuGoToCause_Click(sender As Object, e As EventArgs) Handles mnuGoToCause.Click
+src\Omskep.App\MainForm.vb:559: Private Sub mnuWordWrap_Click(sender As Object, e As EventArgs) Handles mnuWordWrap.Click
+src\Omskep.App\MainForm.vb:566: Private Sub DoPaste(plainText As Boolean)
+src\Omskep.App\MainForm.vb:581: Private Shared Function ReadClipboardText() As String
+src\Omskep.App\MainForm.vb:591: Private Sub BuildEditorContextMenu()
+src\Omskep.App\MainForm.vb:608: Private Sub mnuReviewMarks_Click(sender As Object, e As EventArgs) Handles mnuReviewMarks.Click
+src\Omskep.App\MainForm.vb:613: Private Sub mnuDirectWrite_Click(sender As Object, e As EventArgs) Handles mnuDirectWrite.Click
+src\Omskep.App\MainForm.vb:619: Private Sub RefreshReviewMarks()
+src\Omskep.App\MainForm.vb:629: Private Sub mnuReverseHebrew_Click(sender As Object, e As EventArgs) Handles mnuReverseHebrew.Click
+src\Omskep.App\MainForm.vb:633: Private Sub ReverseHebrew()
+src\Omskep.App\MainForm.vb:673: Private Sub mnuVoiceChange_Click(sender As Object, e As EventArgs) Handles mnuVoiceChange.Click
+src\Omskep.App\MainForm.vb:677: Private Sub ChangeVoice()
+src\Omskep.App\MainForm.vb:704: Private Sub EnsureFindDialog()
+src\Omskep.App\MainForm.vb:710: Private Sub mnuFind_Click(sender As Object, e As EventArgs) Handles mnuFind.Click
+src\Omskep.App\MainForm.vb:715: Private Sub mnuReplace_Click(sender As Object, e As EventArgs) Handles mnuReplace.Click
+src\Omskep.App\MainForm.vb:720: Private Sub mnuFindNext_Click(sender As Object, e As EventArgs) Handles mnuFindNext.Click
+src\Omskep.App\MainForm.vb:725: Private Sub mnuFindPrevious_Click(sender As Object, e As EventArgs) Handles mnuFindPrevious.Click
+src\Omskep.App\MainForm.vb:732: Private Sub mnuSettings_Click(sender As Object, e As EventArgs) Handles mnuSettings.Click
+src\Omskep.App\MainForm.vb:736: Private Sub ShowSettings()
 src\Omskep.App\Program.vb:6: Friend Module Program
 src\Omskep.App\Program.vb:9: Friend Sub Main(args As String())
 src\Omskep.App\Program.vb:29: Private Sub OnThreadException(sender As Object, e As Threading.ThreadExceptionEventArgs)
@@ -106,45 +108,46 @@ src\Omskep.App\SettingsForm.vb:104: Private Sub btnClear_Click(sender As Object,
 src\Omskep.App\SettingsForm.vb:143: Private Sub SettingsForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
 src\Omskep.App\SettingsForm.vb:147: Private Sub SettingsForm_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
 src\Omskep.App\Editor\SsmlEditor.vb:23: Public NotInheritable Class SsmlEditor
-src\Omskep.App\Editor\SsmlEditor.vb:58: Public Sub New()
-src\Omskep.App\Editor\SsmlEditor.vb:82: Private Sub CalibratePositions()
-src\Omskep.App\Editor\SsmlEditor.vb:91: Private Function CharIndexFromUnits(units As Integer) As Integer
-src\Omskep.App\Editor\SsmlEditor.vb:98: Private Function Units(value As String) As Integer
-src\Omskep.App\Editor\SsmlEditor.vb:103: Private Sub ConfigureEditor()
-src\Omskep.App\Editor\SsmlEditor.vb:123: Private Sub ConfigureLexer()
-src\Omskep.App\Editor\SsmlEditor.vb:141: Private Sub ConfigureMargins()
-src\Omskep.App\Editor\SsmlEditor.vb:150: Private Sub ConfigureIndicators()
-src\Omskep.App\Editor\SsmlEditor.vb:164: Public ReadOnly Property DocumentText As String
-src\Omskep.App\Editor\SsmlEditor.vb:172: Public Sub LoadText(newText As String)
-src\Omskep.App\Editor\SsmlEditor.vb:189: Public Sub MarkSaved()
-src\Omskep.App\Editor\SsmlEditor.vb:195: Public Property IsEditable As Boolean
-src\Omskep.App\Editor\SsmlEditor.vb:205: Public Property WordWrap As Boolean
-src\Omskep.App\Editor\SsmlEditor.vb:216: Public Property UseDirectWrite As Boolean
-src\Omskep.App\Editor\SsmlEditor.vb:227: Public Sub UseContextMenu(menu As ContextMenuStrip)
-src\Omskep.App\Editor\SsmlEditor.vb:232: Public ReadOnly Property LineCount As Integer
-src\Omskep.App\Editor\SsmlEditor.vb:240: Public Sub UndoEdit()
-src\Omskep.App\Editor\SsmlEditor.vb:244: Public Sub RedoEdit()
-src\Omskep.App\Editor\SsmlEditor.vb:248: Public Sub CutSelection()
-src\Omskep.App\Editor\SsmlEditor.vb:252: Public Sub CopySelection()
-src\Omskep.App\Editor\SsmlEditor.vb:256: Public Sub SelectEverything()
-src\Omskep.App\Editor\SsmlEditor.vb:261: Public Sub InsertAtCaret(insertText As String)
-src\Omskep.App\Editor\SsmlEditor.vb:272: Public ReadOnly Property SelectedText As String
-src\Omskep.App\Editor\SsmlEditor.vb:279: Public Sub ReplaceSelectionText(replacement As String)
-src\Omskep.App\Editor\SsmlEditor.vb:287: Public Function ApplyEdits(edits As IEnumerable(Of TextEdit), expectedText As String) As Boolean
-src\Omskep.App\Editor\SsmlEditor.vb:322: Public ReadOnly Property SelectionStartIndex As Integer
-src\Omskep.App\Editor\SsmlEditor.vb:329: Public ReadOnly Property SelectionEndIndex As Integer
-src\Omskep.App\Editor\SsmlEditor.vb:336: Public Sub SelectCharacterRange(startIndex As Integer, length As Integer)
-src\Omskep.App\Editor\SsmlEditor.vb:347: Public Sub ReplaceAllText(newText As String)
-src\Omskep.App\Editor\SsmlEditor.vb:361: Public Sub ClearMarks()
-src\Omskep.App\Editor\SsmlEditor.vb:369: Public Sub ShowCheck(result As CheckResult)
-src\Omskep.App\Editor\SsmlEditor.vb:399: Public Sub ShowFlags(flags As IEnumerable(Of ImportFlag))
-src\Omskep.App\Editor\SsmlEditor.vb:409: Public Sub GoToLineColumn(line As Integer, column As Integer)
-src\Omskep.App\Editor\SsmlEditor.vb:420: Private Sub OnSciTextChanged(sender As Object, e As EventArgs)
-src\Omskep.App\Editor\SsmlEditor.vb:425: Private Sub UpdateLineNumberWidth()
-src\Omskep.App\Editor\SsmlEditor.vb:430: Private Function LineTextWithoutEol(line As Integer) As String
-src\Omskep.App\Editor\SsmlEditor.vb:434: Private Shared Function IsTokenBoundary(c As Char) As Boolean
-src\Omskep.App\Editor\SsmlEditor.vb:438: Private Sub MarkRange(indicator As Integer, line As Integer, column As Integer, length As Integer)
-src\Omskep.App\Editor\SsmlEditor.vb:448: Private Function TryRange(line As Integer, column As Integer, length As Integer,
+src\Omskep.App\Editor\SsmlEditor.vb:59: Public Sub New()
+src\Omskep.App\Editor\SsmlEditor.vb:83: Private Sub CalibratePositions()
+src\Omskep.App\Editor\SsmlEditor.vb:92: Private Function CharIndexFromUnits(units As Integer) As Integer
+src\Omskep.App\Editor\SsmlEditor.vb:99: Private Function Units(value As String) As Integer
+src\Omskep.App\Editor\SsmlEditor.vb:104: Private Sub ConfigureEditor()
+src\Omskep.App\Editor\SsmlEditor.vb:124: Private Sub ConfigureLexer()
+src\Omskep.App\Editor\SsmlEditor.vb:142: Private Sub ConfigureMargins()
+src\Omskep.App\Editor\SsmlEditor.vb:151: Private Sub ConfigureIndicators()
+src\Omskep.App\Editor\SsmlEditor.vb:167: Public ReadOnly Property DocumentText As String
+src\Omskep.App\Editor\SsmlEditor.vb:175: Public Sub LoadText(newText As String)
+src\Omskep.App\Editor\SsmlEditor.vb:192: Public Sub MarkSaved()
+src\Omskep.App\Editor\SsmlEditor.vb:198: Public Property IsEditable As Boolean
+src\Omskep.App\Editor\SsmlEditor.vb:208: Public Property WordWrap As Boolean
+src\Omskep.App\Editor\SsmlEditor.vb:219: Public Property UseDirectWrite As Boolean
+src\Omskep.App\Editor\SsmlEditor.vb:230: Public Sub UseContextMenu(menu As ContextMenuStrip)
+src\Omskep.App\Editor\SsmlEditor.vb:235: Public ReadOnly Property LineCount As Integer
+src\Omskep.App\Editor\SsmlEditor.vb:243: Public Sub UndoEdit()
+src\Omskep.App\Editor\SsmlEditor.vb:247: Public Sub RedoEdit()
+src\Omskep.App\Editor\SsmlEditor.vb:251: Public Sub CutSelection()
+src\Omskep.App\Editor\SsmlEditor.vb:255: Public Sub CopySelection()
+src\Omskep.App\Editor\SsmlEditor.vb:259: Public Sub SelectEverything()
+src\Omskep.App\Editor\SsmlEditor.vb:264: Public Sub InsertAtCaret(insertText As String)
+src\Omskep.App\Editor\SsmlEditor.vb:275: Public ReadOnly Property SelectedText As String
+src\Omskep.App\Editor\SsmlEditor.vb:282: Public Sub ReplaceSelectionText(replacement As String)
+src\Omskep.App\Editor\SsmlEditor.vb:290: Public Function ApplyEdits(edits As IEnumerable(Of TextEdit), expectedText As String) As Boolean
+src\Omskep.App\Editor\SsmlEditor.vb:325: Public ReadOnly Property SelectionStartIndex As Integer
+src\Omskep.App\Editor\SsmlEditor.vb:332: Public ReadOnly Property SelectionEndIndex As Integer
+src\Omskep.App\Editor\SsmlEditor.vb:339: Public Sub SelectCharacterRange(startIndex As Integer, length As Integer)
+src\Omskep.App\Editor\SsmlEditor.vb:350: Public Sub ReplaceAllText(newText As String)
+src\Omskep.App\Editor\SsmlEditor.vb:364: Public Sub ClearMarks()
+src\Omskep.App\Editor\SsmlEditor.vb:372: Public Sub ShowCheck(result As CheckResult)
+src\Omskep.App\Editor\SsmlEditor.vb:402: Public Sub ShowFlags(flags As IEnumerable(Of ImportFlag))
+src\Omskep.App\Editor\SsmlEditor.vb:414: Public Sub ShowNestedVoiceMarks(marks As IEnumerable(Of NestedVoiceMark))
+src\Omskep.App\Editor\SsmlEditor.vb:424: Public Sub GoToLineColumn(line As Integer, column As Integer)
+src\Omskep.App\Editor\SsmlEditor.vb:435: Private Sub OnSciTextChanged(sender As Object, e As EventArgs)
+src\Omskep.App\Editor\SsmlEditor.vb:440: Private Sub UpdateLineNumberWidth()
+src\Omskep.App\Editor\SsmlEditor.vb:445: Private Function LineTextWithoutEol(line As Integer) As String
+src\Omskep.App\Editor\SsmlEditor.vb:449: Private Shared Function IsTokenBoundary(c As Char) As Boolean
+src\Omskep.App\Editor\SsmlEditor.vb:453: Private Sub MarkRange(indicator As Integer, line As Integer, column As Integer, length As Integer)
+src\Omskep.App\Editor\SsmlEditor.vb:463: Private Function TryRange(line As Integer, column As Integer, length As Integer,
 src\Omskep.App\Secrets\DpapiSecretProtector.vb:12: Public NotInheritable Class DpapiSecretProtector
 src\Omskep.App\Secrets\DpapiSecretProtector.vb:18: Public Function Protect(plain As Byte()) As Byte() Implements ISecretProtector.Protect
 src\Omskep.App\Secrets\DpapiSecretProtector.vb:24: Public Function Unprotect(protectedBlob As Byte()) As Byte() Implements ISecretProtector.Unprotect
@@ -289,6 +292,17 @@ src\Omskep.Core\Documents\HebrewOrder.vb:67: Private Sub New()
 src\Omskep.Core\Documents\HebrewOrder.vb:73: Public Shared Function ReverseRuns(text As String, skipRunsThatLookCorrect As Boolean) As HebrewReverseResult
 src\Omskep.Core\Documents\HebrewOrder.vb:101: Friend Shared Function LooksCorrect(run As String) As Boolean
 src\Omskep.Core\Documents\HebrewOrder.vb:120: Private Shared Function IsFinalForm(letter As Char) As Boolean
+src\Omskep.Core\Documents\NestedVoiceFinder.vb:10: Public NotInheritable Class NestedVoiceMark
+src\Omskep.Core\Documents\NestedVoiceFinder.vb:12: Public ReadOnly Property Line As Integer
+src\Omskep.Core\Documents\NestedVoiceFinder.vb:13: Public ReadOnly Property Column As Integer
+src\Omskep.Core\Documents\NestedVoiceFinder.vb:14: Public ReadOnly Property Length As Integer
+src\Omskep.Core\Documents\NestedVoiceFinder.vb:16: Public Sub New(line As Integer, column As Integer, length As Integer)
+src\Omskep.Core\Documents\NestedVoiceFinder.vb:36: Public NotInheritable Class NestedVoiceFinder
+src\Omskep.Core\Documents\NestedVoiceFinder.vb:38: Private Sub New()
+src\Omskep.Core\Documents\NestedVoiceFinder.vb:41: Public Shared Function Find(documentText As String) As IReadOnlyList(Of NestedVoiceMark)
+src\Omskep.Core\Documents\NestedVoiceFinder.vb:68: Private Shared Function FindNestedVoiceOffsets(text As String) As List(Of Integer)
+src\Omskep.Core\Documents\NestedVoiceFinder.vb:125: Private Shared Function Matches(text As String, at As Integer, literal As String) As Boolean
+src\Omskep.Core\Documents\NestedVoiceFinder.vb:132: Private Shared Function FindUnquotedGreaterThan(text As String, fromIndex As Integer) As Integer
 src\Omskep.Core\Documents\OmskepMetaFields.vb:17: Public NotInheritable Class OmskepMetaFields
 src\Omskep.Core\Documents\OmskepMetaFields.vb:21: Private Sub New(values As IReadOnlyDictionary(Of String, String))
 src\Omskep.Core\Documents\OmskepMetaFields.vb:25: Public Shared ReadOnly Property Empty As OmskepMetaFields = New OmskepMetaFields(New Dictionary(Of String, String)())
@@ -363,6 +377,64 @@ src\Omskep.Core\Documents\TextSearch.vb:175: Private Shared Function Build(patte
 src\Omskep.Core\Documents\TextSearch.vb:195: Private Shared Function FirstNonEmpty(rx As Regex, haystack As String, start As Integer) As Match
 src\Omskep.Core\Documents\TextSearch.vb:203: Private Shared Function Expand(found As Match, replacement As String, options As SearchOptions) As String
 src\Omskep.Core\Documents\TextSearch.vb:211: Private Shared Function UnescapeReplacement(value As String) As String
+src\Omskep.Core\Documents\VoicePickerListBuilder.vb:12: Public NotInheritable Class VoiceLocaleGroup
+src\Omskep.Core\Documents\VoicePickerListBuilder.vb:14: Public ReadOnly Property Locale As String
+src\Omskep.Core\Documents\VoicePickerListBuilder.vb:15: Public ReadOnly Property Voices As IReadOnlyList(Of VoiceInfo)
+src\Omskep.Core\Documents\VoicePickerListBuilder.vb:17: Public Sub New(locale As String, voices As IReadOnlyList(Of VoiceInfo))
+src\Omskep.Core\Documents\VoicePickerListBuilder.vb:32: Public NotInheritable Class VoicePickerListBuilder
+src\Omskep.Core\Documents\VoicePickerListBuilder.vb:34: Private Sub New()
+src\Omskep.Core\Documents\VoicePickerListBuilder.vb:37: Public Shared Function Build(documentText As String, catalog As VoiceCatalog) As IReadOnlyList(Of VoiceLocaleGroup)
+src\Omskep.Core\Documents\VoicePickerListBuilder.vb:70: Private Shared Function CanonicalLocale(catalog As VoiceCatalog, locale As String) As String
+src\Omskep.Core\Documents\VoicePickerListBuilder.vb:80: Private Shared Function FindDefaultLocale(text As String) As String
+src\Omskep.Core\Documents\VoicePickerListBuilder.vb:114: Private Shared Function FindUsedLocales(text As String, catalog As VoiceCatalog) As List(Of String)
+src\Omskep.Core\Documents\VoicePickerListBuilder.vb:169: Private Shared Function GuessLocaleFromShortName(shortName As String) As String
+src\Omskep.Core\Documents\VoicePickerListBuilder.vb:175: Private Shared Function Matches(text As String, at As Integer, literal As String) As Boolean
+src\Omskep.Core\Documents\VoicePickerListBuilder.vb:179: Private Shared Function FindUnquotedGreaterThan(text As String, fromIndex As Integer) As Integer
+src\Omskep.Core\Documents\VoicePickerListBuilder.vb:194: Private Shared Sub FindAttributeValue(text As String, tagStart As Integer, tagEnd As Integer, attrName As String, ByRef valueStart As Integer, ByRef valueLength As Integer)
+src\Omskep.Core\Documents\VoiceSplitter.vb:16: Public NotInheritable Class VoiceSplitResult
+src\Omskep.Core\Documents\VoiceSplitter.vb:18: Public ReadOnly Property IsSuccess As Boolean
+src\Omskep.Core\Documents\VoiceSplitter.vb:19: Public ReadOnly Property NewText As String
+src\Omskep.Core\Documents\VoiceSplitter.vb:20: Public ReadOnly Property Edits As IReadOnlyList(Of TextEdit)
+src\Omskep.Core\Documents\VoiceSplitter.vb:22: Public ReadOnly Property FailureReason As String
+src\Omskep.Core\Documents\VoiceSplitter.vb:24: Private Sub New(isSuccess As Boolean, newText As String, edits As IReadOnlyList(Of TextEdit), failureReason As String)
+src\Omskep.Core\Documents\VoiceSplitter.vb:31: Friend Shared Function Success(newText As String, edits As IReadOnlyList(Of TextEdit)) As VoiceSplitResult
+src\Omskep.Core\Documents\VoiceSplitter.vb:35: Friend Shared Function Failure(reason As String) As VoiceSplitResult
+src\Omskep.Core\Documents\VoiceSplitter.vb:69: Public NotInheritable Class VoiceSplitter
+src\Omskep.Core\Documents\VoiceSplitter.vb:71: Private Sub New()
+src\Omskep.Core\Documents\VoiceSplitter.vb:74: Public Shared Function Split(documentText As String, selectionStart As Integer, selectionLength As Integer, newVoiceName As String) As VoiceSplitResult
+src\Omskep.Core\Documents\VoiceSplitter.vb:176: Private Shared Function RenameVoice(documentText As String, voice As VoiceSpan, newName As String) As VoiceSplitResult
+src\Omskep.Core\Documents\VoiceSplitter.vb:183: Private Shared Function FindContainingVoice(voices As IReadOnlyList(Of VoiceSpan), start As Integer, [end] As Integer) As VoiceSpan
+src\Omskep.Core\Documents\VoiceSplitter.vb:193: Private Shared Function ApplyLocally(documentText As String, edits As IReadOnlyList(Of TextEdit)) As String
+src\Omskep.Core\Documents\VoiceSplitter.vb:208: Private NotInheritable Class VoiceSpan
+src\Omskep.Core\Documents\VoiceSplitter.vb:209: Public Property Name As String
+src\Omskep.Core\Documents\VoiceSplitter.vb:210: Public Property TagOpenStart As Integer
+src\Omskep.Core\Documents\VoiceSplitter.vb:211: Public Property ContentStart As Integer
+src\Omskep.Core\Documents\VoiceSplitter.vb:212: Public Property ContentEnd As Integer
+src\Omskep.Core\Documents\VoiceSplitter.vb:213: Public Property TagCloseEnd As Integer
+src\Omskep.Core\Documents\VoiceSplitter.vb:214: Public Property NameValueStart As Integer
+src\Omskep.Core\Documents\VoiceSplitter.vb:215: Public Property NameValueLength As Integer
+src\Omskep.Core\Documents\VoiceSplitter.vb:218: Private NotInheritable Class ElementSpan
+src\Omskep.Core\Documents\VoiceSplitter.vb:219: Public Property Name As String
+src\Omskep.Core\Documents\VoiceSplitter.vb:220: Public Property TagOpenStart As Integer
+src\Omskep.Core\Documents\VoiceSplitter.vb:221: Public Property TagCloseEnd As Integer
+src\Omskep.Core\Documents\VoiceSplitter.vb:224: Private NotInheritable Class ScanResult
+src\Omskep.Core\Documents\VoiceSplitter.vb:225: Public Property RootStart As Integer = -1
+src\Omskep.Core\Documents\VoiceSplitter.vb:226: Public Property MaxVoiceDepth As Integer = 0
+src\Omskep.Core\Documents\VoiceSplitter.vb:227: Public Property NestedVoiceLocationText As String = String.Empty
+src\Omskep.Core\Documents\VoiceSplitter.vb:228: Public Property Voices As New List(Of VoiceSpan)()
+src\Omskep.Core\Documents\VoiceSplitter.vb:229: Public Property InlineElements As New List(Of ElementSpan)()
+src\Omskep.Core\Documents\VoiceSplitter.vb:232: Private NotInheritable Class OpenTag
+src\Omskep.Core\Documents\VoiceSplitter.vb:233: Public Property Name As String
+src\Omskep.Core\Documents\VoiceSplitter.vb:234: Public Property TagOpenStart As Integer
+src\Omskep.Core\Documents\VoiceSplitter.vb:235: Public Property ContentStart As Integer
+src\Omskep.Core\Documents\VoiceSplitter.vb:236: Public Property NameValueStart As Integer
+src\Omskep.Core\Documents\VoiceSplitter.vb:237: Public Property NameValueLength As Integer
+src\Omskep.Core\Documents\VoiceSplitter.vb:248: Private NotInheritable Class Scanner
+src\Omskep.Core\Documents\VoiceSplitter.vb:250: Private Sub New()
+src\Omskep.Core\Documents\VoiceSplitter.vb:253: Public Shared Function Scan(text As String) As ScanResult
+src\Omskep.Core\Documents\VoiceSplitter.vb:367: Private Shared Function Matches(text As String, at As Integer, literal As String) As Boolean
+src\Omskep.Core\Documents\VoiceSplitter.vb:373: Private Shared Function FindUnquotedGreaterThan(text As String, fromIndex As Integer) As Integer
+src\Omskep.Core\Documents\VoiceSplitter.vb:391: Private Shared Sub FindAttributeValue(text As String, tagStart As Integer, tagEnd As Integer, attrName As String, ByRef valueStart As Integer, ByRef valueLength As Integer)
 src\Omskep.Core\Documents\WellFormednessChecker.vb:15: Public NotInheritable Class CheckResult
 src\Omskep.Core\Documents\WellFormednessChecker.vb:19: Public ReadOnly Property IsWellFormed As Boolean
 src\Omskep.Core\Documents\WellFormednessChecker.vb:22: Public ReadOnly Property Line As Integer
@@ -965,6 +1037,26 @@ tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:178: Public Funct
 tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:182: Public Function ReadMetadata(pdfPath As String) As PdfDocumentMetadata Implements IPdfPageReader.ReadMetadata
 tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:188: Public Sub A_text_file_import_says_which_file_it_came_from()
 tests\Omskep.Core.Tests\Documents\HebrewAndCommandLineTests.vb:194: Public Sub Pasted_text_still_says_pasted()
+tests\Omskep.Core.Tests\Documents\NestedVoiceFinderTests.vb:11: Public Class NestedVoiceFinderTests
+tests\Omskep.Core.Tests\Documents\NestedVoiceFinderTests.vb:14: Public Sub EmptyOrNullDocument_ReturnsNoMarks_DoesNotThrow()
+tests\Omskep.Core.Tests\Documents\NestedVoiceFinderTests.vb:20: Public Sub CleanDocumentWithSeveralVoices_ReturnsNoMarks()
+tests\Omskep.Core.Tests\Documents\NestedVoiceFinderTests.vb:26: Public Sub DocumentWithNoVoiceAtAll_ReturnsNoMarks()
+tests\Omskep.Core.Tests\Documents\NestedVoiceFinderTests.vb:31: Public Sub SingleNestedVoice_ReturnsOneMark_AtTheInnerTagsPosition()
+tests\Omskep.Core.Tests\Documents\NestedVoiceFinderTests.vb:44: Public Sub TwoSeparateNestedVoices_ReturnsTwoMarks()
+tests\Omskep.Core.Tests\Documents\NestedVoiceFinderTests.vb:57: Public Sub TripleNestedVoice_FlagsEachLevelBeyondTheFirst()
+tests\Omskep.Core.Tests\Documents\NestedVoiceFinderTests.vb:65: Public Sub SelfClosingNestedVoice_IsStillFlagged()
+tests\Omskep.Core.Tests\Documents\NestedVoiceFinderTests.vb:73: Public Sub SelfClosingVoice_DoesNotPersistDepth_SubsequentSiblingVoiceIsClean()
+tests\Omskep.Core.Tests\Documents\NestedVoiceFinderTests.vb:83: Public Sub NestedVoiceOnASecondLine_ReportsCorrectLineAndColumn()
+tests\Omskep.Core.Tests\Documents\NestedVoiceFinderTests.vb:99: Public Sub TextLookingLikeVoiceInsideAComment_IsNotFlagged()
+tests\Omskep.Core.Tests\Documents\NestedVoiceFinderTests.vb:105: Public Sub TextLookingLikeVoiceInsideCData_IsNotFlagged()
+tests\Omskep.Core.Tests\Documents\NestedVoiceFinderTests.vb:111: Public Sub AttributeValueContainingAngleBracketLikeText_DoesNotConfuseTheScanner()
+tests\Omskep.Core.Tests\Documents\NestedVoiceFinderTests.vb:117: Public Sub ElementNamedVoicemailIsNotMistakenForVoice()
+tests\Omskep.Core.Tests\Documents\NestedVoiceFinderTests.vb:125: Public Sub UnterminatedVoiceTag_DoesNotThrow_ReturnsWhateverWasFoundBeforeIt()
+tests\Omskep.Core.Tests\Documents\NestedVoiceFinderTests.vb:133: Public Sub UnterminatedComment_DoesNotThrow()
+tests\Omskep.Core.Tests\Documents\NestedVoiceFinderTests.vb:139: Public Sub DanglingLessThanAtEndOfDocument_DoesNotThrow()
+tests\Omskep.Core.Tests\Documents\NestedVoiceFinderTests.vb:145: Public Sub ExtraClosingVoiceTag_DoesNotGoNegativeOrThrow()
+tests\Omskep.Core.Tests\Documents\NestedVoiceFinderTests.vb:153: Public Sub CompletelyUnrelatedGarbageText_ReturnsNoMarks_DoesNotThrow()
+tests\Omskep.Core.Tests\Documents\NestedVoiceFinderTests.vb:158: Public Sub VeryLargeCleanDocument_CompletesPromptlyWithNoMarks()
 tests\Omskep.Core.Tests\Documents\OmskepMetaFieldsTests.vb:11: Public Class OmskepMetaFieldsTests
 tests\Omskep.Core.Tests\Documents\OmskepMetaFieldsTests.vb:14: Public Sub A_document_with_no_block_treats_every_field_as_null()
 tests\Omskep.Core.Tests\Documents\OmskepMetaFieldsTests.vb:21: Public Sub Empty_or_whitespace_input_treats_every_field_as_null()
@@ -1051,6 +1143,60 @@ tests\Omskep.Core.Tests\Documents\TextSearchTests.vb:166: Public Sub Replace_at_
 tests\Omskep.Core.Tests\Documents\TextSearchTests.vb:177: Public Sub Hebrew_and_other_Unicode_text_is_searched_and_replaced_correctly()
 tests\Omskep.Core.Tests\Documents\TextSearchTests.vb:186: Public Sub Null_text_is_treated_as_empty()
 tests\Omskep.Core.Tests\Documents\TextSearchTests.vb:192: Public Sub Random_patterns_and_texts_never_throw_and_edits_always_match_the_new_text()
+tests\Omskep.Core.Tests\Documents\VoicePickerListBuilderTests.vb:12: Public Class VoicePickerListBuilderTests
+tests\Omskep.Core.Tests\Documents\VoicePickerListBuilderTests.vb:14: Private Shared Function Voice(shortName As String, locale As String, Optional gender As String = "Female") As VoiceInfo
+tests\Omskep.Core.Tests\Documents\VoicePickerListBuilderTests.vb:18: Private Shared Function CatalogWithAfrikaansEnglishHebrew() As VoiceCatalog
+tests\Omskep.Core.Tests\Documents\VoicePickerListBuilderTests.vb:29: Private Shared Function Doc(defaultLocale As String, body As String) As String
+tests\Omskep.Core.Tests\Documents\VoicePickerListBuilderTests.vb:36: Public Sub NullOrEmptyCatalogOrDocument_ReturnsEmptyList_DoesNotThrow()
+tests\Omskep.Core.Tests\Documents\VoicePickerListBuilderTests.vb:44: Public Sub DefaultLocaleFirst_ThenRestAlphabetical_WhenNoVoicesUsedYet()
+tests\Omskep.Core.Tests\Documents\VoicePickerListBuilderTests.vb:57: Public Sub UsedLocale_ComesSecond_BeforeTheRestOfTheCatalog()
+tests\Omskep.Core.Tests\Documents\VoicePickerListBuilderTests.vb:69: Public Sub SeveralUsedLocales_AreAlphabeticalAmongThemselves()
+tests\Omskep.Core.Tests\Documents\VoicePickerListBuilderTests.vb:81: Public Sub DefaultLocaleAlsoUsedElsewhere_AppearsOnlyOnce()
+tests\Omskep.Core.Tests\Documents\VoicePickerListBuilderTests.vb:91: Public Sub VoicesWithinALocale_MatchTheCatalogsOwnOrder()
+tests\Omskep.Core.Tests\Documents\VoicePickerListBuilderTests.vb:102: Public Sub NoXmlLangOnSpeak_SkipsTheDefaultLocaleGroup_RestStillAlphabetical()
+tests\Omskep.Core.Tests\Documents\VoicePickerListBuilderTests.vb:113: Public Sub VoiceNameNotInCatalog_FallsBackToShortNameLocaleGuess()
+tests\Omskep.Core.Tests\Documents\VoicePickerListBuilderTests.vb:124: Public Sub VoiceNameNotInCatalogAndLocaleGuessAlsoNotInCatalog_IsSkippedEntirely_NoThrow()
+tests\Omskep.Core.Tests\Documents\VoicePickerListBuilderTests.vb:133: Public Sub DefaultLocaleNotInCatalog_IsSkipped_NoCrash()
+tests\Omskep.Core.Tests\Documents\VoicePickerListBuilderTests.vb:141: Public Sub XmlLangCasingDiffersFromCatalog_StillMatchesCaseInsensitively()
+tests\Omskep.Core.Tests\Documents\VoicePickerListBuilderTests.vb:149: Public Sub VoiceInsideAComment_IsNotCountedAsUsed()
+tests\Omskep.Core.Tests\Documents\VoicePickerListBuilderTests.vb:158: Public Sub MalformedDocument_DoesNotThrow_DegradesGracefully()
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:11: Public Class VoiceSplitterTests
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:16: Private Shared Function Doc(body As String, Optional defaultVoice As String = "af-ZA-WillemNeural") As String
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:23: Private Shared Function IndexOfOnce(text As String, needle As String) As Integer
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:32: Public Sub SelectionInsideOneVoice_SplitsIntoThreeBlocks_OriginalVoiceReopened()
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:44: Public Sub SelectionInsideOneVoice_LeadingAndTrailingTextPreservedByteForByte()
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:57: Public Sub BothFragmentsSplit_EditsAreOrderedLastFirst_MatchingApplyEditsContract()
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:74: Public Sub SelectionIsEntireVoiceContent_RenamesInPlace_NoSplitProduced()
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:88: Public Sub EmptySelectionInsideVoiceText_ResolvesToEnclosingVoice_BehavesAsRename()
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:101: Public Sub SelectionSpanningTwoAdjacentVoiceBlocks_IsRefused()
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:117: Public Sub SelectionStartingInsideSubElement_IsRefused()
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:127: Public Sub SelectionEndingInsidePhonemeElement_IsRefused()
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:137: Public Sub SelectionFullyContainingAnInlineElement_IsAllowed()
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:148: Public Sub SelectionBoundaryRefusal_DoesNotModifyDocument()
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:161: Public Sub SelectionStartsAtFirstNonWhitespaceChar_NoLeadingWhitespaceOnlyVoiceProduced()
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:172: Public Sub SelectionEndsAtLastNonWhitespaceChar_NoTrailingWhitespaceOnlyVoiceProduced()
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:183: Public Sub SelectionLeavesOnlyWhitespaceOnBothSides_CollapsesToRenameCase()
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:194: Public Sub WhitespaceOnlyFragment_NeverAppearsInOutput_AcrossSpacesTabsAndNewlines()
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:207: Public Sub CaretExactlyBetweenTwoVoices_IsRefused()
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:221: Public Sub SelectionIncludingLeadingSpace_SpaceTravelsWithSelectedText()
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:233: Public Sub DocumentWithNoVoiceElement_IsRefused()
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:242: Public Sub DocumentWithNoVoiceElement_RefusalDoesNotThrow()
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:252: Public Sub SelectionInsideOmskepMetaBlock_IsRefusedUnconditionally()
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:261: Public Sub SelectionBeforeBodyStartLine_IsRefusedEvenIfOtherwiseValid()
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:272: Public Sub CaretInsideOmskepMetaBlock_EmptySelection_IsRefused()
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:283: Public Sub DocumentAlreadyContainsNestedVoiceElsewhere_WholeOperationRefused_NotJustRepaired()
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:299: Public Sub AnyRefusal_LeavesDocumentByteForByteUnchanged()
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:307: Public Sub SuccessfulSplit_NeverProducesNestedVoice_VerifiedByReparsing()
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:319: Public Sub SuccessfulSplit_HebrewTextSurvivesByteForByte()
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:330: Public Sub SuccessfulSplit_AccentedAfrikaansTextSurvivesByteForByte()
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:343: Public Sub SuccessfulSplit_ResultIsAlwaysWellFormed_VerifiedByWellFormednessChecker()
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:354: Public Sub MalformedInputDocument_IsRefused_NeverGuessedAt()
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:364: Public Sub NullOrEmptyDocumentText_IsRefused_DoesNotThrow()
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:370: Public Sub SelectionIndicesOutOfRange_IsRefused_DoesNotThrow()
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:377: Public Sub NegativeOrInvertedSelectionRange_IsRefused_DoesNotThrow()
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:384: Public Sub NewVoiceNameIsNullOrEmpty_IsRefused()
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:392: Public Sub NewVoiceNameContainingXmlSpecialCharacters_IsRefusedOutright()
+tests\Omskep.Core.Tests\Documents\VoiceSplitterTests.vb:401: Public Sub VeryLargeDocument_SplitStillAppliedAsOneUndoStep()
 tests\Omskep.Core.Tests\Export\ExportEngineTests.vb:35: Public Class ExportEngineTests
 tests\Omskep.Core.Tests\Export\ExportEngineTests.vb:47: Private NotInheritable Class Rig
 tests\Omskep.Core.Tests\Export\ExportEngineTests.vb:53: Public ReadOnly Property Dir As Support.TempDir

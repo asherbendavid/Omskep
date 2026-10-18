@@ -6,6 +6,7 @@ Imports Omskep.Core.Documents
 Imports Omskep.Core.Export
 Imports Omskep.Core.Import
 Imports Omskep.Core.Session
+Imports Omskep.Core.Voices
 
 ''' <summary>
 ''' The main window. It holds no decisions: MainFormState and DocumentFormState say what is enabled and what to show,
@@ -677,9 +678,12 @@ Public Class MainForm
     Private Sub ChangeVoice()
         If _busy OrElse Not ssmlEditor.IsEditable Then Return
 
-        Dim newVoiceName As String = Microsoft.VisualBasic.Interaction.InputBox(
-            "Voice short name (e.g. en-US-JennyNeural):", "Use another voice", "")
-        If newVoiceName.Trim().Length = 0 Then Return ' cancelled
+        Dim documentText As String = ssmlEditor.DocumentText
+        Dim groups As IReadOnlyList(Of VoiceLocaleGroup) = VoicePickerListBuilder.Build(documentText, _session.Catalog)
+        Dim chosen As VoiceInfo = VoicePickerForm.PickVoice(Me, groups)
+        If chosen Is Nothing Then Return ' cancelled
+
+        Dim newVoiceName As String = chosen.ShortName
 
         Dim start As Integer = ssmlEditor.SelectionStartIndex
         Dim length As Integer = ssmlEditor.SelectionEndIndex - start
