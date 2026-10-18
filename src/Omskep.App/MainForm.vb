@@ -27,6 +27,7 @@ Public Class MainForm
     Private ReadOnly _editOnlyItems As New List(Of ToolStripItem)()
 
     Private _billableCount As Integer
+    Private _nestedVoiceMarks As IReadOnlyList(Of NestedVoiceMark) = Array.Empty(Of NestedVoiceMark)()
     Private _lastSnapshotRevision As Integer = -1
     Private _busy As Boolean
     Private _keepRecovery As Boolean
@@ -99,6 +100,9 @@ Public Class MainForm
         ssmlEditor.IsEditable = ds.EditorEnabled
         Text = ds.WindowTitle
         _checkFull = ds.CheckText
+        If _nestedVoiceMarks.Count > 0 Then
+            _checkFull &= " — nested <voice> at line " & _nestedVoiceMarks(0).Line.ToString(Globalization.CultureInfo.InvariantCulture) & "."
+        End If
         lblCount.Text = ds.CountText
 
         ' Until startup has read the settings the access state is only a default, so show no banner yet.
@@ -274,6 +278,8 @@ Public Class MainForm
         Dim result As CheckResult = WellFormednessChecker.Check(documentText)
         If _model.CheckCompleted(revision, result) Then ssmlEditor.ShowCheck(result)
         _billableCount = BillableCharacterCounter.CountUpperBound(documentText)
+        _nestedVoiceMarks = NestedVoiceFinder.Find(documentText)
+        ssmlEditor.ShowNestedVoiceMarks(_nestedVoiceMarks)
         ApplyState()
     End Sub
 

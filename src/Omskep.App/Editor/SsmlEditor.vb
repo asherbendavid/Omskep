@@ -43,6 +43,7 @@ Namespace Editor
         Private Const ErrorIndicator As Integer = 8
         Private Const CauseIndicator As Integer = 9
         Private Const FlagIndicator As Integer = 10
+        Private Const NestedVoiceIndicator As Integer = 11
 
         Private ReadOnly _sci As New Scintilla()
         Private _loading As Boolean
@@ -156,6 +157,8 @@ Namespace Editor
             _sci.Indicators(FlagIndicator).ForeColor = Color.Gold
             _sci.Indicators(FlagIndicator).Alpha = 90
             _sci.Indicators(FlagIndicator).Under = True
+            _sci.Indicators(NestedVoiceIndicator).Style = IndicatorStyle.Squiggle
+            _sci.Indicators(NestedVoiceIndicator).ForeColor = Color.Purple
         End Sub
 
         ' ---- text ----
@@ -359,7 +362,7 @@ Namespace Editor
 
         ''' <summary>Removes the error, cause and flag marks.</summary>
         Public Sub ClearMarks()
-            For Each indicator As Integer In {ErrorIndicator, CauseIndicator, FlagIndicator}
+            For Each indicator As Integer In {ErrorIndicator, CauseIndicator, FlagIndicator, NestedVoiceIndicator}
                 _sci.IndicatorCurrent = indicator
                 _sci.IndicatorClearRange(0, _sci.TextLength)
             Next
@@ -402,6 +405,18 @@ Namespace Editor
             If flags Is Nothing Then Return
             For Each flag As ImportFlag In flags
                 MarkRange(FlagIndicator, flag.Line, flag.Column, flag.Length)
+            Next
+        End Sub
+
+        ''' <summary>Highlights hand-typed &lt;voice&gt; elements nested inside another -- a project rule
+        ''' SsmlComposer already enforces unconditionally at export time; this surfaces it while typing
+        ''' instead of waiting. Marks only; export stays gated by SsmlComposer regardless of this.</summary>
+        Public Sub ShowNestedVoiceMarks(marks As IEnumerable(Of NestedVoiceMark))
+            _sci.IndicatorCurrent = NestedVoiceIndicator
+            _sci.IndicatorClearRange(0, _sci.TextLength)
+            If marks Is Nothing Then Return
+            For Each mark As NestedVoiceMark In marks
+                MarkRange(NestedVoiceIndicator, mark.Line, mark.Column, mark.Length)
             Next
         End Sub
 
