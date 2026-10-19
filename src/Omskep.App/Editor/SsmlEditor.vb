@@ -336,6 +336,13 @@ Namespace Editor
         End Property
 
         ''' <summary>Selects a range given as character offsets and scrolls it into view (focus stays where it is).</summary>
+        ''' <summary>The zero-based character index of the caret.</summary>
+        Public ReadOnly Property CaretIndex As Integer
+            Get
+                Return _sci.CurrentPosition
+            End Get
+        End Property
+
         Public Sub SelectCharacterRange(startIndex As Integer, length As Integer)
             Dim snapshot As String = _sci.Text
             Dim first As Integer = Math.Max(0, Math.Min(startIndex, snapshot.Length))
@@ -365,7 +372,6 @@ Namespace Editor
             For Each indicator As Integer In {ErrorIndicator, CauseIndicator, FlagIndicator, NestedVoiceIndicator}
                 _sci.IndicatorCurrent = indicator
                 _sci.IndicatorClearRange(0, _sci.TextLength)
-                _sci.AutoCShow(0, Nothing)
             Next
         End Sub
 

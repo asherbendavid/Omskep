@@ -603,7 +603,32 @@ Public Class MainForm
         menu.Items.Add(New ToolStripSeparator())
         _editOnlyItems.Add(menu.Items.Add("Reverse &Hebrew text", Nothing, Sub(sender, e) ReverseHebrew()))
         _editOnlyItems.Add(menu.Items.Add("Use another &voice...", Nothing, Sub(sender, e) ChangeVoice()))
+        AddHandler menu.Opening, AddressOf OnEditorContextMenuOpening
         ssmlEditor.UseContextMenu(menu)
+    End Sub
+
+    ''' <summary>Right-click or the keyboard context-menu key (both raise this same event) opens the
+    ''' voice picker instead of the normal menu when the caret is inside a &lt;voice name="..."&gt; value
+    ''' -- otherwise the normal context menu is left untouched. Confirmed in manual testing: Scintilla
+    ''' moves the caret to the click point before this event fires, so a right-click away from the old
+    ''' caret position is read correctly here.</summary>
+    Private Sub OnEditorContextMenuOpening(sender As Object, e As System.ComponentModel.CancelEventArgs)
+        If Not ssmlEditor.IsEditable Then Return
+
+        Dim documentText As String = ssmlEditor.DocumentText
+        Dim caret As Integer = ssmlEditor.CaretIndex
+        Dim span As VoiceAttributeSpan = VoiceAttributeLocator.Locate(documentText, caret)
+        If span Is Nothing Then Return
+
+        e.Cancel = True
+
+        Dim currentVoiceShortName As String = documentText.Substring(span.ValueStart, span.ValueLength)
+        Dim groups As IReadOnlyList(Of VoiceLocaleGroup) = VoicePickerListBuilder.Build(documentText, _session.Catalog)
+        Dim chosen As VoiceInfo = VoicePickerForm.PickVoice(Me, groups, currentVoiceShortName)
+        If chosen Is Nothing Then Return ' cancelled
+
+        ssmlEditor.SelectCharacterRange(span.ValueStart, span.ValueLength)
+        ssmlEditor.ReplaceSelectionText(chosen.ShortName)
     End Sub
 
     Private Sub mnuReviewMarks_Click(sender As Object, e As EventArgs) Handles mnuReviewMarks.Click
