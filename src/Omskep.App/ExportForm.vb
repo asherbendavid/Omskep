@@ -57,12 +57,30 @@ Public Class ExportForm
     End Sub
 
     Private Async Sub btnExport_Click(sender As Object, e As EventArgs) Handles btnExport.Click
+        If _preparation.Warnings.Count > 0 AndAlso Not ConfirmExportAnyway() Then Return
+
         Dim outputPath As String = PromptForOutputPath()
         If outputPath Is Nothing Then Return ' Save As was cancelled; stay on the confirm screen
 
         ShowProgressPanel()
         Await RunExportAsync(outputPath)
     End Sub
+
+    ''' <summary>The explicit "export anyway" the script-mismatch warning calls for. Only asked once,
+    ''' here, on the first export attempt -- Try Again re-enters RunExportAsync directly, not through
+    ''' btnExport_Click, since a retry is continuing an export the person already confirmed, not
+    ''' starting a fresh one.</summary>
+    Private Function ConfirmExportAnyway() As Boolean
+        Dim lines As New List(Of String)()
+        For Each w As ScriptMismatchWarning In _preparation.Warnings
+            lines.Add($"{w.ShortName} ({w.Locale}) -- expected {w.ExpectedScript}, found {w.ActualScript}: ""{w.Excerpt}""")
+        Next
+        Dim message As String =
+            "This document has text that doesn't match the expected script for its voice. " &
+            "Azure bills these characters even when little useful audio results:" & vbCrLf & vbCrLf &
+            String.Join(vbCrLf, lines) & vbCrLf & vbCrLf & "Export anyway?"
+        Return MessageBox.Show(Me, message, "Script mismatch", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.Yes
+    End Function
 
     Private Function PromptForOutputPath() As String
         Using dialog As New SaveFileDialog() With {
