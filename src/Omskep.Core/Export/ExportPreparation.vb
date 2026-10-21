@@ -84,8 +84,8 @@ Namespace Export
             End If
 
             Dim upperBound As Integer = Chunker.TotalBillableCharacters(chunking.Chunks)
-            Dim rateDescription As String = DescribeRates(session.SpeakingRatePercent())
-            Dim fields As Id3Fields = ExportId3FieldsBuilder.Build(documentText, chunking.Chunks, rateDescription, sourceFileName)
+            'Dim rateDescription As String = DescribeRates(session.SpeakingRatePercent())
+            Dim fields As Id3Fields = ExportId3FieldsBuilder.Build(documentText, chunking.Chunks, "", sourceFileName)
 
             Dim stem As String = If(model.FilePath IsNot Nothing, Path.GetFileNameWithoutExtension(model.FilePath), Nothing)
             Dim defaultName As String = ExportFileNamer.DefaultFileName(stem, outputFolder)

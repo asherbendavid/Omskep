@@ -60,6 +60,7 @@ Partial Class MainForm
         mnuDirectWrite = New ToolStripMenuItem()
         mnuTools = New ToolStripMenuItem()
         mnuSettings = New ToolStripMenuItem()
+        mnuVoiceSettings = New ToolStripMenuItem()
         pnlBanner = New Panel()
         lblBanner = New Label()
         flpBannerButtons = New FlowLayoutPanel()
@@ -285,7 +286,7 @@ Partial Class MainForm
         ' 
         ' mnuTools
         ' 
-        mnuTools.DropDownItems.AddRange(New ToolStripItem() {mnuSettings})
+        mnuTools.DropDownItems.AddRange(New ToolStripItem() {mnuSettings, mnuVoiceSettings})
         mnuTools.Name = "mnuTools"
         mnuTools.Text = "&Tools"
         ' 
@@ -293,6 +294,12 @@ Partial Class MainForm
         ' 
         mnuSettings.Name = "mnuSettings"
         mnuSettings.Text = "&Settings..."
+        ' 
+        ' mnuVoiceSettings
+        ' 
+        mnuVoiceSettings.Name = "mnuVoiceSettings"
+        mnuVoiceSettings.Text = "&Voice settings..."
+        mnuVoiceSettings.ToolTipText = "Default voice and speaking rate for each locale."
         ' 
         ' pnlBanner
         ' 
@@ -462,6 +469,7 @@ Partial Class MainForm
     Friend WithEvents mnuDirectWrite As ToolStripMenuItem
     Friend WithEvents mnuTools As ToolStripMenuItem
     Friend WithEvents mnuSettings As ToolStripMenuItem
+    Friend WithEvents mnuVoiceSettings As ToolStripMenuItem
     Friend WithEvents pnlBanner As Panel
     Friend WithEvents lblBanner As Label
     Friend WithEvents flpBannerButtons As FlowLayoutPanel

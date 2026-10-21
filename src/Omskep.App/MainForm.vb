@@ -769,4 +769,11 @@ Public Class MainForm
         ApplyState()
     End Sub
 
+    Private Sub mnuVoiceSettings_Click(sender As Object, e As EventArgs) Handles mnuVoiceSettings.Click
+        Using dialog As New VoiceSettingsForm(_session)
+            dialog.ShowDialog(Me)
+        End Using
+        ApplyState()
+    End Sub
+
 End Class

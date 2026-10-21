@@ -334,6 +334,32 @@ Namespace Session
             Return New Dictionary(Of String, Integer)(loaded.Value.SpeakingRatePercent)
         End Function
 
+        ''' <summary>Saves the default voice for a locale. A preference is not worth an error: if the
+        ''' file is locked it is skipped.</summary>
+        Public Sub SetDefaultVoice(locale As String, shortName As String)
+            Try
+                _settings.Update(Sub(s)
+                                     If s.DefaultVoices Is Nothing Then s.DefaultVoices = New Dictionary(Of String, String)()
+                                     s.DefaultVoices(locale) = shortName
+                                 End Sub)
+            Catch ex As IOException
+                ' Settings file in use by another program; try again at the next change.
+            End Try
+        End Sub
+
+        ''' <summary>Saves the speaking-rate percent for a locale. A preference is not worth an error: if
+        ''' the file is locked it is skipped.</summary>
+        Public Sub SetSpeakingRatePercent(locale As String, percent As Integer)
+            Try
+                _settings.Update(Sub(s)
+                                     If s.SpeakingRatePercent Is Nothing Then s.SpeakingRatePercent = New Dictionary(Of String, Integer)()
+                                     s.SpeakingRatePercent(locale) = percent
+                                 End Sub)
+            Catch ex As IOException
+                ' Settings file in use by another program; try again at the next change.
+            End Try
+        End Sub
+
     End Class
 
 End Namespace

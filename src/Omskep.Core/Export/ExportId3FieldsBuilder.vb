@@ -21,7 +21,7 @@ Namespace Export
             End If
 
             Dim voices As String = String.Join(", ", VoiceUsageScanner.FindDistinctVoiceNames(chunks).OrderBy(Function(v) v, StringComparer.Ordinal))
-            Dim computedComment As String = $"Made with Omskep. This narration is synthetic (AI-generated) speech. Speaking rate: {speakingRateDescription}. Source: {sourceFileName}. Voices: {voices}."
+            Dim computedComment As String = $"Made with Omskep. This narration is synthetic (AI-generated) speech. Source: {sourceFileName}. Voices: {voices}."
 
             Return New Id3Fields(
                 title:=meta.Value("Title"),
