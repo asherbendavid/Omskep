@@ -14,6 +14,13 @@ packages were introduced. Phase 3a introduced no new third-party packages. The s
 composition and chunking use only `System.Net.Http` and `System.Xml.Linq`, both
 part of .NET (see Platform components below); Azure AI Speech is called directly
 over its REST endpoint, same position as already recorded under Services.
+Phase 4 (voice authoring, the script/voice mismatch warning, voice settings, and
+the SSML reference panel) introduced no new third-party packages. It explored
+Scintilla5.NET's native `AutoCShow` autocompletion API for the in-editor voice
+picker but abandoned it after two real bugs surfaced in manual testing (see the
+phase 4 handoff), settling on a plain dialog instead -- `Scintilla5.NET` itself
+was already in use since phase 2, so this is a new API surface used from an
+existing dependency, not a new dependency.
 
 ## Libraries used or planned
 
@@ -59,7 +66,12 @@ committed and is not part of the product. It used PdfPig only.
 - **W3C Speech Synthesis Markup Language (SSML) Version 1.0**: the document
   format. The scaffold written into new documents uses its namespace URI
   (`http://www.w3.org/2001/10/synthesis`). Azure's SSML support is documented
-  by Microsoft; the SSML reference panel (a later phase) will link to it.
+  by Microsoft. Phase 4 built the SSML reference panel (View > SSML reference)
+  as a small set of static, hand-verified examples embedded in the app -- it
+  does not link out to Microsoft's docs. The break-strength durations shown
+  there are the project's own measurements (Audacity, three locales), not
+  numbers Microsoft publishes, since Azure doesn't document exact per-keyword
+  timing.
 - **Extensible Markup Language (XML) 1.0**: the well-formedness rules the live
   check enforces (DTDs are refused; no entity is ever expanded).
 - **The Unicode Standard**: normalization form C, the private-use ranges that

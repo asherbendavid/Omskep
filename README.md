@@ -7,23 +7,32 @@ proof-listened audio version with a study group.
 
 ## Status
 
-Phases 0 (technical decisions, spikes, scaffold), 1 (Settings and Azure
-connection) and 2 (the SSML editor) are complete. You can now import a study
-PDF or paste text, clean it up in a line-numbered editor that checks your markup
-as you type, and save it as an `.ssml` file. Omskep is **not yet a complete
-converter**: exporting audio, choosing a voice per language, the pronunciation
-tools and the SSML reference panel are built in later phases. The File, Export
-item is still a placeholder.
+Phases 0 through 4 are complete.
 
-**Phase 3 (export) is complete.** The synthesis engine (phase 3a) composes a
-document into the SSML actually sent to Azure, splits it into chunks under
-Azure's duration limit, and runs them through to one joined MP3 with retry and
-a crash-safe write. Phase 3b (this phase) made it reachable: **File > Export**
-opens a confirmation dialog showing the billable count and the resolved ID3
-fields, then a standard Save As dialog (defaulting to `<document name>
-Alpha.mp3`, never overwriting a different export), then export progress with
-Cancel, and a result screen that offers **Try Again** on a failure -- which
-resumes rather than re-synthesizing audio that already succeeded.
+You can import a study PDF or paste text, clean it up in a line-numbered
+editor that checks your markup as you type, and save it as an `.ssml` file.
+**File > Export** composes the document into the SSML actually sent to Azure,
+splits it into chunks under Azure's duration limit, and runs them through to
+one joined, tagged MP3. A confirmation screen shows the billable count and
+the resolved ID3 fields, then a standard Save As dialog (defaulting to
+`<document name> Alpha.mp3`, never overwriting a different export), then
+export progress with Cancel, and a result screen that offers **Try Again** on
+a failure -- which resumes rather than re-synthesizing audio that already
+succeeded.
+
+Phase 4 added voice authoring: splitting or renaming the voice for a
+selection (or the block under the caret) via **Edit > Use another
+voice...**, or a right-click (or the keyboard context-menu key) directly on
+an existing `<voice>` tag; a live warning if you accidentally type a nested
+`<voice>`, on top of **File > Export**'s own unconditional check; a warning
+you can export past if a block's text doesn't look like the right script for
+its voice; a hard block, with no override, if a voice no longer exists on
+your key/region; per-locale default voices and speaking rates under
+**Tools > Voice settings...**; and a static SSML syntax reference under
+**View > SSML reference**. See "Choosing and switching voices" below.
+
+Phase 5 (pronunciation preview and a replacement list) and phase 6 (polish)
+are still to come.
 
 ## What it will do
 
@@ -31,14 +40,15 @@ resumes rather than re-synthesizing audio that already succeeded.
    SSML document. SSML (Speech Synthesis Markup Language) is the saved file
    format, shown as raw text in a line-numbered editor. *(Done.)*
 2. Let you remove page headers, footers and extraction artefacts, tag
-   language changes, and choose a voice per language. *(Cleaning is done; tagging
-   and voice choice come in phase 4.)*
+   language changes, and choose a voice per language. *(Done.)*
 3. Show the billable character count before anything is sent to Azure, both
    while editing (the status bar) and again, finally, in the export
    confirmation dialog. *(Done.)*
 4. Export the document as one MP3 with ID3 tags, defaulting to an Alpha-numbered filename, via **File > Export**. *(Done.)*
 5. Let you listen, note corrections by line number, fix pronunciations
-   (respelling, `<sub alias>`, or `<phoneme>`), and export again. *(Phases 4 and 5.)*
+   (respelling, `<sub alias>`, or `<phoneme>`), and export again. *(The
+   `<sub>`/`<phoneme>` reference and voice switching are done; a replacement
+   list and pronunciation preview come in phase 5.)*
 
 ## Requirements
 
@@ -152,6 +162,46 @@ after asking). It is also in the right-click menu and is one undo step. In
 pointed (vowelled) text a vowel mark can end up beside the wrong letter; the
 marks are not spoken, so the order of the letters is what matters.
 
+### Choosing and switching voices
+
+Every `<voice>` block can be split or renamed without hand-editing tags.
+**Edit > Use another voice...** (or right-click, or the keyboard
+context-menu key / Shift+F10) splits the current selection into its own
+voice, reopening the surrounding one after it -- or, with no selection, or a
+selection covering a whole voice's content, renames that voice instead.
+Right-clicking directly on an existing `<voice name="...">` opens the same
+picker pre-selected on the voice already there, rather than starting a new
+split. The picker lists your document's own default locale first, then any
+locale already used elsewhere in the document, then everything else, each
+alphabetical; type to filter.
+
+Voices never nest. Hand-typing a nested `<voice>` by mistake is flagged live
+with a squiggle and a status-bar message, well before **File > Export**'s
+own unconditional check (which still blocks it regardless) would catch it.
+
+**Tools > Voice settings...** sets a default voice and a speaking rate
+(-90% to +100%) for every locale your key/region has voices for. The rate is
+only ever applied when composing a document for Azure -- it is never written
+into the saved document itself.
+
+**File > Export** checks two more things before anything is sent to Azure:
+that every voice named in the document still exists on your current
+key/region (a hard block, no override, if not), and that each block's text
+doesn't look like the wrong script for its voice -- a Hebrew word under an
+English voice, say. A script mismatch is a warning you can export past; a
+missing voice is not.
+
+### SSML reference panel
+
+**View > SSML reference** shows a panel of five short, click-to-copy
+examples -- substitution, IPA pronunciation, pauses, voice switching, and
+speaking rate -- verified against Azure's current SSML documentation, not
+memory. The break-strength durations shown are the project's own
+measurement (Audacity, several locales), since Azure doesn't publish exact
+per-keyword timing. Unlike the other View options, this one is session-only:
+it always starts hidden, even if you had it open when you last closed
+Omskep.
+
 ### Live checking
 
 While you type, Omskep checks that the markup is well-formed XML about 0.4 seconds
@@ -230,9 +280,10 @@ your say-so.
 
 ### View options and keys
 
-**View** has Word wrap, Highlight review marks and Smooth text rendering
-(DirectWrite; turn it off if text looks wrong on your machine). All three are
-remembered.
+**View** has Word wrap, Highlight review marks, Smooth text rendering
+(DirectWrite; turn it off if text looks wrong on your machine), and SSML
+reference (see above). The first three are remembered between sessions; SSML
+reference is not -- it always starts hidden.
 
 | Keys | Action |
 | --- | --- |
@@ -306,8 +357,10 @@ not include or redistribute the Azure Speech SDK.
   - `Documents`: well-formedness checking, the billable-character counter, the
     document state model, file open and save, the recovery store, find and
     replace, Hebrew order repair, composing a document into send-ready SSML
-    (`SsmlComposer`), and splitting it into chunks under the duration cap
-    (`Chunker`).
+    (`SsmlComposer`), splitting it into chunks under the duration cap
+    (`Chunker`), voice authoring (`VoiceSplitter`, `NestedVoiceFinder`,
+    `VoicePickerListBuilder`, `VoiceAttributeLocator`), and the export-time
+    voice checks (`VoiceBlockAnalyzer`, `ScriptMismatchDetector`).
   - `Export`: the export engine (`ExportEngine`) -- sequential per-chunk
     synthesis with retry, a plausibility check on each response, byte-join,
     and a crash-safe write via `AtomicFile`, with content-checked resume (an
@@ -318,8 +371,10 @@ not include or redistribute the Azure Speech SDK.
     and the one call (`ExportPreparation`) that ties all of it together for
     the export dialog.
 - `src/Omskep.App`: WinForms application (`net10.0-windows`): the main window,
-  Settings, the Find and Replace window, `Editor\SsmlEditor` (the wrapper around
-  the Scintilla5.NET control), and the Windows DPAPI key protector
+  Settings, Voice settings (`VoiceSettingsForm`), the voice picker
+  (`VoicePickerForm`) and the SSML reference panel, the Find and Replace
+  window, `Editor\SsmlEditor` (the wrapper around the Scintilla5.NET
+  control), and the Windows DPAPI key protector
 - `tests/Omskep.Core.Tests`: MSTest unit tests for `Omskep.Core`
 - `tests/Omskep.App.Tests`: MSTest tests that need Windows
   (`net10.0-windows`), such as the DPAPI key protector
