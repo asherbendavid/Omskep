@@ -30,69 +30,72 @@ src\Omskep.App\FindReplaceForm.vb:214: Private Sub ReplaceEverything()
 src\Omskep.App\MainForm.vb:16: Public Class MainForm
 src\Omskep.App\MainForm.vb:41: Public Sub New()
 src\Omskep.App\MainForm.vb:45: Public Sub New(session As AppSession)
-src\Omskep.App\MainForm.vb:60: Private Sub OnSessionStateChanged(sender As Object, e As EventArgs)
-src\Omskep.App\MainForm.vb:69: Private Sub ApplyState()
-src\Omskep.App\MainForm.vb:118: Private Sub ShowNote(message As String)
-src\Omskep.App\MainForm.vb:125: Private Sub tmrNote_Tick(sender As Object, e As EventArgs) Handles tmrNote.Tick
-src\Omskep.App\MainForm.vb:131: Private Sub statusMain_SizeChanged(sender As Object, e As EventArgs) Handles statusMain.SizeChanged
-src\Omskep.App\MainForm.vb:139: Private Sub FitStatusBar()
-src\Omskep.App\MainForm.vb:151: Private Function StatusTextWidth(value As String) As Integer
-src\Omskep.App\MainForm.vb:156: Private Function Shorten(value As String, maxWidth As Integer) As String
-src\Omskep.App\MainForm.vb:172: Private Sub ShowError(message As String)
-src\Omskep.App\MainForm.vb:177: Private Function Scaffold() As ScaffoldChoice
-src\Omskep.App\MainForm.vb:212: Private Sub MainForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-src\Omskep.App\MainForm.vb:232: Private Sub MainForm_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
-src\Omskep.App\MainForm.vb:250: Private Sub btnOpenSettings_Click(sender As Object, e As EventArgs) Handles btnOpenSettings.Click
-src\Omskep.App\MainForm.vb:256: Private Sub ssmlEditor_ContentChanged() Handles ssmlEditor.ContentChanged
-src\Omskep.App\MainForm.vb:263: Private Sub ssmlEditor_DirtyChanged(isDirty As Boolean) Handles ssmlEditor.DirtyChanged
-src\Omskep.App\MainForm.vb:270: Private Sub tmrCheck_Tick(sender As Object, e As EventArgs) Handles tmrCheck.Tick
-src\Omskep.App\MainForm.vb:275: Private Sub RunCheckNow()
-src\Omskep.App\MainForm.vb:289: Private Sub tmrAutosave_Tick(sender As Object, e As EventArgs) Handles tmrAutosave.Tick
-src\Omskep.App\MainForm.vb:298: Private Sub OfferRecovery()
-src\Omskep.App\MainForm.vb:320: Private Sub RestoreFrom(item As RecoveryItem)
-src\Omskep.App\MainForm.vb:340: Private Sub mnuNew_Click(sender As Object, e As EventArgs) Handles mnuNew.Click
-src\Omskep.App\MainForm.vb:345: Private Sub StartNewDocument()
-src\Omskep.App\MainForm.vb:381: Private Function TryLoad(path As String) As String
-src\Omskep.App\MainForm.vb:390: Private Sub OpenLoadedSsml(path As String, fileText As String)
-src\Omskep.App\MainForm.vb:409: Private Sub SetBusy(value As Boolean)
-src\Omskep.App\MainForm.vb:416: Private Sub ApplyImport(result As ImportResult)
-src\Omskep.App\MainForm.vb:429: Private Sub AfterContentReplaced()
-src\Omskep.App\MainForm.vb:437: Private Sub mnuSave_Click(sender As Object, e As EventArgs) Handles mnuSave.Click
-src\Omskep.App\MainForm.vb:441: Private Sub mnuSaveAs_Click(sender As Object, e As EventArgs) Handles mnuSaveAs.Click
-src\Omskep.App\MainForm.vb:445: Private Function SaveDocument() As Boolean
-src\Omskep.App\MainForm.vb:450: Private Function SaveDocumentAs() As Boolean
-src\Omskep.App\MainForm.vb:467: Private Function WriteTo(path As String) As Boolean
-src\Omskep.App\MainForm.vb:484: Private Function ConfirmDiscardChanges() As Boolean
-src\Omskep.App\MainForm.vb:498: Private Sub mnuExit_Click(sender As Object, e As EventArgs) Handles mnuExit.Click
-src\Omskep.App\MainForm.vb:502: Private Sub mnuExport_Click(sender As Object, e As EventArgs) Handles mnuExport.Click
-src\Omskep.App\MainForm.vb:522: Private Sub mnuUndo_Click(sender As Object, e As EventArgs) Handles mnuUndo.Click
-src\Omskep.App\MainForm.vb:526: Private Sub mnuRedo_Click(sender As Object, e As EventArgs) Handles mnuRedo.Click
-src\Omskep.App\MainForm.vb:530: Private Sub mnuCut_Click(sender As Object, e As EventArgs) Handles mnuCut.Click
-src\Omskep.App\MainForm.vb:534: Private Sub mnuCopy_Click(sender As Object, e As EventArgs) Handles mnuCopy.Click
-src\Omskep.App\MainForm.vb:538: Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
-src\Omskep.App\MainForm.vb:542: Private Sub mnuPastePlain_Click(sender As Object, e As EventArgs) Handles mnuPastePlain.Click
-src\Omskep.App\MainForm.vb:546: Private Sub mnuSelectAll_Click(sender As Object, e As EventArgs) Handles mnuSelectAll.Click
-src\Omskep.App\MainForm.vb:550: Private Sub mnuGoToError_Click(sender As Object, e As EventArgs) Handles mnuGoToError.Click
-src\Omskep.App\MainForm.vb:555: Private Sub mnuGoToCause_Click(sender As Object, e As EventArgs) Handles mnuGoToCause.Click
-src\Omskep.App\MainForm.vb:560: Private Sub mnuWordWrap_Click(sender As Object, e As EventArgs) Handles mnuWordWrap.Click
-src\Omskep.App\MainForm.vb:567: Private Sub DoPaste(plainText As Boolean)
-src\Omskep.App\MainForm.vb:582: Private Shared Function ReadClipboardText() As String
-src\Omskep.App\MainForm.vb:592: Private Sub BuildEditorContextMenu()
-src\Omskep.App\MainForm.vb:615: Private Sub OnEditorContextMenuOpening(sender As Object, e As System.ComponentModel.CancelEventArgs)
-src\Omskep.App\MainForm.vb:634: Private Sub mnuReviewMarks_Click(sender As Object, e As EventArgs) Handles mnuReviewMarks.Click
-src\Omskep.App\MainForm.vb:639: Private Sub mnuDirectWrite_Click(sender As Object, e As EventArgs) Handles mnuDirectWrite.Click
-src\Omskep.App\MainForm.vb:645: Private Sub RefreshReviewMarks()
-src\Omskep.App\MainForm.vb:655: Private Sub mnuReverseHebrew_Click(sender As Object, e As EventArgs) Handles mnuReverseHebrew.Click
-src\Omskep.App\MainForm.vb:659: Private Sub ReverseHebrew()
-src\Omskep.App\MainForm.vb:699: Private Sub mnuVoiceChange_Click(sender As Object, e As EventArgs) Handles mnuVoiceChange.Click
-src\Omskep.App\MainForm.vb:703: Private Sub ChangeVoice()
-src\Omskep.App\MainForm.vb:733: Private Sub EnsureFindDialog()
-src\Omskep.App\MainForm.vb:739: Private Sub mnuFind_Click(sender As Object, e As EventArgs) Handles mnuFind.Click
-src\Omskep.App\MainForm.vb:744: Private Sub mnuReplace_Click(sender As Object, e As EventArgs) Handles mnuReplace.Click
-src\Omskep.App\MainForm.vb:749: Private Sub mnuFindNext_Click(sender As Object, e As EventArgs) Handles mnuFindNext.Click
-src\Omskep.App\MainForm.vb:754: Private Sub mnuFindPrevious_Click(sender As Object, e As EventArgs) Handles mnuFindPrevious.Click
-src\Omskep.App\MainForm.vb:761: Private Sub mnuSettings_Click(sender As Object, e As EventArgs) Handles mnuSettings.Click
-src\Omskep.App\MainForm.vb:765: Private Sub ShowSettings()
+src\Omskep.App\MainForm.vb:61: Private Sub OnSessionStateChanged(sender As Object, e As EventArgs)
+src\Omskep.App\MainForm.vb:70: Private Sub ApplyState()
+src\Omskep.App\MainForm.vb:119: Private Sub ShowNote(message As String)
+src\Omskep.App\MainForm.vb:126: Private Sub tmrNote_Tick(sender As Object, e As EventArgs) Handles tmrNote.Tick
+src\Omskep.App\MainForm.vb:132: Private Sub statusMain_SizeChanged(sender As Object, e As EventArgs) Handles statusMain.SizeChanged
+src\Omskep.App\MainForm.vb:140: Private Sub FitStatusBar()
+src\Omskep.App\MainForm.vb:152: Private Function StatusTextWidth(value As String) As Integer
+src\Omskep.App\MainForm.vb:157: Private Function Shorten(value As String, maxWidth As Integer) As String
+src\Omskep.App\MainForm.vb:173: Private Sub ShowError(message As String)
+src\Omskep.App\MainForm.vb:178: Private Function Scaffold() As ScaffoldChoice
+src\Omskep.App\MainForm.vb:213: Private Sub MainForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+src\Omskep.App\MainForm.vb:233: Private Sub MainForm_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
+src\Omskep.App\MainForm.vb:251: Private Sub btnOpenSettings_Click(sender As Object, e As EventArgs) Handles btnOpenSettings.Click
+src\Omskep.App\MainForm.vb:257: Private Sub ssmlEditor_ContentChanged() Handles ssmlEditor.ContentChanged
+src\Omskep.App\MainForm.vb:264: Private Sub ssmlEditor_DirtyChanged(isDirty As Boolean) Handles ssmlEditor.DirtyChanged
+src\Omskep.App\MainForm.vb:271: Private Sub tmrCheck_Tick(sender As Object, e As EventArgs) Handles tmrCheck.Tick
+src\Omskep.App\MainForm.vb:276: Private Sub RunCheckNow()
+src\Omskep.App\MainForm.vb:290: Private Sub tmrAutosave_Tick(sender As Object, e As EventArgs) Handles tmrAutosave.Tick
+src\Omskep.App\MainForm.vb:299: Private Sub OfferRecovery()
+src\Omskep.App\MainForm.vb:321: Private Sub RestoreFrom(item As RecoveryItem)
+src\Omskep.App\MainForm.vb:341: Private Sub mnuNew_Click(sender As Object, e As EventArgs) Handles mnuNew.Click
+src\Omskep.App\MainForm.vb:346: Private Sub StartNewDocument()
+src\Omskep.App\MainForm.vb:382: Private Function TryLoad(path As String) As String
+src\Omskep.App\MainForm.vb:391: Private Sub OpenLoadedSsml(path As String, fileText As String)
+src\Omskep.App\MainForm.vb:410: Private Sub SetBusy(value As Boolean)
+src\Omskep.App\MainForm.vb:417: Private Sub ApplyImport(result As ImportResult)
+src\Omskep.App\MainForm.vb:430: Private Sub AfterContentReplaced()
+src\Omskep.App\MainForm.vb:438: Private Sub mnuSave_Click(sender As Object, e As EventArgs) Handles mnuSave.Click
+src\Omskep.App\MainForm.vb:442: Private Sub mnuSaveAs_Click(sender As Object, e As EventArgs) Handles mnuSaveAs.Click
+src\Omskep.App\MainForm.vb:446: Private Function SaveDocument() As Boolean
+src\Omskep.App\MainForm.vb:451: Private Function SaveDocumentAs() As Boolean
+src\Omskep.App\MainForm.vb:468: Private Function WriteTo(path As String) As Boolean
+src\Omskep.App\MainForm.vb:485: Private Function ConfirmDiscardChanges() As Boolean
+src\Omskep.App\MainForm.vb:499: Private Sub mnuExit_Click(sender As Object, e As EventArgs) Handles mnuExit.Click
+src\Omskep.App\MainForm.vb:503: Private Sub mnuExport_Click(sender As Object, e As EventArgs) Handles mnuExport.Click
+src\Omskep.App\MainForm.vb:523: Private Sub mnuUndo_Click(sender As Object, e As EventArgs) Handles mnuUndo.Click
+src\Omskep.App\MainForm.vb:527: Private Sub mnuRedo_Click(sender As Object, e As EventArgs) Handles mnuRedo.Click
+src\Omskep.App\MainForm.vb:531: Private Sub mnuCut_Click(sender As Object, e As EventArgs) Handles mnuCut.Click
+src\Omskep.App\MainForm.vb:535: Private Sub mnuCopy_Click(sender As Object, e As EventArgs) Handles mnuCopy.Click
+src\Omskep.App\MainForm.vb:539: Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
+src\Omskep.App\MainForm.vb:543: Private Sub mnuPastePlain_Click(sender As Object, e As EventArgs) Handles mnuPastePlain.Click
+src\Omskep.App\MainForm.vb:547: Private Sub mnuSelectAll_Click(sender As Object, e As EventArgs) Handles mnuSelectAll.Click
+src\Omskep.App\MainForm.vb:551: Private Sub mnuGoToError_Click(sender As Object, e As EventArgs) Handles mnuGoToError.Click
+src\Omskep.App\MainForm.vb:556: Private Sub mnuGoToCause_Click(sender As Object, e As EventArgs) Handles mnuGoToCause.Click
+src\Omskep.App\MainForm.vb:561: Private Sub mnuWordWrap_Click(sender As Object, e As EventArgs) Handles mnuWordWrap.Click
+src\Omskep.App\MainForm.vb:568: Private Sub DoPaste(plainText As Boolean)
+src\Omskep.App\MainForm.vb:583: Private Shared Function ReadClipboardText() As String
+src\Omskep.App\MainForm.vb:593: Private Sub BuildEditorContextMenu()
+src\Omskep.App\MainForm.vb:616: Private Sub OnEditorContextMenuOpening(sender As Object, e As System.ComponentModel.CancelEventArgs)
+src\Omskep.App\MainForm.vb:635: Private Sub mnuReviewMarks_Click(sender As Object, e As EventArgs) Handles mnuReviewMarks.Click
+src\Omskep.App\MainForm.vb:640: Private Sub mnuDirectWrite_Click(sender As Object, e As EventArgs) Handles mnuDirectWrite.Click
+src\Omskep.App\MainForm.vb:646: Private Sub RefreshReviewMarks()
+src\Omskep.App\MainForm.vb:656: Private Sub mnuReverseHebrew_Click(sender As Object, e As EventArgs) Handles mnuReverseHebrew.Click
+src\Omskep.App\MainForm.vb:660: Private Sub ReverseHebrew()
+src\Omskep.App\MainForm.vb:700: Private Sub mnuVoiceChange_Click(sender As Object, e As EventArgs) Handles mnuVoiceChange.Click
+src\Omskep.App\MainForm.vb:704: Private Sub ChangeVoice()
+src\Omskep.App\MainForm.vb:734: Private Sub EnsureFindDialog()
+src\Omskep.App\MainForm.vb:740: Private Sub mnuFind_Click(sender As Object, e As EventArgs) Handles mnuFind.Click
+src\Omskep.App\MainForm.vb:745: Private Sub mnuReplace_Click(sender As Object, e As EventArgs) Handles mnuReplace.Click
+src\Omskep.App\MainForm.vb:750: Private Sub mnuFindNext_Click(sender As Object, e As EventArgs) Handles mnuFindNext.Click
+src\Omskep.App\MainForm.vb:755: Private Sub mnuFindPrevious_Click(sender As Object, e As EventArgs) Handles mnuFindPrevious.Click
+src\Omskep.App\MainForm.vb:762: Private Sub mnuSettings_Click(sender As Object, e As EventArgs) Handles mnuSettings.Click
+src\Omskep.App\MainForm.vb:766: Private Sub ShowSettings()
+src\Omskep.App\MainForm.vb:773: Private Sub mnuVoiceSettings_Click(sender As Object, e As EventArgs) Handles mnuVoiceSettings.Click
+src\Omskep.App\MainForm.vb:780: Private Sub mnuReferencePanel_Click(sender As Object, e As EventArgs) Handles mnuReferencePanel.Click
+src\Omskep.App\MainForm.vb:788: Private Sub BuildReferencePanel()
 src\Omskep.App\Program.vb:6: Friend Module Program
 src\Omskep.App\Program.vb:9: Friend Sub Main(args As String())
 src\Omskep.App\Program.vb:29: Private Sub OnThreadException(sender As Object, e As Threading.ThreadExceptionEventArgs)
@@ -122,6 +125,15 @@ src\Omskep.App\VoicePickerForm.vb:100: Private Sub UpdateOkEnabled()
 src\Omskep.App\VoicePickerForm.vb:104: Private Sub lvVoices_DoubleClick(sender As Object, e As EventArgs) Handles lvVoices.DoubleClick
 src\Omskep.App\VoicePickerForm.vb:109: Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
 src\Omskep.App\VoicePickerForm.vb:113: Private Sub AcceptSelection()
+src\Omskep.App\VoiceSettingsForm.vb:10: Public Class VoiceSettingsForm
+src\Omskep.App\VoiceSettingsForm.vb:12: Private NotInheritable Class LocaleRow
+src\Omskep.App\VoiceSettingsForm.vb:13: Public ReadOnly Property Locale As String
+src\Omskep.App\VoiceSettingsForm.vb:14: Public ReadOnly Property VoiceCombo As ComboBox
+src\Omskep.App\VoiceSettingsForm.vb:15: Public ReadOnly Property RateUpDown As NumericUpDown
+src\Omskep.App\VoiceSettingsForm.vb:17: Public Sub New(locale As String, voiceCombo As ComboBox, rateUpDown As NumericUpDown)
+src\Omskep.App\VoiceSettingsForm.vb:27: Public Sub New(session As AppSession)
+src\Omskep.App\VoiceSettingsForm.vb:40: Private Sub BuildRows()
+src\Omskep.App\VoiceSettingsForm.vb:88: Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
 src\Omskep.App\Editor\SsmlEditor.vb:23: Public NotInheritable Class SsmlEditor
 src\Omskep.App\Editor\SsmlEditor.vb:59: Public Sub New()
 src\Omskep.App\Editor\SsmlEditor.vb:83: Private Sub CalibratePositions()
@@ -704,6 +716,8 @@ src\Omskep.Core\Session\AppSession.vb:315: Private Shared Function IsStorageProb
 src\Omskep.Core\Session\AppSession.vb:319: Private Sub RaiseStateChanged()
 src\Omskep.Core\Session\AppSession.vb:326: Public Function CreateExportEngine(Optional retryDelay As TimeSpan? = Nothing) As ExportEngine
 src\Omskep.Core\Session\AppSession.vb:331: Public Function SpeakingRatePercent() As IReadOnlyDictionary(Of String, Integer)
+src\Omskep.Core\Session\AppSession.vb:339: Public Sub SetDefaultVoice(locale As String, shortName As String)
+src\Omskep.Core\Session\AppSession.vb:352: Public Sub SetSpeakingRatePercent(locale As String, percent As Integer)
 src\Omskep.Core\Session\ConnectionMessages.vb:7: Public Module ConnectionMessages
 src\Omskep.Core\Session\ConnectionMessages.vb:21: Public Function Plural(count As Integer, singular As String, pluralForm As String) As String
 src\Omskep.Core\Session\ConnectionMessages.vb:26: Public Function Connected(prefix As String, voices As Integer, locales As Integer, cacheSaved As Boolean) As String

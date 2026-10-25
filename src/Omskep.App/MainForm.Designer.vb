@@ -67,6 +67,9 @@ Partial Class MainForm
         btnRetry = New Button()
         btnOpenSettings = New Button()
         ssmlEditor = New Editor.SsmlEditor()
+        mnuReferencePanel = New ToolStripMenuItem()
+        pnlReference = New Panel()
+        pnlReferenceEntries = New FlowLayoutPanel()
         statusMain = New StatusStrip()
         lblStatus = New ToolStripStatusLabel()
         lblNote = New ToolStripStatusLabel()
@@ -256,7 +259,7 @@ Partial Class MainForm
         ' 
         ' mnuView
         ' 
-        mnuView.DropDownItems.AddRange(New ToolStripItem() {mnuWordWrap, mnuReviewMarks, mnuDirectWrite})
+        mnuView.DropDownItems.AddRange(New ToolStripItem() {mnuWordWrap, mnuReviewMarks, mnuDirectWrite, mnuReferencePanel})
         mnuView.Name = "mnuView"
         mnuView.Text = "&View"
         ' 
@@ -283,6 +286,27 @@ Partial Class MainForm
         mnuDirectWrite.CheckState = CheckState.Checked
         mnuDirectWrite.Name = "mnuDirectWrite"
         mnuDirectWrite.Text = "&Smooth text rendering (DirectWrite)"
+        ' 
+        ' mnuReferencePanel
+        ' 
+        mnuReferencePanel.CheckOnClick = True
+        mnuReferencePanel.Name = "mnuReferencePanel"
+        mnuReferencePanel.Text = "SS&ML reference"
+        ' 
+        ' pnlReference
+        ' 
+        pnlReference.Dock = DockStyle.Right
+        pnlReference.Width = 340
+        pnlReference.Visible = False
+        pnlReference.Controls.Add(pnlReferenceEntries)
+        ' 
+        ' pnlReferenceEntries
+        ' 
+        pnlReferenceEntries.Dock = DockStyle.Fill
+        pnlReferenceEntries.AutoScroll = True
+        pnlReferenceEntries.FlowDirection = FlowDirection.TopDown
+        pnlReferenceEntries.WrapContents = False
+        pnlReferenceEntries.Padding = New Padding(8)
         ' 
         ' mnuTools
         ' 
@@ -411,6 +435,7 @@ Partial Class MainForm
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(900, 560)
         Controls.Add(ssmlEditor)
+        Controls.Add(pnlReference)
         Controls.Add(pnlBanner)
         Controls.Add(statusMain)
         Controls.Add(mnuMain)
@@ -458,6 +483,9 @@ Partial Class MainForm
     Friend WithEvents sepEdit4 As ToolStripSeparator
     Friend WithEvents mnuReverseHebrew As ToolStripMenuItem
     Friend WithEvents mnuVoiceChange As ToolStripMenuItem
+    Friend WithEvents mnuReferencePanel As ToolStripMenuItem
+    Friend WithEvents pnlReference As Panel
+    Friend WithEvents pnlReferenceEntries As FlowLayoutPanel
     Friend WithEvents sepEdit5 As ToolStripSeparator
     Friend WithEvents mnuFind As ToolStripMenuItem
     Friend WithEvents mnuReplace As ToolStripMenuItem

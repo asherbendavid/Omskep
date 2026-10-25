@@ -46,6 +46,7 @@ Public Class MainForm
         Me.New()
         _session = session
         BuildEditorContextMenu()
+        BuildReferencePanel()
         mnuWordWrap.Checked = _session.WordWrapPreference()
         ssmlEditor.WordWrap = mnuWordWrap.Checked
         mnuReviewMarks.Checked = _session.ReviewMarksPreference()
@@ -774,6 +775,85 @@ Public Class MainForm
             dialog.ShowDialog(Me)
         End Using
         ApplyState()
+    End Sub
+
+    Private Sub mnuReferencePanel_Click(sender As Object, e As EventArgs) Handles mnuReferencePanel.Click
+        pnlReference.Visible = mnuReferencePanel.Checked
+    End Sub
+
+    ''' <summary>Static reference content -- verified against Azure's current SSML documentation, not
+    ''' from memory, per the starter prompt. Each entry's snippet is a read-only, genuinely selectable
+    ''' TextBox (not a label); clicking it also copies the whole snippet in one step, which is the
+    ''' "simple, convenient" interaction the developer asked for without giving up real text selection.</summary>
+    Private Sub BuildReferencePanel()
+        Dim entries As New List(Of (Title As String, Snippet As String, Note As String)) From {
+            ("Substitution",
+             "<sub alias=""World Wide Web Consortium"">W3C</sub>",
+             "The preferred way to correct a mispronunciation: say something differently than it's written."),
+            ("Pronunciation (IPA)",
+             "<phoneme alphabet=""ipa"" ph=""təˈmeɪtoʊ"">tomato</phoneme>",
+             "IPA only. SAPI is accepted by Azure but unverified by ear here, so it isn't documented."),
+            ("Pause",
+             "<break strength=""medium""/>" & vbCrLf & "<break time=""750ms""/>",
+             "Strength (measured once per keyword; consistent across locale and voice): x-weak ~180ms, weak ~410ms, medium ~700ms, strong ~915ms, x-strong ~1175ms."),
+            ("Switch voice",
+             "<voice name=""en-US-JennyNeural"">" & vbCrLf & "  Text goes here." & vbCrLf & "</voice>",
+             "Omskep's ""Use another voice"" command does the splitting for you. Voices never nest."),
+            ("Speaking rate",
+             "<prosody rate=""-10%"">Slower speech.</prosody>",
+             "Applied at composition time only -- never written into the saved document.")
+        }
+
+        Const contentWidth As Integer = 300
+        Dim snippetFont As New Font(FontFamily.GenericMonospace, 9)
+        Dim noteFont As New Font(Font, FontStyle.Italic)
+        Dim measureFlags As TextFormatFlags = TextFormatFlags.WordBreak Or TextFormatFlags.NoPrefix Or TextFormatFlags.TextBoxControl
+
+        pnlReferenceEntries.SuspendLayout()
+        Try
+            For Each entry In entries
+                ' Measured, not guessed from explicit-newline count: a long single-line example (no \r\n
+                ' at all) still needs to word-wrap across several visual rows at this width, which a
+                ' newline count alone never accounts for -- this is what clipped several examples before.
+                Dim snippetSize As Size = TextRenderer.MeasureText(entry.Snippet, snippetFont, New Size(contentWidth - 8, Integer.MaxValue), measureFlags)
+                Dim snippetHeight As Integer = snippetSize.Height + 10 ' a little breathing room beyond the exact measurement
+
+                Dim noteSize As Size = TextRenderer.MeasureText(entry.Note, noteFont, New Size(contentWidth, Integer.MaxValue), measureFlags)
+                Dim noteHeight As Integer = noteSize.Height + 4
+
+                Dim row As New Panel With {.Size = New Size(contentWidth, 18 + 4 + snippetHeight + 4 + noteHeight), .Margin = New Padding(0, 0, 0, 10)}
+
+                Dim lblTitle As New Label With {
+                    .Text = entry.Title, .Font = New Font(Font, FontStyle.Bold),
+                    .Location = New Point(0, 0), .Size = New Size(contentWidth, 18)
+                }
+
+                Dim txtSnippet As New TextBox With {
+                    .Text = entry.Snippet, .ReadOnly = True, .Multiline = True, .WordWrap = True,
+                    .ScrollBars = ScrollBars.None, .Location = New Point(0, 22),
+                    .Size = New Size(contentWidth, snippetHeight),
+                    .Font = snippetFont, .BackColor = SystemColors.Window
+                }
+                AddHandler txtSnippet.Click, Sub(sender, e)
+                                                 txtSnippet.SelectAll()
+                                                 Clipboard.SetText(entry.Snippet)
+                                                 ShowNote("Copied.")
+                                             End Sub
+
+                Dim lblNote As New Label With {
+                    .Text = entry.Note, .Font = noteFont,
+                    .ForeColor = SystemColors.GrayText, .AutoSize = False,
+                    .Location = New Point(0, txtSnippet.Bottom + 4), .Size = New Size(contentWidth, noteHeight)
+                }
+
+                row.Controls.Add(lblTitle)
+                row.Controls.Add(txtSnippet)
+                row.Controls.Add(lblNote)
+                pnlReferenceEntries.Controls.Add(row)
+            Next
+        Finally
+            pnlReferenceEntries.ResumeLayout(True)
+        End Try
     End Sub
 
 End Class
