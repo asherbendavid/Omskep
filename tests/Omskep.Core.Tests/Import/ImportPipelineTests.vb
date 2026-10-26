@@ -7,6 +7,7 @@ Imports System.Numerics
 Imports System.Text
 Imports System.Xml
 Imports Microsoft.VisualStudio.TestTools.UnitTesting
+Imports Omskep.Core.Documents
 Imports Omskep.Core.Import
 
 Namespace Import
@@ -85,7 +86,7 @@ Namespace Import
                              "Year:" & LF &
                              "Copyright:" & LF &
                              "?>" & LF &
-                             "<speak version=""1.0"" xmlns=""http://www.w3.org/2001/10/synthesis"" xml:lang=""af-ZA"">" & LF &
+                             "<speak version=""1.0"" xmlns=""http://www.w3.org/2001/10/synthesis"" xmlns:mstts=""https://www.w3.org/2001/mstts"" xml:lang=""af-ZA"">" & LF &
                              "<voice name=""af-ZA-WillemNeural"">" & LF &
                              "Hallo" & LF &
                              "</voice>" & LF &
@@ -110,6 +111,14 @@ Namespace Import
             Assert.AreEqual("locale", noLocale.ParamName)
             Dim noVoice As ArgumentException = Assert.ThrowsExactly(Of ArgumentException)(Sub() DocumentComposer.Compose("x", Locale, String.Empty))
             Assert.AreEqual("voiceShortName", noVoice.ParamName)
+        End Sub
+
+        <TestMethod>
+        Public Sub Compose_output_with_mstts_express_as_is_well_formed()
+            Dim body As String = "<mstts:express-as style=""cheerful"">Hallo</mstts:express-as>"
+            Dim document As String = DocumentComposer.Compose(body, Locale, Voice)
+            Dim result As CheckResult = WellFormednessChecker.Check(document)
+            Assert.IsTrue(result.IsWellFormed)
         End Sub
 
     End Class

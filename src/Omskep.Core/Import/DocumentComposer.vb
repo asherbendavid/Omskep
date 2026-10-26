@@ -13,6 +13,7 @@ Namespace Import
     Public NotInheritable Class DocumentComposer
 
         Public Const SsmlNamespace As String = "http://www.w3.org/2001/10/synthesis"
+        Public Const MsttsNameSpace As String = "https://www.w3.org/2001/mstts"
 
         Private Sub New()
         End Sub
@@ -44,7 +45,7 @@ Namespace Import
             AppendMetaLine(sb, "Year", year, lf)
             AppendMetaLine(sb, "Copyright", copyright, lf)
             sb.Append("?>").Append(lf)
-            sb.Append("<speak version=""1.0"" xmlns=""").Append(SsmlNamespace).Append(""" xml:lang=""")
+            sb.Append("<speak version=""1.0"" xmlns=""").Append(SsmlNamespace).Append(""" xmlns:mstts=""").Append(MsttsNamespace).Append(""" xml:lang=""")
             sb.Append(EscapeAttribute(locale)).Append(""">").Append(lf)
             sb.Append("<voice name=""").Append(EscapeAttribute(voiceShortName)).Append(""">").Append(lf)
             sb.Append(body).Append(lf)
