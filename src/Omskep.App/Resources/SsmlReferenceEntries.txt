@@ -12,6 +12,7 @@ Snippet:
 <phoneme alphabet="ipa" ph="təˈmeɪtoʊ">tomato</phoneme>
 Note:
 IPA only. SAPI is accepted by Azure and sounds correct, but has no control over spacing/pacing between phones -- declined for that reason, not for being unverified.
+SAPI only works on eight specific locales (en-US, fr-FR, de-DE, es-ES, ja-JP, zh-CN, zh-HK, zh-TW, per Microsoft’s docs — en-GB is not among them and fails outright). Combined with the lack of pacing control observed earlier, SAPI remains out of this panel; IPA works everywhere and is the only phoneme alphabet documented here.
 [/Entry]
 
 [Entry]
@@ -34,11 +35,11 @@ Omskep's "Use another voice" command does the splitting for you. Voices never ne
 [/Entry]
 
 [Entry]
-Title: Speaking rate
+Title: Prosody (rate, pitch, volume)
 Snippet:
-<prosody rate="-10%">Slower speech.</prosody>
+<prosody rate="-10%" pitch="+15%" volume="+3">Slower, higher, louder speech.</prosody>
 Note:
-Applied at composition time only -- never written into the saved document.
+All three attributes are optional -- include only the ones you need. rate and pitch accept a percentage ("+15%", "-10%"); volume accepts a bare signed or absolute number ("+3", "-5.5", "90") or a keyword (loud, x-soft, etc.) -- a dB-suffixed value like "+3dB" matches the general SSML spec but not Azure's own implementation, and fails to synthesize outright. The app's own global speaking-rate setting (separate from this tag) is applied at composition time only -- never written into the saved document.
 [/Entry]
 
 [Entry]
