@@ -1,0 +1,171 @@
+[Entry]
+Title: Substitution
+Snippet:
+<sub alias="World Wide Web Consortium">W3C</sub>
+Note:
+The preferred way to correct a mispronunciation: say something differently than it's written.
+[/Entry]
+
+[Entry]
+Title: Pronunciation (IPA)
+Snippet:
+<phoneme alphabet="ipa" ph="təˈmeɪtoʊ">tomato</phoneme>
+Note:
+IPA only. SAPI is accepted by Azure and sounds correct, but has no control over spacing/pacing between phones -- declined for that reason, not for being unverified.
+[/Entry]
+
+[Entry]
+Title: Pause
+Snippet:
+<break strength="medium"/>
+<break time="750ms"/>
+Note:
+Strength (measured once per keyword; consistent across locale and voice): x-weak ~180ms, weak ~410ms, medium ~700ms, strong ~915ms, x-strong ~1175ms.
+[/Entry]
+
+[Entry]
+Title: Switch voice
+Snippet:
+<voice name="en-US-JennyNeural">
+  Text goes here.
+</voice>
+Note:
+Omskep's "Use another voice" command does the splitting for you. Voices never nest.
+[/Entry]
+
+[Entry]
+Title: Speaking rate
+Snippet:
+<prosody rate="-10%">Slower speech.</prosody>
+Note:
+Applied at composition time only -- never written into the saved document.
+[/Entry]
+
+[Entry]
+Title: Characters
+Snippet:
+<say-as interpret-as="characters">AI</say-as>
+Note:
+Reads each character individually.
+[/Entry]
+
+[Entry]
+Title: Spell out
+Snippet:
+<say-as interpret-as="spell-out">WWW</say-as>
+Note:
+Same as characters -- spells the text letter by letter.
+[/Entry]
+
+[Entry]
+Title: Cardinal number
+Snippet:
+<say-as interpret-as="cardinal">1234</say-as>
+Note:
+Reads as a whole number: "one thousand two hundred thirty-four."
+[/Entry]
+
+[Entry]
+Title: Ordinal number
+Snippet:
+<say-as interpret-as="ordinal">5</say-as>
+Note:
+Reads as "fifth."
+[/Entry]
+
+[Entry]
+Title: Digits
+Snippet:
+<say-as interpret-as="digits">1234</say-as>
+Note:
+Documented as digit-by-digit, but observed (Jenny en-US and Leah en-ZA) grouping 4-digit strings in pairs instead -- "1234" read as "twelve thirty-four," not "one-two-three-four." Verify by ear before relying on it.
+[/Entry]
+
+[Entry]
+Title: Fraction
+Snippet:
+<say-as interpret-as="fraction">3/4</say-as>
+Note:
+Reads as "three quarters."
+[/Entry]
+
+[Entry]
+Title: Unit
+Snippet:
+<say-as interpret-as="unit">10kg</say-as>
+Note:
+Reads as "ten kilograms," singular/plural handled automatically.
+[/Entry]
+
+[Entry]
+Title: Date
+Snippet:
+<say-as interpret-as="date">2026-10-23</say-as>
+Note:
+Reads as a full date.
+[/Entry]
+
+[Entry]
+Title: Time
+Snippet:
+<say-as interpret-as="time" format="hms12">1:45pm</say-as>
+Note:
+Only reliable with 12-hour input and an explicit am/pm marker. A bare 24-hour value like "13:45" is read literally as "thirteen forty-five" regardless of the format attribute -- convert to 12-hour form before tagging.
+[/Entry]
+
+[Entry]
+Title: Telephone
+Snippet:
+<say-as interpret-as="telephone">+27 21 555 1234</say-as>
+Note:
+Reads digit groups with natural phone-number pacing.
+[/Entry]
+
+[Entry]
+Title: Currency
+Snippet:
+<say-as interpret-as="currency">R250</say-as>
+Note:
+Reads the currency correctly from the symbol/code (e.g. "R" -> Rand), independent of the voice's own locale.
+[/Entry]
+
+[Entry]
+Title: Address
+Snippet:
+<say-as interpret-as="address">123 Main St</say-as>
+Note:
+The house number is read as a plain number ("one twenty-three"), not digit-by-digit.
+[/Entry]
+
+[Entry]
+Title: Web address
+Snippet:
+<say-as interpret-as="net">www.microsoft.com</say-as>
+Note:
+Reads as a spoken web address.
+[/Entry]
+
+[Entry]
+Title: Name
+Snippet:
+<say-as interpret-as="name">Chris</say-as>
+Note:
+No different from plain text -- included for completeness, not special handling.
+[/Entry]
+
+[Entry]
+Title: Censored text
+Snippet:
+<say-as interpret-as="expletive">****</say-as>
+Note:
+Replaces the text with silence. There is no audible bleep tone and the asterisks are never spoken literally.
+[/Entry]
+
+[Entry]
+Title: Styled speech (mstts)
+Snippet:
+xmlns:mstts="https://www.w3.org/2001/mstts"
+<mstts:express-as style="cheerful">Text.</mstts:express-as>
+Note:
+New documents declare this automatically. For a legacy document missing it, paste the declaration onto the <speak> tag by hand -- Omskep never adds it for you. Unsupported styles are silently ignored (text still speaks, plainly) on voices that don't support them.
+[/Entry]

@@ -100,6 +100,11 @@ src\Omskep.App\Program.vb:6: Friend Module Program
 src\Omskep.App\Program.vb:9: Friend Sub Main(args As String())
 src\Omskep.App\Program.vb:29: Private Sub OnThreadException(sender As Object, e As Threading.ThreadExceptionEventArgs)
 src\Omskep.App\Program.vb:36: Private Sub OnDomainException(sender As Object, e As UnhandledExceptionEventArgs)
+src\Omskep.App\ReferencePanelContent.vb:14: Public NotInheritable Class ReferencePanelContent
+src\Omskep.App\ReferencePanelContent.vb:16: Private Sub New()
+src\Omskep.App\ReferencePanelContent.vb:28: Public Shared Function LoadEntries() As IReadOnlyList(Of (Title As String, Snippet As String, Note As String))
+src\Omskep.App\ReferencePanelContent.vb:41: Public Shared Function Parse(text As String) As IReadOnlyList(Of (Title As String, Snippet As String, Note As String))
+src\Omskep.App\ReferencePanelContent.vb:88: Private Shared Function JoinTrimmed(lines As List(Of String)) As String
 src\Omskep.App\SettingsForm.vb:9: Public Class SettingsForm
 src\Omskep.App\SettingsForm.vb:16: Public Sub New()
 src\Omskep.App\SettingsForm.vb:20: Public Sub New(session As AppSession)
@@ -594,11 +599,11 @@ src\Omskep.Core\Export\Id3Stamper.vb:47: Public Shared Function Stamp(mp3Path As
 src\Omskep.Core\Export\VoiceUsageScanner.vb:11: Public NotInheritable Class VoiceUsageScanner
 src\Omskep.Core\Export\VoiceUsageScanner.vb:12: Public Shared Function FindDistinctVoiceNames(chunks As IReadOnlyList(Of DocumentChunk)) As IReadOnlyList(Of String)
 src\Omskep.Core\Import\DocumentComposer.vb:13: Public NotInheritable Class DocumentComposer
-src\Omskep.Core\Import\DocumentComposer.vb:17: Private Sub New()
-src\Omskep.Core\Import\DocumentComposer.vb:29: Public Shared Function Compose(body As String, locale As String, voiceShortName As String,
-src\Omskep.Core\Import\DocumentComposer.vb:59: Private Shared Sub AppendMetaLine(sb As StringBuilder, key As String, value As String, lf As String)
-src\Omskep.Core\Import\DocumentComposer.vb:68: Friend Shared Sub RequireScaffold(locale As String, voiceShortName As String)
-src\Omskep.Core\Import\DocumentComposer.vb:77: Private Shared Function EscapeAttribute(value As String) As String
+src\Omskep.Core\Import\DocumentComposer.vb:18: Private Sub New()
+src\Omskep.Core\Import\DocumentComposer.vb:30: Public Shared Function Compose(body As String, locale As String, voiceShortName As String,
+src\Omskep.Core\Import\DocumentComposer.vb:60: Private Shared Sub AppendMetaLine(sb As StringBuilder, key As String, value As String, lf As String)
+src\Omskep.Core\Import\DocumentComposer.vb:69: Friend Shared Sub RequireScaffold(locale As String, voiceShortName As String)
+src\Omskep.Core\Import\DocumentComposer.vb:78: Private Shared Function EscapeAttribute(value As String) As String
 src\Omskep.Core\Import\DocumentImporter.vb:19: Public NotInheritable Class DocumentImporter
 src\Omskep.Core\Import\DocumentImporter.vb:29: Public Sub New(reader As IPdfPageReader)
 src\Omskep.Core\Import\DocumentImporter.vb:35: Public Function ImportPdf(pdfPath As String, locale As String, voiceShortName As String) As ImportResult
@@ -884,6 +889,16 @@ tests\Omskep.App.Tests\DpapiSecretProtectorTests.vb:50: Public Sub TruncatedBlob
 tests\Omskep.App.Tests\DpapiSecretProtectorTests.vb:59: Public Sub GarbageBlob_ThrowsCryptographicException()
 tests\Omskep.App.Tests\DpapiSecretProtectorTests.vb:66: Public Sub BlobMadeWithOtherEntropy_CannotBeReadByOurProtector()
 tests\Omskep.App.Tests\DpapiSecretProtectorTests.vb:74: Public Sub NullInput_Throws()
+tests\Omskep.App.Tests\ReferencePanelContentTests.vb:6: Public Class ReferencePanelContentTests
+tests\Omskep.App.Tests\ReferencePanelContentTests.vb:9: Public Sub Parse_reads_title_snippet_and_note_in_order()
+tests\Omskep.App.Tests\ReferencePanelContentTests.vb:36: Public Sub Parse_preserves_multiline_snippet_exactly()
+tests\Omskep.App.Tests\ReferencePanelContentTests.vb:58: Public Sub Parse_of_empty_text_returns_no_entries()
+tests\Omskep.App.Tests\ReferencePanelContentTests.vb:63: Public Sub Parse_tolerates_a_block_missing_the_note_field()
+tests\Omskep.App.Tests\ReferencePanelContentTests.vb:78: Public Sub Embedded_resource_loads_and_has_the_expected_entry_count()
+tests\Omskep.App.Tests\ReferencePanelContentTests.vb:84: Public Sub Embedded_resource_places_mstts_entry_last()
+tests\Omskep.App.Tests\ReferencePanelContentTests.vb:95: Public Sub Every_reference_entry_is_well_formed_when_composed()
+tests\Omskep.App.Tests\ReferencePanelContentTests.vb:118: Private Shared Function DocumentFor(entry As (Title As String, Snippet As String, Note As String)) As String
+tests\Omskep.App.Tests\ReferencePanelContentTests.vb:136: Private Shared Function BodyFor(entry As (Title As String, Snippet As String, Note As String)) As String
 tests\Omskep.Core.Tests\AtomicFileTests.vb:10: Public Class AtomicFileTests
 tests\Omskep.Core.Tests\AtomicFileTests.vb:13: Public Sub Write_NewFile_CreatesMissingFolderAndContent()
 tests\Omskep.Core.Tests\AtomicFileTests.vb:23: Public Sub Write_ExistingFile_ReplacesContent_AndLeavesNoTemp()
@@ -1333,55 +1348,56 @@ tests\Omskep.Core.Tests\Export\VoiceUsageScannerTests.vb:14: Private Shared Func
 tests\Omskep.Core.Tests\Export\VoiceUsageScannerTests.vb:19: Public Sub Distinct_voices_are_returned_in_first_appearance_order_not_sorted()
 tests\Omskep.Core.Tests\Export\VoiceUsageScannerTests.vb:30: Public Sub A_voice_repeated_across_chunks_is_only_listed_once()
 tests\Omskep.Core.Tests\Export\VoiceUsageScannerTests.vb:39: Public Sub No_chunks_yields_no_voices()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:15: Friend NotInheritable Class FakePdfReader
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:22: Public Function ReadPages(pdfPath As String) As IReadOnlyList(Of String) Implements IPdfPageReader.ReadPages
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:27: Public Sub New(pages As IReadOnlyList(Of String), Optional metadata As PdfDocumentMetadata = Nothing)
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:32: Public Sub New(failure As Exception)
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:37: Public Function ReadMetadata(pdfPath As String) As PdfDocumentMetadata Implements IPdfPageReader.ReadMetadata
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:43: Friend Module ImportTestHelpers
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:48: Public Sub AssertWellFormedDocument(document As String)
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:60: Public Function CountOf(value As String, find As String) As Integer
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:70: Public Function Importer(reader As IPdfPageReader) As DocumentImporter
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:76: Public Class DocumentComposerTests
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:79: Public Sub Compose_wraps_body_in_speak_and_voice()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:97: Public Sub Compose_output_is_well_formed_even_with_hostile_attribute_values()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:103: Public Sub Compose_with_empty_body_is_still_well_formed()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:108: Public Sub Compose_rejects_a_blank_locale_or_voice()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:118: Public Class ImportFlagFinderTests
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:121: Public Sub Wide_space_run_is_flagged_with_line_column_and_length()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:131: Public Sub One_or_two_spaces_are_not_flagged()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:136: Public Sub Line_end_hyphen_after_a_letter_is_flagged()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:145: Public Sub Hyphens_that_are_not_split_words_are_not_flagged()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:151: Public Sub Flag_lines_match_document_lines_including_the_scaffold()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:161: Public Sub Null_empty_and_huge_runs_do_not_throw()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:170: Public Sub Windows_line_endings_do_not_hide_a_line_end_hyphen()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:178: Public Class DocumentImporterTests
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:182: Private Shared Function Pages(ParamArray texts As String()) As IReadOnlyList(Of String)
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:186: Private Shared Function StudyPage(n As Integer) As String
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:194: Public Sub A_normal_pdf_becomes_a_well_formed_document()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:206: Public Sub Headers_and_page_numbers_are_never_silently_removed()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:213: Public Sub Pages_are_separated_by_one_blank_line_and_use_LF_only()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:220: Public Sub Wide_gaps_and_line_end_hyphens_are_flagged_per_page()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:233: Public Sub Sanitizer_counts_are_summed_over_all_pages_and_reported()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:246: Public Sub Pages_without_text_are_skipped_and_listed_by_number()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:259: Public Sub A_page_holding_only_decorative_or_control_characters_counts_as_empty()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:266: Public Sub A_null_page_from_the_reader_is_treated_as_empty()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:273: Public Sub Many_empty_pages_are_summarised_not_listed_in_full()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:287: Public Sub A_scanned_pdf_with_no_text_gives_a_clear_message_not_an_empty_document()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:296: Public Sub A_scan_whose_only_text_is_page_numbers_counts_as_no_text()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:303: Public Sub A_pdf_with_no_pages_gives_no_text_found()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:309: Public Sub A_password_protected_pdf_gives_a_clear_message()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:317: Public Sub Any_other_reader_failure_becomes_an_unreadable_result_not_an_exception()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:333: Public Sub A_blank_voice_or_locale_is_a_caller_bug_and_throws_before_reading()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:342: Public Sub Pasted_word_text_keeps_curly_quotes_and_escapes_a_literal_ampersand()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:353: Public Sub Empty_or_whitespace_paste_gives_no_text_found()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:365: Public Sub Importing_twice_with_the_same_importer_gives_identical_results()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:374: Public Sub A_forty_five_page_study_imports_quickly_and_stays_well_formed()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:393: Public Sub Pdf_title_and_author_metadata_seed_title_and_artist_alongside_filename_derived_track_and_year()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:403: Public Sub Missing_pdf_title_falls_back_to_the_filenames_numbered_pattern()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:411: Public Sub A_filename_that_does_not_match_the_numbered_pattern_falls_back_to_the_whole_name_with_no_track()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:418: Public Sub Modification_date_is_used_when_creation_date_is_missing()
-tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:425: Public Sub Album_and_copyright_are_always_left_unset_on_import_regardless_of_pdf_metadata()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:16: Friend NotInheritable Class FakePdfReader
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:23: Public Function ReadPages(pdfPath As String) As IReadOnlyList(Of String) Implements IPdfPageReader.ReadPages
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:28: Public Sub New(pages As IReadOnlyList(Of String), Optional metadata As PdfDocumentMetadata = Nothing)
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:33: Public Sub New(failure As Exception)
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:38: Public Function ReadMetadata(pdfPath As String) As PdfDocumentMetadata Implements IPdfPageReader.ReadMetadata
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:44: Friend Module ImportTestHelpers
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:49: Public Sub AssertWellFormedDocument(document As String)
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:61: Public Function CountOf(value As String, find As String) As Integer
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:71: Public Function Importer(reader As IPdfPageReader) As DocumentImporter
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:77: Public Class DocumentComposerTests
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:80: Public Sub Compose_wraps_body_in_speak_and_voice()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:98: Public Sub Compose_output_is_well_formed_even_with_hostile_attribute_values()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:104: Public Sub Compose_with_empty_body_is_still_well_formed()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:109: Public Sub Compose_rejects_a_blank_locale_or_voice()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:117: Public Sub Compose_output_with_mstts_express_as_is_well_formed()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:127: Public Class ImportFlagFinderTests
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:130: Public Sub Wide_space_run_is_flagged_with_line_column_and_length()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:140: Public Sub One_or_two_spaces_are_not_flagged()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:145: Public Sub Line_end_hyphen_after_a_letter_is_flagged()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:154: Public Sub Hyphens_that_are_not_split_words_are_not_flagged()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:160: Public Sub Flag_lines_match_document_lines_including_the_scaffold()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:170: Public Sub Null_empty_and_huge_runs_do_not_throw()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:179: Public Sub Windows_line_endings_do_not_hide_a_line_end_hyphen()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:187: Public Class DocumentImporterTests
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:191: Private Shared Function Pages(ParamArray texts As String()) As IReadOnlyList(Of String)
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:195: Private Shared Function StudyPage(n As Integer) As String
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:203: Public Sub A_normal_pdf_becomes_a_well_formed_document()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:215: Public Sub Headers_and_page_numbers_are_never_silently_removed()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:222: Public Sub Pages_are_separated_by_one_blank_line_and_use_LF_only()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:229: Public Sub Wide_gaps_and_line_end_hyphens_are_flagged_per_page()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:242: Public Sub Sanitizer_counts_are_summed_over_all_pages_and_reported()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:255: Public Sub Pages_without_text_are_skipped_and_listed_by_number()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:268: Public Sub A_page_holding_only_decorative_or_control_characters_counts_as_empty()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:275: Public Sub A_null_page_from_the_reader_is_treated_as_empty()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:282: Public Sub Many_empty_pages_are_summarised_not_listed_in_full()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:296: Public Sub A_scanned_pdf_with_no_text_gives_a_clear_message_not_an_empty_document()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:305: Public Sub A_scan_whose_only_text_is_page_numbers_counts_as_no_text()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:312: Public Sub A_pdf_with_no_pages_gives_no_text_found()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:318: Public Sub A_password_protected_pdf_gives_a_clear_message()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:326: Public Sub Any_other_reader_failure_becomes_an_unreadable_result_not_an_exception()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:342: Public Sub A_blank_voice_or_locale_is_a_caller_bug_and_throws_before_reading()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:351: Public Sub Pasted_word_text_keeps_curly_quotes_and_escapes_a_literal_ampersand()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:362: Public Sub Empty_or_whitespace_paste_gives_no_text_found()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:374: Public Sub Importing_twice_with_the_same_importer_gives_identical_results()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:383: Public Sub A_forty_five_page_study_imports_quickly_and_stays_well_formed()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:402: Public Sub Pdf_title_and_author_metadata_seed_title_and_artist_alongside_filename_derived_track_and_year()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:412: Public Sub Missing_pdf_title_falls_back_to_the_filenames_numbered_pattern()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:420: Public Sub A_filename_that_does_not_match_the_numbered_pattern_falls_back_to_the_whole_name_with_no_track()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:427: Public Sub Modification_date_is_used_when_creation_date_is_missing()
+tests\Omskep.Core.Tests\Import\ImportPipelineTests.vb:434: Public Sub Album_and_copyright_are_always_left_unset_on_import_regardless_of_pdf_metadata()
 tests\Omskep.Core.Tests\Import\TextSanitizerTests.vb:13: Public Class TextSanitizerTests
 tests\Omskep.Core.Tests\Import\TextSanitizerTests.vb:17: Private Shared Function Clean(raw As String) As String
 tests\Omskep.Core.Tests\Import\TextSanitizerTests.vb:24: Public Sub Unicode_punctuation_passes_through_unchanged()

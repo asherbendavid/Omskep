@@ -786,23 +786,8 @@ Public Class MainForm
     ''' TextBox (not a label); clicking it also copies the whole snippet in one step, which is the
     ''' "simple, convenient" interaction the developer asked for without giving up real text selection.</summary>
     Private Sub BuildReferencePanel()
-        Dim entries As New List(Of (Title As String, Snippet As String, Note As String)) From {
-            ("Substitution",
-             "<sub alias=""World Wide Web Consortium"">W3C</sub>",
-             "The preferred way to correct a mispronunciation: say something differently than it's written."),
-            ("Pronunciation (IPA)",
-             "<phoneme alphabet=""ipa"" ph=""təˈmeɪtoʊ"">tomato</phoneme>",
-             "IPA only. SAPI is accepted by Azure but unverified by ear here, so it isn't documented."),
-            ("Pause",
-             "<break strength=""medium""/>" & vbCrLf & "<break time=""750ms""/>",
-             "Strength (measured once per keyword; consistent across locale and voice): x-weak ~180ms, weak ~410ms, medium ~700ms, strong ~915ms, x-strong ~1175ms."),
-            ("Switch voice",
-             "<voice name=""en-US-JennyNeural"">" & vbCrLf & "  Text goes here." & vbCrLf & "</voice>",
-             "Omskep's ""Use another voice"" command does the splitting for you. Voices never nest."),
-            ("Speaking rate",
-             "<prosody rate=""-10%"">Slower speech.</prosody>",
-             "Applied at composition time only -- never written into the saved document.")
-        }
+        Dim entries As IReadOnlyList(Of (Title As String, Snippet As String, Note As String)) =
+            ReferencePanelContent.LoadEntries()
 
         Const contentWidth As Integer = 300
         Dim snippetFont As New Font(FontFamily.GenericMonospace, 9)

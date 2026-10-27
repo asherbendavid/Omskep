@@ -10,7 +10,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\SsmlReferenceEntries.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="Omskep icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\SsmlReferenceEntries.txt" />
   </ItemGroup>
 
   <ItemGroup>

@@ -292,6 +292,8 @@ Partial Class MainForm
         mnuReferencePanel.CheckOnClick = True
         mnuReferencePanel.Name = "mnuReferencePanel"
         mnuReferencePanel.Text = "SS&ML reference"
+        mnuReferencePanel.ShortcutKeys = Keys.Control Or Keys.R
+        mnuReferencePanel.ShowShortcutKeys = True
         ' 
         ' pnlReference
         ' 
